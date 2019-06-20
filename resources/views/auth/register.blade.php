@@ -87,7 +87,7 @@
 
                     <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">ENREGISTREZ-VOUS</button>
                     <div class="register-link m-t-15 text-center">
-                        <p>Vous avez déjà un compte ? <a href="#"> Connectez-vous</a></p>
+                        <p>Vous avez déjà un compte ? <a href="{{route('login')}}"> Connectez-vous</a></p>
                     </div>
                 </form>
             </div>
