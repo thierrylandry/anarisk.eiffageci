@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Nature;
 
 class NatureTableSeeder extends Seeder
 {
@@ -12,5 +13,12 @@ class NatureTableSeeder extends Seeder
     public function run()
     {
         //
+        $nature = new Nature();
+        $nature->id=1;
+        $nature->nature="Risque";
+
+        $nature = new Nature();
+        $nature->id=2;
+        $nature->nature="Opportunité";
     }
 }
