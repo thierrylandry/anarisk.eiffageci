@@ -6,8 +6,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sufee Admin - HTML5 Admin Template</title>
-    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta name="description" content="{{ config('app.name', 'Laravel') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="apple-icon.png">
@@ -52,40 +52,21 @@
             <div class="col-sm-12 pull-right">
                 <div class="user-area dropdown float-right">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="images/user.png" alt="User Avatar">
                     </a>
 
                     <div class="user-menu dropdown-menu">
-                        <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+                        <a class="nav-link" href="#"><i class="fa fa- user"></i>Mon profil</a>
 
-                        <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
-
-                        <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-
-                        <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power -off"></i>Se déconnecter
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form></a>
                     </div>
                 </div>
 
 
-                <div class="language-select dropdown" id="language-select">
-                    <a class="dropdown-toggle" href="#" data-toggle="dropdown"  id="language" aria-haspopup="true" aria-expanded="true">
-                        <i class="flag-icon flag-icon-us"></i>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="language" >
-                        <div class="dropdown-item">
-                            <span class="flag-icon flag-icon-fr"></span>
-                        </div>
-                        <div class="dropdown-item">
-                            <i class="flag-icon flag-icon-es"></i>
-                        </div>
-                        <div class="dropdown-item">
-                            <i class="flag-icon flag-icon-us"></i>
-                        </div>
-                        <div class="dropdown-item">
-                            <i class="flag-icon flag-icon-it"></i>
-                        </div>
-                    </div>
-                </div>
+
 
             </div>
         </div>

@@ -39,23 +39,55 @@
                 </a>
             </div>
             <div class="login-form">
-                <form>
+                <form  method="POST" action="{{ route('register') }}">
+                    @csrf
                     <div class="form-group">
-                        <label>User Name</label>
-                        <input type="email" class="form-control" placeholder="User Name">
+                        <label>Nom</label>
+                        <input type="text" class="form-control @error('nom') is-invalid @enderror" placeholder="Nom" value="{{ old('nom') }}" name="nom" required autocomplete="nom" autofocus>
+                        @error('nom')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
                     </div>
                     <div class="form-group">
-                        <label>Email address</label>
-                        <input type="email" class="form-control" placeholder="Email">
+                        <label>Prenoms</label>
+                        <input type="text" class="form-control @error('prenoms') is-invalid @enderror" placeholder="Prenoms" name="prenoms" required autocomplete="prenoms">
+                        @error('prenoms')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
                     </div>
                     <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" class="form-control" placeholder="Password">
+                        <label>Email</label>
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email"  name="email" required autocomplete="email">
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label>Mot de passe </label>
+                        <input type="password" class="form-control" placeholder="Password"  name="password" required autocomplete="new-password">
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="password-confirm" class="col-form-label text-md-right">{{ __('CONFRIMER MOT DE PASSE') }}</label>
+
+
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>
+                    <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">ENREGISTREZ-VOUS</button>
                     <div class="register-link m-t-15 text-center">
-                        <p>Vous avez déjà un compte ? <a href="#"> Connectez-vous</a></p>
+                        <p>Vous avez déjà un compte ? <a href="{{route('login')}}"> Connectez-vous</a></p>
                     </div>
                 </form>
             </div>
