@@ -14,10 +14,12 @@ class PrioriteTableSeeder extends Seeder
         //
         $priorite= new Priorite();
         $priorite->id='1';
-        $priorite->string='Urgent';
+        $priorite->libelle='Urgent';
+        $priorite->save();
 
         $priorite= new Priorite();
-        $priorite->id='1';
-        $priorite->string='Très urgent';
+        $priorite->id='2';
+        $priorite->libelle='Très urgent';
+        $priorite->save();
     }
 }

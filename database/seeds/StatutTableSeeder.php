@@ -27,5 +27,15 @@ class StatutTableSeeder extends Seeder
         $Statut->id="3";
         $Statut->libelle="Fait";
         $Statut->save();
+
+        $Statut= new Statut();
+        $Statut->id="4";
+        $Statut->libelle="Permanente";
+        $Statut->save();
+
+        $Statut= new Statut();
+        $Statut->id="5";
+        $Statut->libelle="Régulière";
+        $Statut->save();
     }
 }
