@@ -45,23 +45,23 @@ class ActeurTableSeeder extends Seeder
         $acteur->save();
 
         $acteur= new Acteur();
-        $acteur->id=8;
+        $acteur->id=7;
         $acteur->libelle="Qualité";
         $acteur->save();
 
         $acteur= new Acteur();
-        $acteur->id=9;
+        $acteur->id=8;
         $acteur->libelle="HSE";
         $acteur->save();
 
         $acteur= new Acteur();
-        $acteur->id=10;
+        $acteur->id=9;
         $acteur->libelle="SPIE F";
         $acteur->save();
 
         $acteur= new Acteur();
-        $acteur->id=11;
-        $acteur->libelle="SRH";
+        $acteur->id=10;
+        $acteur->libelle="RH";
         $acteur->save();
     }
 }
