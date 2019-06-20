@@ -16,9 +16,11 @@ class NatureTableSeeder extends Seeder
         $nature = new Nature();
         $nature->id=1;
         $nature->nature="Risque";
+        $nature->save();
 
         $nature = new Nature();
         $nature->id=2;
         $nature->nature="Opportunité";
+        $nature->save();
     }
 }
