@@ -18,3 +18,8 @@ Route::get('/',[
     'as'=>'/',
     'uses'=>'HomeController@index',
 ])->middleware('auth');
+
+Route::get('/analyses',[
+    'as'=>'analyses',
+    'uses'=>'AnalysesController@ajouter_analyse',
+])->middleware('auth');

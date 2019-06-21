@@ -10,24 +10,18 @@
 
     <div id="main-menu" class="main-menu collapse navbar-collapse">
         <ul class="nav navbar-nav">
-            <li class="active">
-                <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+            <li class="@yield('tableau_de_bord_actif')">
+                <a href="{{route('/')}}"> <i class="menu-icon fa fa-dashboard"></i>Tableau de bord </a>
             </li>
-            <h3 class="menu-title">ANALYSES</h3><!-- /.menu-title -->
-            <li class="menu-item-has-children dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>RISQUE</a>
-                <ul class="sub-menu children dropdown-menu">
-                    <li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
-                    <li><i class="fa fa-table"></i><a href="tables-data.html">Data Table</a></li>
-                </ul>
+
+            <li class="@yield('analyses_actif')">
+                <a href="{{route('analyses')}}"> <i class="menu-icon fa fa-table"></i>ANALYSES</a>
             </li>
-            <li class="menu-item-has-children dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>OPPORTUNITE</a>
-                <ul class="sub-menu children dropdown-menu">
-                    <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
-                    <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
-                </ul>
+            <li class="menu-item">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>RISQUES\OPPORTUNITES</a>
             </li>
+
         </ul>
+
     </div><!-- /.navbar-collapse -->
 </nav>
