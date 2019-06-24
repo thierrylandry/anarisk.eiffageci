@@ -26,7 +26,7 @@ class CreateTableAnalyse extends Migration
             $table->integer("planingAvavant")->nullable(true);
             $table->double("coutAvant")->nullable(true);
             $table->integer("probabiliteApres")->nullable(true);
-            $table->integer("severiteAprs")->nullable(true);
+            $table->integer("severiteApres")->nullable(true);
             $table->integer("planingApres")->nullable(true);
             $table->double("coutApres")->nullable(true);
             $table->double("cout")->nullable(true);

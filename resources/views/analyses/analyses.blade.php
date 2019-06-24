@@ -5,15 +5,15 @@
 @section('page')
     <style>
         #mydiv {
-            position: fixed;
-            top:259px;
-            left:0;
+            position: absolute;
             z-index: 9;
+            left:0;
+            bottom:100px;
             background-color: #f1f1f1;
             text-align: center;
             border: 1px solid #d3d3d3;
             resize: both;
-            overflow: auto;
+            overflow: hidden;
         }
 
         #mydivheader {
@@ -40,77 +40,105 @@
     <div class="content mt-3">
 
 
-        <div id="mydiv" style="height: 100px;width: 300px" >
+        <div id="mydiv" style="height: 162px;width: 229px" >
             <div id="mydivheader">Cliquer ici pour déplacer</div>
             <img src="{{URL::asset("images/anarisk.png")}}" width="100%" height="100%"/>
             <div class="resizeUI"><i class="fa fa-arrows"></i></div>
         </div>
         <div class="animated fadeIn">
-
+<form method="post" action="{{route('save_analyse')}}">
+    @csrf
             <div class="row">
 
-                <div class="col-xs-6 col-sm-6">
+                <div class="col-xs-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
                             <strong>Analyses</strong> <small> Création</small>
                         </div>
                         <div class="card-body card-block">
-                            <div class="form-group">
-                                <label class=" form-control-label">Nature</label>
-                                <div class="input-group">
+                            <div class="row">
+                                <div class="form-group col-sm-2">
+                                    <label class=" form-control-label">Nature</label>
+                                    <div class="input-group">
 
-                                    <select data-placeholder="Choose a Country..." class="standardSelect form-control" tabindex="1" name="nature">
-                                        <option value=""></option>
-                                        <option value="United States">United States</option>
+                                        <select data-placeholder="Sélectionner une nature" class="standardSelect form-control" tabindex="1" name="nature" required>
+                                            <option value=""></option>
+                                            @foreach($natures as $nature)
+                                            <option value="{{$nature->id}}">{{$nature->nature}}</option>
+                                            @endforeach
 
-                                    </select>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label class=" form-control-label">Date</label>
+                                    <div class="input-group">
+
+                                        <input type="date" class="form-control" name="date" required/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label class=" form-control-label">Pays</label>
+                                    <div class="input-group">
+
+                                        <select data-placeholder="Sélectionner un pays..." class="standardSelect form-control" tabindex="1" name="pays" required>
+                                            @foreach($payss as $pays)
+                                                <option @if($pays->alpha2=="CI") {{'selected'}}@endif value="{{$pays->id}}">{{$pays->nom_fr_fr."(".$pays->alpha2.")"}}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label class=" form-control-label">Chantier</label>
+                                    <div class="input-group">
+
+                                        <select data-placeholder="Sélectionner un chantier..." class="standardSelect form-control" tabindex="1" name="chantier" required>
+                                            @foreach($chantiers as $chantier)
+                                                <option @if($chantier->id=="CI") {{'selected'}}@endif value="{{$chantier->id}}">{{$chantier->libelle}}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label class=" form-control-label">Propriétaire</label>
+                                    <div class="input-group">
+
+                                        <select data-placeholder="Choose a Country..." class="standardSelect form-control" tabindex="1" name="proprietaire">
+                                            @foreach($responsables as $responsable)
+                                                <option  value="{{$responsable->id}}">{{$responsable->nom.' '.$responsable->prenoms}}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label class=" form-control-label">Code</label>
+                                    <div class="input-group">
+
+                                        <input type="text" class="form-control" name="code" required/>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class=" form-control-label">Date</label>
-                                <div class="input-group">
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label class=" form-control-label">Description</label>
+                                    <div class="input-group">
 
-                                    <input type="date" class="form-control" name="date"/>
+                                        <textarea id="description" class="form-control">
+
+                                        </textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" form-control-label">Pays</label>
-                                <div class="input-group">
+                                <div class="form-group col-sm-8">
+                                    <label class=" form-control-label">Détail</label>
+                                    <div class="input-group">
 
-                                    <select data-placeholder="Choose a Country..." class="standardSelect form-control" tabindex="1" name="pays">
-                                        <option value=""></option>
-                                        <option value="United States">United States</option>
+                                        <textarea id="detail" class="form-control">
 
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" form-control-label">Chantier</label>
-                                <div class="input-group">
-
-                                    <select data-placeholder="Choose a Country..." class="standardSelect form-control" tabindex="1" name="chantier">
-                                        <option value=""></option>
-                                        <option value="United States">United States</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" form-control-label">Propriétaire</label>
-                                <div class="input-group">
-
-                                    <select data-placeholder="Choose a Country..." class="standardSelect form-control" tabindex="1" name="proprietaire">
-                                        <option value=""></option>
-                                        <option value="United States">United States</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" form-control-label">Code</label>
-                                <div class="input-group">
-
-                                    <input type="text" class="form-control" name="code"/>
+                                        </textarea>
+                                    </div>
                                 </div>
                             </div>
 
@@ -118,7 +146,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-6 col-sm-6">
+                <div class="col-xs-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">Causes </strong>
@@ -131,22 +159,22 @@
                             </button>
                             </br>
                             </br>
-                            <div id="causes" class="form-inline">
+                            <div id="causes" class="">
 
                                 <div class=" form-control-label">
-                                    <label for="observation_c[]">Cause</label>
+                                    <label for="causes[]">Cause</label>
                                     <div class="form-group">
-                                        <textarea name="causes[]" class="form-control" style="width:100%"></textarea>
+                                        <input name="causes[]" class="form-control" style="" type="text"/>
                                     </div>
                                 </div>
 
                                 <hr width="100%" color="blue">
                             </div>
-                            <div id="piecetemplate" class="row clearfix" style="display: none">
+                            <div id="causestemplate" class="row clearfix" style="display: none">
                                 <div class=" form-control-label">
-                                    <label for="observation_c[]">Cause</label>
-                                    <div class="form-group col-sm-12">
-                                        <textarea name="causes[]" class="form-control" style="width:100%"></textarea>
+                                    <label for="causes[]">Cause</label>
+                                    <div class="form-group">
+                                        <input name="causes[]" class="form-control" style="" type="text"/>
                                     </div>
                                 </div>
                                 <hr width="100%" color="blue">
@@ -154,97 +182,168 @@
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="card-header">
-                            <strong class="card-title">Conséquence</strong>
-                        </div>
-                        <div class="card-body">
-
-                            <select data-placeholder="Choose a country..." multiple class="standardSelect">
-                                <option value=""></option>
-                                <option value="United States">United States</option>
-                                <option value="United Kingdom">United Kingdom</option>
-                                <option value="Afghanistan">Afghanistan</option>
-                                <option value="Aland Islands">Aland Islands</option>
-                                <option value="Albania">Albania</option>
-                                <option value="Algeria">Algeria</option>
-                                <option value="American Samoa">American Samoa</option>
-                                <option value="Andorra">Andorra</option>
-                                <option value="Angola">Angola</option>
-                                <option value="Anguilla">Anguilla</option>
-                                <option value="Antarctica">Antarctica</option>
-                            </select>
-
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <strong class="card-title">Multi Select with Groups</strong>
-                        </div>
-                        <div class="card-body">
-
-                            <select data-placeholder="Your Favorite Football Team" multiple class="standardSelect" tabindex="5">
-                                <option value=""></option>
-                                <optgroup label="NFC EAST">
-                                    <option>Dallas Cowboys</option>
-                                    <option>New York Giants</option>
-                                    <option>Philadelphia Eagles</option>
-                                    <option>Washington Redskins</option>
-                                </optgroup>
-                                <optgroup label="NFC NORTH">
-                                    <option>Chicago Bears</option>
-                                    <option>Detroit Lions</option>
-                                    <option>Green Bay Packers</option>
-                                    <option>Minnesota Vikings</option>
-                                </optgroup>
-                                <optgroup label="NFC SOUTH">
-                                    <option>Atlanta Falcons</option>
-                                    <option>Carolina Panthers</option>
-                                    <option>New Orleans Saints</option>
-                                    <option>Tampa Bay Buccaneers</option>
-                                </optgroup>
-                                <optgroup label="NFC WEST">
-                                    <option>Arizona Cardinals</option>
-                                    <option>St. Louis Rams</option>
-                                    <option>San Francisco 49ers</option>
-                                    <option>Seattle Seahawks</option>
-                                </optgroup>
-                                <optgroup label="AFC EAST">
-                                    <option>Buffalo Bills</option>
-                                    <option>Miami Dolphins</option>
-                                    <option>New England Patriots</option>
-                                    <option>New York Jets</option>
-                                </optgroup>
-                                <optgroup label="AFC NORTH">
-                                    <option>Baltimore Ravens</option>
-                                    <option>Cincinnati Bengals</option>
-                                    <option>Cleveland Browns</option>
-                                    <option>Pittsburgh Steelers</option>
-                                </optgroup>
-                                <optgroup label="AFC SOUTH">
-                                    <option>Houston Texans</option>
-                                    <option>Indianapolis Colts</option>
-                                    <option>Jacksonville Jaguars</option>
-                                    <option>Tennessee Titans</option>
-                                </optgroup>
-                                <optgroup label="AFC WEST">
-                                    <option>Denver Broncos</option>
-                                    <option>Kansas City Chiefs</option>
-                                    <option>Oakland Raiders</option>
-                                    <option>San Diego Chargers</option>
-                                </optgroup>
-                            </select>
-
-                        </div>
-                    </div>
 
                 </div>
 
 
+                <div class="col-xs-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Conséquences </strong>
+                        </div>
+                        <div class="card-body">
+
+                            Ajouter une conséquence
+                            <button type="button" class="btn bg-teal btn-circle waves-effect waves-circle waves-float" id="addconsequences">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            </button>
+                            </br>
+                            </br>
+                            <div id="consequences" class="">
+
+                                <div class=" form-control-label">
+                                    <label for="consequences[]">Conséquence</label>
+                                    <div class="form-group">
+                                        <input name="consequences[]" class="form-control" style="" type="text"/>
+                                    </div>
+                                </div>
+
+                                <hr width="100%" color="blue">
+                            </div>
+                            <div id="consequencestemplate" class="row clearfix" style="display: none">
+                                <div class=" form-control-label">
+                                    <label for="consequences[]">Conséquence</label>
+                                    <div class="form-group">
+                                        <input name="consequences[]" class="form-control" style="" type="text"/>
+                                    </div>
+                                </div>
+                                <hr width="100%" color="blue">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div class="col-xs-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Evaluation du neveau de risque</strong>
+                        </div>
+                        <div class="card-body card-block">
+                            <div class="form-group col-sm-2">
+                                <label class=" form-control-label">Probabilité d'occurance</label>
+                                <div class="input-group">
+
+                                    <input name="probabiliteAvant" class="form-control" type="number" min="1" max="5" required/>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label class=" form-control-label"> Séverité</label>
+                                <div class="input-group">
+
+                                    <input name="severiteAvant" class="form-control" type="number" min="1" max="5" required/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-2">
+                                <label class=" form-control-label">Planning</label>
+                                <div class="input-group">
+
+                                    <input name="planingAvant" class="form-control" type="number" min="1" max="5" required/>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label class=" form-control-label">Coût</label>
+                                <div class="input-group">
+
+                                    <input name="coutAvant" class="form-control" type="number" min="1" max="5" required/>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label class=" form-control-label">Niveau</label>
+                                <div class="input-group">
+
+                                    <input name="niveauAvant" id="niveauAvant" class="form-control" type="number" min="1" required/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Evaluation après mesure préventive</strong>
+                        </div>
+                        <div class="card-body card-block">
+
+                            <div class="form-group col-sm-2">
+                                <label class=" form-control-label">Probabilité d'occurance</label>
+                                <div class="input-group">
+
+                                    <input name="probabiliteApres" class="form-control" type="number" min="1" max="5"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label class=" form-control-label"> Séverité</label>
+                                <div class="input-group">
+
+                                    <input name="severiteApres" class="form-control" type="number" min="1" max="5"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-2">
+                                <label class=" form-control-label">Planning</label>
+                                <div class="input-group">
+
+                                    <input name="planingApres" class="form-control" type="number" min="1" max="5"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label class=" form-control-label">Coût</label>
+                                <div class="input-group">
+
+                                    <input name="coutApres" class="form-control" type="number" min="1" max="5"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label class=" form-control-label">Niveau</label>
+                                <div class="input-group">
+
+                                    <input name="niveauAvant" id="niveauAvant" class="form-control" type="number" min="1"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong></strong>
+                        </div>
+                        <div class="card-body card-block">
+
+                            <div class="form-group col-sm-12">
+
+                                <div class="input-group">
+
+                                    <textarea name="brouillon" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
 
             </div>
-
+            <div class="card-footer pull-right">
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <i class="fa fa-dot-circle-o"></i> Enregistrer
+                </button>
+            </div>
+</form>
 
         </div>
         <script src="{{ asset("assets/js/vendor/jquery-2.1.4.min.js") }}"></script>
@@ -260,11 +359,27 @@
         <script src="{{ asset("assets/js/lib/vector-map/jquery.vmap.min.js") }}"></script>
         <script src="{{ asset("assets/js/lib/vector-map/jquery.vmap.sampledata.js") }}"></script>
         <script src="{{ asset("assets/js/lib/vector-map/country/jquery.vmap.world.js") }}"></script>
+
+        <script>
+            jQuery(document).ready(function() {
+                jQuery(".standardSelect").chosen({
+                    disable_search_threshold: 10,
+                    no_results_text: "Oops, nothing found!",
+                    width: "100%"
+                });
+            });
+        </script>
        <!-- .animated -->
         <script>
-            $("#addcauses").click(function (e) {
-                $($("#familletemplate").html()).appendTo($("#familles"));
+            jQuery(function($) {
+                $("#addcauses").click(function (e) {
+                    $($("#causestemplate").html()).appendTo($("#causes"));
+                });
+                $("#addconsequences").click(function (e) {
+                    $($("#consequencestemplate").html()).appendTo($("#consequences"));
+                });
             });
+
             //Make the DIV element draggagle:
             dragElement(document.getElementById("mydiv"));
 

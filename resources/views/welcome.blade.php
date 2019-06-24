@@ -7,6 +7,8 @@
         #mydiv {
             position: absolute;
             z-index: 9;
+            left:0;
+            bottom:100px;
             background-color: #f1f1f1;
             text-align: center;
             border: 1px solid #d3d3d3;
@@ -38,7 +40,7 @@
     <div class="content mt-3">
 
 
-        <div id="mydiv" style="height: 100px;width: 300px" >
+        <div id="mydiv" style="height: 162px;width: 229px" >
             <div id="mydivheader">Cliquer ici pour déplacer</div>
             <img src="{{URL::asset("images/anarisk.png")}}" width="100%" height="100%"/>
             <div class="resizeUI"><i class="fa fa-arrows"></i></div>

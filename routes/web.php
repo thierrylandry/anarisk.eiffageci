@@ -23,3 +23,7 @@ Route::get('/analyses',[
     'as'=>'analyses',
     'uses'=>'AnalysesController@ajouter_analyse',
 ])->middleware('auth');
+Route::post('/save_analyse',[
+    'as'=>'save_analyse',
+    'uses'=>'AnalysesController@save_analyse',
+])->middleware('auth');
