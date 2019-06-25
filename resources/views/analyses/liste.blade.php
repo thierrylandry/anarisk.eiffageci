@@ -103,16 +103,20 @@
         <script src="{{ asset("assets/js/lib/vector-map/jquery.vmap.sampledata.js") }}"></script>
         <script src="{{ asset("assets/js/lib/vector-map/country/jquery.vmap.world.js") }}"></script>
             <script src="{{ asset("assets/js/lib/chosen/chosen.jquery.min.js")}}"></script>
-        <script>
 
-            jQuery(document).ready(function() {
-                jQuery(".standardSelect").chosen({
-                    disable_search_threshold: 10,
-                    no_results_text: "Oops, nothing found!",
-                    width: "100%"
-                });
-            });
-        </script>
+
+
+            <script src="{{ asset('assets/js/lib/data-table/datatables.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/dataTables.buttons.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/buttons.bootstrap.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/jszip.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/pdfmake.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/vfs_fonts.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/buttons.html5.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/buttons.print.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/buttons.colVis.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/datatables-init.js')}}"></script>
         <!-- .animated -->
         <script>
             jQuery(function($) {

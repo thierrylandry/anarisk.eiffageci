@@ -29,8 +29,9 @@ class AnalysesController extends Controller
         $payss = Pays::all();
         $chantiers = Chantier::all();
         $responsables = Responsable::all();
+        $analyses = Analyse::all();
 
-        return view('analyses.liste',compact('natures','payss','chantiers','responsables'));
+        return view('analyses.liste',compact('natures','payss','chantiers','responsables','analyses'));
 
     }
 

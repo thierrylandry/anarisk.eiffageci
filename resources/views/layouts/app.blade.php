@@ -134,6 +134,16 @@
 <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.sampledata.js')}}"></script>
 <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.world.js')}}"></script>
 <script src="{{ asset("assets/js/lib/chosen/chosen.jquery.min.js")}}"></script>
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#bootstrap-data-table-export').DataTable();
+    } );
+</script>
 <script>
     ( function ( $ ) {
         "use strict";
@@ -152,6 +162,7 @@
         } );
     } )( jQuery );
 </script>
+
 
 </body>
 </html>
