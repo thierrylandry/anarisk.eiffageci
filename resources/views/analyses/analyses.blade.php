@@ -283,14 +283,14 @@
                                 <label class=" form-control-label">Probabilité d'occurance</label>
                                 <div class="input-group">
 
-                                    <input name="probabiliteApres" class="form-control calcule1" type="number" min="1" max="5"/>
+                                    <input name="probabiliteApres" id="probabiliteApres" class="form-control calcule1" type="number" min="1" max="5"/>
                                 </div>
                             </div>
                             <div class="form-group col-sm-2">
                                 <label class=" form-control-label"> Séverité</label>
                                 <div class="input-group">
 
-                                    <input name="severiteApres" class="form-control calcule1" type="number" min="1" max="5"/>
+                                    <input name="severiteApres" id="severiteApres" class="form-control calcule1" type="number" min="1" max="5"/>
                                 </div>
                             </div>
 
@@ -298,14 +298,14 @@
                                 <label class=" form-control-label">Planning</label>
                                 <div class="input-group">
 
-                                    <input name="planingApres" class="form-control calcule1" type="number" min="1" max="5"/>
+                                    <input name="planingApres" id="planingApres" class="form-control calcule1" type="number" min="1" max="5"/>
                                 </div>
                             </div>
                             <div class="form-group col-sm-2">
                                 <label class=" form-control-label">Coût</label>
                                 <div class="input-group">
 
-                                    <input name="coutApres" class="form-control calcule1" type="number" min="1" max="5"/>
+                                    <input name="coutApres" id="coutApres" class="form-control calcule1" type="number" min="1" max="5"/>
                                 </div>
                             </div>
                             <div class="form-group col-sm-2">
@@ -415,7 +415,7 @@
                         var luimeme=0;
                     }
                     if($("#severiteApres").val()!="") {
-                    var severiteAvant=$("#severiteApres").val();
+                    var severiteApres=$("#severiteApres").val();
                     }else{
                         var  severiteApres=0;
                     }
