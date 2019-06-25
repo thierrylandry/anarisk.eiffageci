@@ -17,8 +17,8 @@
             <li class="@yield('analyses_actif')">
                 <a href="{{route('analyses')}}"> <i class="menu-icon fa fa-table"></i>ANALYSES</a>
             </li>
-            <li class="menu-item">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>RISQUES\OPPORTUNITES</a>
+            <li class="@yield('liste_actif')">
+                <a href="{{route('liste')}}" > <i class="menu-icon fa fa-table"></i>RISQUES\OPPORTUNITES</a>
             </li>
 
         </ul>
