@@ -19,11 +19,16 @@ Route::get('/',[
     'uses'=>'HomeController@index',
 ])->middleware('auth');
 
-Route::get('/analyses',[
-    'as'=>'analyses',
-    'uses'=>'AnalysesController@ajouter_analyse',
-])->middleware('auth');
-Route::post('/save_analyse',[
-    'as'=>'save_analyse',
-    'uses'=>'AnalysesController@save_analyse',
-])->middleware('auth');
+Route::group(['prefix' => 'analyses'], function () {
+    Route::get('/creer',[
+        'as'=>'analyses',
+        'uses'=>'AnalysesController@ajouter_analyse',
+    ])->middleware('auth');
+    Route::post('/enregistrer',[
+        'as'=>'save_analyse',
+        'uses'=>'AnalysesController@save_analyse',
+    ])->middleware('auth');
+});
+
+
+

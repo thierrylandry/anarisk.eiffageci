@@ -20,10 +20,10 @@ class CreateTableAnalyse extends Migration
             $table->date("date")->nullable(true);
             $table->string("code")->nullable(true);
             $table->string("causes")->nullable(true);
-            $table->string("conséquences")->nullable(true);
+            $table->string("consequences")->nullable(true);
             $table->integer("probabiliteAvant")->nullable(true);
             $table->integer("severiteAvant")->nullable(true);
-            $table->integer("planingAvavant")->nullable(true);
+            $table->integer("planingAvant")->nullable(true);
             $table->double("coutAvant")->nullable(true);
             $table->integer("probabiliteApres")->nullable(true);
             $table->integer("severiteApres")->nullable(true);
@@ -32,7 +32,16 @@ class CreateTableAnalyse extends Migration
             $table->double("cout")->nullable(true);
             $table->string("brouillon")->nullable(true);
 
+
+
+
             //les clés étrangères
+            $table->unsignedBigInteger("id_proprietaire")->nullable(true);
+            $table->foreign('id_proprietaire')->references('responsable')->on('id');
+
+            $table->unsignedBigInteger("id_pays")->nullable(true);
+            $table->foreign('id_pays')->references('pays')->on('id');
+
             $table->unsignedBigInteger("id_user")->nullable(true);
             $table->foreign('id_user')->references('id')->on('users');
 

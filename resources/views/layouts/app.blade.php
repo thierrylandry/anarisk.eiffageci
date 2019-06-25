@@ -16,12 +16,12 @@
     <link rel="stylesheet" href="{{ asset('assets/css/normalize.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/flag-icon.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/cs-skin-elastic.css')}}">
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
-    <link rel="stylesheet" href="assets/scss/style.css">
-    <link href="assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/scss/style.css')}}">
+    <link href="{{ asset('assets/css/lib/vector-map/jqvmap.min.css')}}" rel="stylesheet">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ asset('assets/css/lib/chosen/chosen.min.css')}}">
@@ -74,7 +74,7 @@
             <div class="col-sm-12 pull-right">
                 <div class="user-area dropdown float-right">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="images/user.png" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="{{ asset('images/user.png')}}" alt="User Avatar">
                     </a>
 
                     <div class="user-menu dropdown-menu">
@@ -120,19 +120,19 @@
 
 <!-- Right Panel -->
 
-<script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-<script src="assets/js/plugins.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js')}}"></script>
+<script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js')}}"></script>
+<script src="{{ asset('assets/js/plugins.js')}}"></script>
+<script src="{{ asset('assets/js/main.js')}}"></script>
 
 
-<script src="assets/js/lib/chart-js/Chart.bundle.js"></script>
-<script src="assets/js/dashboard.js"></script>
-<script src="assets/js/widgets.js"></script>
-<script src="assets/js/lib/vector-map/jquery.vmap.js"></script>
-<script src="assets/js/lib/vector-map/jquery.vmap.min.js"></script>
-<script src="assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
-<script src="assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>
+<script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js')}}"></script>
+<script src="{{ asset('assets/js/dashboard.js')}}"></script>
+<script src="{{ asset('assets/js/widgets.js')}}"></script>
+<script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.js')}}"></script>
+<script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js')}}"></script>
+<script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.sampledata.js')}}"></script>
+<script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.world.js')}}"></script>
 <script src="{{ asset("assets/js/lib/chosen/chosen.jquery.min.js")}}"></script>
 <script>
     ( function ( $ ) {
