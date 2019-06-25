@@ -24,6 +24,16 @@ class AnalysesController extends Controller
 
     }
 
+    public function liste(){
+        $natures= Nature::all();
+        $payss = Pays::all();
+        $chantiers = Chantier::all();
+        $responsables = Responsable::all();
+
+        return view('analyses.liste',compact('natures','payss','chantiers','responsables'));
+
+    }
+
     /**
      * @param Request $request
      * @return $this
@@ -104,6 +114,7 @@ class AnalysesController extends Controller
         $analyse->causes=$var["cause"];
         $analyse->causes=$var["consequences"];
         $analyse->cout=$cout;
+        $analyse->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
         $analyse->save();
 
         return redirect()->route('analyses')->with('success',"La personne a été ajoutée avec succès");

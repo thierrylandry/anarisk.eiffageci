@@ -24,11 +24,18 @@ Route::group(['prefix' => 'analyses'], function () {
         'as'=>'analyses',
         'uses'=>'AnalysesController@ajouter_analyse',
     ])->middleware('auth');
+
+    Route::get('/liste',[
+        'as'=>'liste',
+        'uses'=>'AnalysesController@liste',
+    ])->middleware('auth');
     Route::post('/enregistrer',[
         'as'=>'save_analyse',
         'uses'=>'AnalysesController@save_analyse',
     ])->middleware('auth');
 });
+
+
 
 
 
