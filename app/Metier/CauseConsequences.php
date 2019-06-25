@@ -6,12 +6,12 @@
  * Date: 24/06/2019
  * Time: 17:22
  */
-namespace App\Metier\Json;
+namespace App\Metier;
 
 class CauseConsequences
 {
 
-public $libelle;
+    public $libelle;
 
 
 }

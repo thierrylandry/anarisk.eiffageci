@@ -236,14 +236,14 @@
                                 <label class=" form-control-label">Probabilité d'occurance</label>
                                 <div class="input-group">
 
-                                    <input name="probabiliteAvant" class="form-control" type="number" min="1" max="5" required/>
+                                    <input name="probabiliteAvant" id="probabiliteAvant" class="form-control calcule" type="number" min="1" max="5"  required/>
                                 </div>
                             </div>
                             <div class="form-group col-sm-2">
                                 <label class=" form-control-label"> Séverité</label>
                                 <div class="input-group">
 
-                                    <input name="severiteAvant" class="form-control" type="number" min="1" max="5" required/>
+                                    <input name="severiteAvant" id="severiteAvant" class="form-control calcule" type="number" min="1" max="5" required/>
                                 </div>
                             </div>
 
@@ -251,21 +251,21 @@
                                 <label class=" form-control-label">Planning</label>
                                 <div class="input-group">
 
-                                    <input name="planingAvant" class="form-control" type="number" min="1" max="5" required/>
+                                    <input name="planingAvant" id="planingAvant" class="form-control calcule" type="number" min="1" max="5" required/>
                                 </div>
                             </div>
                             <div class="form-group col-sm-2">
                                 <label class=" form-control-label">Coût</label>
                                 <div class="input-group">
 
-                                    <input name="coutAvant" class="form-control" type="number" min="1" max="5" required/>
+                                    <input name="coutAvant" id="coutAvant"  class="form-control calcule" type="number" min="1" max="5" required/>
                                 </div>
                             </div>
                             <div class="form-group col-sm-2">
                                 <label class=" form-control-label">Niveau</label>
                                 <div class="input-group">
 
-                                    <input name="niveauAvant" id="niveauAvant" class="form-control" type="number" min="1" required/>
+                                    <input name="niveauAvant" id="niveauAvant" class="form-control calcule" type="number" min="1" required readonly/>
                                 </div>
                             </div>
 
@@ -283,14 +283,14 @@
                                 <label class=" form-control-label">Probabilité d'occurance</label>
                                 <div class="input-group">
 
-                                    <input name="probabiliteApres" class="form-control" type="number" min="1" max="5"/>
+                                    <input name="probabiliteApres" class="form-control calcule1" type="number" min="1" max="5"/>
                                 </div>
                             </div>
                             <div class="form-group col-sm-2">
                                 <label class=" form-control-label"> Séverité</label>
                                 <div class="input-group">
 
-                                    <input name="severiteApres" class="form-control" type="number" min="1" max="5"/>
+                                    <input name="severiteApres" class="form-control calcule1" type="number" min="1" max="5"/>
                                 </div>
                             </div>
 
@@ -298,21 +298,21 @@
                                 <label class=" form-control-label">Planning</label>
                                 <div class="input-group">
 
-                                    <input name="planingApres" class="form-control" type="number" min="1" max="5"/>
+                                    <input name="planingApres" class="form-control calcule1" type="number" min="1" max="5"/>
                                 </div>
                             </div>
                             <div class="form-group col-sm-2">
                                 <label class=" form-control-label">Coût</label>
                                 <div class="input-group">
 
-                                    <input name="coutApres" class="form-control" type="number" min="1" max="5"/>
+                                    <input name="coutApres" class="form-control calcule1" type="number" min="1" max="5"/>
                                 </div>
                             </div>
                             <div class="form-group col-sm-2">
                                 <label class=" form-control-label">Niveau</label>
                                 <div class="input-group">
 
-                                    <input name="niveauAvant" id="niveauAvant" class="form-control" type="number" min="1"/>
+                                    <input name="niveauApres" id="niveauApres" class="form-control" type="number" min="1" readonly/>
                                 </div>
                             </div>
                         </div>
@@ -324,12 +324,21 @@
                             <strong></strong>
                         </div>
                         <div class="card-body card-block">
+                            <div class="form-inline col-sm-4">
+                                <label class=" form-control-label">Coût: &nbsp;</label>
+                                <div class="input-group">
 
+                                    <input name="cout" class="form-control" type="number" required/>
+                                </div> <label class=" form-control-label"> &nbsp;Fr </label>
+                            </div>
+                            </br>
+                            </br>
+                            </br>
                             <div class="form-group col-sm-12">
 
                                 <div class="input-group">
 
-                                    <textarea name="brouillon" class="form-control"></textarea>
+                                    <textarea name="brouillon" class="form-control" style="height: 318px; margin-top: 0px; margin-bottom: 0px;"></textarea>
                                 </div>
                             </div>
 
@@ -361,6 +370,7 @@
         <script src="{{ asset("assets/js/lib/vector-map/country/jquery.vmap.world.js") }}"></script>
 
         <script>
+
             jQuery(document).ready(function() {
                 jQuery(".standardSelect").chosen({
                     disable_search_threshold: 10,
@@ -372,6 +382,66 @@
        <!-- .animated -->
         <script>
             jQuery(function($) {
+                function test(){
+                    if($("#probabiliteAvant").val()!="") {
+                        var luimeme = $("#probabiliteAvant").val();
+                    }else{
+                        var luimeme=0;
+                    }
+                    if($("#severiteAvant").val()!="") {
+                    var severiteAvant=$("#severiteAvant").val();
+                    }else{
+                        var  severiteAvant=0;
+                    }
+                    if($("#planingAvant").val()!="") {
+                    var planingAvant=$("#planingAvant").val();
+                    }else{
+                        var  planingAvant=0;
+                    }
+                    if($("#coutAvant").val()!="") {
+                    var coutAvant=$("#coutAvant").val();
+                    }else{
+                        var coutAvant=0;
+                    }
+
+                    var res = parseInt(luimeme)+parseInt(severiteAvant)+parseInt(planingAvant)+parseInt(coutAvant);
+
+                    $("#niveauAvant").val(res);
+                };
+                function test1(){
+                    if($("#probabiliteApres").val()!="") {
+                        var luimeme = $("#probabiliteApres").val();
+                    }else{
+                        var luimeme=0;
+                    }
+                    if($("#severiteApres").val()!="") {
+                    var severiteAvant=$("#severiteApres").val();
+                    }else{
+                        var  severiteApres=0;
+                    }
+                    if($("#planingApres").val()!="") {
+                    var planingApres=$("#planingApres").val();
+                    }else{
+                        var  planingApres=0;
+                    }
+                    if($("#coutApres").val()!="") {
+                    var coutApres=$("#coutApres").val();
+                    }else{
+                        var coutApres=0;
+                    }
+
+                    var res = parseInt(luimeme)+parseInt(severiteApres)+parseInt(planingApres)+parseInt(coutApres);
+
+                    $("#niveauApres").val(res);
+                };
+
+                $(".calcule").change(function (e) {
+                  test();
+                });
+                $(".calcule1").change(function (e) {
+                  test1();
+                });
+
                 $("#addcauses").click(function (e) {
                     $($("#causestemplate").html()).appendTo($("#causes"));
                 });
