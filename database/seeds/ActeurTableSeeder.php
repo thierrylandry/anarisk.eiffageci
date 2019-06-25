@@ -18,7 +18,6 @@ class ActeurTableSeeder extends Seeder
         $acteur->libelle="Direction";
         $acteur->save();
 
-
         $acteur= new Acteur();
         $acteur->id=2;
         $acteur->libelle="Travaux";
