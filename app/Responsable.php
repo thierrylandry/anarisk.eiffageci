@@ -11,4 +11,6 @@ class Responsable extends Model
     protected $fillable = [
         'id','nom','prenoms','id_acteur'
     ];
+
+
 }

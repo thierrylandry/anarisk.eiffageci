@@ -11,4 +11,8 @@ class Chantier extends Model
     protected $fillable = [
         'id','libelle'
     ];
+    public function responsables(){
+
+        return $this->hasMany('App\Responsable','id_chantier');
+    }
 }

@@ -37,5 +37,15 @@ Route::group(['prefix' => 'analyses'], function () {
 
 
 
+Route::get('/chantierListeFonction/{id}',[
+        'as'=>'chantierListeFonction',
+        'uses'=>'AnalysesController@chantierListeFonction',
+    ])->middleware('auth');
+
+Route::get('/proprietaireListeFonction/{id}',[
+        'as'=>'proprietaireListeFonction',
+        'uses'=>'AnalysesController@proprietaireListeFonction',
+    ])->middleware('auth');
+
 
 
