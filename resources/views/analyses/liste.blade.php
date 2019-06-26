@@ -8,7 +8,7 @@
             position: absolute;
             z-index: 9;
             left:0;
-            bottom:100px;
+            top:291px;
             background-color: #f1f1f1;
             text-align: center;
             border: 1px solid #d3d3d3;
@@ -29,6 +29,14 @@
         .opportunite{
             background-color: springgreen;
         }
+        .gros {
+            width: 980px;
+            height: 650px;
+        }
+        .petit {
+            width: 10%;
+            height: 10%;
+        }
     </style>
     <div class="breadcrumbs" style="max-height:300px">
         <div class="col-sm-4">
@@ -46,9 +54,9 @@
     <div class="content mt-3">
 
 
-        <div id="mydiv" style="height: 162px;width: 229px" >
-            <div id="mydivheader">Cliquer ici pour déplacer</div>
-            <img src="{{URL::asset("images/anarisk.png")}}" width="100%" height="100%"/>
+        <div id="mydiv" class="petit" >
+            <div id="mydivheader">Cliquer ici pour déplacer ou double cliquer pour agrandire</div>
+            <img src="{{URL::asset("images/anarisk.png")}}" width="980px" height="600px"/>
             <div class="resizeUI"><i class="fa fa-arrows"></i></div>
         </div>
         <div class="animated fadeIn">
@@ -103,16 +111,20 @@
         <script src="{{ asset("assets/js/lib/vector-map/jquery.vmap.sampledata.js") }}"></script>
         <script src="{{ asset("assets/js/lib/vector-map/country/jquery.vmap.world.js") }}"></script>
             <script src="{{ asset("assets/js/lib/chosen/chosen.jquery.min.js")}}"></script>
-        <script>
 
-            jQuery(document).ready(function() {
-                jQuery(".standardSelect").chosen({
-                    disable_search_threshold: 10,
-                    no_results_text: "Oops, nothing found!",
-                    width: "100%"
-                });
-            });
-        </script>
+
+
+            <script src="{{ asset('assets/js/lib/data-table/datatables.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/dataTables.buttons.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/buttons.bootstrap.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/jszip.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/pdfmake.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/vfs_fonts.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/buttons.html5.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/buttons.print.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/buttons.colVis.min.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/datatables-init.js')}}"></script>
         <!-- .animated -->
         <script>
             jQuery(function($) {
@@ -181,6 +193,19 @@
                 });
                 $("#addconsequences").click(function (e) {
                     $($("#consequencestemplate").html()).appendTo($("#consequences"));
+                });
+
+                $( "#mydiv" ).dblclick(function() {
+                    //  alert( "Handler for .dblclick() called." );
+                    if($("#mydiv").hasClass('petit')) {
+                        $("#mydiv").removeClass('petit');
+                        $("#mydiv").addClass('gros');
+                    }else{
+                        $("#mydiv").removeClass('gros');
+                        $("#mydiv").addClass('petit');
+                    }
+
+
                 });
             });
 

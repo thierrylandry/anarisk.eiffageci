@@ -39,9 +39,6 @@ class CreateTableAnalyse extends Migration
             $table->unsignedBigInteger("id_proprietaire")->nullable(true);
             $table->foreign('id_proprietaire')->references('responsable')->on('id');
 
-            $table->unsignedBigInteger("id_pays")->nullable(true);
-            $table->foreign('id_pays')->references('pays')->on('id');
-
             $table->unsignedBigInteger("id_user")->nullable(true);
             $table->foreign('id_user')->references('id')->on('users');
 

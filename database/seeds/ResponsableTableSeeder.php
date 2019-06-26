@@ -18,6 +18,7 @@ class ResponsableTableSeeder extends Seeder
         $responsable->nom="Descamps";
         $responsable->prenoms="Nicolas";
         $responsable->id_acteur="1";
+        $responsable->id_chantier=1;
         $responsable->save();
 
         $responsable= new Responsable();
@@ -25,6 +26,7 @@ class ResponsableTableSeeder extends Seeder
         $responsable->nom="Decultieux";
         $responsable->prenoms="Sylvain";
         $responsable->id_acteur="2";
+        $responsable->id_chantier=1;
         $responsable->save();
 
         $responsable= new Responsable();
@@ -32,6 +34,7 @@ class ResponsableTableSeeder extends Seeder
         $responsable->nom="Vigna";
         $responsable->prenoms="Christian";
         $responsable->id_acteur="3";
+        $responsable->id_chantier=1;
         $responsable->save();
 
         $responsable= new Responsable();
@@ -39,6 +42,7 @@ class ResponsableTableSeeder extends Seeder
         $responsable->nom="Costecalde";
         $responsable->prenoms="Claudiane";
         $responsable->id_acteur="4";
+        $responsable->id_chantier=1;
         $responsable->save();
 
         $responsable= new Responsable();
@@ -46,6 +50,7 @@ class ResponsableTableSeeder extends Seeder
         $responsable->nom="Kompaniiets";
         $responsable->prenoms="Oleksandr";
         $responsable->id_acteur="5";
+        $responsable->id_chantier=1;
         $responsable->save();
 
         $responsable= new Responsable();
@@ -53,6 +58,7 @@ class ResponsableTableSeeder extends Seeder
         $responsable->nom="Galea";
         $responsable->prenoms="Benoit";
         $responsable->id_acteur="6";
+        $responsable->id_chantier=1;
         $responsable->save();
 
         $responsable= new Responsable();
@@ -60,6 +66,7 @@ class ResponsableTableSeeder extends Seeder
         $responsable->nom="Logbo";
         $responsable->prenoms="Franck";
         $responsable->id_acteur="7";
+        $responsable->id_chantier=1;
         $responsable->save();
 
         $responsable= new Responsable();
@@ -67,6 +74,7 @@ class ResponsableTableSeeder extends Seeder
         $responsable->nom="Kouehie";
         $responsable->prenoms="Gnimy Yves";
         $responsable->id_acteur="8";
+        $responsable->id_chantier=1;
         $responsable->save();
 
         $responsable= new Responsable();
@@ -74,6 +82,7 @@ class ResponsableTableSeeder extends Seeder
         $responsable->nom="Brisset";
         $responsable->prenoms="Franck";
         $responsable->id_acteur="9";
+        $responsable->id_chantier=1;
         $responsable->save();
 
         $responsable= new Responsable();
@@ -81,6 +90,7 @@ class ResponsableTableSeeder extends Seeder
         $responsable->nom="Orsot";
         $responsable->prenoms="Lydie";
         $responsable->id_acteur="10";
+        $responsable->id_chantier=1;
         $responsable->save();
     }
 }

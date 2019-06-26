@@ -17,10 +17,24 @@ class AnalysesController extends Controller
     public function ajouter_analyse(){
         $natures= Nature::all();
         $payss = Pays::all();
-        $chantiers = Chantier::all();
-        $responsables = Responsable::all();
+        $chantiers = Chantier::where('id_pays','=',110)->get();
+        $responsables = Responsable::where('id_chantier','=',$chantiers->first()->id)->get();
 
         return view('analyses.analyses',compact('natures','payss','chantiers','responsables'));
+
+    }
+    public function chantierListeFonction($id){
+        $pays = Pays::find($id);
+
+
+        return $pays->chantiers()->get();
+
+    }
+    public function proprietaireListeFonction($id){
+        $chantier = Chantier::find($id);
+
+
+        return $chantier->responsables()->get();
 
     }
 
@@ -29,8 +43,9 @@ class AnalysesController extends Controller
         $payss = Pays::all();
         $chantiers = Chantier::all();
         $responsables = Responsable::all();
+        $analyses = Analyse::all();
 
-        return view('analyses.liste',compact('natures','payss','chantiers','responsables'));
+        return view('analyses.liste',compact('natures','payss','chantiers','responsables','analyses'));
 
     }
 
@@ -45,12 +60,18 @@ class AnalysesController extends Controller
         $pays = $parameters['pays'];
         $chantier = $parameters['chantier'];
         $proprietaire = $parameters['proprietaire'];
-        $code = $parameters['code'];
+
+        $lepays= Pays::find($pays);
+        $lechantier= Pays::find($chantier);
+        $lesanalyses= Analyse::all();
+
+        $value=sizeof($lesanalyses)+1;
+        $code = $lepays->alpha2.'-'.$lechantier->libelle.'-'.$value ;
         $probabiliteAvant = $parameters['probabiliteAvant'];
         $severiteAvant = $parameters['severiteAvant'];
         $planingAvant = $parameters['planingAvant'];
         $coutAvant = $parameters['coutAvant'];
-        $niveauAvant = $parameters['niveauAvant'];
+
         $probabiliteApres = $parameters['probabiliteApres'];
         $severiteApres = $parameters['severiteApres'];
         $planingApres = $parameters['planingApres'];
@@ -98,7 +119,6 @@ class AnalysesController extends Controller
 
         $analyse->id_nature=$nature;
         $analyse->date=$date;
-        $analyse->id_pays=$pays;
         $analyse->id_chantier=$chantier;
         $analyse->id_proprietaire=$proprietaire;
         $analyse->code=$code;
@@ -117,7 +137,7 @@ class AnalysesController extends Controller
         $analyse->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
         $analyse->save();
 
-        return redirect()->route('analyses')->with('success',"La personne a été ajoutée avec succès");
+        return redirect()->route('analyses')->with('success',"L'analyse a été enregistré avec succès");
 
     }
 }

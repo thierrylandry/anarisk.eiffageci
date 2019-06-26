@@ -5,14 +5,13 @@
 @section('page')
     <style>
         #mydiv {
-            position: absolute;
+            position: fixed;
             z-index: 9;
             left:0;
-            bottom:100px;
+            top:291px;
             background-color: #f1f1f1;
             text-align: center;
             border: 1px solid #d3d3d3;
-            resize: both;
             overflow: hidden;
         }
 
@@ -22,6 +21,20 @@
             z-index: 10;
             background-color: #2196F3;
             color: #fff;
+        }
+        .gros {
+            width: 1000px;
+            height: 650px;
+        }
+        .petit {
+            width: 10%;
+            height: 10%;
+        }
+        .risk {
+            background-color: #f50017d4;
+        }
+        .opportunite {
+            background-color: #00ff7f29;
         }
     </style>
     <div class="breadcrumbs" style="max-height:300px">
@@ -40,9 +53,9 @@
     <div class="content mt-3">
 
 
-        <div id="mydiv" style="height: 162px;width: 229px" >
-            <div id="mydivheader">Cliquer ici pour déplacer</div>
-            <img src="{{URL::asset("images/anarisk.png")}}" width="100%" height="100%"/>
+        <div id="mydiv" class="petit" >
+            <div id="mydivheader">Cliquer ici pour déplacer ou double cliquer pour agrandire</div>
+            <img src="{{URL::asset("images/anarisk.png")}}" width="1000px" height="600px"/>
             <div class="resizeUI"><i class="fa fa-arrows"></i></div>
         </div>
         <div class="animated fadeIn">
@@ -61,7 +74,7 @@
                                     <label class=" form-control-label">Nature</label>
                                     <div class="input-group">
 
-                                        <select data-placeholder="Sélectionner une nature" class="standardSelect form-control" tabindex="1" name="nature" required>
+                                        <select data-placeholder="Sélectionner une nature" class="standardSelect form-control" tabindex="1" name="nature" id="nature" required>
                                             <option value=""></option>
                                             @foreach($natures as $nature)
                                             <option value="{{$nature->id}}">{{$nature->nature}}</option>
@@ -74,16 +87,16 @@
                                     <label class=" form-control-label">Date</label>
                                     <div class="input-group">
 
-                                        <input type="date" class="form-control" name="date" required/>
+                                        <input type="date" class="form-control" name="date" value="{{date("Y-m-d")}}" required/>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-2">
                                     <label class=" form-control-label">Pays</label>
                                     <div class="input-group">
 
-                                        <select data-placeholder="Sélectionner un pays..." class="standardSelect form-control" tabindex="1" name="pays" required>
+                                        <select data-placeholder="Sélectionner un pays..." class="standardSelect form-control" tabindex="1" name="pays" id="pays" required>
                                             @foreach($payss as $pays)
-                                                <option @if($pays->alpha2=="CI") {{'selected'}}@endif value="{{$pays->id}}">{{$pays->nom_fr_fr."(".$pays->alpha2.")"}}</option>
+                                                <option @if($pays->alpha2=="CI") {{'selected'}}@endif value="{{$pays->id}}">{{$pays->nom_fr_fr." (".$pays->alpha2.")"}}</option>
                                             @endforeach
 
                                         </select>
@@ -93,9 +106,9 @@
                                     <label class=" form-control-label">Chantier</label>
                                     <div class="input-group">
 
-                                        <select data-placeholder="Sélectionner un chantier..." class="standardSelect form-control" tabindex="1" name="chantier" required>
+                                        <select data-placeholder="Sélectionner un chantier..." class="standardSelect form-control" tabindex="1" name="chantier" id="chantier" required>
                                             @foreach($chantiers as $chantier)
-                                                <option @if($chantier->id=="CI") {{'selected'}}@endif value="{{$chantier->id}}">{{$chantier->libelle}}</option>
+                                                <option value="{{$chantier->id}}">{{$chantier->libelle}}</option>
                                             @endforeach
 
                                         </select>
@@ -105,19 +118,12 @@
                                     <label class=" form-control-label">Propriétaire</label>
                                     <div class="input-group">
 
-                                        <select data-placeholder="Choose a Country..." class="standardSelect form-control" tabindex="1" name="proprietaire">
+                                        <select data-placeholder="Choose a Country..." class="standardSelect form-control" tabindex="1" name="proprietaire" id="proprietaire">
                                             @foreach($responsables as $responsable)
                                                 <option  value="{{$responsable->id}}">{{$responsable->nom.' '.$responsable->prenoms}}</option>
                                             @endforeach
 
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-sm-2">
-                                    <label class=" form-control-label">Code</label>
-                                    <div class="input-group">
-
-                                        <input type="text" class="form-control" name="code" required/>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +152,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-12">
+                <div class="col-xs-6 col-sm-6">
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">Causes </strong>
@@ -186,7 +192,7 @@
                 </div>
 
 
-                <div class="col-xs-12 col-sm-12">
+                <div class="col-xs-6 col-sm-6">
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">Conséquences </strong>
@@ -229,45 +235,49 @@
                 <div class="col-xs-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Evaluation du neveau de risque</strong>
+                            <strong id="titreeval"></strong>
                         </div>
                         <div class="card-body card-block">
-                            <div class="form-group col-sm-2">
-                                <label class=" form-control-label">Probabilité d'occurance</label>
-                                <div class="input-group">
 
-                                    <input name="probabiliteAvant" id="probabiliteAvant" class="form-control calcule" type="number" min="1" max="5"  required/>
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class=" form-control-label"> Séverité</label>
-                                <div class="input-group">
-
-                                    <input name="severiteAvant" id="severiteAvant" class="form-control calcule" type="number" min="1" max="5" required/>
-                                </div>
-                            </div>
-
-                            <div class="form-group col-sm-2">
-                                <label class=" form-control-label">Planning</label>
-                                <div class="input-group">
-
-                                    <input name="planingAvant" id="planingAvant" class="form-control calcule" type="number" min="1" max="5" required/>
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class=" form-control-label">Coût</label>
-                                <div class="input-group">
-
-                                    <input name="coutAvant" id="coutAvant"  class="form-control calcule" type="number" min="1" max="5" required/>
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class=" form-control-label">Niveau</label>
-                                <div class="input-group">
-
-                                    <input name="niveauAvant" id="niveauAvant" class="form-control calcule" type="number" min="1" required readonly/>
-                                </div>
-                            </div>
+                            <table border="1px" width="100%" style="text-align: center;">
+                                <thead>
+                                <tr>
+                                    <th rowspan="2">Probabilité d'occurrence</th>
+                                    <th colspan="3">Impacts</th>
+                                </tr>
+                                <tr>
+                                    <th>Sévérité </th>
+                                    <th>Planing</th>
+                                    <th>Cout</th>
+                                    <th>Niveau</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <input name="probabiliteAvant" id="probabiliteAvant" class="form-control calcule" type="number" min="1" max="5"  required/>
+                                    </td>
+                                    <td>
+                                        <input name="severiteAvant" id="severiteAvant" class="form-control calcule" type="number" min="1" max="5" required/>
+                                    </td>
+                                    <td>
+                                        <input name="planingAvant" id="planingAvant" class="form-control calcule" type="number" min="1" max="5" required/>
+                                    </td>
+                                    <td>
+                                        <input name="coutAvant" id="coutAvant"  class="form-control calcule" type="number" min="1" max="5" required/>
+                                    </td>
+                                    <td>
+                                        <input name="niveauAvant" id="niveauAvant" class="form-control calcule" type="number" min="1" required readonly/>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
 
                         </div>
                     </div>
@@ -275,46 +285,48 @@
                 <div class="col-xs-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Evaluation après mesure préventive</strong>
+                            <strong id="titreeval1"></strong>
                         </div>
                         <div class="card-body card-block">
-
-                            <div class="form-group col-sm-2">
-                                <label class=" form-control-label">Probabilité d'occurance</label>
-                                <div class="input-group">
-
-                                    <input name="probabiliteApres" id="probabiliteApres" class="form-control calcule1" type="number" min="1" max="5"/>
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class=" form-control-label"> Séverité</label>
-                                <div class="input-group">
-
-                                    <input name="severiteApres" id="severiteApres" class="form-control calcule1" type="number" min="1" max="5"/>
-                                </div>
-                            </div>
-
-                            <div class="form-group col-sm-2">
-                                <label class=" form-control-label">Planning</label>
-                                <div class="input-group">
-
-                                    <input name="planingApres" id="planingApres" class="form-control calcule1" type="number" min="1" max="5"/>
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class=" form-control-label">Coût</label>
-                                <div class="input-group">
-
-                                    <input name="coutApres" id="coutApres" class="form-control calcule1" type="number" min="1" max="5"/>
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label class=" form-control-label">Niveau</label>
-                                <div class="input-group">
-
-                                    <input name="niveauApres" id="niveauApres" class="form-control" type="number" min="1" readonly/>
-                                </div>
-                            </div>
+                            <table border="1px" width="100%" style="text-align: center;">
+                                <thead>
+                                <tr>
+                                    <th rowspan="2">Probabilité d'occurrence</th>
+                                    <th colspan="3">Impacts</th>
+                                </tr>
+                                <tr>
+                                    <th>Sévérité </th>
+                                    <th>Planning</th>
+                                    <th>Coût</th>
+                                    <th>Niveau</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <input name="probabiliteApres" id="probabiliteApres" class="form-control calcule1" type="number" min="1" max="5"  />
+                                    </td>
+                                    <td>
+                                        <input name="severiteApres" id="severiteApres" class="form-control calcule1" type="number" min="1" max="5" />
+                                    </td>
+                                    <td>
+                                        <input name="planingApres" id="planingApres" class="form-control calcule1" type="number" min="1" max="5" />
+                                    </td>
+                                    <td>
+                                        <input name="coutApres" id="coutApres"  class="form-control calcule1" type="number" min="1" max="5" />
+                                    </td>
+                                    <td>
+                                        <input name="niveauApres" id="niveauApres" class="form-control calcule1" type="number" min="1"  readonly/>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -329,7 +341,7 @@
                                 <div class="input-group">
 
                                     <input name="cout" class="form-control" type="number" required/>
-                                </div> <label class=" form-control-label"> &nbsp;Fr </label>
+                                </div> <label class=" form-control-label"> &nbsp;FCFA </label>
                             </div>
                             </br>
                             </br>
@@ -377,11 +389,80 @@
                     no_results_text: "Oops, nothing found!",
                     width: "100%"
                 });
+                //en fonction du pays
+                jQuery("#pays").change(function (e) {
+                    var pays=jQuery("#pays").val();
+                    jQuery.get("../chantierListeFonction/"+pays, function(data, status){
+
+                        //console.log(data[0]);
+                        var lesOptions="";
+                        jQuery.each(data, function( index, value ) {
+                            lesOptions+="<option value='"+value.id+"'>"+value.libelle+"</option>" ;
+                        });
+                        jQuery("#chantier").empty();
+                        jQuery("#chantier").append(lesOptions);
+                        jQuery("#chantier").trigger("chosen:updated");
+
+                    });
+                });
+
+                jQuery("#chantier").change(function (e) {
+                    var chantier=jQuery("#chantier").val();
+                    jQuery.get("../proprietaireListeFonction/"+chantier, function(data, status){
+
+                        //console.log(data[0]);
+                        var lesOptions="";
+                        jQuery.each(data, function( index, value ) {
+                            lesOptions+="<option value='"+value.id+"'>"+value.nom+' '+value.prenoms+"</option>" ;
+                        });
+                        jQuery("#proprietaire").empty();
+                        jQuery("#proprietaire").append(lesOptions);
+                        jQuery("#proprietaire").trigger("chosen:updated");
+
+                    });
+                });
+
+                jQuery("#nature").change(function (e) {
+
+                    var nature =jQuery("#nature").val();
+                    if(nature==1){
+                        jQuery("#titreeval").empty();
+                        jQuery("#titreeval").append(" Evaluation du niveau de risque");
+
+                        jQuery("#titreeval1").empty();
+                        jQuery("#titreeval1").append(" Evaluation après mesure(s) préventive(s)");
+
+
+                            if(jQuery(".right-panel").hasClass('opportunite')){
+                                jQuery(".right-panel").removeClass('opportunite');
+                                jQuery(".right-panel").addClass('risk');
+                            }else{
+                                jQuery(".right-panel").addClass('risk');
+                            }
+
+
+                    }else{
+                        jQuery("#titreeval").empty();
+                        jQuery("#titreeval").append( "Evaluation du niveau de l'opportunité");
+
+                        jQuery("#titreeval1").empty();
+                        jQuery("#titreeval1").append(" Evaluation après action(s) favorisante(s)");
+
+                        if(jQuery(".right-panel").hasClass('risk')) {
+                            jQuery(".right-panel").removeClass('risk');
+                            jQuery(".right-panel").addClass('opportunite');
+                        }else{
+                            jQuery(".right-panel").addClass('opportunite');
+                        }
+                    }
+
+                });
             });
         </script>
        <!-- .animated -->
         <script>
             jQuery(function($) {
+
                 function test(){
                     if($("#probabiliteAvant").val()!="") {
                         var luimeme = $("#probabiliteAvant").val();
@@ -404,7 +485,7 @@
                         var coutAvant=0;
                     }
 
-                    var res = parseInt(luimeme)+parseInt(severiteAvant)+parseInt(planingAvant)+parseInt(coutAvant);
+                    var res = parseInt(luimeme)*Math.max(parseInt(severiteAvant), parseInt(planingAvant), parseInt(coutAvant));
 
                     $("#niveauAvant").val(res);
                 };
@@ -430,7 +511,7 @@
                         var coutApres=0;
                     }
 
-                    var res = parseInt(luimeme)+parseInt(severiteApres)+parseInt(planingApres)+parseInt(coutApres);
+                    var res = parseInt(luimeme)*Math.max(parseInt(severiteApres), parseInt(planingApres), parseInt(coutApres));
 
                     $("#niveauApres").val(res);
                 };
@@ -448,6 +529,21 @@
                 $("#addconsequences").click(function (e) {
                     $($("#consequencestemplate").html()).appendTo($("#consequences"));
                 });
+
+                $( "#mydiv" ).dblclick(function() {
+                  //  alert( "Handler for .dblclick() called." );
+                    if($("#mydiv").hasClass('petit')) {
+                        $("#mydiv").removeClass('petit');
+                        $("#mydiv").addClass('gros');
+                    }else{
+                        $("#mydiv").removeClass('gros');
+                        $("#mydiv").addClass('petit');
+                    }
+
+
+                });
+
+
             });
 
             //Make the DIV element draggagle:
