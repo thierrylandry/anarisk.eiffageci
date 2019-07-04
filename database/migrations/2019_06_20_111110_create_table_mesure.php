@@ -14,11 +14,10 @@ class CreateTableMesure extends Migration
     public function up()
     {
         Schema::create('mesure', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('priorite');
+            $table->bigIncrements('id');;
             $table->date('dateplanifie');
-            $table->date('dateEffective');
-            $table->string('documentation');
+            $table->date('dateEffective')->nullable();
+            $table->string('documentation')->nullable();
 
             // les clées étrangères
             $table->unsignedBigInteger('id_responsable');

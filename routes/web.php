@@ -33,6 +33,23 @@ Route::group(['prefix' => 'analyses'], function () {
         'as'=>'save_analyse',
         'uses'=>'AnalysesController@save_analyse',
     ])->middleware('auth');
+    Route::get('/mesures/{id}',[
+        'as'=>'mesures',
+        'uses'=>'MesuresController@mesures',
+    ])->middleware('auth');
+
+    Route::post('/SaveMesure',[
+        'as'=>'SaveMesure',
+        'uses'=>'MesuresController@SaveMesure',
+    ])->middleware('auth');
+    Route::post('/ModifierMesure',[
+        'as'=>'ModifierMesure',
+        'uses'=>'MesuresController@ModifierMesure',
+    ])->middleware('auth');
+    Route::get('/pageModifMesure/{id}',[
+        'as'=>'pageModifMesure',
+        'uses'=>'MesuresController@pageModifMesure',
+    ])->middleware('auth');
 });
 
 

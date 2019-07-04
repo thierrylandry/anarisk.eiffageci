@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Acteur;
 use App\Analyse;
 use App\Chantier;
 use App\Metier\CauseConsequences;
 use App\Nature;
 use App\Pays;
+use App\Periodicite;
+use App\Priorite;
 use App\Responsable;
+use App\Statut;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -43,9 +47,13 @@ class AnalysesController extends Controller
         $payss = Pays::all();
         $chantiers = Chantier::all();
         $responsables = Responsable::all();
+        $priorites = Priorite::all();
         $analyses = Analyse::all();
-
-        return view('analyses.liste',compact('natures','payss','chantiers','responsables','analyses'));
+        $statuts = Statut::all();
+        $acteurs = Acteur::all();
+        $periodicites = Periodicite::all();
+       // dd($analyses[0]->chantier()->get());
+        return view('analyses.liste',compact('natures','payss','chantiers','responsables','analyses','priorites','statuts','acteurs','periodicites'));
 
     }
 
@@ -62,7 +70,7 @@ class AnalysesController extends Controller
         $proprietaire = $parameters['proprietaire'];
 
         $lepays= Pays::find($pays);
-        $lechantier= Pays::find($chantier);
+        $lechantier= Chantier::find($chantier);
         $lesanalyses= Analyse::all();
 
         $value=sizeof($lesanalyses)+1;

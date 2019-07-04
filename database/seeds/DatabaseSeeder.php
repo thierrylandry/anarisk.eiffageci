@@ -14,9 +14,11 @@ class DatabaseSeeder extends Seeder
          $this->call(ActeurTableSeeder::class);
          $this->call(ChantierTableSeeder::class);
          $this->call(NatureTableSeeder::class);
-         $this->call(PrioriteTableSeeder::class);
+         $this->call(PrioritesTableSeeder::class);
          $this->call(ResponsableTableSeeder::class);
          $this->call(StatutTableSeeder::class);
+         $this->call(UsersTableSeeder::class);
+         $this->call(PeriodiciteTableSeeder::class);
          $this->call(UsersTableSeeder::class);
     }
 }

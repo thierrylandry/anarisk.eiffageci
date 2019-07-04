@@ -50,7 +50,7 @@
         }
     </style>
 </head>
-<body>
+<body >
 
 
 <!-- Left Panel -->
@@ -63,7 +63,7 @@
 
 <!-- Right Panel -->
 
-<div id="right-panel" class="right-panel">
+<div id="right-panel" class="right-panel ">
 
     <!-- Header-->
     <header id="header" class="header">
@@ -139,11 +139,6 @@
 
 
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#bootstrap-data-table-export').DataTable();
-    } );
-</script>
 <script>
     ( function ( $ ) {
         "use strict";
