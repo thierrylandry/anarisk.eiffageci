@@ -154,21 +154,27 @@
                                 <td colspan="3">Statut Date planifi. Priorité & Périodicité</td>
                                 <td >Documentation</td>
                             </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
 
+                            @foreach($analyse->mesures()->get() as $mesure)
+
+                            <tr>
+                                <td>{{$mesure->libelle}}</td>
+                                <td>{{$mesure->responsable->nom}} {{$mesure->responsable->prenoms}}</td>
+                                <td>{{$mesure->acteur->libelle}}</td>
+                                <td>{{$mesure->statut->libelle}}</td>
+                                <td>{{$mesure->dateplanifie}}</td>
+                                <td>{{$mesure->priorite->libelle}} & {{$mesure->periodicite->libelle}}</td>
+                                <td>{{$mesure->documentation}}</td>
 
                             </tr>
-
-
+                            @endforeach
+                            <tr>
+                                <td colspan="4">Calcul impacte financier :</td>
+                                <td colspan="3">{{$analyse->coute}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="7">{!! nl2br($analyse->brouillon) !!}</td>
+                            </tr>
                         </table>
                     </div>
                 </div>
