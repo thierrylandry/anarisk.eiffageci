@@ -5,14 +5,13 @@
 @section('page')
     <style>
         #mydiv {
-            position: absolute;
+            position: fixed;
             z-index: 9;
             left:0;
-            top:291px;
+            top:250px;
             background-color: #f1f1f1;
             text-align: center;
             border: 1px solid #d3d3d3;
-            resize: both;
             overflow: hidden;
         }
 
@@ -23,19 +22,30 @@
             background-color: #2196F3;
             color: #fff;
         }
-        .risk{
-            background-color: red;
-        }
-        .opportunite{
-            background-color: springgreen;
-        }
         .gros {
-            width: 980px;
+            width: 1000px;
+            height: 700px;
+        }
+
+        .grosImage {
+            width: 1000px;
             height: 650px;
         }
         .petit {
             width: 10%;
-            height: 10%;
+            height: 300px;
+        }
+        .petitImage {
+            width: 187px;
+            height:200px;
+        }
+        .risk {
+            background-color: #f50017d4 !important;
+            color:white;
+        }
+        .opportunite {
+            background-color: #00ff7f29 !important;
+            color:black;
         }
     </style>
     <div class="breadcrumbs" style="max-height:300px">
@@ -50,13 +60,122 @@
 
         </div>
     </div>
+    <div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="smallmodalLabel">Ajouter une  mesure</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{{route('SaveMesure')}}">
+                        @csrf
+                        <input type="hidden" id="id_analyse" name="id_analyse" value="" />
+                    <div class="form-group">
+                        <label class=" form-control-label">Priorité</label>
+                        <div class="input-group">
+                            <select data-placeholder="Sélectionner une priorité..." class="standardSelect form-control" tabindex="1" name="priorite" id="priorite" required>
+                               <option></option>
+                                @foreach($priorites as $priorite)
+                                    <option value="{{$priorite->id}}">{{$priorite->libelle}}</option>
+                                    @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class=" form-control-label">Statut</label>
+                        <div class="input-group">
 
+                            <select data-placeholder="Sélectionner une statut..." class="standardSelect form-control" tabindex="1" name="statut" id="statut" required>
+                                <option></option>
+                                @foreach($statuts as $statut)
+                                    <option value="{{$statut->id}}">{{$statut->libelle}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class=" form-control-label">Périodicité</label>
+                        <div class="input-group">
+
+                            <select data-placeholder="Sélectionner une périodicité..." class="standardSelect form-control" tabindex="1" name="periodicite" id="periodicite" required>
+                                <option></option>
+                                @foreach($periodicites as $periodicite)
+                                    <option value="{{$periodicite->id}}">{{$periodicite->libelle}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class=" form-control-label">libelle</label>
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" name="libelle" value="" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class=" form-control-label">Responsable</label>
+                        <div class="input-group">
+
+                            <select data-placeholder="Sélectionner une responsable..." class="standardSelect form-control" tabindex="1" name="responsable" id="responsable" required>
+                                <option></option>
+                                @foreach($responsables as $responsable)
+                                    <option value="{{$responsable->id}}">{{$responsable->nom.' '.$responsable->prenoms}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class=" form-control-label">Acteur</label>
+                        <div class="input-group">
+
+                            <select data-placeholder="Sélectionner un acteur..." class="standardSelect form-control" tabindex="1" name="acteur" id="acteur" required>
+                                <option></option>
+                                @foreach($acteurs as $acteur)
+                                    <option value="{{$acteur->id}}">{{$acteur->libelle}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class=" form-control-label">Date de planification</label>
+                        <div class="input-group">
+
+                            <input type="date" class="form-control" name="datePlanifie" value="" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class=" form-control-label">Date de réalisation effective</label>
+                        <div class="input-group">
+
+                            <input type="date" class="form-control" name="dateEffective" value="" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class=" form-control-label">Documentation</label>
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" name="documentation" value="" required/>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">ENREGISTRER</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="content mt-3">
 
 
         <div id="mydiv" class="petit" >
             <div id="mydivheader">Cliquer ici pour déplacer ou double cliquer pour agrandire</div>
-            <img src="{{URL::asset("images/anarisk.png")}}" width="980px" height="600px"/>
+            <img src="{{URL::asset("images/anarisk.png")}}"  class="petitImage" id="permanant"/>
             <div class="resizeUI"><i class="fa fa-arrows"></i></div>
         </div>
         <div class="animated fadeIn">
@@ -68,28 +187,52 @@
                         <strong class="card-title">Liste des risques/opportunités</strong>
                     </div>
                     <div class="card-body">
-                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                        <table id="bootstrap-data-table1" class="table table-striped table-bordered">
                             <thead>
                             <tr>
+                                <th>id</th>
+                                <th>Code</th>
                                 <th>Nature</th>
+                                <th>Pays</th>
                                 <th>Chantier</th>
                                 <th>Proprietaire</th>
-                                <th>Salary</th>
+                                <th>Auteur</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>$320,800</td>
-                            </tr>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>$170,750</td>
-                            </tr>
+                               @foreach($analyses as $analyse)
+                                   <tr class="{{$analyse->id_nature==1?'risk':'opportunite'}}" >
+                                       <td>
+                                           {{$analyse->id}}
+                                       </td>
+                                       <td>
+                                           {{$analyse->code}}
+                                       </td>
+                                       <td>
+                                          {{$analyse->nature()->first()->nature}}
+                                       </td>
+                                       <td>
+                                           {{$analyse->chantier()->first()->libelle}}
+                                       </td>
+                                       <td>
+                                           {{$analyse->chantier()->first()->pays()->first()->nom_fr_fr}}
+                                       </td>
+                                       <td>
+                                           {{$analyse->proprietaire()->first()->nom." ".$analyse->proprietaire()->first()->prenoms}}
+                                       </td>
+                                       <td>
+                                           {{$analyse->auteur()->first()->nom." ".$analyse->auteur()->first()->prenoms}}
+                                       </td>
+                                        <td>
+
+                                            <a href="#" data-toggle="modal" data-target="#smallmodal" class="ajouterMesure"> <i class="menu-icon fa fa-plus"></i> Ajouter une mesure</a>
+                                            <a href="{{route('mesures',$analyse->id)}}"> <i class="menu-icon fa fa-list"></i> Lister les mesures</a>
+                                        </td>
+                                   </tr>
+                                   @endforeach
+
+
                             </tbody>
                         </table>
                     </div>
@@ -127,7 +270,33 @@
             <script src="{{ asset('assets/js/lib/data-table/datatables-init.js')}}"></script>
         <!-- .animated -->
         <script>
+
+            jQuery(document).ready(function() {
+                jQuery(".standardSelect").chosen({
+                    disable_search_threshold: 10,
+                    no_results_text: "Oops, nothing found!",
+                    width: "100%"
+                });
+                });
+
             jQuery(function($) {
+                var table= $('#bootstrap-data-table1').DataTable({
+                    language: {
+                        url: "{{ URL::asset('js/French.json') }}"
+                    },
+                    "ordering":true,
+                    "createdRow": function( row, data, dataIndex){
+
+                    },
+                    responsive: false,
+                }).column(0).visible(false);
+
+                $('.ajouterMesure').click(function(){
+                    var data = table.row($(this).closest('tr')).data();
+                    //alert(data[Object.keys(data)[0]]);
+                    $("#id_analyse").val(data[Object.keys(data)[0]]);
+                });
+
                 function test(){
                     if($("#probabiliteAvant").val()!="") {
                         var luimeme = $("#probabiliteAvant").val();
@@ -203,6 +372,14 @@
                     }else{
                         $("#mydiv").removeClass('gros');
                         $("#mydiv").addClass('petit');
+                    }
+
+                    if($("#permanant").hasClass('petitImage')) {
+                        $("#permanant").removeClass('petitImage');
+                        $("#permanant").addClass('grosImage');
+                    }else{
+                        $("#permanant").removeClass('grosImage');
+                        $("#permanant").addClass('petitImage');
                     }
 
 

@@ -15,4 +15,9 @@ class Chantier extends Model
 
         return $this->hasMany('App\Responsable','id_chantier');
     }
+
+    public function pays(){
+
+        return $this->belongsTo('App\Pays','id_pays');
+    }
 }

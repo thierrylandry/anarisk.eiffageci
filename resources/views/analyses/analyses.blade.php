@@ -8,7 +8,7 @@
             position: fixed;
             z-index: 9;
             left:0;
-            top:291px;
+            top:250px;
             background-color: #f1f1f1;
             text-align: center;
             border: 1px solid #d3d3d3;
@@ -23,12 +23,21 @@
             color: #fff;
         }
         .gros {
+                     width: 1000px;
+                     height: 700px;
+                 }
+
+        .grosImage {
             width: 1000px;
             height: 650px;
         }
         .petit {
             width: 10%;
-            height: 10%;
+            height: 300px;
+        }
+        .petitImage {
+            width: 187px;
+            height:200px;
         }
         .risk {
             background-color: #f50017d4;
@@ -54,8 +63,8 @@
 
 
         <div id="mydiv" class="petit" >
-            <div id="mydivheader">Cliquer ici pour déplacer ou double cliquer pour agrandire</div>
-            <img src="{{URL::asset("images/anarisk.png")}}" width="1000px" height="600px"/>
+            <div id="mydivheader">Cliquer ici pour déplacer ou double cliquer pour agrandir</div>
+            <img src="{{URL::asset("images/anarisk.png")}}" class="petitImage" id="permanant"/>
             <div class="resizeUI"><i class="fa fa-arrows"></i></div>
         </div>
         <div class="animated fadeIn">
@@ -538,6 +547,14 @@
                     }else{
                         $("#mydiv").removeClass('gros');
                         $("#mydiv").addClass('petit');
+                    }
+
+                    if($("#permanant").hasClass('petitImage')) {
+                        $("#permanant").removeClass('petitImage');
+                        $("#permanant").addClass('grosImage');
+                    }else{
+                        $("#permanant").removeClass('grosImage');
+                        $("#permanant").addClass('petitImage');
                     }
 
 
