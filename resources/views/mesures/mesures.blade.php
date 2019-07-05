@@ -171,7 +171,7 @@
                                                 {{$mesure->auteur->nom}}  {{$mesure->auteur->prenoms}}
                                             </td>
                                             <td>
-                                                <a href="{{route('pageModifMesure',$mesure->id)}}"> <i class="menu-icon fa fa-edit"></i> Modifier la mesure</a>
+                                                <a href="{{route('pageModifMesure',$mesure->id)}}" class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-edit"></i> Modifier la mesure</a>
                                             </td>
                                         </tr>
                                     @endforeach
