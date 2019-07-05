@@ -141,18 +141,14 @@
                                     <label class=" form-control-label">Description</label>
                                     <div class="input-group">
 
-                                        <textarea id="description" class="form-control">
-
-                                        </textarea>
+                                        <input type="text" id="description" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-8">
                                     <label class=" form-control-label">Détail</label>
                                     <div class="input-group">
 
-                                        <textarea id="detail" class="form-control">
-
-                                        </textarea>
+                                        <input type="text" id="detail" class="form-control"/>
                                     </div>
                                 </div>
                             </div>

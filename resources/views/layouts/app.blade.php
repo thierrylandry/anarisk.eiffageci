@@ -22,7 +22,7 @@
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
     <link rel="stylesheet" href="{{ asset('assets/scss/style.css')}}">
     <link href="{{ asset('assets/css/lib/vector-map/jqvmap.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/impression.css')}}" rel="stylesheet" media="print">
+
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ asset('assets/css/lib/chosen/chosen.min.css')}}">
@@ -50,13 +50,14 @@
             cursor: e-resize;
         }
     </style>
+    <link href="{{ asset('css/impression.css')}}" rel="stylesheet" media="print">
 </head>
 <body >
 
 
 <!-- Left Panel -->
 
-<aside id="left-panel" class="left-panel">
+<aside id="left-panel" class="left-panel ne_pas_afficher">
     @include('layouts.nav')
 </aside><!-- /#left-panel -->
 
@@ -67,9 +68,9 @@
 <div id="right-panel" class="right-panel ">
 
     <!-- Header-->
-    <header id="header" class="header">
+    <header id="header" class="header ne_pas_afficher">
 
-        <div class="header-menu">
+        <div class="header-menu ne_pas_afficher">
 
 
             <div class="col-sm-12 pull-right">

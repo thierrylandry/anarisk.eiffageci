@@ -48,26 +48,23 @@
     </style>
     <div class="breadcrumbs" style="max-height:300px">
         <div class="col-sm-4">
-            <div class="page-header float-left">
+            <div class="page-header float-left {{($analyse->nature->id==1)?'risk':'opportunite'}}" >
                 <div class="page-title">
-                    <h1>MESURES </h1>
+                    <h1>FICHE ANALYSE </h1>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12">
-
         </div>
     </div>
 
     <div class="content mt-3">
 
 
-        <div id="mydiv" class="petit" >
+        <div id="mydiv" class="petit ne_pas_afficher" >
             <div id="mydivheader">Cliquer ici pour déplacer ou double cliquer pour agrandire</div>
             <img src="{{URL::asset("images/anarisk.png")}}"  class="petitImage" id="permanant"/>
             <div class="resizeUI"><i class="fa fa-arrows"></i></div>
         </div>
-        <div class="row">
+        <div class="row ne_pas_afficher">
             <div class="col-sm-11">
                 <a href="javascript:window.print()" id="btnprint" target="_blank" class="btn btn-info"><i class="fa fa-print"></i> Imprimer</a>
             </div>
@@ -77,19 +74,17 @@
 
         </div>
         </br>
-        <div class="row">
+        <div class="row" id="page">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header {{($analyse->nature->id==1)?'risk':'opportunite'}}">
-                        <strong class="card-title">Fiche analyse</strong>
+                <div class="card " id="page">
+                    <div class="row">
+                        <div class="col-sm-12" style="text-align: center">
+                            <img src="{{URL::asset("images/anarisk.png")}}" width="800px" align="center" class="push-right"/>
+                        </div>
                     </div>
+
                     <div class="card-body">
-                        <table border="1" align="center" style="text-align: center">
-                            <tr>
-                                <td colspan="7">
-                                    <img src="{{URL::asset("images/anarisk.png")}}" />
-                                </td>
-                            </tr>
+                        <table border="1" align="center" style="text-align: center" width="100%">
                             <tr>
                                 <td   style="{{$analyse->nature->id==1?'color:red':'color:green'}}" colspan="2"><b>{{$analyse->nature->nature}}</b></td>
                                 <td>Date</td>
@@ -99,7 +94,7 @@
                                 <td>Code</td>
                             </tr>
                             <tr>
-                                <td>Description</td>
+                                <td style="text-align: left !important" width="5%">&nbsp;Description</td>
                                 <td>{{$analyse->description}}</td>
                                 <td>{{$analyse->date}}</td>
                                 <td>{{$analyse->chantier->pays->nom_fr_fr}}</td>
@@ -108,15 +103,15 @@
                                 <td>{{isset($analyse)? $analyse->code:''}}</td>
                             </tr>
                             <tr>
-                                <td>Détail</td>
-                                <td colspan="6">{{$analyse->description}}</td>
+                                <td style="text-align: left !important">&nbsp;Détail</td>
+                                <td colspan="6">{{$analyse->detail}}</td>
                             </tr>
                             <tr>
                                 <td colspan="4"><b>Causes</b></td>
                                 <td colspan="3"><b>Conséquences</b></td>
                             </tr>
                             <tr>
-                                <td colspan="4">@if(isset($analyse->causes)) @foreach(json_decode($analyse->causes) as $cause) <p>&nbsp;&nbsp;&nbsp; - {{$cause->libelle}}</p> @endforeach @endif</td>
+                                <td colspan="4" style="text-align: left !important">@if(isset($analyse->causes)) @foreach(json_decode($analyse->causes) as $cause) <p>&nbsp;&nbsp;&nbsp; - {{$cause->libelle}}</p> @endforeach @endif</td>
                                 <td colspan="3">@if(isset($analyse->consequences))@foreach(json_decode($analyse->consequences) as $consequence)  <p>&nbsp;&nbsp;&nbsp; - {{$consequence->libelle}}</p> @endforeach @endif</td>
                             </tr>
                             <tr>
@@ -170,7 +165,7 @@
                             </tr>
                             @endforeach
                             <tr>
-                                <td colspan="4">Calcul impacte financier :</td>
+                                <td colspan="4">Calcul impact financier :</td>
                                 <td colspan="3">{{$analyse->coute}}</td>
                             </tr>
                             <tr>

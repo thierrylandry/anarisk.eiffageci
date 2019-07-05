@@ -1,12 +1,13 @@
 body { /* Modifications : la couleur de fond de page - la police - l'unité utilisée pour la taille de la police  */
     background-color :#fff;
     font-family :Serif;
-    font-size :15pt;
+    font-size :12pt;
 }
 
 #page { /* Modifications : suppression de la bordure - marges */
     margin: 2%;
     border :none;
+
 }
 
 #banner, #menuright, #footer { /* Les éléments qui ne seront pas affichés  */
@@ -29,12 +30,9 @@ h2, h3, #contenu h3, #contenu a, a { /* Modification de la couleur des titres et
 h2{
     font-size: 1em;
 }
-header,nav,aside,#ne_pas_afficher,#btnprint{display: none;}
+header,nav,aside,#ne_pas_afficher,.ne_pas_afficher,#btnprint{display: none;}
 
-table,div{
-
-
-}
+card{background-color: transparent !important; border: none !important;}
 .logo_eiffage{
     display: block !important;
 }
