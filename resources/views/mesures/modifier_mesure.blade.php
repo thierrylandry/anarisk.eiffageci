@@ -79,7 +79,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header {{($analyse->nature->id==1)?'risk':'opportunite'}}">
                         <strong class="card-title">Analyse</strong>
                     </div>
                     <div class="card-body">

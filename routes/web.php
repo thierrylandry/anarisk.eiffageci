@@ -33,6 +33,10 @@ Route::group(['prefix' => 'analyses'], function () {
         'as'=>'save_analyse',
         'uses'=>'AnalysesController@save_analyse',
     ])->middleware('auth');
+    Route::get('/ficheAnalyse/{id}',[
+        'as'=>'ficheAnalyse',
+        'uses'=>'AnalysesController@ficheAnalyse',
+    ])->middleware('auth');
     Route::get('/mesures/{id}',[
         'as'=>'mesures',
         'uses'=>'MesuresController@mesures',
@@ -50,6 +54,7 @@ Route::group(['prefix' => 'analyses'], function () {
         'as'=>'pageModifMesure',
         'uses'=>'MesuresController@pageModifMesure',
     ])->middleware('auth');
+
 });
 
 

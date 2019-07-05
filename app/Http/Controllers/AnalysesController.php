@@ -41,7 +41,11 @@ class AnalysesController extends Controller
         return $chantier->responsables()->get();
 
     }
+public function ficheAnalyse($id){
+    $analyse =Analyse::find($id);
 
+    return view('analyses.fiche',compact('analyse'));
+}
     public function liste(){
         $natures= Nature::all();
         $payss = Pays::all();
