@@ -69,6 +69,7 @@
         </div>
         <div class="row">
             <div class="col-sm-11">
+                <a href="javascript:window.print()" id="btnprint" target="_blank" class="btn btn-info"><i class="fa fa-print"></i> Imprimer</a>
             </div>
             <div class="col-sm-1">
                 <a class="btn btn-outline-secondary btn-sm btn-block" href="{{ URL::previous() }}"><i class="menu-icon fa fa-back"></i>RETOUR</a>
@@ -122,8 +123,8 @@
                                 <td colspan="7"><b>EVALUATION</b></td>
                             </tr>
                             <tr>
-                                <td colspan="4">{{($analyse->nature->id==1)?"Niveau du risque":"Niveau  de l'opportunité"}}</td>
-                                <td colspan="3">{{($analyse->nature->id==1)?"Après mesure(s) préventive(s)":"après action(s) favorisante(s)"}}</td>
+                                <td colspan="4" style="{{$analyse->nature->id==1?'color:red':'color:green'}}"><b>{{($analyse->nature->id==1)?"Niveau du risque":"Niveau  de l'opportunité"}}</b></td>
+                                <td colspan="3" style="{{$analyse->nature->id==1?'color:red':'color:green'}}"><b>{{($analyse->nature->id==1)?"Après mesure(s) préventive(s)":"après action(s) favorisante(s)"}}</b></td>
                             </tr>
                             <tr>
                                 <td colspan="4">
@@ -132,8 +133,8 @@
                                         <tr><td rowspan="4">Impact</td><td>Sévérité</td><td>{{$analyse->severiteAvant}}</td></tr>
                                         <tr><td>Planning</td><td>{{$analyse->planingAvant}}</td></tr>
                                         <tr><td>Coût</td><td>{{$analyse->coutAvant}}</td></tr>
-                                        <tr><td>Niveau</td><td>
-                                                {{$analyse->probabiliteAvant*max(array($analyse->severiteAvant,$analyse->planingAvant,$analyse->coutAvant))}}
+                                        <tr><td>Niveau</td><td style="{{$analyse->nature->id==1?'color:red':'color:green'}}">
+                                                <b>{{$analyse->probabiliteAvant*max(array($analyse->severiteAvant,$analyse->planingAvant,$analyse->coutAvant))}}</b>
                                             </td></tr>
                                     </table>
                                 </td>
@@ -142,8 +143,8 @@
                                         <tr><td rowspan="4">Impact</td><td>Sévérité</td><td>{{$analyse->severiteApres}}</td></tr>
                                         <tr><td>Planning</td><td>{{$analyse->planingApres}}</td></tr>
                                         <tr><td>Coût</td><td>{{$analyse->coutApres}}</td></tr>
-                                        <tr><td>Niveau</td><td>
-                                                {{$analyse->probabiliteApres*max(array($analyse->severiteApres,$analyse->planingApres,$analyse->coutApres))}}
+                                        <tr><td>Niveau</td><td style="{{$analyse->nature->id==1?'color:red':'color:green'}}">
+                                                <b> {{$analyse->probabiliteApres*max(array($analyse->severiteApres,$analyse->planingApres,$analyse->coutApres))}}</b>
                                             </td></tr>
                                     </table></td>
                             </tr>
