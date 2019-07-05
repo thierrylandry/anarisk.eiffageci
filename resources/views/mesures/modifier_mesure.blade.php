@@ -102,8 +102,8 @@
                         </div>
                         <div class="col-sm-4">
                             <p> Date  :  {{$analyse->date}}</p>
-                            <p> Causes  :  {{$analyse->causes}}</p>
-                            <p> Conséquences  :  {{$analyse->conséquences}}</p>
+                            <p> Causes  :  &nbsp;&nbsp;&nbsp; @if(isset($analyse->causes)) @foreach(json_decode($analyse->causes) as $cause) <p>{{$cause->libelle}}</p> @endforeach @endif</p>
+                            <p> Conséquences  : &nbsp;&nbsp;&nbsp; @if(isset($analyse->consequences)) @foreach(json_decode($analyse->consequences) as $consequence) <p>{{$consequence->libelle}}</p> @endforeach @endif</p>
                             <p> Probabilité avant mesure  :  {{$analyse->probabiliteAvant}}</p>
                             <p> Severité avant mesure  :  {{$analyse->probabiliteAvant}}</p>
                             <p> Planing avant mesure  :  {{$analyse->planingAvant}}</p>
