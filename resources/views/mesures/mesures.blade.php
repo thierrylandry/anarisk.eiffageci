@@ -70,14 +70,52 @@
         <div class="animated fadeIn">
 
             <div class="row">
-                <div class="col-sm-8">
-                    <h2><b>Analyse Ref</b> : {{$analyse->code}} {{$analyse->nature->nature}} {{$analyse->chantier->pays->nom_fr_fr}} {{$analyse->chantier->libelle}} {{$analyse->proprietaire->nom}} {{$analyse->proprietaire->prenoms}}</h2>
+                <div class="col-sm-11">
                 </div>
-                <div class="col-sm-1 push-right">
-                    <a class="btn btn-outline-secondary btn-sm btn-block" href="{{ URL::previous() }}"><i class="menu-icon fa fa-back"></i>RETOUR</a>
+                <div class="col-sm-1">
+                    <a class="btn btn-outline-secondary btn-sm btn-block" href="{{ route("liste") }}"><i class="menu-icon fa fa-back"></i>RETOUR</a>
                 </div>
 
                 </div>
+            </br>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Analyse</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-sm-4">
+                                <p> Code : {{isset($analyse)? $analyse->code:''}}</p>
+                                <p> Nature : <b>{{$analyse->nature->nature}}</b></p>
+                                <p> Pays : <b>{{$analyse->chantier->pays->nom_fr_fr}}</b></p>
+                                <p> Chantier :  {{$analyse->chantier->libelle}}</p>
+
+                            </div>
+                            <div class="col-sm-4">
+                                <p> Pays :  {{$analyse->chantier->pays->nom_fr_fr}}</p>
+                                <p> Proprietaire :  {{$analyse->proprietaire->nom}} {{$analyse->proprietaire->prenoms}}</p>
+                                <p> Auteur :  {{$analyse->auteur->nom}} {{$analyse->auteur->prenoms}}</p>
+                                <p> Description  :  {{$analyse->description}}</p>
+                                <p> Detail  :  {{$analyse->detail}}</p>
+
+
+
+                            </div>
+                            <div class="col-sm-4">
+                                <p> Date  :  {{$analyse->date}}</p>
+                                <p> Causes  :  {{$analyse->causes}}</p>
+                                <p> Conséquences  :  {{$analyse->conséquences}}</p>
+                                <p> Probabilité avant mesure  :  {{$analyse->probabiliteAvant}}</p>
+                                <p> Severité avant mesure  :  {{$analyse->probabiliteAvant}}</p>
+                                <p> Planing avant mesure  :  {{$analyse->planingAvant}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 </br></br>
 
             </div>

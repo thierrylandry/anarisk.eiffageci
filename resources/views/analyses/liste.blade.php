@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class=" form-control-label">libelle</label>
+                        <label class=" form-control-label">Libelle</label>
                         <div class="input-group">
 
                             <input type="text" class="form-control" name="libelle" value="" required/>
@@ -151,7 +151,7 @@
                         <label class=" form-control-label">Date de réalisation effective</label>
                         <div class="input-group">
 
-                            <input type="date" class="form-control" name="dateEffective" value="" required/>
+                            <input type="date" class="form-control" name="dateEffective" value=""/>
                         </div>
                     </div>
                     <div class="form-group">
