@@ -12,5 +12,8 @@ class Responsable extends Model
         'id','nom','prenoms','id_acteur'
     ];
 
-
+    public function acteur()
+    {
+        return $this->belongsTo('App\Acteur', 'id_acteur');
+    }
 }

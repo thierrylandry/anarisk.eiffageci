@@ -110,4 +110,10 @@ class MesuresController extends Controller
         return view('mesures.modifier_mesure',compact('analyse','mesure','natures','chantiers','responsables','priorites','analyses','statuts','acteurs','periodicites'));
 
     }
+    public function acteurFonctionResponsable($id){
+        $responsable = Responsable::find($id);
+
+
+        return $responsable->acteur->id;
+    }
 }

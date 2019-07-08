@@ -50,9 +50,20 @@ Route::group(['prefix' => 'analyses'], function () {
         'as'=>'ModifierMesure',
         'uses'=>'MesuresController@ModifierMesure',
     ])->middleware('auth');
+
+
     Route::get('/pageModifMesure/{id}',[
         'as'=>'pageModifMesure',
         'uses'=>'MesuresController@pageModifMesure',
+    ])->middleware('auth');
+
+    Route::get('/pageModifierAnalyse/{id}',[
+        'as'=>'pageModifierAnalyse',
+        'uses'=>'AnalysesController@pageModifierAnalyse',
+    ])->middleware('auth');
+    Route::post('/modifier_analyse',[
+        'as'=>'modifier_analyse',
+        'uses'=>'AnalysesController@modifier_analyse',
     ])->middleware('auth');
 
 });
@@ -69,5 +80,14 @@ Route::get('/proprietaireListeFonction/{id}',[
         'uses'=>'AnalysesController@proprietaireListeFonction',
     ])->middleware('auth');
 
+Route::get('/analyseFonctionId/{id}',[
+        'as'=>'analyseFonctionId',
+        'uses'=>'AnalysesController@analyseFonctionId',
+    ])->middleware('auth');
+
+Route::get('/acteurFonctionResponsable/{id}',[
+    'as'=>'acteurFonctionResponsable',
+    'uses'=>'MesuresController@acteurFonctionResponsable',
+])->middleware('auth');
 
 

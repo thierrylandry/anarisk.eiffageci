@@ -60,6 +60,127 @@
 
         </div>
     </div>
+
+    <div class="modal fade" id="evaluationpostemesure" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="smallmodalLabel">Evaluation poste mesure</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{{route('SaveMesure')}}">
+                        @csrf
+                        <input type="hidden" id="id_analyse1" name="id_analyse" value="" />
+
+                        <div class="col-xs-12 col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong id="titreeval"></strong>
+                                </div>
+                                <div class="card-body card-block">
+
+                                    <table border="1px" width="100%" style="text-align: center;">
+                                        <thead>
+                                        <tr>
+                                            <th rowspan="2">Probabilité d'occurrence</th>
+                                            <th colspan="3">Impacts</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Sévérité </th>
+                                            <th>Planing</th>
+                                            <th>Cout</th>
+                                            <th>Niveau</th>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <input name="probabiliteAvant" id="probabiliteAvant" class="form-control calcule" type="number" min="1" max="5"  required/>
+                                            </td>
+                                            <td>
+                                                <input name="severiteAvant" id="severiteAvant" class="form-control calcule" type="number" min="1" max="5" required/>
+                                            </td>
+                                            <td>
+                                                <input name="planingAvant" id="planingAvant" class="form-control calcule" type="number" min="1" max="5" required/>
+                                            </td>
+                                            <td>
+                                                <input name="coutAvant" id="coutAvant"  class="form-control calcule" type="number" min="1" max="5" required/>
+                                            </td>
+                                            <td>
+                                                <input name="niveauAvant" id="niveauAvant" class="form-control calcule" type="number" min="1" required readonly/>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong id="titreeval1"></strong>
+                                </div>
+                                <div class="card-body card-block">
+                                    <table border="1px" width="100%" style="text-align: center;">
+                                        <thead>
+                                        <tr>
+                                            <th rowspan="2">Probabilité d'occurrence</th>
+                                            <th colspan="3">Impacts</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Sévérité </th>
+                                            <th>Planning</th>
+                                            <th>Coût</th>
+                                            <th>Niveau</th>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <input name="probabiliteApres" id="probabiliteApres" class="form-control calcule1" type="number" min="1" max="5"  />
+                                            </td>
+                                            <td>
+                                                <input name="severiteApres" id="severiteApres" class="form-control calcule1" type="number" min="1" max="5" />
+                                            </td>
+                                            <td>
+                                                <input name="planingApres" id="planingApres" class="form-control calcule1" type="number" min="1" max="5" />
+                                            </td>
+                                            <td>
+                                                <input name="coutApres" id="coutApres"  class="form-control calcule1" type="number" min="1" max="5" />
+                                            </td>
+                                            <td>
+                                                <input name="niveauApres" id="niveauApres" class="form-control calcule1" type="number" min="1"  readonly/>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">ENREGISTRER</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -225,10 +346,13 @@
                                            {{$analyse->auteur()->first()->nom." ".$analyse->auteur()->first()->prenoms}}
                                        </td>
                                         <td>
-
-                                            <a href="#" data-toggle="modal" data-target="#smallmodal" class="ajouterMesure btn btn-primary btn-sm"> <i class="menu-icon fa fa-plus"></i> Ajouter une mesure</a>
-                                            <a href="{{route('mesures',$analyse->id)}}" class="btn btn-secondary btn-sm" > <i class="menu-icon fa fa-list"></i> Lister les mesures</a>
+                                            <a href="#" data-toggle="modal" data-target="#smallmodal" class="ajouterMesure btn btn-primary btn-sm"> <i class="ti-ruler-pencil"></i> Ajouter une mesure</a>
+                                            <a href="{{route('mesures',$analyse->id)}}" class="btn btn-secondary btn-sm" > <i class="menu-icon fa fa-list"></i><i class="ti-list"></i> Lister les mesures</a>
                                             <a href="{{route('ficheAnalyse',$analyse->id)}}" class="btn btn-info btn-sm"> <i class="menu-icon fa  fa-file"></i> fiche analyse</a>
+                                            @if((stristr( \Illuminate\Support\Facades\Auth::user()->nom,$analyse->proprietaire->nom) === true and stristr( \Illuminate\Support\Facades\Auth::user()->prenoms,$analyse->proprietaire->prenoms) === true )|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id)
+                                                <a href="{{route('pageModifierAnalyse',$analyse->id)}}"  class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-update"></i>Modifier</a>
+                                                <a href="#"  data-toggle="modal" data-target="#evaluationpostemesure" class="evaluer btn btn-success btn-sm"> <i class="ti-view-grid"></i> Evaluation poste mesure</a>
+                                            @endif
                                         </td>
                                    </tr>
                                    @endforeach
@@ -278,6 +402,16 @@
                     no_results_text: "Oops, nothing found!",
                     width: "100%"
                 });
+
+                jQuery("#responsable").change(function (e) {
+                    var responsable=jQuery("#responsable").val();
+                    jQuery.get("../acteurFonctionResponsable/"+responsable, function(data, status){
+
+
+                        jQuery("#acteur").val(data);
+                        jQuery("#acteur").trigger("chosen:updated");
+                    });
+                });
                 });
 
             jQuery(function($) {
@@ -285,7 +419,7 @@
                     language: {
                         url: "{{ URL::asset('js/French.json') }}"
                     },
-                    "ordering":true,
+                    "ordering":false,
                     "createdRow": function( row, data, dataIndex){
 
                     },
@@ -297,6 +431,53 @@
                     //alert(data[Object.keys(data)[0]]);
                     $("#id_analyse").val(data[Object.keys(data)[0]]);
                 });
+
+                $('.evaluer').click(function(){
+                    var data = table.row($(this).closest('tr')).data();
+                    //alert(data[Object.keys(data)[0]]);
+                    $("#id_analyse1").val(data[Object.keys(data)[0]]);
+                  var id_analyse =data[Object.keys(data)[0]];
+
+                    $.get("../analyseFonctionId/"+id_analyse, function(data, status){
+
+                        console.log(data);
+                        if(data.id_nature==1){
+                            alert("ici je suis ");
+                            jQuery("#titreeval").empty();
+                            jQuery("#titreeval").append(" Evaluation du niveau de risque");
+
+                            jQuery("#titreeval1").empty();
+                            jQuery("#titreeval1").append(" Evaluation après mesure(s) préventive(s)");
+
+
+                            if(jQuery(".right-panel").hasClass('opportunite')){
+                                jQuery(".right-panel").removeClass('opportunite');
+                                jQuery(".right-panel").addClass('risk');
+                            }else{
+                                jQuery(".right-panel").addClass('risk');
+                            }
+
+
+                        }else{
+                            jQuery("#titreeval").empty();
+                            jQuery("#titreeval").append( "Evaluation du niveau de l'opportunité");
+
+                            jQuery("#titreeval1").empty();
+                            jQuery("#titreeval1").append(" Evaluation après action(s) favorisante(s)");
+
+                            if(jQuery(".right-panel").hasClass('risk')) {
+                                jQuery(".right-panel").removeClass('risk');
+                                jQuery(".right-panel").addClass('opportunite');
+                            }else{
+                                jQuery(".right-panel").addClass('opportunite');
+                            }
+                        }
+
+                    });
+
+
+                });
+
 
                 function test(){
                     if($("#probabiliteAvant").val()!="") {

@@ -345,7 +345,7 @@
                                 <label class=" form-control-label">Coût: &nbsp;</label>
                                 <div class="input-group">
 
-                                    <input name="cout" class="form-control" type="number" required/>
+                                    <input name="cout" class="form-control" type="text" id="cout"value="{{isset($analyse)?number_format($analyse->cout,0, ',', ' '):''}}" required/>
                                 </div> <label class=" form-control-label"> &nbsp;FCFA </label>
                             </div>
                             </br>
@@ -467,7 +467,27 @@
        <!-- .animated -->
         <script>
             jQuery(function($) {
+                function lisibilite_nombre(nbr)
+                {
+                    var nombre = ''+nbr;
+                    var retour = '';
+                    var count=0;
+                    for(var i=nombre.length-1 ; i>=0 ; i--)
+                    {
+                        if(count!=0 && count % 3 == 0)
+                            retour = nombre[i]+' '+retour ;
+                        else
+                            retour = nombre[i]+retour ;
+                        count++;
+                    }
+                    //          alert('nb : '+nbr+' => '+retour);
+                    return retour;
+                }
 
+                $('#cout').on('change',function(){var valeur=$('#cout').val();
+                    for(var i=valeur.length-1; i>=0; i-- ){valeur=valeur.replace(' ','');}
+                    var res=  lisibilite_nombre(valeur);  $('#cout').val(res);
+                })
                 function test(){
                     if($("#probabiliteAvant").val()!="") {
                         var luimeme = $("#probabiliteAvant").val();
