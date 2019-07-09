@@ -267,7 +267,7 @@
                                         <th colspan="3">Impacts</th>
                                     </tr>
                                     <tr>
-                                        <th>Sévérité </th>
+                                        <th>Sévérité</th>
                                         <th>Planning</th>
                                         <th>Cout</th>
                                         <th>Niveau</th>
