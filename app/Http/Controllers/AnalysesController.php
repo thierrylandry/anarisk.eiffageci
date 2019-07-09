@@ -264,4 +264,25 @@ public function ficheAnalyse($id){
             }
 
     }
+
+    public function EnregistrerEvalPosteEv(Request $request){
+        $parameters=$request->except(['_token']);
+        $probabiliteApres = $parameters['probabiliteApres'];
+        $severiteApres = $parameters['severiteApres'];
+        $planingApres = $parameters['planingApres'];
+        $coutApres = $parameters['coutApres'];
+        $id = $parameters['id_analyse'];
+        $analyse =  Analyse::find($id);
+        if( (stristr( \Illuminate\Support\Facades\Auth::user()->nom,$analyse->proprietaire->nom) === true and stristr( \Illuminate\Support\Facades\Auth::user()->prenoms,$analyse->proprietaire->prenoms) === true )|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id ) {
+
+            $analyse->probabiliteApres = $probabiliteApres;
+            $analyse->severiteApres = $severiteApres;
+            $analyse->planingApres = $planingApres;
+            $analyse->coutApres = $coutApres;
+            $analyse->save();
+            return redirect()->route('liste')->with('success', "Evaluation enregistré");
+        }else{
+            return redirect()->route('liste')->with('error',"vous n'avez pas le droit de faire l'évaluation");
+        }
+    }
 }

@@ -33,6 +33,10 @@ Route::group(['prefix' => 'analyses'], function () {
         'as'=>'save_analyse',
         'uses'=>'AnalysesController@save_analyse',
     ])->middleware('auth');
+    Route::post('/EnregistrerEvalPosteEv',[
+        'as'=>'EnregistrerEvalPosteEv',
+        'uses'=>'AnalysesController@EnregistrerEvalPosteEv',
+    ])->middleware('auth');
     Route::get('/ficheAnalyse/{id}',[
         'as'=>'ficheAnalyse',
         'uses'=>'AnalysesController@ficheAnalyse',

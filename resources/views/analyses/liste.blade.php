@@ -1,7 +1,5 @@
 @extends('layouts.app')
-@section('liste_actif')
-    active
-@endsection
+@section('liste_actif') active @endsection
 @section('page')
     <style>
         #mydiv {
@@ -40,12 +38,10 @@
             height:200px;
         }
         .risk {
-            background-color: #f50017d4 !important;
-            color:white;
+            background-color: #f50017d4;
         }
         .opportunite {
-            background-color: #00ff7f29 !important;
-            color:black;
+            background-color: #00ff7f29;
         }
     </style>
     <div class="breadcrumbs" style="max-height:300px">
@@ -71,7 +67,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{route('SaveMesure')}}">
+                    <form method="post" action="{{route('EnregistrerEvalPosteEv')}}">
                         @csrf
                         <input type="hidden" id="id_analyse1" name="id_analyse" value="" />
 
@@ -104,19 +100,19 @@
                                         <tbody>
                                         <tr>
                                             <td>
-                                                <input name="probabiliteAvant" id="probabiliteAvant" class="form-control calcule" type="number" min="1" max="5"  required/>
+                                                <input name="probabiliteAvant" id="probabiliteAvant" class="form-control calcule" type="number" min="1" max="5"  readonly/>
                                             </td>
                                             <td>
-                                                <input name="severiteAvant" id="severiteAvant" class="form-control calcule" type="number" min="1" max="5" required/>
+                                                <input name="severiteAvant" id="severiteAvant" class="form-control calcule" type="number" min="1" max="5" readonly/>
                                             </td>
                                             <td>
-                                                <input name="planingAvant" id="planingAvant" class="form-control calcule" type="number" min="1" max="5" required/>
+                                                <input name="planingAvant" id="planingAvant" class="form-control calcule" type="number" min="1" max="5" readonly/>
                                             </td>
                                             <td>
-                                                <input name="coutAvant" id="coutAvant"  class="form-control calcule" type="number" min="1" max="5" required/>
+                                                <input name="coutAvant" id="coutAvant"  class="form-control calcule" type="number" min="1" max="5" readonly/>
                                             </td>
                                             <td>
-                                                <input name="niveauAvant" id="niveauAvant" class="form-control calcule" type="number" min="1" required readonly/>
+                                                <input name="niveauAvant" id="niveauAvant" class="form-control calcule" type="number" min="1"  readonly/>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -441,21 +437,25 @@
                     $.get("../analyseFonctionId/"+id_analyse, function(data, status){
 
                         console.log(data);
+
+                        $("#probabiliteAvant").val(data.probabiliteAvant);
+                        $("#severiteAvant").val(data.severiteAvant);
+                        $("#planingAvant").val(data.planingAvant);
+                        $("#coutAvant").val(data.coutAvant);
+                        $("#probabiliteApres").val(data.probabiliteApres);
+                        $("#severiteApres").val(data.severiteApres);
+                        $("#planingApres").val(data.planingApres);
+                        $("#coutApres").val(data.coutApres);
+                     //   $("#planingAvant").val(data.planingAvant);
+                        test();
+                        test1();
                         if(data.id_nature==1){
-                            alert("ici je suis ");
                             jQuery("#titreeval").empty();
                             jQuery("#titreeval").append(" Evaluation du niveau de risque");
 
                             jQuery("#titreeval1").empty();
                             jQuery("#titreeval1").append(" Evaluation après mesure(s) préventive(s)");
 
-
-                            if(jQuery(".right-panel").hasClass('opportunite')){
-                                jQuery(".right-panel").removeClass('opportunite');
-                                jQuery(".right-panel").addClass('risk');
-                            }else{
-                                jQuery(".right-panel").addClass('risk');
-                            }
 
 
                         }else{
@@ -465,12 +465,6 @@
                             jQuery("#titreeval1").empty();
                             jQuery("#titreeval1").append(" Evaluation après action(s) favorisante(s)");
 
-                            if(jQuery(".right-panel").hasClass('risk')) {
-                                jQuery(".right-panel").removeClass('risk');
-                                jQuery(".right-panel").addClass('opportunite');
-                            }else{
-                                jQuery(".right-panel").addClass('opportunite');
-                            }
                         }
 
                     });
@@ -501,7 +495,7 @@
                         var coutAvant=0;
                     }
 
-                    var res = parseInt(luimeme)+parseInt(severiteAvant)+parseInt(planingAvant)+parseInt(coutAvant);
+                    var res = parseInt(luimeme)*Math.max(parseInt(severiteAvant), parseInt(planingAvant), parseInt(coutAvant));
 
                     $("#niveauAvant").val(res);
                 };
@@ -527,7 +521,7 @@
                         var coutApres=0;
                     }
 
-                    var res = parseInt(luimeme)+parseInt(severiteApres)+parseInt(planingApres)+parseInt(coutApres);
+                    var res = parseInt(luimeme)*Math.max(parseInt(severiteApres), parseInt(planingApres), parseInt(coutApres));
 
                     $("#niveauApres").val(res);
                 };

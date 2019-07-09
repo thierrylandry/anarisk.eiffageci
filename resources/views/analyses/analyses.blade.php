@@ -287,7 +287,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12">
+                <div class="col-xs-12 col-sm-12" style="display: none">
                     <div class="card">
                         <div class="card-header">
                             <strong id="titreeval1"></strong>
