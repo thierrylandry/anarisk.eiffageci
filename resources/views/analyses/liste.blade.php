@@ -275,7 +275,7 @@
                         <label class=" form-control-label">Documentation</label>
                         <div class="input-group">
 
-                            <input type="text" class="form-control" name="documentation" value="" required/>
+                            <input type="text" class="form-control" name="documentation" value="" />
                         </div>
                     </div>
 
