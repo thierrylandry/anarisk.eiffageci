@@ -298,4 +298,19 @@ public function ficheAnalyse($id){
             return redirect()->route('liste')->with('error',"vous n'avez pas le droit de faire l'évaluation");
         }
     }
+    public function etat(){
+        $natures= Nature::all();
+        $payss = Pays::all();
+        $chantiers = Chantier::all();
+        $responsables = Responsable::all();
+        $priorites = Priorite::all();
+        $analyses = Analyse::orderBy('id','DESC')->get();
+
+       // dd($analyses->first()->mesures()->orderBy('dateplanifie','ASC')->first());
+        $statuts = Statut::all();
+        $acteurs = Acteur::all();
+        $periodicites = Periodicite::all();
+        // dd($analyses[0]->chantier()->get());
+        return view('analyses.etat',compact('natures','payss','chantiers','responsables','analyses','priorites','statuts','acteurs','periodicites'));
+    }
 }

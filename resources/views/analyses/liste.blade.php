@@ -1,50 +1,6 @@
 @extends('layouts.app')
 @section('liste_actif') active @endsection
 @section('page')
-    <style>
-        #mydiv {
-            position: fixed;
-            z-index: 9;
-            left:0;
-            top:250px;
-            background-color: #f1f1f1;
-            text-align: center;
-            border: 1px solid #d3d3d3;
-            overflow: hidden;
-        }
-
-        #mydivheader {
-            padding: 10px;
-            cursor: move;
-            z-index: 10;
-            background-color: #2196F3;
-            color: #fff;
-        }
-        .gros {
-            width: 1000px;
-            height: 700px;
-        }
-
-        .grosImage {
-            width: 1000px;
-            height: 650px;
-        }
-        .petit {
-            width: 10%;
-            height: 300px;
-        }
-        .petitImage {
-            width: 187px;
-            height:200px;
-        }
-        .risk {
-            background-color: #f50017d4 !important;
-            color:white !important;
-        }
-        .opportunite {
-            background-color: #00ff7f29!important;
-        }
-    </style>
     <div class="breadcrumbs" style="max-height:300px">
         <div class="col-sm-4">
             <div class="page-header float-left">
@@ -344,11 +300,11 @@
                                        </td>
                                         <td>
                                             <a href="#" data-toggle="modal" data-target="#smallmodal" class="ajouterMesure btn btn-primary btn-sm"> <i class="ti-ruler-pencil"></i> Ajouter une mesure</a>
-                                            <a href="{{route('mesures',$analyse->id)}}" class="btn btn-secondary btn-sm" > <i class="menu-icon fa fa-list"></i><i class="ti-list"></i> Lister les mesures</a>
+                                            <a href="{{route('mesures',$analyse->id)}}" class="btn btn-secondary btn-sm" > <i class="menu-icon fa fa-list"></i> Lister les mesures</a>
                                             <a href="{{route('ficheAnalyse',$analyse->id)}}" class="btn btn-info btn-sm"> <i class="menu-icon fa  fa-file"></i> fiche analyse</a>
                                             @if((stristr( \Illuminate\Support\Facades\Auth::user()->nom,$analyse->proprietaire->nom) === true and stristr( \Illuminate\Support\Facades\Auth::user()->prenoms,$analyse->proprietaire->prenoms) === true )|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id)
                                                 <a href="{{route('pageModifierAnalyse',$analyse->id)}}"  class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-update"></i>Modifier</a>
-                                                <a href="#"  data-toggle="modal" data-target="#evaluationpostemesure" class="evaluer btn btn-success btn-sm"> <i class="ti-view-grid"></i> Evaluation poste mesure</a>
+                                                <a href="#"  data-toggle="modal" data-target="#evaluationpostemesure" class="evaluer btn btn-success btn-sm"> <i class="ti-view-grid"></i> Evaluation post mesure</a>
                                             @endif
                                         </td>
                                    </tr>

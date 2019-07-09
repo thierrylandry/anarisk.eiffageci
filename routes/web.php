@@ -78,6 +78,10 @@ Route::get('/chantierListeFonction/{id}',[
         'as'=>'chantierListeFonction',
         'uses'=>'AnalysesController@chantierListeFonction',
     ])->middleware('auth');
+Route::get('/etat',[
+        'as'=>'etat',
+        'uses'=>'AnalysesController@etat',
+    ])->middleware('auth');
 
 Route::get('/proprietaireListeFonction/{id}',[
         'as'=>'proprietaireListeFonction',

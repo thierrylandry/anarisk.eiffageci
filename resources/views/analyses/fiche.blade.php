@@ -85,13 +85,13 @@
 
                     <div class="card-body">
                         <table border="1" align="center" style="text-align: center" width="100%">
-                            <tr>
+                            <tr style="">
                                 <td   style="{{$analyse->nature->id==1?'color:red':'color:green'}}" colspan="2"><b>{{$analyse->nature->nature}}</b></td>
-                                <td>Date</td>
-                                <td>Pays</td>
-                                <td>Chantier</td>
-                                <td>Propriétaire</td>
-                                <td>Code</td>
+                                <td><b>Date</b></td>
+                                <td><b>Pays</b></td>
+                                <td><b>Chantier</b></td>
+                                <td><b>Propriétaire</b></td>
+                                <td><b>Code</b></td>
                             </tr>
                             <tr>
                                 <td style="text-align: left !important" width="5%">&nbsp;Description</td>
@@ -112,7 +112,7 @@
                             </tr>
                             <tr>
                                 <td colspan="4" style="text-align: left !important">@if(isset($analyse->causes)) @foreach(json_decode($analyse->causes) as $cause) <p>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{{$cause->libelle}}</p> @endforeach @endif</td>
-                                <td colspan="3">@if(isset($analyse->consequences))@foreach(json_decode($analyse->consequences) as $consequence)  <p>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{{$consequence->libelle}}</p> @endforeach @endif</td>
+                                <td colspan="3" style="text-align: left !important">@if(isset($analyse->consequences))@foreach(json_decode($analyse->consequences) as $consequence)  <p>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{{$consequence->libelle}}</p> @endforeach @endif</td>
                             </tr>
                             <tr>
                                 <td colspan="7"><b>EVALUATION</b></td>
