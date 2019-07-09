@@ -95,7 +95,7 @@
                             </tr>
                             <tr>
                                 <td style="text-align: left !important" width="5%">&nbsp;Description</td>
-                                <td>{{$analyse->description}}</td>
+                                <td style="text-align: left;">&nbsp;{{$analyse->description}}</td>
                                 <td>{{$analyse->date}}</td>
                                 <td>{{$analyse->chantier->pays->nom_fr_fr}}</td>
                                 <td>{{$analyse->chantier->libelle}}</td>
@@ -104,15 +104,15 @@
                             </tr>
                             <tr>
                                 <td style="text-align: left !important">&nbsp;Détail</td>
-                                <td colspan="6">{{$analyse->detail}}</td>
+                                <td colspan="6" style="text-align: left;">&nbsp;{{$analyse->detail}}</td>
                             </tr>
                             <tr>
                                 <td colspan="4"><b>Causes</b></td>
                                 <td colspan="3"><b>Conséquences</b></td>
                             </tr>
                             <tr>
-                                <td colspan="4" style="text-align: left !important">@if(isset($analyse->causes)) @foreach(json_decode($analyse->causes) as $cause) <p>&nbsp;&nbsp;&nbsp; - {{$cause->libelle}}</p> @endforeach @endif</td>
-                                <td colspan="3">@if(isset($analyse->consequences))@foreach(json_decode($analyse->consequences) as $consequence)  <p>&nbsp;&nbsp;&nbsp; - {{$consequence->libelle}}</p> @endforeach @endif</td>
+                                <td colspan="4" style="text-align: left !important">@if(isset($analyse->causes)) @foreach(json_decode($analyse->causes) as $cause) <p>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{{$cause->libelle}}</p> @endforeach @endif</td>
+                                <td colspan="3">@if(isset($analyse->consequences))@foreach(json_decode($analyse->consequences) as $consequence)  <p>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{{$consequence->libelle}}</p> @endforeach @endif</td>
                             </tr>
                             <tr>
                                 <td colspan="7"><b>EVALUATION</b></td>
@@ -169,7 +169,7 @@
                                 <td colspan="3">{{$analyse->coute}}</td>
                             </tr>
                             <tr>
-                                <td colspan="7">{!! nl2br($analyse->brouillon) !!}</td>
+                                <td colspan="7" style="text-align: left !important">&nbsp;&nbsp;&nbsp;{!! nl2br($analyse->brouillon) !!}</td>
                             </tr>
                         </table>
                     </div>

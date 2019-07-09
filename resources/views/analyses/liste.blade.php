@@ -38,10 +38,11 @@
             height:200px;
         }
         .risk {
-            background-color: #f50017d4;
+            background-color: #f50017d4 !important;
+            color:white !important;
         }
         .opportunite {
-            background-color: #00ff7f29;
+            background-color: #00ff7f29!important;
         }
     </style>
     <div class="breadcrumbs" style="max-height:300px">
@@ -412,10 +413,11 @@
 
             jQuery(function($) {
                 var table= $('#bootstrap-data-table1').DataTable({
+                    "order": [[ 0, "desc" ]],
                     language: {
                         url: "{{ URL::asset('js/French.json') }}"
                     },
-                    "ordering":false,
+                    "ordering":true,
                     "createdRow": function( row, data, dataIndex){
 
                     },

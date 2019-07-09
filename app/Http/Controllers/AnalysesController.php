@@ -89,6 +89,8 @@ public function ficheAnalyse($id){
         $pays = $parameters['pays'];
         $chantier = $parameters['chantier'];
         $proprietaire = $parameters['proprietaire'];
+        $description = $parameters['description'];
+        $detail = $parameters['detail'];
 
         $lepays= Pays::find($pays);
         $lechantier= Chantier::find($chantier);
@@ -143,7 +145,7 @@ public function ficheAnalyse($id){
 
         $raw = $request->except("_token", "type_p","num_p",'date_exp');
         //  dd($raw);
-        $var["consequences"] = json_encode($causes->toArray());
+        $var["consequences"] = json_encode($consequences->toArray());
         $analyse = new Analyse();
 
         $analyse->id_nature=$nature;
@@ -160,8 +162,13 @@ public function ficheAnalyse($id){
         $analyse->planingApres=$planingApres;
         $analyse->coutApres=$coutApres;
         $analyse->brouillon=nl2br(e($brouillon));
+
+        $analyse->description=$description;
+        $analyse->detail=$detail;
+
+
         $analyse->causes=$var["cause"];
-        $analyse->causes=$var["consequences"];
+        $analyse->consequences=$var["consequences"];
         $analyse->cout=filter_var($cout, FILTER_SANITIZE_NUMBER_INT);
         $analyse->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
         $analyse->save();
@@ -179,6 +186,8 @@ public function ficheAnalyse($id){
         $id = $parameters['id'];
         $chantier = $parameters['chantier'];
         $proprietaire = $parameters['proprietaire'];
+        $description = $parameters['description'];
+        $detail = $parameters['detail'];
 
         $lepays= Pays::find($pays);
         $lechantier= Chantier::find($chantier);
@@ -233,7 +242,7 @@ public function ficheAnalyse($id){
 
         $raw = $request->except("_token", "type_p","num_p",'date_exp');
         //  dd($raw);
-        $var["consequences"] = json_encode($causes->toArray());
+        $var["consequences"] = json_encode($consequences->toArray());
         $analyse =  Analyse::find($id);
         if( (stristr( \Illuminate\Support\Facades\Auth::user()->nom,$analyse->proprietaire->nom) === true and stristr( \Illuminate\Support\Facades\Auth::user()->prenoms,$analyse->proprietaire->prenoms) === true )|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id ){
 
@@ -252,8 +261,12 @@ public function ficheAnalyse($id){
         $analyse->planingApres=$planingApres;
         $analyse->coutApres=$coutApres;
         $analyse->brouillon=nl2br(e($brouillon));
+
+            $analyse->description=$description;
+            $analyse->detail=$detail;
+
         $analyse->causes=$var["cause"];
-        $analyse->causes=$var["consequences"];
+        $analyse->consequences=$var["consequences"];
         $analyse->cout=filter_var($cout, FILTER_SANITIZE_NUMBER_INT);
         $analyse->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
         $analyse->save();
