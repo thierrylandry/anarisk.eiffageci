@@ -88,7 +88,7 @@
         }
         .risk {
             background-color: #f50017d4 !important;
-            color:black !important;
+            color:white !important;
         }
         .opportunite {
             background-color: #00ff7f29!important;
@@ -101,108 +101,35 @@
 
 <!-- Left Panel -->
 
-<aside id="left-panel" class="left-panel ne_pas_afficher">
-    @include('layouts.nav')
-</aside><!-- /#left-panel -->
-
-<!-- Left Panel -->
-
 <!-- Right Panel -->
 
 <div id="right-panel" class="right-panel ">
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="agile-grid"  style="background-color: #FFFFFF;@yield('pour_register') margin: 5px">
 
-    <!-- Header-->
-    <header id="header" class="header ne_pas_afficher">
-
-        <div class="header-menu ne_pas_afficher">
-
-
-            <div class="col-sm-12 pull-right">
-                <div class="user-area dropdown float-right">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="{{ asset('images/user.png')}}" alt="User Avatar">
-                    </a>
-
-                    <div class="user-menu dropdown-menu">
-                        <a class="nav-link" href="#"><i class="fa fa- user"></i>Mon profil</a>
-
-                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power -off"></i>Se déconnecter
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form></a>
-                    </div>
-                </div>
-
-
-
-
+                @if(Session::has('success'))
+                    <div class="alert alert-success">{{Session::get('success')}}</div>
+                @endif()
+                @if(Session::has('error'))
+                    <div class="alert alert-danger">{{Session::get('error')}}</div>
+                @endif()
+                @yield('content')
             </div>
-        </div>
-
-    </header><!-- /header -->
-    <!-- Header-->
-
-    <div class="main-content">
-        <div class="section__content section__content--p30">
-            <div class="container-fluid">
-                <div class="agile-grid"  style="background-color: #FFFFFF;@yield('pour_register') margin: 5px">
-
-                    @if(Session::has('success'))
-                        <div class="alert alert-success">{{Session::get('success')}}</div>
-                    @endif()
-                    @if(Session::has('error'))
-                        <div class="alert alert-danger">{{Session::get('error')}}</div>
-                    @endif()
-                    @yield('content')
-                </div>
-                @yield('page')
-            </div>
+            @yield('page')
         </div>
     </div>
+</div>
 
-    </div> <!-- .content -->
+</div> <!-- .content -->
 
 </div><!-- /#right-panel -->
 
 <!-- Right Panel -->
 
 <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js')}}"></script>
-<script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js')}}"></script>
-<script src="{{ asset('assets/js/plugins.js')}}"></script>
-<script src="{{ asset('assets/js/main.js')}}"></script>
 
-
-<script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js')}}"></script>
-<script src="{{ asset('assets/js/dashboard.js')}}"></script>
-<script src="{{ asset('assets/js/widgets.js')}}"></script>
-<script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.js')}}"></script>
-<script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js')}}"></script>
-<script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.sampledata.js')}}"></script>
-<script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.world.js')}}"></script>
-<script src="{{ asset("assets/js/lib/chosen/chosen.jquery.min.js")}}"></script>
-
-
-
-
-
-<script>
-    ( function ( $ ) {
-        "use strict";
-
-        jQuery( '#vmap' ).vectorMap( {
-            map: 'world_en',
-            backgroundColor: null,
-            color: '#ffffff',
-            hoverOpacity: 0.7,
-            selectedColor: '#1de9b6',
-            enableZoom: true,
-            showTooltip: true,
-            values: sample_data,
-            scaleColors: [ '#1de9b6', '#03a9f5' ],
-            normalizeFunction: 'polynomial'
-        } );
-    } )( jQuery );
-</script>
 
 
 </body>
