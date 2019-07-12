@@ -489,8 +489,41 @@
                                     typeof i === 'number' ?
                                             i : 0;
                         };
-                        var val= intVal(ilisibilite_nombre($('#tot_aupire').html()))+intVal(ilisibilite_nombre($('#tot_aupire1').html()));
+
+
+
+                        var val= intVal(ilisibilite_nombre($('#tot_aupire1').html()))+intVal(ilisibilite_nombre($('#tot_aupire').html()));
                                $('#aupire_aupire').html(ilisibilite_nombre(Math.round(val)));
+
+                        var val= intVal(ilisibilite_nombre($('#tot_aupire1').html()))+intVal(ilisibilite_nombre($('#tot_aujuste').html()));
+                               $('#aupire_juste').html(ilisibilite_nombre(Math.round(val)));
+
+                        var val= intVal(ilisibilite_nombre($('#tot_aupire1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
+                               $('#aupire_aumieux').html(ilisibilite_nombre(Math.round(val)));
+
+
+
+                       var val= intVal(ilisibilite_nombre($('#tot_aujuste1').html()))+intVal(ilisibilite_nombre($('#tot_aupire').html()));
+                        $('#juste_aupire').html(ilisibilite_nombre(Math.round(val)));
+
+                        var val= intVal(ilisibilite_nombre($('#tot_aujuste1').html()))+intVal(ilisibilite_nombre($('#tot_aujuste').html()));
+                        $('#juste_juste').html(ilisibilite_nombre(Math.round(val)));
+
+                        var val= intVal(ilisibilite_nombre($('#tot_aujuste1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
+                        $('#juste_aumieux').html(ilisibilite_nombre(Math.round(val)));
+
+
+
+                        var val= intVal(ilisibilite_nombre($('#tot_aumieux1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
+                        $('#aumieux_aupire').html(ilisibilite_nombre(Math.round(val)));
+
+                        var val= intVal(ilisibilite_nombre($('#tot_aumieux1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
+                        $('#aumieux_juste').html(ilisibilite_nombre(Math.round(val)));
+
+                        var val= intVal(ilisibilite_nombre($('#tot_aumieux1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
+                        $('#aumieux_aumieux').html(ilisibilite_nombre(Math.round(val)));
+
+
                     }
 
                     $('.prob_aupire').change( function(){
