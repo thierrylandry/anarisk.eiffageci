@@ -114,7 +114,7 @@
                                         <label class=" form-control-label">Détail</label>
                                         <div class="input-group">
 
-                                            <input type="text" id="detail" class="form-control" value="{{isset($analyse)?$analyse->detail:''}}"/>
+                                            <input type="text" id="detail" name="detail" class="form-control" value="{{isset($analyse)?$analyse->detail:''}}"/>
                                         </div>
                                     </div>
                                 </div>
