@@ -299,18 +299,11 @@ public function ficheAnalyse($id){
         }
     }
     public function etat(){
-        $natures= Nature::all();
-        $payss = Pays::all();
-        $chantiers = Chantier::all();
-        $responsables = Responsable::all();
-        $priorites = Priorite::all();
-        $analyses = Analyse::orderBy('id','DESC')->get();
+        $risques = Analyse::where('id_nature','=',1)->orderBy('id','DESC')->get();
+        $opportunites = Analyse::where('id_nature','=',2)->orderBy('id','DESC')->get();
 
        // dd($analyses->first()->mesures()->orderBy('dateplanifie','ASC')->first());
-        $statuts = Statut::all();
-        $acteurs = Acteur::all();
-        $periodicites = Periodicite::all();
         // dd($analyses[0]->chantier()->get());
-        return view('analyses.etat',compact('natures','payss','chantiers','responsables','analyses','priorites','statuts','acteurs','periodicites'));
+        return view('analyses.etat',compact('risques','opportunites'));
     }
 }

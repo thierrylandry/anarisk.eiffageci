@@ -21,7 +21,7 @@
                 <a href="{{route('liste')}}" ><i class="menu-icon fa fa-table"></i>RISQUES\OPPORTUNITES</a>
             </li>
             <li class="@yield('liste_actif')">
-                <a href="{{route('etat')}}" ><i class="menu-icon fa fa-table"></i> ETATS</a>
+                <a href="{{route('etat')}}" target="_blank" ><i class="menu-icon fa fa-table"></i> ETATS</a>
             </li>
 
         </ul>
