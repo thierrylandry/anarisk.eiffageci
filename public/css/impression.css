@@ -1,7 +1,7 @@
 body { /* Modifications : la couleur de fond de page - la police - l'unité utilisée pour la taille de la police  */
     background-color :#fff;
     font-family :Serif;
-    font-size :12pt;
+    font-size :10pt;
 }
 
 #page { /* Modifications : suppression de la bordure - marges */
@@ -20,6 +20,7 @@ h1#top { /* Affichage du titre */
     text-indent :0;
     line-height :25pt;
     font-size :25pt;
+    text-align: center;
 }
 
 h2, h3, #contenu h3, #contenu a, a { /* Modification de la couleur des titres et liens */

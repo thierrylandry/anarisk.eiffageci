@@ -144,6 +144,7 @@
 
     <div class="main-content">
         <div class="section__content section__content--p30">
+            <img src="{{ asset("images/Eiffage_2400_01_colour_RGB.jpg") }}" class="logo_eiffage" style="display: none">
             <div class="container-fluid">
                 <div class="agile-grid"  style="background-color: #FFFFFF;@yield('pour_register') margin: 5px">
 

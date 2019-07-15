@@ -1,5 +1,7 @@
 @extends('layouts.app')
-@section('liste_actif') active @endsection
+@section('liste_actif')
+    
+@endsection
 @section('page')
     <div class="breadcrumbs" style="max-height:300px">
         <div class="col-sm-4">
@@ -126,11 +128,12 @@
                                 </div>
                             </div>
                         </div>
-                </div>
+
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">ENREGISTRER</button>
                 </div>
                 </form>
+                </div>
             </div>
         </div>
     </div>

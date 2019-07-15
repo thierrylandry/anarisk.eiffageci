@@ -47,7 +47,7 @@
         }
     </style>
     <div class="breadcrumbs" style="max-height:300px">
-        <div class="col-sm-4">
+        <div class="col-sm-4 text_center" >
             <div class="page-header float-left {{($analyse->nature->id==1)?'risk':'opportunite'}}" >
                 <div class="page-title">
                     <h1>FICHE ANALYSE </h1>
@@ -66,23 +66,16 @@
         </div>
         <div class="row ne_pas_afficher">
             <div class="col-sm-11">
-                <a href="javascript:window.print()" id="btnprint" target="_blank" class="btn btn-info"><i class="fa fa-print"></i> Imprimer</a>
+                <a href="javascript:window.print()" id="btnprint" class="btn btn-info"><i class="fa fa-print"></i> Imprimer</a>
             </div>
             <div class="col-sm-1">
                 <a class="btn btn-outline-secondary btn-sm btn-block" href="{{ URL::previous() }}"><i class="menu-icon fa fa-back"></i>RETOUR</a>
             </div>
 
         </div>
-        </br>
         <div class="row" id="page">
             <div class="col-md-12">
                 <div class="card " id="page">
-                    <div class="row">
-                        <div class="col-sm-12" style="text-align: center">
-                            <img src="{{URL::asset("images/anarisk.png")}}" width="800px" align="center" class="push-right"/>
-                        </div>
-                    </div>
-
                     <div class="card-body">
                         <table border="1" align="center" style="text-align: center" width="100%">
                             <tr style="">
@@ -144,11 +137,11 @@
                                     </table></td>
                             </tr>
                             <tr>
-                                <td >Mesures préventives</td>
-                                <td >Responsable</td>
-                                <td >Acteur</td>
-                                <td colspan="3">Statut Date planifi. Priorité & Périodicité</td>
-                                <td >Documentation</td>
+                                <td ><b>Mesures préventives</b></td>
+                                <td ><b>Responsable</b></td>
+                                <td ><b>Acteur</b></td>
+                                <td colspan="3"><b>Statut Date planifi. Priorité & Périodicité</b></td>
+                                <td ><b>Documentation</b></td>
                             </tr>
 
                             @foreach($analyse->mesures()->get() as $mesure)
