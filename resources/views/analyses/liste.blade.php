@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('liste_actif')
-    
+active
 @endsection
 @section('page')
     <div class="breadcrumbs" style="max-height:300px">
@@ -45,7 +45,7 @@
                                         </tr>
                                         <tr>
                                             <th>Sévérité </th>
-                                            <th>Planing</th>
+                                            <th>Planning</th>
                                             <th>Cout</th>
                                             <th>Niveau</th>
                                         </tr>
@@ -129,10 +129,10 @@
                             </div>
                         </div>
 
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">ENREGISTRER</button>
-                </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">ENREGISTRER</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -150,94 +150,94 @@
                     <form method="post" action="{{route('SaveMesure')}}">
                         @csrf
                         <input type="hidden" id="id_analyse" name="id_analyse" value="" />
-                    <div class="form-group">
-                        <label class=" form-control-label">Priorité</label>
-                        <div class="input-group">
-                            <select data-placeholder="Sélectionner une priorité..." class="standardSelect form-control" tabindex="1" name="priorite" id="priorite" required>
-                               <option></option>
-                                @foreach($priorites as $priorite)
-                                    <option value="{{$priorite->id}}">{{$priorite->libelle}}</option>
+                        <div class="form-group">
+                            <label class=" form-control-label">Priorité</label>
+                            <div class="input-group">
+                                <select data-placeholder="Sélectionner une priorité..." class="standardSelect form-control" tabindex="1" name="priorite" id="priorite" required>
+                                    <option></option>
+                                    @foreach($priorites as $priorite)
+                                        <option value="{{$priorite->id}}">{{$priorite->libelle}}</option>
                                     @endforeach
-                            </select>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class=" form-control-label">Statut</label>
-                        <div class="input-group">
+                        <div class="form-group">
+                            <label class=" form-control-label">Statut</label>
+                            <div class="input-group">
 
-                            <select data-placeholder="Sélectionner une statut..." class="standardSelect form-control" tabindex="1" name="statut" id="statut" required>
-                                <option></option>
-                                @foreach($statuts as $statut)
-                                    <option value="{{$statut->id}}">{{$statut->libelle}}</option>
-                                @endforeach
-                            </select>
+                                <select data-placeholder="Sélectionner une statut..." class="standardSelect form-control" tabindex="1" name="statut" id="statut" required>
+                                    <option></option>
+                                    @foreach($statuts as $statut)
+                                        <option value="{{$statut->id}}">{{$statut->libelle}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class=" form-control-label">Périodicité</label>
-                        <div class="input-group">
+                        <div class="form-group">
+                            <label class=" form-control-label">Périodicité</label>
+                            <div class="input-group">
 
-                            <select data-placeholder="Sélectionner une périodicité..." class="standardSelect form-control" tabindex="1" name="periodicite" id="periodicite" required>
-                                <option></option>
-                                @foreach($periodicites as $periodicite)
-                                    <option value="{{$periodicite->id}}">{{$periodicite->libelle}}</option>
-                                @endforeach
-                            </select>
+                                <select data-placeholder="Sélectionner une périodicité..." class="standardSelect form-control" tabindex="1" name="periodicite" id="periodicite" required>
+                                    <option></option>
+                                    @foreach($periodicites as $periodicite)
+                                        <option value="{{$periodicite->id}}">{{$periodicite->libelle}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class=" form-control-label">Libelle</label>
-                        <div class="input-group">
+                        <div class="form-group">
+                            <label class=" form-control-label">Libelle</label>
+                            <div class="input-group">
 
-                            <input type="text" class="form-control" name="libelle" value="" required/>
+                                <input type="text" class="form-control" name="libelle" value="" required/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class=" form-control-label">Responsable</label>
-                        <div class="input-group">
+                        <div class="form-group">
+                            <label class=" form-control-label">Responsable</label>
+                            <div class="input-group">
 
-                            <select data-placeholder="Sélectionner une responsable..." class="standardSelect form-control" tabindex="1" name="responsable" id="responsable" required>
-                                <option></option>
-                                @foreach($responsables as $responsable)
-                                    <option value="{{$responsable->id}}">{{$responsable->nom.' '.$responsable->prenoms}}</option>
-                                @endforeach
-                            </select>
+                                <select data-placeholder="Sélectionner une responsable..." class="standardSelect form-control" tabindex="1" name="responsable" id="responsable" required>
+                                    <option></option>
+                                    @foreach($responsables as $responsable)
+                                        <option value="{{$responsable->id}}">{{$responsable->nom.' '.$responsable->prenoms}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class=" form-control-label">Acteur</label>
-                        <div class="input-group">
+                        <div class="form-group">
+                            <label class=" form-control-label">Acteur</label>
+                            <div class="input-group">
 
-                            <select data-placeholder="Sélectionner un acteur..." class="standardSelect form-control" tabindex="1" name="acteur" id="acteur" required>
-                                <option></option>
-                                @foreach($acteurs as $acteur)
-                                    <option value="{{$acteur->id}}">{{$acteur->libelle}}</option>
-                                @endforeach
-                            </select>
+                                <select data-placeholder="Sélectionner un acteur..." class="standardSelect form-control" tabindex="1" name="acteur" id="acteur" required>
+                                    <option></option>
+                                    @foreach($acteurs as $acteur)
+                                        <option value="{{$acteur->id}}">{{$acteur->libelle}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class=" form-control-label">Date de planification</label>
-                        <div class="input-group">
+                        <div class="form-group">
+                            <label class=" form-control-label">Date de planification</label>
+                            <div class="input-group">
 
-                            <input type="date" class="form-control" name="datePlanifie" value="" required/>
+                                <input type="date" class="form-control" name="datePlanifie" value="" required/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class=" form-control-label">Date de réalisation effective</label>
-                        <div class="input-group">
+                        <div class="form-group">
+                            <label class=" form-control-label">Date de réalisation effective</label>
+                            <div class="input-group">
 
-                            <input type="date" class="form-control" name="dateEffective" value=""/>
+                                <input type="date" class="form-control" name="dateEffective" value=""/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class=" form-control-label">Documentation</label>
-                        <div class="input-group">
+                        <div class="form-group">
+                            <label class=" form-control-label">Documentation</label>
+                            <div class="input-group">
 
-                            <input type="text" class="form-control" name="documentation" value="" />
+                                <input type="text" class="form-control" name="documentation" value="" />
+                            </div>
                         </div>
-                    </div>
 
                 </div>
                 <div class="modal-footer">
@@ -258,49 +258,49 @@
         <div class="animated fadeIn">
 
             <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">Liste des risques/opportunités</strong>
-                    </div>
-                    <div class="card-body">
-                        <table id="bootstrap-data-table1" class="table table-striped table-bordered">
-                            <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>Code</th>
-                                <th>Nature</th>
-                                <th>Pays</th>
-                                <th>Chantier</th>
-                                <th>Proprietaire</th>
-                                <th>Auteur</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                               @foreach($analyses as $analyse)
-                                   <tr class="{{$analyse->id_nature==1?'risk':'opportunite'}}" >
-                                       <td>
-                                           {{$analyse->id}}
-                                       </td>
-                                       <td>
-                                           {{$analyse->code}}
-                                       </td>
-                                       <td>
-                                          {{$analyse->nature()->first()->nature}}
-                                       </td>
-                                       <td>
-                                           {{$analyse->chantier()->first()->libelle}}
-                                       </td>
-                                       <td>
-                                           {{$analyse->chantier()->first()->pays()->first()->nom_fr_fr}}
-                                       </td>
-                                       <td>
-                                           {{$analyse->proprietaire()->first()->nom." ".$analyse->proprietaire()->first()->prenoms}}
-                                       </td>
-                                       <td>
-                                           {{$analyse->auteur()->first()->nom." ".$analyse->auteur()->first()->prenoms}}
-                                       </td>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Liste des risques/opportunités</strong>
+                        </div>
+                        <div class="card-body">
+                            <table id="bootstrap-data-table1" class=" table table-striped table-bordered" style="width: 100%">
+                                <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Code</th>
+                                    <th>Nature</th>
+                                    <th>Pays</th>
+                                    <th>Chantier</th>
+                                    <th>Proprietaire</th>
+                                    <th>Auteur</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($analyses as $analyse)
+                                    <tr class="{{$analyse->id_nature==1?'risk':'opportunite'}}" >
+                                        <td>
+                                            {{$analyse->id}}
+                                        </td>
+                                        <td>
+                                            {{$analyse->code}}
+                                        </td>
+                                        <td>
+                                            {{$analyse->nature()->first()->nature}}
+                                        </td>
+                                        <td>
+                                            {{$analyse->chantier()->first()->libelle}}
+                                        </td>
+                                        <td>
+                                            {{$analyse->chantier()->first()->pays()->first()->nom_fr_fr}}
+                                        </td>
+                                        <td>
+                                            {{$analyse->proprietaire()->first()->nom." ".$analyse->proprietaire()->first()->prenoms}}
+                                        </td>
+                                        <td>
+                                            {{$analyse->auteur()->first()->nom." ".$analyse->auteur()->first()->prenoms}}
+                                        </td>
                                         <td>
                                             <a href="#" data-toggle="modal" data-target="#smallmodal" class="ajouterMesure btn btn-primary btn-sm"> <i class="ti-ruler-pencil"></i> Ajouter une mesure</a>
                                             <a href="{{route('mesures',$analyse->id)}}" class="btn btn-secondary btn-sm" > <i class="menu-icon fa fa-list"></i> Lister les mesures</a>
@@ -310,17 +310,19 @@
                                                 <a href="#"  data-toggle="modal" data-target="#evaluationpostemesure" class="evaluer btn btn-success btn-sm"> <i class="ti-view-grid"></i> Evaluation post mesure</a>
                                             @endif
                                         </td>
-                                   </tr>
-                                   @endforeach
+                                    </tr>
+                                @endforeach
 
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
+    </div>
         <script src="{{ asset("assets/js/vendor/jquery-2.1.4.min.js") }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
         <script src="{{ asset("assets/js/plugins.js") }}"></script>

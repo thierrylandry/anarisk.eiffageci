@@ -122,7 +122,6 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="user-avatar rounded-circle" src="{{ asset('images/user.png')}}" alt="User Avatar">
                     </a>
-
                     <div class="user-menu dropdown-menu">
                         <a class="nav-link" href="#"><i class="fa fa- user"></i>Mon profil</a>
 
@@ -145,7 +144,7 @@
     <div class="main-content">
         <div class="section__content section__content--p30">
             <img src="{{ asset("images/Eiffage_2400_01_colour_RGB.jpg") }}" class="logo_eiffage" style="display: none">
-            <div class="container-fluid">
+            <div class="container-fluid" id="page">
                 <div class="agile-grid"  style="background-color: #FFFFFF;@yield('pour_register') margin: 5px">
 
                     @if(Session::has('success'))

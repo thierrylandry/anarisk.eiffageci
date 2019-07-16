@@ -23,9 +23,12 @@ class MesuresController extends Controller
         // dd($analyses[0]->chantier()->get());
         //dd($analyse->nature()->first()->id);
         //dd($analyse->mesures()->get());
-
-
-        return view('mesures.mesures',compact('analyse'));
+        $responsables = Responsable::all();
+        $priorites = Priorite::all();
+        $statuts = Statut::all();
+        $acteurs = Acteur::all();
+        $periodicites = Periodicite::all();
+        return view('mesures.mesures',compact('analyse','priorites','statuts','periodicites','responsables','acteurs'));
 
     }
     public function SaveMesure(Request $request){

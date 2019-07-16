@@ -33,7 +33,6 @@ class AnalysesController extends Controller
         $payss = Pays::all();
         $chantiers = Chantier::where('id_pays','=',110)->get();
         $responsables = Responsable::where('id_chantier','=',$chantiers->first()->id)->get();
-
         return view('analyses.modifierAnalyse',compact('analyse','natures','payss','chantiers','responsables'));
 
     }

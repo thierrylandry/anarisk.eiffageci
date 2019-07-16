@@ -3,49 +3,7 @@
     active
 @endsection
 @section('page')
-    <style>
-        #mydiv {
-            position: fixed;
-            z-index: 9;
-            left:0;
-            top:250px;
-            background-color: #f1f1f1;
-            text-align: center;
-            border: 1px solid #d3d3d3;
-            overflow: hidden;
-        }
 
-        #mydivheader {
-            padding: 10px;
-            cursor: move;
-            z-index: 10;
-            background-color: #2196F3;
-            color: #fff;
-        }
-        .gros {
-            width: 1000px;
-            height: 700px;
-        }
-
-        .grosImage {
-            width: 1000px;
-            height: 650px;
-        }
-        .petit {
-            width: 10%;
-            height: 300px;
-        }
-        .petitImage {
-            width: 187px;
-            height:200px;
-        }
-        .risk {
-            background-color: #f50017d4;
-        }
-        .opportunite {
-            background-color: #00ff7f29;
-        }
-    </style>
     <div class="breadcrumbs" style="max-height:300px">
         <div class="col-sm-4 text_center" >
             <div class="page-header float-left {{($analyse->nature->id==1)?'risk':'opportunite'}}" >
@@ -108,7 +66,7 @@
                                 <td colspan="3" style="text-align: left !important">@if(isset($analyse->consequences))@foreach(json_decode($analyse->consequences) as $consequence)  <p>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{{$consequence->libelle}}</p> @endforeach @endif</td>
                             </tr>
                             <tr>
-                                <td colspan="7"><b>EVALUATION</b></td>
+                                <td colspan="7"><b>Evaluation</b></td>
                             </tr>
                             <tr>
                                 <td colspan="4" style="{{$analyse->nature->id==1?'color:red':'color:green'}}"><b>{{($analyse->nature->id==1)?"Niveau du risque":"Niveau  de l'opportunité"}}</b></td>

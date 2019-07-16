@@ -37,13 +37,13 @@ card{background-color: transparent !important; border: none !important;}
 .logo_eiffage{
     display: block !important;
 }
-#effectifglobaux,#repartition_homme_femme,#qualification_contractuelle,#repartition_nationalite,#repartition_service{
-    page-break-after:auto;
-    height: 200px;
-}
+
 .copyright{
     display: none;
 }
-.col-lg-6{
-    float: left;
-}
+
+table { page-break-inside:auto }
+tr    { page-break-inside:avoid; page-break-after:auto }
+.tablee,th, td{border:  1px solid black!important;
+    border-collapse: collapse; width: 100%;
+    text-align: center;}

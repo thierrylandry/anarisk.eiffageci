@@ -209,7 +209,7 @@
                                 </tr>
                                 <tr>
                                     <th>Sévérité </th>
-                                    <th>Planing</th>
+                                    <th>Planning</th>
                                     <th>Cout</th>
                                     <th>Niveau</th>
                                 </tr>

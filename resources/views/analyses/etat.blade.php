@@ -102,7 +102,7 @@
 
                                 </tbody>
                                 <tfooter>
-                                    <tr> <th colspan="12" style="text-align:right" >FCFA Budget :</th> <th id="tot_aupire" style="text-align: right"></th><th id="tot_aujuste" style="text-align: right"></th><th id="tot_aumieux" style="text-align: right"></th> </tr>
+                                    <tr> <th colspan="11" style="text-align:right" >FCFA Budget :</th> <th id="tot_aupire" style="text-align: left"></th><th id="tot_aujuste" style="text-align: left"></th><th id="tot_aumieux" style="text-align: left"></th> </tr>
                                 </tfooter>
                             </table>
                         </div>
@@ -123,7 +123,7 @@
                                     <th COLSPAN="3">Valorisaion</th></tr>
                                 <tr>
                                     <th>id</th>
-                                    <th>Code</th>
+                                    <th class="colonne"  >Code</th>
                                     <th>Pays</th>
                                     <th>Chantier</th>
                                     <th>Proprietaire</th>
@@ -192,7 +192,7 @@
 
                                 </tbody>
                                 <tfooter>
-                                    <tr> <th colspan="12" style="text-align:right" >FCFA Budget :</th> <th id="tot_aupire1" style="text-align: right"></th><th id="tot_aujuste1" style="text-align: right"></th><th id="tot_aumieux1" style="text-align: right"></th> </tr>
+                                    <tr> <th colspan="11" style="text-align:right" >FCFA Budget :</th> <th id="tot_aupire1" style="text-align: left"></th><th id="tot_aujuste1" style="text-align: left"></th><th id="tot_aumieux1" style="text-align: left"></th> </tr>
                                 </tfooter>
                             </table>
                         </div>
@@ -274,11 +274,13 @@
                 jQuery(function($) {
                     var table= $('#bootstrap-data-table1').DataTable({
                         "order": [[ 0, "desc" ]],
-                        "paging": false,
                         language: {
                             url: "{{ URL::asset('js/French.json') }}"
                         },
                         "ordering":true,
+                        "autoWidth": false,
+                        "paging": false,
+                        "searching": false,
                         "createdRow": function( row, data, dataIndex){
 
                         },
@@ -337,15 +339,17 @@
                             $('#tot_aujuste').html(lisibilite_nombre(Math.round(totalaujuste)));
                             $('#tot_aumieux').html(lisibilite_nombre(Math.round(totalaumieux)));
                         },
-                        responsive:true
-                    }).column(0).visible(false);
+                        responsive:false,
+                    }).column(0).visible(false).column(7).visible(false);
                     var table2= $('#bootstrap-data-table2').DataTable({
                         "order": [[ 0, "desc" ]],
                         "paging": false,
+                        "searching": false,
                         language: {
                             url: "{{ URL::asset('js/French.json') }}"
                         },
                         "ordering":true,
+                        "autoWidth": false,
                         "createdRow": function( row, data, dataIndex){
 
                         },
@@ -404,8 +408,8 @@
                             $('#tot_aujuste1').html(lisibilite_nombre(Math.round(totalaujuste)));
                             $('#tot_aumieux1').html(lisibilite_nombre(Math.round(totalaumieux)));
                         },
-                        responsive:true
-                    }).column(0).visible(false);
+                        responsive:false,
+                    }).column(0).visible(false).column(7).visible(false);
                     function lisibilite_nombre(nbr){
                         var nombre = ''+nbr;
                         var retour = '';

@@ -1,0 +1,43 @@
+body { /* Modifications : la couleur de fond de page - la police - l'unité utilisée pour la taille de la police  */
+    background-color :#fff;
+    font-family :Serif;
+    font-size :10pt;
+}
+@page { /* Modifications : suppression de la bordure - marges */
+    /*page-break-inside : avoid;*/
+    page-break-after: always;
+    size: landscape;
+    border :1cm;
+
+}
+#page { /* Modifications : suppression de la bordure - marges */
+    margin: 2%;
+    border :none;
+
+}
+div.col-md-12{
+    width: 25cm;
+    margin: 1cm 1cm;
+    float: left;
+
+}
+.risk {
+    background-color: rgba(212, 17, 31, 0.96);
+    color:white ;
+}
+.opportunite {
+    background-color: #00bf8f;
+}
+table tr .colonne{
+    width:300cm;
+}
+
+table { page-break-inside:auto }
+tr    { page-break-inside:avoid; page-break-after:auto }
+
+.tablee,th, td{border:  1px solid black;
+    border-collapse: collapse; width: 100%;
+    text-align: center;}
+td{
+    width: 100%;
+}

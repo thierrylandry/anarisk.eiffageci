@@ -3,49 +3,6 @@
     active
 @endsection
 @section('page')
-    <style>
-        #mydiv {
-            position: fixed;
-            z-index: 9;
-            left:0;
-            top:250px;
-            background-color: #f1f1f1;
-            text-align: center;
-            border: 1px solid #d3d3d3;
-            overflow: hidden;
-        }
-
-        #mydivheader {
-            padding: 10px;
-            cursor: move;
-            z-index: 10;
-            background-color: #2196F3;
-            color: #fff;
-        }
-        .gros {
-            width: 1000px;
-            height: 700px;
-        }
-
-        .grosImage {
-            width: 1000px;
-            height: 650px;
-        }
-        .petit {
-            width: 10%;
-            height: 300px;
-        }
-        .petitImage {
-            width: 187px;
-            height:200px;
-        }
-        .risk {
-            background-color: #f50017d4;
-        }
-        .opportunite {
-            background-color: #00ff7f29;
-        }
-    </style>
     <div class="breadcrumbs" style="max-height:300px">
         <div class="col-sm-4">
             <div class="page-header float-left">
@@ -82,31 +39,37 @@
                     <div class="card-header {{($analyse->nature->id==1)?'risk':'opportunite'}}">
                         <strong class="card-title">Analyse</strong>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="color: black !important">
                         <div class="col-sm-4">
-                            <p> Code : {{isset($analyse)? $analyse->code:''}}</p>
-                            <p> Nature : <b>{{$analyse->nature->nature}}</b></p>
-                            <p> Pays : <b>{{$analyse->chantier->pays->nom_fr_fr}}</b></p>
-                            <p> Chantier :  {{$analyse->chantier->libelle}}</p>
+                            <p><b> Code : </b>{{isset($analyse)? $analyse->code:''}}</p>
+                            <p> <b>Nature : </b>{{$analyse->nature->nature}}</p>
+                            <p> <b>Pays : </b>{{$analyse->chantier->pays->nom_fr_fr}}</p>
+                            <p> <b>Chantier : </b> {{$analyse->chantier->libelle}}</p>
 
                         </div>
                         <div class="col-sm-4">
-                            <p> Pays :  {{$analyse->chantier->pays->nom_fr_fr}}</p>
-                            <p> Proprietaire :  {{$analyse->proprietaire->nom}} {{$analyse->proprietaire->prenoms}}</p>
-                            <p> Auteur :  {{$analyse->auteur->nom}} {{$analyse->auteur->prenoms}}</p>
-                            <p> Description  :  {{$analyse->description}}</p>
-                            <p> Detail  :  {{$analyse->detail}}</p>
+                            <p><b> Pays : </b> {{$analyse->chantier->pays->nom_fr_fr}}</p>
+                            <p> <b>Proprietaire :  </b>{{$analyse->proprietaire->nom}} {{$analyse->proprietaire->prenoms}}</p>
+                            <p> <b>Auteur : </b> {{$analyse->auteur->nom}} {{$analyse->auteur->prenoms}}</p>
+                            <p> <b>Description  : </b> {{$analyse->description}}</p>
+                            <p><b> Detail  :  </b>{{$analyse->detail}}</p>
 
 
 
                         </div>
                         <div class="col-sm-4">
-                            <p> Date  :  {{$analyse->date}}</p>
-                            <p> Causes  :  @if(isset($analyse->causes)) @foreach(json_decode($analyse->causes) as $cause) <p>&nbsp;&nbsp;&nbsp; - {{$cause->libelle}}</p> @endforeach @endif</p>
-                            <p> Conséquences  :  @if(isset($analyse->consequences))@foreach(json_decode($analyse->consequences) as $consequence)  <p>&nbsp;&nbsp;&nbsp; - {{$consequence->libelle}}</p> @endforeach @endif</p>
-                            <p> Probabilité avant mesure  :  {{$analyse->probabiliteAvant}}</p>
-                            <p> Severité avant mesure  :  {{$analyse->probabiliteAvant}}</p>
-                            <p> Planing avant mesure  :  {{$analyse->planingAvant}}</p>
+                            <p><b> Date  : </b> {{$analyse->date}}</p>
+                            <p><b> Probabilité avant mesure  : </b> {{$analyse->probabiliteAvant}}</p>
+                            <p> <b>Severité avant mesure  :</b>  {{$analyse->probabiliteAvant}}</p>
+                            <p> <b>Planing avant mesure  :</b>  {{$analyse->planingAvant}}</p>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <p> <b>Causes  : </b> @if(isset($analyse->causes)) @foreach(json_decode($analyse->causes) as $cause) <p>&nbsp;&nbsp;&nbsp; - {{$cause->libelle}}</p> @endforeach @endif</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p><b> Conséquences  : </b> @if(isset($analyse->consequences))@foreach(json_decode($analyse->consequences) as $consequence)  <p>&nbsp;&nbsp;&nbsp; - {{$consequence->libelle}}</p> @endforeach @endif</p>
+
                         </div>
 
                     </div>
@@ -216,7 +179,7 @@
                                         <label class=" form-control-label">Documentation</label>
                                         <div class="input-group">
 
-                                            <input type="text" class="form-control" name="documentation" value="{{isset($mesure)?$mesure->documentation:''}}" required/>
+                                            <input type="text" class="form-control" name="documentation" value="{{isset($mesure)?$mesure->documentation:''}}"/>
                                         </div>
                                     </div>
                         </div>
