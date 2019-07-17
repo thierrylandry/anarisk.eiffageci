@@ -82,6 +82,14 @@ Route::get('/etat',[
         'as'=>'etat',
         'uses'=>'AnalysesController@etat',
     ])->middleware('auth');
+Route::get('/etatpdf',[
+        'as'=>'etatpdf',
+        'uses'=>'AnalysesController@etatpdf',
+    ])->middleware('auth');
+Route::post('/saveEtat',[
+        'as'=>'saveEtat',
+        'uses'=>'AnalysesController@saveEtat',
+    ])->middleware('auth');
 
 Route::get('/proprietaireListeFonction/{id}',[
         'as'=>'proprietaireListeFonction',

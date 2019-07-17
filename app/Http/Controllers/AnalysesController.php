@@ -12,6 +12,9 @@ use App\Periodicite;
 use App\Priorite;
 use App\Responsable;
 use App\Statut;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\View;
+use Spipu\Html2Pdf\Html2Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -298,11 +301,70 @@ public function ficheAnalyse($id){
         }
     }
     public function etat(){
+    $risques = Analyse::where('id_nature','=',1)->orderBy('id','DESC')->get();
+    $opportunites = Analyse::where('id_nature','=',2)->orderBy('id','DESC')->get();
+
+    // dd($analyses->first()->mesures()->orderBy('dateplanifie','ASC')->first());
+    // dd($analyses[0]->chantier()->get());
+    //  $pdf = PDF::loadView('analyses.etat', compact('risques','opportunites'))->setPaper('a3', 'landscape');
+    //return $pdf->download('etat.pdf');
+      return view('analyses.etat',compact('risques','opportunites'));
+    }
+
+    public function etatpdf(){
         $risques = Analyse::where('id_nature','=',1)->orderBy('id','DESC')->get();
         $opportunites = Analyse::where('id_nature','=',2)->orderBy('id','DESC')->get();
 
-       // dd($analyses->first()->mesures()->orderBy('dateplanifie','ASC')->first());
+        // dd($analyses->first()->mesures()->orderBy('dateplanifie','ASC')->first());
         // dd($analyses[0]->chantier()->get());
-        return view('analyses.etat',compact('risques','opportunites'));
+          $pdf = PDF::loadView('analyses.etat', compact('risques','opportunites'))->setPaper('a3', 'landscape');
+        //return $pdf->download('etat.pdf');
+
+        $html2pdf = new Html2Pdf('P', 'A4', 'fr');
+
+        $content=  View::make('analyses.etat',compact('risques','opportunites'))->render()->output();
+
+
+        $html2pdf->writeHTML($content);
+        return $html2pdf->output();
+        //  return view('analyses.etat',compact('risques','opportunites'));
+    }
+    public function saveEtat(Request $request){
+        $parameters=$request->except(['_token']);
+     //   dd($parameters);
+
+       // dd($parameters['list_risk']);
+      $list_risk = explode(',',$parameters['list_risk']);
+       // dd($parameters);
+
+        foreach ($list_risk as $id):
+
+            $risque = Analyse::find($id);
+
+            if($id!=''){
+                $risque->aupire=$parameters['prob_aupire_'.$id];
+                $risque->juste=$parameters['prob_aujuste_'.$id];
+                $risque->aumieux=$parameters['prob_aumieux_'.$id];
+                $risque->save();
+            }
+
+        endforeach;
+
+        $list_opportunite = explode(',',$parameters['list_opportunite']);
+     //   dd($parameters);
+
+        foreach ($list_opportunite as $id):
+
+            $opportunite = Analyse::find($id);
+
+            if($id!='') {
+                $opportunite->aupire = $parameters['prob_aupire1_' . $id];
+                $opportunite->juste = $parameters['prob_aujuste1_' . $id];
+                $opportunite->aumieux = $parameters['prob_aumieux1_' . $id];
+                $opportunite->save();
+
+            }
+        endforeach;
+        return redirect()->route('etat')->with('success', "Etat enregistré");
     }
 }

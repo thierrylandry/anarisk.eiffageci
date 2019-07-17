@@ -19,7 +19,10 @@
     </div>
     <div class="content mt-3">
         <div class="animated fadeIn">
-
+             <form method="post" action="{{route('saveEtat')}}">
+                @csrf
+<input type="hidden" value="@foreach($risques as $risque){{$risque->id.','}}@endforeach" name="list_risk"/>
+<input type="hidden" value="@foreach($opportunites as $opportunite){{$opportunite->id.','}}@endforeach" name="list_opportunite"/>
             <div class="row" >
                 <div class="col-md-12">
                     <div class="card">
@@ -33,7 +36,7 @@
                                     <th COLSPAN="3">Valorisaion</th></tr>
                                 <tr>
                                     <th>id</th>
-                                    <th>Code</th>
+                                    <th class="colonne">Code</th>
                                     <th>Pays</th>
                                     <th>Chantier</th>
                                     <th>Proprietaire</th>
@@ -74,24 +77,20 @@
                                         </td>
                                         <td>
                                             @if(isset($risque->mesures()->orderBy('dateplanifie','ASC')->first()->dateplanifie))
-                                            {{date("d-m-Y",strtotime($risque->mesures()->orderBy('dateplanifie','ASC')->first()->dateplanifie))}}
-                                                @endif
+                                                {{date("d-m-Y",strtotime($risque->mesures()->orderBy('dateplanifie','ASC')->first()->dateplanifie))}}
+                                            @endif
                                         </td>
                                         <td> {{$risque->description}} </td>
-                                        <td><select>
-                                                <option value="Intégrer - Risque/Aléas">Intégrer - Dans débours</option>
-                                                <option value="Intégrer - Risque/Aléas">Intégrer - Risque/Aléas</option>
-                                                <option value="Non intégrer">Intégrer - Risque/Aléas</option>
-                                            </select> </td>
+                                        <td> <input type="hidden" value="{{$risque->id}}" name="risk_{{$risque->id}}"/> </td>
                                         <td>
                                             {{number_format($risque->cout, 0, ',', ' ')}}
                                         </td>
                                         <td>
                                             FCFA
                                         </td>
-                                        <td><input type="number" id="prob_aupire" name="prob_aupire" class="prob_aupire" min="0" max="100" style="width: 50px;"/>%</td>
-                                        <td><input type="number" id="prob_aujuste"name="prob_aujuste"  class="prob_aujuste" min="0" max="100" style="width: 50px;"/>%</td>
-                                        <td><input type="number" id="prob_aumieux"name="prob_aumieux"  class="prob_aumieux" min="0" max="100" style="width: 50px;"/>%</td>
+                                        <td><input type="number" value="{{$risque->aupire}}" id="prob_aupire" name="prob_aupire_{{$risque->id}}" class="prob_aupire" min="0" max="100" style="width: 50px;"/>%</td>
+                                        <td><input type="number" value="{{$risque->juste}}" id="prob_aujuste" name="prob_aujuste_{{$risque->id}}"  class="prob_aujuste" min="0" max="100" style="width: 50px;"/>%</td>
+                                        <td><input type="number" value="{{$risque->aumieux}}"  id="prob_aumieux" name="prob_aumieux_{{$risque->id}}"  class="prob_aumieux" min="0" max="100" style="width: 50px;"/>%</td>
                                         <td id="val_aupire{{$risque->id}}"> </td>
                                         <td id="val_aujuste{{$risque->id}}"> </td>
                                         <td id="val_aumieux{{$risque->id}}"> </td>
@@ -164,24 +163,20 @@
                                         </td>
                                         <td>
                                             @if(isset($opportunite->mesures()->orderBy('dateplanifie','ASC')->first()->dateplanifie))
-                                            {{date("d-m-Y",strtotime($opportunite->mesures()->orderBy('dateplanifie','ASC')->first()->dateplanifie))}}
-                                                @endif
+                                                {{date("d-m-Y",strtotime($opportunite->mesures()->orderBy('dateplanifie','ASC')->first()->dateplanifie))}}
+                                            @endif
                                         </td>
                                         <td> {{$opportunite->description}} </td>
-                                        <td><select>
-                                                <option value="Intégrer - Risque/Aléas">Intégrer - Dans débours</option>
-                                                <option value="Intégrer - Risque/Aléas">Intégrer - Risque/Aléas</option>
-                                                <option value="Non intégrer">Intégrer - Risque/Aléas</option>
-                                            </select> </td>
+                                        <td><input type="hidden" value="{{$opportunite->id}}" name="opportunite_{{$opportunite->id}}"/> </td>
                                         <td>
                                             {{number_format($opportunite->cout, 0, ',', ' ')}}
                                         </td>
                                         <td>
                                             FCFA
                                         </td>
-                                        <td><input type="number" id="prob_aupire1" name="prob_aupire1" class="prob_aupire1" min="0" max="100" style="width: 50px;"/>%</td>
-                                        <td><input type="number" id="prob_aujuste1"name="prob_aujuste1"  class="prob_aujuste1" min="0" max="100" style="width: 50px;"/>%</td>
-                                        <td><input type="number" id="prob_aumieux1"name="prob_aumieux1"  class="prob_aumieux1" min="0" max="100" style="width: 50px;"/>%</td>
+                                        <td><input type="number" value="{{$opportunite->aupire}}" id="prob_aupire1" name="prob_aupire1_{{$opportunite->id}}" class="prob_aupire1" min="0" max="100" style="width: 50px;"/>%</td>
+                                        <td><input type="number" value="{{$opportunite->juste}}" id="prob_aujuste1"name="prob_aujuste1_{{$opportunite->id}}"  class="prob_aujuste1" min="0" max="100" style="width: 50px;"/>%</td>
+                                        <td><input type="number" value="{{$opportunite->aumieux}}" id="prob_aumieux1"name="prob_aumieux1_{{$opportunite->id}}"  class="prob_aumieux1" min="0" max="100" style="width: 50px;"/>%</td>
                                         <td id="val_aupire_opportunite{{$opportunite->id}}"> </td>
                                         <td id="val_aujuste_opportunite{{$opportunite->id}}"> </td>
                                         <td id="val_aumieux_opportunite{{$opportunite->id}}"> </td>
@@ -208,51 +203,53 @@
                         </div>
                         <div class="card-body">
                             <div class="col-sm-6"></div>
-                                <div class="col-sm-6 ">
-                                    <table>
-                                        <tbody>
-                                        <tr>
-                                            <th colspan="3" rowspan="2"></th>
-                                            <th colspan="3" class="tableau"> Risques</th>
+                            <div class="col-sm-6 ">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <th colspan="3" rowspan="2"></th>
+                                        <th colspan="3" class="tableau"> Risques</th>
 
-                                        </tr>
-                                        <tr class="tableau">
+                                    </tr>
+                                    <tr class="tableau">
 
-                                            <td class="tableau">Au pire</td>
-                                            <td class="tableau">Juste</td>
-                                            <td class="tableau">Mieux</td>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="5" style="width: 100%">&nbsp;</th>
-                                        </tr>
-                                        <tr>
-                                            <th rowspan="5" class="tableau"> opportunite</th>
-                                            <th style="text-align: center; border-top:  1px solid black;border-right:  1px solid black;border-collapse: collapse;">Au pire</th>
-                                            <td rowspan="3">&nbsp;</td>
-                                            <td class="tableau" style="background-color: #f31f1f; color: white" id="aupire_aupire"></td>
-                                            <td class="tableau" style="background-color: #f5001775;color: white" id="aupire_juste"></td>
-                                            <td class="tableau" style="background-color: #ecf4ee;" id="aupire_aumieux"></td>
-                                        </tr>
-                                        <tr class="tableau">
-                                            <th class="tableau">Juste</th>
-                                            <td class="tableau" style="background-color: #f5001775;" id="juste_aupire"></td>
-                                            <td class="tableau" style="background-color: #2c76ce36;" id="juste_juste"></td>
-                                            <td class="tableau" style="background-color: #a4dea8;" id="juste_aumieux"></td>
-                                        </tr>
-                                        <tr class="tableau">
+                                        <td class="tableau">Au pire</td>
+                                        <td class="tableau">Juste</td>
+                                        <td class="tableau">Mieux</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="5" style="width: 100%">&nbsp;</th>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="5" class="tableau"> opportunite</th>
+                                        <th style="text-align: center; border-top:  1px solid black;border-right:  1px solid black;border-collapse: collapse;">Au pire</th>
+                                        <td rowspan="3">&nbsp;</td>
+                                        <td class="tableau" style="background-color: #f31f1f; color: white" id="aupire_aupire"></td>
+                                        <td class="tableau" style="background-color: #f5001775;color: white" id="aupire_juste"></td>
+                                        <td class="tableau" style="background-color: #ecf4ee;" id="aupire_aumieux"></td>
+                                    </tr>
+                                    <tr class="tableau">
+                                        <th class="tableau">Juste</th>
+                                        <td class="tableau" style="background-color: #f5001775;" id="juste_aupire"></td>
+                                        <td class="tableau" style="background-color: #2c76ce36;" id="juste_juste"></td>
+                                        <td class="tableau" style="background-color: #a4dea8;" id="juste_aumieux"></td>
+                                    </tr>
+                                    <tr class="tableau">
                                         <th class="tableau">Au mieux</th>
                                         <td class="tableau" style="background-color: #b1d0ba40;" id="aumieux_aupire"></td>
                                         <td class="tableau" style="background-color: #a4dea8;" id="aumieux_juste"></td>
                                         <td class="tableau" style="background-color: #23ff32;" id="aumieux_aumieux"></td>
-                                        </tr>
-                                        </tbody></table>
-                                </div>
+                                    </tr>
+                                    </tbody></table>
+                            </div>
                         </div>
                     </div>
                 </div>
 
             </div>
-            <script src="{{ asset("assets/js/vendor/jquery-2.1.4.min.js") }}"></script>
+                 <input type="submit" value="ENREGISTRER" class="btn btn-success">
+             </form>
+                 <script src="{{ asset("assets/js/vendor/jquery-2.1.4.min.js") }}"></script>
 
 
 
@@ -543,7 +540,7 @@
 
 
 
-                    })
+                    });
                     $('.prob_aujuste').change( function(){
 
                         //
@@ -607,6 +604,17 @@
                         }
                         //
                     })
+
+
+                    //exécuer automatiquement
+                    //alert(checkifOnEstDansLesBonnesValeurs(this));
+                    if(checkifOnEstDansLesBonnesValeurs(this)==1){
+                        calculeValorisation(this,'val_aupire','risque');
+                    }else{
+                        $(this).val(0);
+                        calculeValorisation(this,'val_aupire','risque');
+                    }
+
 
                     $( "#mydiv" ).dblclick(function() {
                         //  alert( "Handler for .dblclick() called." );

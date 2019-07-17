@@ -29,7 +29,9 @@ div.col-md-12{
     background-color: #00bf8f;
 }
 table tr .colonne{
-    width:300cm;
+   /*max-width:100cm;*/
+   max-width:1cm;
+    width: 1px;
 }
 
 table { page-break-inside:auto }
