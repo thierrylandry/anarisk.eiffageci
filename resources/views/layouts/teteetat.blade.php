@@ -43,7 +43,7 @@
 <div class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
-            <div class="agile-grid"  style="background-color: #FFFFFF;@yield('pour_register') margin: 5px">
+            <div class="agile-grid page"  style="background-color: #FFFFFF;@yield('pour_register') margin: 5px">
 
                 @if(Session::has('success'))
                     <div class="alert alert-success">{{Session::get('success')}}</div>

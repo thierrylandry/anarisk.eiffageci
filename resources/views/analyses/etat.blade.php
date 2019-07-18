@@ -5,7 +5,7 @@
         .tableau{text-align: center; border:  1px solid black;
         border-collapse: collapse;}
     </style>
-    <div class="breadcrumbs" style="max-height:300px">
+    <div class="breadcrumbs row" style="max-height:300px">
         <div class="col-sm-4">
             <div class="page-header float-left">
                 <div class="page-title" >
@@ -32,11 +32,14 @@
                         <div class="card-body">
                             <table id="bootstrap-data-table1" class="table table-striped table-bordered">
                                 <thead>
-                                <tr rowspan="2" >  <th COLSPAN="10"></th><th COLSPAN="3">Probabilité</th>
-                                    <th COLSPAN="3">Valorisaion</th></tr>
+                                <tr rowspan="2" >
+                                    <th COLSPAN="10"></th>
+                                    <th COLSPAN="3">Probabilité</th>
+                                    <th COLSPAN="3">Valorisaion</th>
+                                </tr>
                                 <tr>
                                     <th>id</th>
-                                    <th class="colonne">Code</th>
+                                    <th >Code</th>
                                     <th>Pays</th>
                                     <th>Chantier</th>
                                     <th>Proprietaire</th>
@@ -107,7 +110,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="row" >
                 <div class="col-md-12">
@@ -123,7 +125,7 @@
                                 <tr>
                                     <th>id</th>
                                     <th class="colonne"  >Code</th>
-                                    <th>Pays</th>
+                                    <th class="colonne">Pays</th>
                                     <th>Chantier</th>
                                     <th>Proprietaire</th>
                                     <th>Plan au plutot</th>
@@ -201,10 +203,10 @@
                         <div class="card-header" style="text-align: center">
                             <strong class="card-title"></strong>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body col-sm-6">
                             <div class="col-sm-6"></div>
                             <div class="col-sm-6 ">
-                                <table>
+                                <table class="tablee">
                                     <tbody>
                                     <tr>
                                         <th colspan="3" rowspan="2"></th>
@@ -346,7 +348,11 @@
                             url: "{{ URL::asset('js/French.json') }}"
                         },
                         "ordering":true,
-                        "autoWidth": false,
+                        "autoWidth": true,
+                        "responsive":true,
+                        "columnDefs": [
+                            { "width": "20%", "targets": 7 }
+                        ],
                         "createdRow": function( row, data, dataIndex){
 
                         },

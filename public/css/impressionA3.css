@@ -1,3 +1,7 @@
+*{
+    padding: 0;
+    margin: 0;
+}
 body { /* Modifications : la couleur de fond de page - la police - l'unité utilisée pour la taille de la police  */
     background-color :#fff;
     font-family :Serif;
@@ -6,40 +10,51 @@ body { /* Modifications : la couleur de fond de page - la police - l'unité util
 @page { /* Modifications : suppression de la bordure - marges */
     /*page-break-inside : avoid;*/
     page-break-after: always;
-    size: landscape;
-    border :1cm;
+    page-break-before: always;
+      size: landscape;
 
 }
 #page { /* Modifications : suppression de la bordure - marges */
-    margin: 2%;
-    border :none;
 
 }
 div.col-md-12{
+    /*
     width: 25cm;
     margin: 1cm 1cm;
     float: left;
+    */
 
 }
-.risk {
-    background-color: rgba(212, 17, 31, 0.96);
+form div.row div.col-md-12 div.card div.card-body{
+    padding: 0;
+}
+#bootstrap-data-table1_wrapper div.row div.col-sm-12{
+    padding: 0;
+}
+#bootstrap-data-table2_wrapper div.row div.col-sm-12{
+    padding: 0;
+}
+div.row div.col-md-12{
+    padding: 0;
+}
+form div.row div.col-md-12 div.card div.card-header.risk {
+    background-color: red!important;
     color:white ;
 }
 .opportunite {
     background-color: #00bf8f;
 }
-table tr .colonne{
-   /*max-width:100cm;*/
-   max-width:1cm;
-    width: 1px;
+thead tr. th.colonne{
+   max-width:10cm;
+
 }
 
-table { page-break-inside:auto }
+table {
+    page-break-inside:auto;
+    border-collapse: collapse;
+}
 tr    { page-break-inside:avoid; page-break-after:auto }
 
 .tablee,th, td{border:  1px solid black;
     border-collapse: collapse; width: 100%;
     text-align: center;}
-td{
-    width: 100%;
-}
