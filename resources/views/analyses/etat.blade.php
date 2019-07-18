@@ -1,20 +1,24 @@
 @extends('layouts.teteetat')
 @section('liste_actif') active @endsection
 @section('page')
+
     <style>
         .tableau{text-align: center; border:  1px solid black;
         border-collapse: collapse;}
     </style>
+
     <div class="breadcrumbs row" style="max-height:300px">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
+        <div class="col-sm-12" style="text-align: center">
+            <div class="page-header align-items-center">
                 <div class="page-title" >
                     <h1>ANALYSES</h1>
                 </div>
             </div>
         </div>
         <div class="col-sm-12">
-
+            <div class="col-sm-11 ne_pas_afficher">
+                <a href="javascript:window.print()" id="btnprint" class="btn btn-info"><i class="fa fa-print"></i> Imprimer</a>
+            </div>
         </div>
     </div>
     <div class="content mt-3">
@@ -23,7 +27,7 @@
                 @csrf
 <input type="hidden" value="@foreach($risques as $risque){{$risque->id.','}}@endforeach" name="list_risk"/>
 <input type="hidden" value="@foreach($opportunites as $opportunite){{$opportunite->id.','}}@endforeach" name="list_opportunite"/>
-            <div class="row" >
+            <div class="row " >
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header risk" style="text-align: center">
@@ -51,9 +55,9 @@
                                     <th>Devise</th>
 
 
-                                    <th> Au pire</th>
-                                    <th> Juste</th>
-                                    <th> Au mieux</th>
+                                    <th> Au pire %</th>
+                                    <th> Juste %</th>
+                                    <th> Au mieux %</th>
                                     <th> Au pire</th>
                                     <th> Juste</th>
                                     <th> Au mieux</th>
@@ -91,12 +95,12 @@
                                         <td>
                                             FCFA
                                         </td>
-                                        <td><input type="number" value="{{$risque->aupire}}" id="prob_aupire" name="prob_aupire_{{$risque->id}}" class="prob_aupire" min="0" max="100" style="width: 50px;"/>%</td>
-                                        <td><input type="number" value="{{$risque->juste}}" id="prob_aujuste" name="prob_aujuste_{{$risque->id}}"  class="prob_aujuste" min="0" max="100" style="width: 50px;"/>%</td>
-                                        <td><input type="number" value="{{$risque->aumieux}}"  id="prob_aumieux" name="prob_aumieux_{{$risque->id}}"  class="prob_aumieux" min="0" max="100" style="width: 50px;"/>%</td>
-                                        <td id="val_aupire{{$risque->id}}"> </td>
-                                        <td id="val_aujuste{{$risque->id}}"> </td>
-                                        <td id="val_aumieux{{$risque->id}}"> </td>
+                                        <td><input type="number" value="{{$risque->aupire}}" id="prob_aupire" name="prob_aupire_{{$risque->id}}" class="prob_aupire" min="0" max="100" style="width: 50px;"/></td>
+                                        <td><input type="number" value="{{$risque->juste}}" id="prob_aujuste" name="prob_aujuste_{{$risque->id}}"  class="prob_aujuste" min="0" max="100" style="width: 50px;"/></td>
+                                        <td><input type="number" value="{{$risque->aumieux}}"  id="prob_aumieux" name="prob_aumieux_{{$risque->id}}"  class="prob_aumieux" min="0" max="100" style="width: 50px;"/></td>
+                                        <td id="val_aupire{{$risque->id}}">{{number_format(($risque->cout*$risque->aupire)/100, 0, ',', ' ')}}</td>
+                                        <td id="val_aujuste{{$risque->id}}">{{number_format(($risque->cout*$risque->juste)/100, 0, ',', ' ')}} </td>
+                                        <td id="val_aumieux{{$risque->id}}">{{number_format(($risque->cout*$risque->aumieux)/100, 0, ',', ' ')}}  </td>
                                     </tr>
 
                                 @endforeach
@@ -111,7 +115,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row" >
+            <div class="row " >
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header opportunite" style="text-align: center">
@@ -136,9 +140,9 @@
                                     <th>Devise</th>
 
 
-                                    <th> Au pire</th>
-                                    <th> Juste</th>
-                                    <th> Au mieux</th>
+                                    <th> Au pire %</th>
+                                    <th> Juste %</th>
+                                    <th> Au mieux %</th>
                                     <th> Au pire</th>
                                     <th> Juste</th>
                                     <th> Au mieux</th>
@@ -176,12 +180,12 @@
                                         <td>
                                             FCFA
                                         </td>
-                                        <td><input type="number" value="{{$opportunite->aupire}}" id="prob_aupire1" name="prob_aupire1_{{$opportunite->id}}" class="prob_aupire1" min="0" max="100" style="width: 50px;"/>%</td>
-                                        <td><input type="number" value="{{$opportunite->juste}}" id="prob_aujuste1"name="prob_aujuste1_{{$opportunite->id}}"  class="prob_aujuste1" min="0" max="100" style="width: 50px;"/>%</td>
-                                        <td><input type="number" value="{{$opportunite->aumieux}}" id="prob_aumieux1"name="prob_aumieux1_{{$opportunite->id}}"  class="prob_aumieux1" min="0" max="100" style="width: 50px;"/>%</td>
-                                        <td id="val_aupire_opportunite{{$opportunite->id}}"> </td>
-                                        <td id="val_aujuste_opportunite{{$opportunite->id}}"> </td>
-                                        <td id="val_aumieux_opportunite{{$opportunite->id}}"> </td>
+                                        <td><input type="number" value="{{$opportunite->aupire}}" id="prob_aupire1" name="prob_aupire1_{{$opportunite->id}}" class="prob_aupire1" min="0" max="100" style="width: 50px;"/></td>
+                                        <td><input type="number" value="{{$opportunite->juste}}" id="prob_aujuste1"name="prob_aujuste1_{{$opportunite->id}}"  class="prob_aujuste1" min="0" max="100" style="width: 50px;"/></td>
+                                        <td><input type="number" value="{{$opportunite->aumieux}}" id="prob_aumieux1"name="prob_aumieux1_{{$opportunite->id}}"  class="prob_aumieux1" min="0" max="100" style="width: 50px;"/></td>
+                                        <td id="val_aupire_opportunite{{$opportunite->id}}">{{number_format(($opportunite->cout*$opportunite->aupire)/100, 0, ',', ' ')}} </td>
+                                        <td id="val_aujuste_opportunite{{$opportunite->id}}">{{number_format(($opportunite->cout*$opportunite->juste)/100, 0, ',', ' ')}} </td>
+                                        <td id="val_aumieux_opportunite{{$opportunite->id}}"> {{number_format(($opportunite->cout*$opportunite->aumieux)/100, 0, ',', ' ')}}</td>
                                     </tr>
 
                                 @endforeach
@@ -197,16 +201,12 @@
                 </div>
 
             </div>
-            <div class="row" >
+            <div class="row " >
                 <div class="col-md-12" >
                     <div class="card">
-                        <div class="card-header" style="text-align: center">
-                            <strong class="card-title"></strong>
-                        </div>
-                        <div class="card-body col-sm-6">
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6 ">
-                                <table class="tablee">
+                        <div class="card-body">
+
+                                <table class="tablee pull-right">
                                     <tbody>
                                     <tr>
                                         <th colspan="3" rowspan="2"></th>
@@ -220,12 +220,12 @@
                                         <td class="tableau">Mieux</td>
                                     </tr>
                                     <tr>
-                                        <th colspan="5" style="width: 100%">&nbsp;</th>
+                                        <th colspan="7">&nbsp;</th>
                                     </tr>
                                     <tr>
-                                        <th rowspan="5" class="tableau"> opportunite</th>
+                                        <th rowspan="5" class="tableau" id="colopportunite"> opportunite</th>
                                         <th style="text-align: center; border-top:  1px solid black;border-right:  1px solid black;border-collapse: collapse;">Au pire</th>
-                                        <td rowspan="3">&nbsp;</td>
+                                        <td rowspan="3" id="espceinutile">&nbsp;</td>
                                         <td class="tableau" style="background-color: #f31f1f; color: white" id="aupire_aupire"></td>
                                         <td class="tableau" style="background-color: #f5001775;color: white" id="aupire_juste"></td>
                                         <td class="tableau" style="background-color: #ecf4ee;" id="aupire_aumieux"></td>
@@ -243,13 +243,13 @@
                                         <td class="tableau" style="background-color: #23ff32;" id="aumieux_aumieux"></td>
                                     </tr>
                                     </tbody></table>
-                            </div>
+
                         </div>
                     </div>
                 </div>
 
             </div>
-                 <input type="submit" value="ENREGISTRER" class="btn btn-success">
+                 <input type="submit" value="ENREGISTRER" class="btn btn-success ne_pas_afficher">
              </form>
                  <script src="{{ asset("assets/js/vendor/jquery-2.1.4.min.js") }}"></script>
 
@@ -413,6 +413,7 @@
                         },
                         responsive:false,
                     }).column(0).visible(false).column(7).visible(false);
+
                     function lisibilite_nombre(nbr){
                         var nombre = ''+nbr;
                         var retour = '';
@@ -461,7 +462,7 @@
                         }
 
                     //    console.log(data[8]);
-                        var val=(parseInt(data[8].replace(' ',''))*prob)/100;
+                        var val=(parseInt(data[8].replace(/ /g,''))*prob)/100;
                         //console.log('#'+val_aupire+data[0]);
 
 
@@ -500,38 +501,40 @@
 
 
                         var val= intVal(ilisibilite_nombre($('#tot_aupire1').html()))+intVal(ilisibilite_nombre($('#tot_aupire').html()));
-                               $('#aupire_aupire').html(ilisibilite_nombre(Math.round(val)));
+                               $('#aupire_aupire').html(lisibilite_nombre(Math.round(val)));
 
                         var val= intVal(ilisibilite_nombre($('#tot_aupire1').html()))+intVal(ilisibilite_nombre($('#tot_aujuste').html()));
-                               $('#aupire_juste').html(ilisibilite_nombre(Math.round(val)));
+                               $('#aupire_juste').html(lisibilite_nombre(Math.round(val)));
 
                         var val= intVal(ilisibilite_nombre($('#tot_aupire1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
-                               $('#aupire_aumieux').html(ilisibilite_nombre(Math.round(val)));
+                               $('#aupire_aumieux').html(lisibilite_nombre(Math.round(val)));
 
 
 
                        var val= intVal(ilisibilite_nombre($('#tot_aujuste1').html()))+intVal(ilisibilite_nombre($('#tot_aupire').html()));
-                        $('#juste_aupire').html(ilisibilite_nombre(Math.round(val)));
+                        $('#juste_aupire').html(lisibilite_nombre(Math.round(val)));
 
                         var val= intVal(ilisibilite_nombre($('#tot_aujuste1').html()))+intVal(ilisibilite_nombre($('#tot_aujuste').html()));
-                        $('#juste_juste').html(ilisibilite_nombre(Math.round(val)));
+                        $('#juste_juste').html(lisibilite_nombre(Math.round(val)));
 
                         var val= intVal(ilisibilite_nombre($('#tot_aujuste1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
-                        $('#juste_aumieux').html(ilisibilite_nombre(Math.round(val)));
+                        $('#juste_aumieux').html(lisibilite_nombre(Math.round(val)));
 
 
 
                         var val= intVal(ilisibilite_nombre($('#tot_aumieux1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
-                        $('#aumieux_aupire').html(ilisibilite_nombre(Math.round(val)));
+                        $('#aumieux_aupire').html(lisibilite_nombre(Math.round(val)));
 
                         var val= intVal(ilisibilite_nombre($('#tot_aumieux1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
-                        $('#aumieux_juste').html(ilisibilite_nombre(Math.round(val)));
+                        $('#aumieux_juste').html(lisibilite_nombre(Math.round(val)));
 
                         var val= intVal(ilisibilite_nombre($('#tot_aumieux1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
-                        $('#aumieux_aumieux').html(ilisibilite_nombre(Math.round(val)));
+                        $('#aumieux_aumieux').html(lisibilite_nombre(Math.round(val)));
 
 
                     }
+
+                    setInterval(calculedynamique, 1500);
 
                     $('.prob_aupire').change( function(){
 
@@ -643,6 +646,7 @@
 
                     });
                 });
+               // calculedynamique();
 
             </script>
 @endsection

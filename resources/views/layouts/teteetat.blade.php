@@ -44,8 +44,7 @@
     <div class="section__content section__content--p30">
         <div class="container-fluid">
             <div class="agile-grid page"  style="background-color: #FFFFFF;@yield('pour_register') margin: 5px">
-
-                @if(Session::has('success'))
+                <img src="{{ asset("images/Eiffage_2400_01_colour_RGB.jpg") }}" class="logo_eiffage" style="display: none">                @if(Session::has('success'))
                     <div class="alert alert-success">{{Session::get('success')}}</div>
                 @endif()
                 @if(Session::has('error'))

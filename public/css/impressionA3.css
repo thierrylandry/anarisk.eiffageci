@@ -44,10 +44,7 @@ form div.row div.col-md-12 div.card div.card-header.risk {
 .opportunite {
     background-color: #00bf8f;
 }
-thead tr. th.colonne{
-   max-width:10cm;
 
-}
 
 table {
     page-break-inside:auto;
@@ -55,6 +52,55 @@ table {
 }
 tr    { page-break-inside:avoid; page-break-after:auto }
 
-.tablee,th, td{border:  1px solid black;
-    border-collapse: collapse; width: 100%;
-    text-align: center;}
+th, td{
+    border:  1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 0.1cm;
+}
+.tablee{
+    width: 100%;
+    border:1px;
+}
+table.tablee th td {
+    width: 100%;
+    border:  none;
+}
+table.tablee tbody tr th:first-child{
+    border-top:none;
+    border-left: none;
+    border-bottom: none;
+}
+#espceinutile{
+    border-top:none;
+    border-left: none;
+    border-bottom: none;
+}
+#colopportunite{
+    border:1px;
+}
+#bootstrap-data-table2,#bootstrap-data-table1{
+    width: 100%!important;
+}
+div.row.break{
+        page-break-after:always;
+        page-break-before:always;
+    clear: both;
+    display: block;
+}
+.ne_pas_afficher{
+    display: none;
+}
+input
+{
+    border: none;
+    width: inherit;
+}
+.logo_eiffage{
+    display: block!important;
+}
+div.page-title h1{
+    text-align: center;
+    font-size: 15pt;
+    margin-bottom: 1cm;
+}

@@ -6,7 +6,7 @@
 
     <div class="breadcrumbs" style="max-height:300px">
         <div class="col-sm-4 text_center" >
-            <div class="page-header float-left {{($analyse->nature->id==1)?'risk':'opportunite'}}" >
+            <div class="page-header float-left" >
                 <div class="page-title">
                     <h1>FICHE ANALYSE </h1>
                 </div>
