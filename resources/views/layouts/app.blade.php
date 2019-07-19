@@ -123,8 +123,6 @@
                         <img class="user-avatar rounded-circle" src="{{ asset('images/user.png')}}" alt="User Avatar">
                     </a>
                     <div class="user-menu dropdown-menu">
-                        <a class="nav-link" href="#"><i class="fa fa- user"></i>Mon profil</a>
-
                         <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power -off"></i>Se déconnecter
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf

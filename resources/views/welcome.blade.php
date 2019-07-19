@@ -29,27 +29,41 @@
 
 
         <div class="row">
-            <div class="col-lg-6 col-xs-3	col-sm-6	col-md-6	col-lg-6 tableau ">
+            <div class="col-lg-6 tableau" id="">
                 <div class="card" style="height: 100% !important">
                     <div class="card-body" >
                         <div class="table-responsive table-responsive-data2">
-
+                            <table class="table  table-earning" id="table_employe">
+                                <thead>
+                                <tr>
+                                    <th>Analyses</th>
+                                    <th>Effectifs</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @for($i=0;$i<sizeof($effanalyses);$i++)
+                                    <tr class="tr-shadow">
+                                        <td> {{$effanalyses[$i]->name}}</td>
+                                        <td> {{$effanalyses[$i]->y}}</td>
+                                    </tr>
+                                @endfor
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-xs-3	col-sm-6	col-md-6	col-lg-6">
+            <div class="col-lg-6 col-xs-6	col-sm-6	col-md-6	col-lg-6">
                 <div class="au-card m-b-30">
                     <div class="au-card-inner">
-                        <div id="effectifglobaux" style=""></div>
+                        <div id="effanalyses" style=""></div>
                     </div>
                 </div>
             </div>
         </div>
-
+        <script src="{{ asset("assets/js/vendor/jquery-2.1.4.min.js") }}"></script>
 
         <script>
-            jQuery(function($) {
             $( "#mydiv" ).dblclick(function() {
                 //  alert( "Handler for .dblclick() called." );
                 if($("#mydiv").hasClass('petit')) {
@@ -69,7 +83,6 @@
                 }
 
 
-            });
             });
             //Make the DIV element draggagle:
             dragElement(document.getElementById("mydiv"));
@@ -114,10 +127,14 @@
                     document.onmousemove = null;
                 }
             }
+
         </script>
 
-
+        <script src="{{URL::asset('code/highcharts.js')}}"></script>
+        <script src="{{URL::asset('code/modules/exporting.js')}}"></script>
+        <script src="{{URL::asset('code/modules/export-data.js')}}"></script>
     <script>
+
         var colors= [
             "#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
             "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
@@ -160,15 +177,16 @@
             "#f812b3", "#b17fc9", "#8d6c2f", "#d3277a", "#2ca1ae", "#9685eb", "#8a96c6",
             "#dba2e6", "#76fc1b", "#608fa4", "#20f6ba", "#07d7f6", "#dce77a", "#77ecca"];
 
-        var effectifglobaux=[
-
-                    {{"{name:"}} 'maison' {{",y:56}"}},
+        var effanalyses=[
+            @foreach($effanalyses as $res)
+                    {{"{name:"}} '{{$res->name}}' {{",y:".$res->y."}"}},
+            @endforeach
 
         ];
         // Build the chart
-        Highcharts.chart('effectifglobaux', {
+        Highcharts.chart('effanalyses', {
             exporting: { enabled: false },
-            colors: colors,
+            colors: ['red','green'],
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
@@ -176,7 +194,7 @@
                 type: 'pie'
             },
             title: {
-                text: 'Effectifs Globaux Projet ESF'
+                text: 'Risques / Opportunités'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -197,26 +215,8 @@
             series: [{
                 name: 'Brands',
                 colorByPoint: true,
-                data: effectifglobaux
+                data: effanalyses
             }],
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                verticalAlign: 'top',
-                y: 0,
-                useHTML: true,
-                navigation: {
-                    activeColor: '#3E576F',
-                    animation: true,
-                    arrowSize: 12,
-                    inactiveColor: '#CCC',
-                    style: {
-                        fontWeight: 'bold',
-                        color: '#333',
-                        fontSize: '12px'
-                    }
-                }
-            },
         });
     </script>
 

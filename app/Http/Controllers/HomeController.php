@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Vardiag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $effanalyses_tab = DB::table('analyse')
+            ->groupBy('nature.id')
+            ->join('nature','analyse.id_nature','=','nature.id')
+            ->select('nature.nature',DB::raw('count(analyse.id) as nb'))
+            ->get();
+       // dd($effanalyses);
+
+        $effanalyses= Array();
+        foreach ($effanalyses_tab as $group):
+            $vardiag = New Vardiag();
+            $vardiag->name=$group->nature;
+            $vardiag->y=$group->nb;
+
+            $effanalyses[]=$vardiag;
+        endforeach;
+        return view('welcome',compact('effanalyses'));
     }
 }
