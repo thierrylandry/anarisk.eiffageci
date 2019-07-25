@@ -33,9 +33,7 @@ class MesuresController extends Controller
     }
     public function SaveMesure(Request $request){
         $parameters=$request->except(['_token']);
-        $priorite = $parameters['priorite'];
         $statut = $parameters['statut'];
-        $periodicite = $parameters['periodicite'];
         $libelle = $parameters['libelle'];
         $responsable = $parameters['responsable'];
         $acteur = $parameters['acteur'];
@@ -46,12 +44,10 @@ class MesuresController extends Controller
 
         $mesure= new Mesure();
 
-        $mesure->id_priorite=$priorite;
         $mesure->datePlanifie=$dateplanifie;
         $mesure->documentation=$documentation;
         $mesure->dateEffective=$dateEffective;
         $mesure->id_statut=$statut;
-        $mesure->id_periodicite=$periodicite;
         $mesure->libelle=$libelle;
         $mesure->id_responsable=$responsable;
         $mesure->id_acteur=$acteur;
@@ -67,9 +63,7 @@ class MesuresController extends Controller
     }
     public function ModifierMesure(Request $request){
         $parameters=$request->except(['_token']);
-        $priorite = $parameters['priorite'];
         $statut = $parameters['statut'];
-        $periodicite = $parameters['periodicite'];
         $libelle = $parameters['libelle'];
         $responsable = $parameters['responsable'];
         $acteur = $parameters['acteur'];
@@ -80,12 +74,10 @@ class MesuresController extends Controller
 
         $mesure=  Mesure::find($id);
 
-        $mesure->id_priorite=$priorite;
         $mesure->datePlanifie=$dateplanifie;
         $mesure->documentation=$documentation;
         $mesure->dateEffective=$dateEffective;
         $mesure->id_statut=$statut;
-        $mesure->id_periodicite=$periodicite;
         $mesure->libelle=$libelle;
         $mesure->id_responsable=$responsable;
         $mesure->id_acteur=$acteur;

@@ -90,43 +90,6 @@
                             <form method="post" action="{{route('ModifierMesure')}}" class="col-sm-12">
                                 <div class="col-sm-6">                                @csrf
                                     <input type="hidden"  name="id" value="{{isset($mesure)?$mesure->id:''}}" />
-
-                                    <div class="form-group">
-                                        <label class=" form-control-label">Priorité</label>
-                                        <div class="input-group">
-                                            <select data-placeholder="Sélectionner une priorité..." class="standardSelect form-control" tabindex="1" name="priorite" id="priorite" required>
-                                                <option></option>
-                                                @foreach($priorites as $priorite)
-                                                    <option value="{{$priorite->id}}" {{isset($mesure) &&$mesure->id_priorite==$priorite->id?'selected':''}}>{{$priorite->libelle}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class=" form-control-label">Statut</label>
-                                        <div class="input-group">
-
-                                            <select data-placeholder="Sélectionner une statut..." class="standardSelect form-control" tabindex="1" name="statut" id="statut" required>
-                                                <option></option>
-                                                @foreach($statuts as $statut)
-                                                    <option value="{{$statut->id}}" {{isset($mesure) &&$mesure->id_statut==$statut->id?'selected':''}}>{{$statut->libelle}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class=" form-control-label">Périodicité</label>
-                                        <div class="input-group">
-
-                                            <select data-placeholder="Sélectionner une périodicité..." class="standardSelect form-control" tabindex="1" name="periodicite" id="periodicite" required>
-                                                <option></option>
-                                                @foreach($periodicites as $periodicite)
-                                                    <option value="{{$periodicite->id}}" {{isset($mesure) &&$mesure->id_periodicite==$periodicite->id?'selected':''}}>{{$periodicite->libelle}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-
                                     <div class="form-group">
                                         <label class=" form-control-label">libelle</label>
                                         <div class="input-group">
@@ -162,14 +125,26 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class=" form-control-label">Date de planification</label>
+                                        <label class=" form-control-label">Planifié</label>
                                         <div class="input-group">
 
                                             <input type="date" class="form-control" name="datePlanifie" value="{{isset($mesure)?$mesure->dateplanifie:''}}" required/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class=" form-control-label">Date de réalisation effective</label>
+                                        <label class=" form-control-label">Statut</label>
+                                        <div class="input-group">
+
+                                            <select data-placeholder="Sélectionner une statut..." class="standardSelect form-control" tabindex="1" name="statut" id="statut" required>
+                                                <option></option>
+                                                @foreach($statuts as $statut)
+                                                    <option value="{{$statut->id}}" {{isset($mesure) &&$mesure->id_statut==$statut->id?'selected':''}}>{{$statut->libelle}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class=" form-control-label">Terminé</label>
                                         <div class="input-group">
 
                                             <input type="date" class="form-control" name="dateEffective" value="{{isset($mesure)?$mesure->dateEffective:''}}"/>

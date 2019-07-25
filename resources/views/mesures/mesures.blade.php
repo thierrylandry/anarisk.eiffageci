@@ -29,41 +29,6 @@
                         @csrf
                         <input type="hidden" id="id_analyse" name="id_analyse" value="{{$analyse->id}}" />
                         <div class="form-group">
-                            <label class=" form-control-label">Priorité</label>
-                            <div class="input-group">
-                                <select data-placeholder="Sélectionner une priorité..." class="standardSelect form-control" tabindex="1" name="priorite" id="priorite" required>
-                                    <option></option>
-                                    @foreach($priorites as $priorite)
-                                        <option value="{{$priorite->id}}">{{$priorite->libelle}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class=" form-control-label">Statut</label>
-                            <div class="input-group">
-
-                                <select data-placeholder="Sélectionner une statut..." class="standardSelect form-control" tabindex="1" name="statut" id="statut" required>
-                                    <option></option>
-                                    @foreach($statuts as $statut)
-                                        <option value="{{$statut->id}}">{{$statut->libelle}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class=" form-control-label">Périodicité</label>
-                            <div class="input-group">
-
-                                <select data-placeholder="Sélectionner une périodicité..." class="standardSelect form-control" tabindex="1" name="periodicite" id="periodicite" required>
-                                    <option></option>
-                                    @foreach($periodicites as $periodicite)
-                                        <option value="{{$periodicite->id}}">{{$periodicite->libelle}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class=" form-control-label">Libelle</label>
                             <div class="input-group">
 
@@ -96,14 +61,26 @@
                         </div>
 
                         <div class="form-group">
-                            <label class=" form-control-label">Date de planification</label>
+                            <label class=" form-control-label">Planifié</label>
                             <div class="input-group">
 
                                 <input type="date" class="form-control" name="datePlanifie" value="" required/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class=" form-control-label">Date de réalisation effective</label>
+                            <label class=" form-control-label">Statut</label>
+                            <div class="input-group">
+
+                                <select data-placeholder="Sélectionner une statut..." class="standardSelect form-control" tabindex="1" name="statut" id="statut" required>
+                                    <option></option>
+                                    @foreach($statuts as $statut)
+                                        <option value="{{$statut->id}}">{{$statut->libelle}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" form-control-label">Terminé</label>
                             <div class="input-group">
 
                                 <input type="date" class="form-control" name="dateEffective" value=""/>
@@ -211,9 +188,7 @@
                                             <th>Libelle</th>
                                             <th>Responsable</th>
                                             <th>Acteur</th>
-                                            <th>Priorité</th>
                                             <th>Statut</th>
-                                            <th>Périodicité</th>
                                             <th>Documentation</th>
                                             <th>Date de planification</th>
                                             <th>Date effective</th>
@@ -237,13 +212,7 @@
                                                     {{$mesure->acteur()->first()->nom." ".$mesure->acteur()->first()->prenoms}}
                                                 </td>
                                                 <td>
-                                                    {{$mesure->priorite->libelle}}
-                                                </td>
-                                                <td>
                                                     {{$mesure->statut->libelle}}
-                                                </td>
-                                                <td>
-                                                    {{$mesure->periodicite->libelle}}
                                                 </td>
                                                 <td>
                                                     {{$mesure->documentation}}

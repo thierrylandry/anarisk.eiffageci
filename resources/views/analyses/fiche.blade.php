@@ -98,7 +98,7 @@
                                 <td ><b>Mesures préventives</b></td>
                                 <td ><b>Responsable</b></td>
                                 <td ><b>Acteur</b></td>
-                                <td colspan="3"><b>Statut Date planifi. Priorité & Périodicité</b></td>
+                                <td colspan="3"><b>Etat</b></td>
                                 <td ><b>Documentation</b></td>
                             </tr>
 
@@ -108,9 +108,9 @@
                                 <td>{{$mesure->libelle}}</td>
                                 <td>{{$mesure->responsable->nom}} {{$mesure->responsable->prenoms}}</td>
                                 <td>{{$mesure->acteur->libelle}}</td>
-                                <td>{{$mesure->statut->libelle}}</td>
                                 <td>{{$mesure->dateplanifie}}</td>
-                                <td>{{$mesure->priorite->libelle}} & {{$mesure->periodicite->libelle}}</td>
+                                <td>{{$mesure->statut->libelle}}</td>
+                                <td>{{$mesure->dateEffective}}</td>
                                 <td>{{$mesure->documentation}}</td>
 
                             </tr>
