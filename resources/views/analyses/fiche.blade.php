@@ -95,13 +95,18 @@
                                     </table></td>
                             </tr>
                             <tr>
-                                <td ><b>Mesures préventives</b></td>
-                                <td ><b>Responsable</b></td>
-                                <td ><b>Acteur</b></td>
+                                <td rowspan="2" ><b>Mesures préventives</b></td>
+                                <td rowspan="2"><b>Responsable</b></td>
+                                <td rowspan="2"><b>Acteur</b></td>
                                 <td colspan="3"><b>Etat</b></td>
-                                <td ><b>Documentation</b></td>
+                                <td rowspan="2"><b>Documentation</b></td>
                             </tr>
+                            <tr>
+                                <td><strong>Planifié</strong></td>
+                                <td><strong>Statut</strong></td>
+                                <td><strong>Terminé</strong></td>
 
+                            </tr>
                             @foreach($analyse->mesures()->get() as $mesure)
 
                             <tr>
@@ -117,7 +122,7 @@
                             @endforeach
                             <tr>
                                 <td colspan="4">Calcul impact financier :</td>
-                                <td colspan="3">{{$analyse->cout}}</td>
+                                <td colspan="3">{{number_format($analyse->cout,0,',',' ')}} MCFA</td>
                             </tr>
                             <tr>
                                 <td colspan="7" style="text-align: left !important">&nbsp;&nbsp;&nbsp;{!! nl2br($analyse->brouillon) !!}</td>

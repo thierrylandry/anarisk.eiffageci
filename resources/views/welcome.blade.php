@@ -3,7 +3,24 @@
     active
     @endsection
 @section('page')
+<style>
+    #colopportunite{
+        border:1px;
+    }
 
+    .tablee{
+
+        border:1px;
+    }
+    table.tablee th td {
+        width: 100%;
+        border:  none;
+    }
+    table.tablee tbody tr th:first-child{
+        border-top:none;
+        border-left: none;
+        border-bottom: none;
+    }</style>
     <div class="breadcrumbs" style="max-height:300px">
         <div class="col-sm-4">
             <div class="page-header float-left">
@@ -60,6 +77,54 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row " >
+            <div class="col-md-12" >
+                <div class="card">
+                    <div class="card-body">
+
+                        <table class="tablee pull-right" style="border: 1px; text-align: center;width: 100%">
+                            <tbody>
+                            <tr>
+                                <th colspan="3" rowspan="2"></th>
+                                <th colspan="3" class="tableau"> Risques</th>
+
+                            </tr>
+                            <tr class="tableau">
+
+                                <td class="tableau">Au pire</td>
+                                <td class="tableau">Juste</td>
+                                <td class="tableau">Mieux</td>
+                            </tr>
+                            <tr>
+                                <th colspan="7">&nbsp;</th>
+                            </tr>
+                            <tr>
+                                <th rowspan="5" class="tableau" id="colopportunite"> opportunite</th>
+                                <th style="text-align: center; border-top:  1px solid black;border-right:  1px solid black;border-collapse: collapse;">Au pire</th>
+                                <td rowspan="3" id="espceinutile">&nbsp;</td>
+                                <td class="tableau" style="background-color: #f31f1f; color: white" id="aupire_aupire">{{number_format($tableau_recap->aupire_aupire,0,',',' ')}}</td>
+                                <td class="tableau" style="background-color: #f5001775;color: white" id="aupire_juste">{{number_format($tableau_recap->aupire_juste,0,',',' ')}}</td>
+                                <td class="tableau" style="background-color: #ecf4ee;" id="aupire_aumieux">{{number_format($tableau_recap->aupire_aumieux,0,',',' ')}}</td>
+                            </tr>
+                            <tr class="tableau" >
+                                <th class="tableau">Juste</th>
+                                <td class="tableau" style="background-color: #f5001775;" id="juste_aupire">{{number_format($tableau_recap->juste_aupire,0,',',' ')}}</td>
+                                <td class="tableau" style="background-color: #2c76ce36;" id="juste_juste">{{number_format($tableau_recap->juste_juste,0,',',' ')}}</td>
+                                <td class="tableau" style="background-color: #a4dea8;" id="juste_aumieux">{{number_format($tableau_recap->juste_aumieux,0,',',' ')}}</td>
+                            </tr>
+                            <tr class="tableau">
+                                <th class="tableau">Au mieux</th>
+                                <td class="tableau" style="background-color: #b1d0ba40;" id="aumieux_aupire">{{number_format($tableau_recap->aumieux_aupire,0,',',' ')}}</td>
+                                <td class="tableau" style="background-color: #a4dea8;" id="aumieux_juste">{{number_format($tableau_recap->aumieux_juste,0,',',' ')}}</td>
+                                <td class="tableau" style="background-color: #23ff32;" id="aumieux_aumieux">{{number_format($tableau_recap->aumieux_aumieux,0,',',' ')}}</td>
+
+                            </tbody></table>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
         <script src="{{ asset("assets/js/vendor/jquery-2.1.4.min.js") }}"></script>
 

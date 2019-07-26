@@ -320,7 +320,7 @@
                                     <div class="input-group">
 
                                         <input name="cout" class="form-control" type="text"  id="cout"value="{{isset($analyse)?number_format($analyse->cout,0, ',', ' '):''}}" required/>
-                                    </div> <label class=" form-control-label"> &nbsp;FCFA </label>
+                                    </div> <label class=" form-control-label"> &nbsp;MFCFA </label>
                                 </div>
                                 </br>
                                 </br>

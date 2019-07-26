@@ -93,7 +93,7 @@
                                             {{number_format($risque->cout, 0, ',', ' ')}}
                                         </td>
                                         <td>
-                                            FCFA
+                                            MFCFA
                                         </td>
                                         <td><input type="number" value="{{$risque->aupire}}" id="prob_aupire" name="prob_aupire_{{$risque->id}}" class="prob_aupire" min="0" max="100" style="width: 50px;"/></td>
                                         <td><input type="number" value="{{$risque->juste}}" id="prob_aujuste" name="prob_aujuste_{{$risque->id}}"  class="prob_aujuste" min="0" max="100" style="width: 50px;"/></td>
@@ -108,7 +108,7 @@
 
                                 </tbody>
                                 <tfooter>
-                                    <tr> <th colspan="11" style="text-align:right" >FCFA Budget :</th> <th id="tot_aupire" style="text-align: left"></th><th id="tot_aujuste" style="text-align: left"></th><th id="tot_aumieux" style="text-align: left"></th> </tr>
+                                    <tr> <th colspan="11" style="text-align:right" >MFCFA Budget :</th> <th id="tot_aupire" style="text-align: left"></th><th id="tot_aujuste" style="text-align: left"></th><th id="tot_aumieux" style="text-align: left"></th> </tr>
                                 </tfooter>
                             </table>
                         </div>
@@ -178,7 +178,7 @@
                                             {{number_format($opportunite->cout, 0, ',', ' ')}}
                                         </td>
                                         <td>
-                                            FCFA
+                                            MFCFA
                                         </td>
                                         <td><input type="number" value="{{$opportunite->aupire}}" id="prob_aupire1" name="prob_aupire1_{{$opportunite->id}}" class="prob_aupire1" min="0" max="100" style="width: 50px;"/></td>
                                         <td><input type="number" value="{{$opportunite->juste}}" id="prob_aujuste1"name="prob_aujuste1_{{$opportunite->id}}"  class="prob_aujuste1" min="0" max="100" style="width: 50px;"/></td>
@@ -193,7 +193,7 @@
 
                                 </tbody>
                                 <tfooter>
-                                    <tr> <th colspan="11" style="text-align:right" >FCFA Budget :</th> <th id="tot_aupire1" style="text-align: left"></th><th id="tot_aujuste1" style="text-align: left"></th><th id="tot_aumieux1" style="text-align: left"></th> </tr>
+                                    <tr> <th colspan="11" style="text-align:right" >MFCFA Budget :</th> <th id="tot_aupire1" style="text-align: left"></th><th id="tot_aujuste1" style="text-align: left"></th><th id="tot_aumieux1" style="text-align: left"></th> </tr>
                                 </tfooter>
                             </table>
                         </div>
@@ -241,7 +241,16 @@
                                         <td class="tableau" style="background-color: #b1d0ba40;" id="aumieux_aupire"></td>
                                         <td class="tableau" style="background-color: #a4dea8;" id="aumieux_juste"></td>
                                         <td class="tableau" style="background-color: #23ff32;" id="aumieux_aumieux"></td>
-                                    </tr>
+                                        //
+                                        <input type="hidden" name="aupire_aupire" id="aupire_aupire_input"/>
+                                        <input type="hidden" name="aupire_juste" id="aupire_juste_input"/>
+                                        <input type="hidden" name="aupire_aumieux" id="aupire_aumieux_input"/>
+                                        <input type="hidden" name="juste_aupire" id="juste_aupire_input"/>
+                                        <input type="hidden" name="juste_juste" id="juste_juste_input"/>
+                                        <input type="hidden" name="juste_aumieux" id="juste_aumieux_input"/>
+                                        <input type="hidden" name="aumieux_aupire" id="aumieux_aupire_input"/>
+                                        <input type="hidden" name="aumieux_juste" id="aumieux_juste_input"/>
+                                        <input type="hidden" name="aumieux_aumieux" id="aumieux_aumieux_input"/>
                                     </tbody></table>
 
                         </div>
@@ -502,34 +511,41 @@
 
                         var val= intVal(ilisibilite_nombre($('#tot_aupire1').html()))+intVal(ilisibilite_nombre($('#tot_aupire').html()));
                                $('#aupire_aupire').html(lisibilite_nombre(Math.round(val)));
+                               $('#aupire_aupire_input').val(Math.round(val));
 
                         var val= intVal(ilisibilite_nombre($('#tot_aupire1').html()))+intVal(ilisibilite_nombre($('#tot_aujuste').html()));
                                $('#aupire_juste').html(lisibilite_nombre(Math.round(val)));
+                                 $('#aupire_juste_input').val(Math.round(val));
 
                         var val= intVal(ilisibilite_nombre($('#tot_aupire1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
                                $('#aupire_aumieux').html(lisibilite_nombre(Math.round(val)));
-
+                               $('#aupire_aumieux_input').val(Math.round(val));
 
 
                        var val= intVal(ilisibilite_nombre($('#tot_aujuste1').html()))+intVal(ilisibilite_nombre($('#tot_aupire').html()));
                         $('#juste_aupire').html(lisibilite_nombre(Math.round(val)));
+                        $('#juste_aupire_input').val(Math.round(val));
 
                         var val= intVal(ilisibilite_nombre($('#tot_aujuste1').html()))+intVal(ilisibilite_nombre($('#tot_aujuste').html()));
                         $('#juste_juste').html(lisibilite_nombre(Math.round(val)));
+                        $('#juste_juste_input').val(Math.round(val));
 
                         var val= intVal(ilisibilite_nombre($('#tot_aujuste1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
                         $('#juste_aumieux').html(lisibilite_nombre(Math.round(val)));
-
+                        $('#juste_aumieux_input').val(Math.round(val));
 
 
                         var val= intVal(ilisibilite_nombre($('#tot_aumieux1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
                         $('#aumieux_aupire').html(lisibilite_nombre(Math.round(val)));
+                        $('#aumieux_aupire_input').val(Math.round(val));
 
                         var val= intVal(ilisibilite_nombre($('#tot_aumieux1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
                         $('#aumieux_juste').html(lisibilite_nombre(Math.round(val)));
+                        $('#aumieux_juste_input').val(Math.round(val));
 
                         var val= intVal(ilisibilite_nombre($('#tot_aumieux1').html()))+intVal(ilisibilite_nombre($('#tot_aumieux').html()));
                         $('#aumieux_aumieux').html(lisibilite_nombre(Math.round(val)));
+                        $('#aumieux_aumieux_input').val(Math.round(val));
 
 
                     }

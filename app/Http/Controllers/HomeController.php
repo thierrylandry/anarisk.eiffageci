@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tableau_recap;
 use App\Vardiag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -40,6 +41,7 @@ class HomeController extends Controller
 
             $effanalyses[]=$vardiag;
         endforeach;
-        return view('welcome',compact('effanalyses'));
+        $tableau_recap = Tableau_recap::find(1);
+        return view('welcome',compact('effanalyses','tableau_recap'));
     }
 }

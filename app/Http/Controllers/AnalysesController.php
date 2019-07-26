@@ -12,6 +12,7 @@ use App\Periodicite;
 use App\Priorite;
 use App\Responsable;
 use App\Statut;
+use App\Tableau_recap;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\View;
 use Spipu\Html2Pdf\Html2Pdf;
@@ -336,6 +337,29 @@ public function ficheAnalyse($id){
        // dd($parameters['list_risk']);
       $list_risk = explode(',',$parameters['list_risk']);
        // dd($parameters);
+
+            $aupire_aupire=$parameters['aupire_aupire'];
+            $aupire_juste=$parameters['aupire_juste'];
+            $aupire_aumieux=$parameters['aupire_aumieux'];
+            $juste_aupire=$parameters['juste_aupire'];
+            $juste_juste=$parameters['juste_juste'];
+            $juste_aumieux=$parameters['juste_aumieux'];
+            $aumieux_aupire=$parameters['aumieux_aupire'];
+            $aumieux_juste=$parameters['aumieux_juste'];
+            $aumieux_aumieux=$parameters['aumieux_aumieux'];
+
+        $tableau_recap =  Tableau_recap::find(1);
+        $tableau_recap->aupire_aupire=$aupire_aupire;
+        $tableau_recap->aupire_juste=$aupire_juste;
+        $tableau_recap->aupire_aumieux=$aupire_aumieux;
+        $tableau_recap->juste_aupire=$juste_aupire;
+        $tableau_recap->juste_juste=$juste_juste;
+        $tableau_recap->juste_aumieux=$juste_aumieux;
+
+        $tableau_recap->aumieux_aupire=$aumieux_aupire;
+        $tableau_recap->aumieux_juste=$aumieux_juste;
+        $tableau_recap->aumieux_aumieux=$aumieux_aumieux;
+        $tableau_recap->save();
 
         foreach ($list_risk as $id):
 
