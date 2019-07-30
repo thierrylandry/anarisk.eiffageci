@@ -90,6 +90,10 @@ Route::post('/saveEtat',[
         'as'=>'saveEtat',
         'uses'=>'AnalysesController@saveEtat',
     ])->middleware('auth');
+Route::post('/terminer_mesure',[
+        'as'=>'terminer_mesure',
+        'uses'=>'MesuresController@terminer_mesure',
+    ])->middleware('auth');
 
 Route::get('/proprietaireListeFonction/{id}',[
         'as'=>'proprietaireListeFonction',

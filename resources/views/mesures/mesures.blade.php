@@ -168,6 +168,40 @@
 </br></br>
 
             </div>
+
+
+        <!-- Modal -->
+        <div id="teminer" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <form method="post" action="{{route('terminer_mesure')}}">
+                        @csrf
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class=" form-control-label">Terminé</label>
+                            <div class="input-group">
+                                <input type="hidden" id="id_mesure" name="id_mesure"/>
+
+                                <input type="date" class="form-control" name="dateEffective" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Enregistrer</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
@@ -228,6 +262,9 @@
                                                 </td>
                                                 <td>
                                                     <a href="{{route('pageModifMesure',$mesure->id)}}" class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-edit"></i> Modifier la mesure</a>
+                                                    @if($mesure->statut->id!=30)
+                                                    <a href="#" class="btn btn-success btn-sm terminerClass" data-toggle="modal" data-target="#teminer"> <i class="menu-icon fa fa-key"></i> terminé</a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -303,6 +340,15 @@
                         },
                         responsive: false,
                     }).column(0).visible(false);
+                    $(".terminerClass").click(function (){
+                        var data = table.row($(this).parents('tr')).data();
+
+                         $("#id_mesure").val(data[0]);
+
+
+
+                    });
+
                     function test(){
                         if($("#probabiliteAvant").val()!="") {
                             var luimeme = $("#probabiliteAvant").val();

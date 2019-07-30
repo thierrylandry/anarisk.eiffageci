@@ -90,6 +90,21 @@ class MesuresController extends Controller
         return redirect()->route('liste')->with('success',"La mesure  a été mise à jour avec succès");
 
     }
+    public function terminer_mesure(Request $request){
+        $parameters=$request->except(['_token']);
+        $dateEffective = $parameters['dateEffective'];
+        $id= $parameters['id_mesure'];
+        $mesure=  Mesure::find($id);
+        $mesure->dateEffective=$dateEffective;
+        $mesure->id_statut=30;
+      //  $mesure->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
+
+        $mesure->save();
+        // dd($analyses[0]->chantier()->get());
+        //dd($analyse->nature()->first()->id);
+        return redirect()->back()->with('success',"La mesure  a été éffectué");
+
+    }
 
     public function pageModifMesure($id){
         $mesure = Mesure::find($id);
