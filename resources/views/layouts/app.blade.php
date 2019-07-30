@@ -119,8 +119,8 @@
 
             <div class="col-sm-12 pull-right">
                 <div class="user-area dropdown float-right">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="{{ asset('images/user.png')}}" alt="User Avatar">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <img class="user-avatar rounded-circle" src="{{ asset('images/user.png')}}" alt="User Avatar"> {{ Auth::user()->prenoms.' '.Auth::user()->nom }}
                     </a>
                     <div class="user-menu dropdown-menu">
                         <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power -off"></i>Se déconnecter
