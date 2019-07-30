@@ -103,21 +103,21 @@
                                 <th rowspan="5" class="tableau" id="colopportunite"> opportunite</th>
                                 <th style="text-align: center; border-top:  1px solid black;border-right:  1px solid black;border-collapse: collapse;">Au pire</th>
                                 <td rowspan="3" id="espceinutile">&nbsp;</td>
-                                <td class="tableau" style="background-color: #f31f1f; color: white" id="aupire_aupire">{{number_format($tableau_recap->aupire_aupire,0,',',' ')}}</td>
-                                <td class="tableau" style="background-color: #f5001775;color: white" id="aupire_juste">{{number_format($tableau_recap->aupire_juste,0,',',' ')}}</td>
-                                <td class="tableau" style="background-color: #ecf4ee;" id="aupire_aumieux">{{number_format($tableau_recap->aupire_aumieux,0,',',' ')}}</td>
+                                <td class="tableau" style="background-color: #f31f1f; color: white" id="aupire_aupire">{{isset($tableau_recap->aupire_aupire)?number_format($tableau_recap->aupire_aupire,0,',',' '):''}}</td>
+                                <td class="tableau" style="background-color: #f5001775;color: white" id="aupire_juste">{{isset($tableau_recap->aupire_aupire)?number_format($tableau_recap->aupire_juste,0,',',' '):''}}</td>
+                                <td class="tableau" style="background-color: #ecf4ee;" id="aupire_aumieux">{{isset($tableau_recap->aupire_aupire)?number_format($tableau_recap->aupire_aumieux,0,',',' '):''}}</td>
                             </tr>
                             <tr class="tableau" >
                                 <th class="tableau">Juste</th>
-                                <td class="tableau" style="background-color: #f5001775;" id="juste_aupire">{{number_format($tableau_recap->juste_aupire,0,',',' ')}}</td>
-                                <td class="tableau" style="background-color: #2c76ce36;" id="juste_juste">{{number_format($tableau_recap->juste_juste,0,',',' ')}}</td>
-                                <td class="tableau" style="background-color: #a4dea8;" id="juste_aumieux">{{number_format($tableau_recap->juste_aumieux,0,',',' ')}}</td>
+                                <td class="tableau" style="background-color: #f5001775;" id="juste_aupire">{{isset($tableau_recap->aupire_aupire)?number_format($tableau_recap->juste_aupire,0,',',' '):''}}</td>
+                                <td class="tableau" style="background-color: #2c76ce36;" id="juste_juste">{{isset($tableau_recap->aupire_aupire)?number_format($tableau_recap->juste_juste,0,',',' '):''}}</td>
+                                <td class="tableau" style="background-color: #a4dea8;" id="juste_aumieux">{{isset($tableau_recap->aupire_aupire)?number_format($tableau_recap->juste_aumieux,0,',',' '):''}}</td>
                             </tr>
                             <tr class="tableau">
                                 <th class="tableau">Au mieux</th>
-                                <td class="tableau" style="background-color: #b1d0ba40;" id="aumieux_aupire">{{number_format($tableau_recap->aumieux_aupire,0,',',' ')}}</td>
-                                <td class="tableau" style="background-color: #a4dea8;" id="aumieux_juste">{{number_format($tableau_recap->aumieux_juste,0,',',' ')}}</td>
-                                <td class="tableau" style="background-color: #23ff32;" id="aumieux_aumieux">{{number_format($tableau_recap->aumieux_aumieux,0,',',' ')}}</td>
+                                <td class="tableau" style="background-color: #b1d0ba40;" id="aumieux_aupire">{{isset($tableau_recap->aupire_aupire)?number_format($tableau_recap->aumieux_aupire,0,',',' '):''}}</td>
+                                <td class="tableau" style="background-color: #a4dea8;" id="aumieux_juste">{{isset($tableau_recap->aupire_aupire)?number_format($tableau_recap->aumieux_juste,0,',',' '):''}}</td>
+                                <td class="tableau" style="background-color: #23ff32;" id="aumieux_aumieux">{{isset($tableau_recap->aupire_aupire)?number_format($tableau_recap->aumieux_aumieux,0,',',' '):''}}</td>
 
                             </tbody></table>
 
