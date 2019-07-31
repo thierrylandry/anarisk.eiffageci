@@ -102,6 +102,26 @@ class MesuresController extends Controller
         $mesure->save();
         // dd($analyses[0]->chantier()->get());
         //dd($analyse->nature()->first()->id);
+        $colleguemesures=$mesure->analyse->mesures()->get();
+        $tab =  array();
+        foreach ($colleguemesures as $mes){
+            if($mes->id_statut==30){
+                $tab[]='ok';
+            }else{
+                $tab[]='impret';
+            }
+        }
+        if (in_array("impret", $tab))
+        {
+            $analyse= Analyse::find($mesure->analyse->id);
+            $analyse->etat=2;
+            $analyse->save();
+
+        }
+        else
+        {
+
+        }
         return redirect()->back()->with('success',"La mesure  a été éffectué");
 
     }

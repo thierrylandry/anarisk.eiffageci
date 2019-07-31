@@ -246,6 +246,7 @@ active
                                 <thead>
                                 <tr>
                                     <th>id</th>
+                                    <th>Etat</th>
                                     <th>Code</th>
                                     <th>Nature</th>
                                     <th>Pays</th>
@@ -261,6 +262,14 @@ active
                                         <td>
                                             {{$analyse->id}}
                                         </td>
+                                        <td>
+                                            @if($analyse->etat==2)
+                                                <p class=" btn btn-link"> <i class="fa fa-check-circle"></i> Terminé</p>
+                                            @else
+                                                <p class=" btn btn-link"> <i class="fa fa-spinner"></i> En cours</p>
+                                            @endif
+                                        </td>
+
                                         <td>
                                             {{$analyse->code}}
                                         </td>
@@ -280,13 +289,21 @@ active
                                             {{$analyse->auteur()->first()->nom." ".$analyse->auteur()->first()->prenoms}}
                                         </td>
                                         <td>
-                                            <a href="#" data-toggle="modal" data-target="#smallmodal" class="ajouterMesure btn btn-primary btn-sm"> <i class="ti-ruler-pencil"></i> Ajouter une mesure</a>
-                                            <a href="{{route('mesures',$analyse->id)}}" class="btn btn-secondary btn-sm" > <i class="menu-icon fa fa-list"></i> Lister les mesures</a>
-                                            <a href="{{route('ficheAnalyse',$analyse->id)}}" class="btn btn-info btn-sm"> <i class="menu-icon fa  fa-file"></i> fiche analyse</a>
-                                            @if((stristr( \Illuminate\Support\Facades\Auth::user()->nom,$analyse->proprietaire->nom) === true and stristr( \Illuminate\Support\Facades\Auth::user()->prenoms,$analyse->proprietaire->prenoms) === true )|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id)
-                                                <a href="{{route('pageModifierAnalyse',$analyse->id)}}"  class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-update"></i>Modifier</a>
-                                                <a href="#"  data-toggle="modal" data-target="#evaluationpostemesure" class="evaluer btn btn-success btn-sm"> <i class="ti-view-grid"></i> Evaluation post mesure</a>
+                                            @if($analyse->etat==1)
+                                                <a href="#" data-toggle="modal" data-target="#smallmodal" class="ajouterMesure btn btn-primary btn-sm"> <i class="ti-ruler-pencil"></i> Ajouter une mesure</a>
+                                                <a href="{{route('mesures',$analyse->id)}}" class="btn btn-secondary btn-sm" > <i class="menu-icon fa fa-list"></i> Lister les mesures</a>
+                                                <a href="{{route('ficheAnalyse',$analyse->id)}}" class="btn btn-info btn-sm"> <i class="menu-icon fa  fa-file"></i> fiche analyse</a>
+                                                @if((stristr( \Illuminate\Support\Facades\Auth::user()->nom,$analyse->proprietaire->nom) === true and stristr( \Illuminate\Support\Facades\Auth::user()->prenoms,$analyse->proprietaire->prenoms) === true )|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id)
+                                                    <a href="{{route('pageModifierAnalyse',$analyse->id)}}"  class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-update"></i>Modifier</a>
+                                                    <a href="#"  data-toggle="modal" data-target="#evaluationpostemesure" class="evaluer btn btn-success btn-sm"> <i class="ti-view-grid"></i> Evaluation post mesure</a>
+                                                @endif
+
                                             @endif
+
+
+
+
+
                                         </td>
                                     </tr>
                                 @endforeach

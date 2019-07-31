@@ -188,7 +188,7 @@
                             <div class="input-group">
                                 <input type="hidden" id="id_mesure" name="id_mesure"/>
 
-                                <input type="date" class="form-control" name="dateEffective" value=""/>
+                                <input type="date" class="form-control" name="dateEffective" value="" required/>
                             </div>
                         </div>
                     </div>
@@ -232,7 +232,7 @@
                                         </thead>
                                         <tbody>
                                         @foreach($analyse->mesures()->get() as $mesure)
-                                            <tr>
+                                            <tr   {{isset($mesure->statut->id)&& $mesure->statut->id==30?"style=background-color:darkgrey":''}}>
                                                 <td>
                                                     {{$mesure->id}}
                                                 </td>
@@ -261,10 +261,13 @@
                                                     {{$mesure->auteur->nom}}  {{$mesure->auteur->prenoms}}
                                                 </td>
                                                 <td>
+                                                    @if(isset($mesure->statut->id)&& $mesure->statut->id!=30)
                                                     <a href="{{route('pageModifMesure',$mesure->id)}}" class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-edit"></i> Modifier la mesure</a>
                                                     @if($mesure->statut->id!=30)
                                                     <a href="#" class="btn btn-success btn-sm terminerClass" data-toggle="modal" data-target="#teminer"> <i class="menu-icon fa fa-key"></i> terminé</a>
                                                     @endif
+
+                                                        @endif
                                                 </td>
                                             </tr>
                                         @endforeach
