@@ -111,7 +111,7 @@ class MesuresController extends Controller
                 $tab[]='impret';
             }
         }
-        if (in_array("impret", $tab))
+        if (!in_array("impret", $tab))
         {
             $analyse= Analyse::find($mesure->analyse->id);
             $analyse->etat=2;
