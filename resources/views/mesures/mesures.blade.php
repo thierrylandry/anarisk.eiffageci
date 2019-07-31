@@ -188,7 +188,7 @@
                             <div class="input-group">
                                 <input type="hidden" id="id_mesure" name="id_mesure"/>
 
-                                <input type="date" class="form-control" name="dateEffective" value="" required/>
+                                <input type="date" class="form-control" name="dateEffective" value="{{date("Y-m-d")}}" required/>
                             </div>
                         </div>
                     </div>
