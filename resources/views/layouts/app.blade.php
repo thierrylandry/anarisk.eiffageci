@@ -170,7 +170,7 @@
 <script src="{{ asset('assets/js/main.js')}}"></script>
 
 
-<script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js')}}"></script>
+
 <script src="{{ asset('assets/js/dashboard.js')}}"></script>
 <script src="{{ asset('assets/js/widgets.js')}}"></script>
 <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.js')}}"></script>

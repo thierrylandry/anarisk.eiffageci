@@ -297,6 +297,8 @@ active
                                                     <a href="{{route('pageModifierAnalyse',$analyse->id)}}"  class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-update"></i>Modifier</a>
                                                     <a href="#"  data-toggle="modal" data-target="#evaluationpostemesure" class="evaluer btn btn-success btn-sm"> <i class="ti-view-grid"></i> Evaluation post mesure</a>
                                                 @endif
+                                                @else
+                                                <a href="{{route('ficheAnalyse',$analyse->id)}}" class="btn btn-info btn-sm"> <i class="menu-icon fa  fa-file"></i> fiche analyse</a>
 
                                             @endif
 
@@ -318,20 +320,7 @@ active
             </div>
         </div>
     </div>
-        <script src="{{ asset("assets/js/vendor/jquery-2.1.4.min.js") }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-        <script src="{{ asset("assets/js/plugins.js") }}"></script>
-        <script src="{{ asset("assets/js/main.js") }}"></script>
 
-
-        <script src="{{ asset("assets/js/lib/chart-js/Chart.bundle.js") }}"></script>
-        <script src="{{ asset("assets/js/dashboard.js") }}"></script>
-        <script src="{{ asset("assets/js/widgets.js") }}"></script>
-        <script src="{{ asset("assets/js/lib/vector-map/jquery.vmap.js") }}"></script>
-        <script src="{{ asset("assets/js/lib/vector-map/jquery.vmap.min.js") }}"></script>
-        <script src="{{ asset("assets/js/lib/vector-map/jquery.vmap.sampledata.js") }}"></script>
-        <script src="{{ asset("assets/js/lib/vector-map/country/jquery.vmap.world.js") }}"></script>
-            <script src="{{ asset("assets/js/lib/chosen/chosen.jquery.min.js")}}"></script>
 
 
 
