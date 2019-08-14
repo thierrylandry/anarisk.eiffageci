@@ -128,7 +128,7 @@
                                         <label class=" form-control-label">Planifié</label>
                                         <div class="input-group">
 
-                                            <input type="date" class="form-control" name="datePlanifie" value="{{isset($mesure)?$mesure->dateplanifie:''}}" required/>
+                                            <input type="date" class="form-control" name="datePlanifie" value="{{isset($mesure)?$mesure->dateplanifie:''}}"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
