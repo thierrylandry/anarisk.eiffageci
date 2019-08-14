@@ -273,7 +273,9 @@ public function ficheAnalyse($id){
 
         $analyse->causes=$var["cause"];
         $analyse->consequences=$var["consequences"];
-        $analyse->cout=filter_var($cout, FILTER_SANITIZE_NUMBER_INT);
+            if($cout!=null){
+                $analyse->cout=filter_var($cout, FILTER_SANITIZE_NUMBER_INT);
+            }
         $analyse->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
         $analyse->save();
 
