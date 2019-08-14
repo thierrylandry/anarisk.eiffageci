@@ -275,6 +275,8 @@ public function ficheAnalyse($id){
         $analyse->consequences=$var["consequences"];
             if($cout!=null){
                 $analyse->cout=filter_var($cout, FILTER_SANITIZE_NUMBER_INT);
+            }{
+                $analyse->cout=null;
             }
         $analyse->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
         $analyse->save();
