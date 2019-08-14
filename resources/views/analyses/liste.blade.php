@@ -186,7 +186,7 @@ active
                             <label class=" form-control-label">Planifié</label>
                             <div class="input-group">
 
-                                <input type="date" class="form-control" name="datePlanifie" value="" required/>
+                                <input type="date" class="form-control" name="datePlanifie" value=""/>
                             </div>
                         </div>
                         <div class="form-group">
