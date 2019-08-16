@@ -164,7 +164,7 @@ public function ficheAnalyse($id){
         $analyse->severiteApres=$severiteApres;
         $analyse->planingApres=$planingApres;
         $analyse->coutApres=$coutApres;
-        $analyse->brouillon=nl2br(e($brouillon));
+        $analyse->brouillon=$brouillon;
 
         $analyse->description=$description;
         $analyse->detail=$detail;
@@ -266,7 +266,7 @@ public function ficheAnalyse($id){
         $analyse->severiteApres=$severiteApres;
         $analyse->planingApres=$planingApres;
         $analyse->coutApres=$coutApres;
-        $analyse->brouillon=nl2br(e($brouillon));
+        $analyse->brouillon=$brouillon;
 
             $analyse->description=$description;
             $analyse->detail=$detail;
