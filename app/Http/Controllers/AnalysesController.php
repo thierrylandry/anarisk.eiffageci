@@ -179,6 +179,12 @@ public function ficheAnalyse($id){
         $analyse->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
         $analyse->save();
 
+        $value=$analyse->id;
+        $code = $lepays->alpha2.'-'.$lechantier->libelle.'-'.$value ;
+        $analyse->code=$code;
+
+        $analyse->save();
+
 
         return redirect()->route('liste')->with('success',"L'analyse a été enregistré avec succès");
 
