@@ -277,11 +277,12 @@ active
                                             {{$analyse->nature()->first()->nature}}
                                         </td>
                                         <td>
-                                            {{$analyse->chantier()->first()->libelle}}
-                                        </td>
-                                        <td>
                                             {{$analyse->chantier()->first()->pays()->first()->nom_fr_fr}}
                                         </td>
+                                        <td>
+                                            {{$analyse->chantier()->first()->libelle}}
+                                        </td>
+
                                         <td>
                                             {{$analyse->proprietaire()->first()->nom." ".$analyse->proprietaire()->first()->prenoms}}
                                         </td>
