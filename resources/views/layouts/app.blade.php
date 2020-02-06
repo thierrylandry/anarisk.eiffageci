@@ -55,7 +55,7 @@
             position: fixed;
             z-index: 9;
             left:0;
-            top:300px;
+            top:500px;
             background-color: #f1f1f1;
             text-align: center;
             border: 1px solid #d3d3d3;

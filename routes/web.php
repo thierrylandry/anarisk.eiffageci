@@ -110,4 +110,9 @@ Route::get('/acteurFonctionResponsable/{id}',[
     'uses'=>'MesuresController@acteurFonctionResponsable',
 ])->middleware('auth');
 
+Route::get('/utilisateurs',[
+    'as'=>'utilisateurs',
+    'uses'=>'UsersController@utilisateurs',
+])->middleware('auth');
+
 

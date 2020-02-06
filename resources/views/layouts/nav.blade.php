@@ -14,6 +14,7 @@
                 <a href="{{route('/')}}"> <i class="menu-icon fa fa-dashboard"></i>Tableau de bord </a>
             </li>
 
+
             <li class="@yield('analyses_actif')">
                 <a href="{{route('analyses')}}"> <i class="menu-icon fa fa-flask"></i>ANALYSES</a>
             </li>
@@ -22,6 +23,13 @@
             </li>
             <li class="">
                 <a href="{{route('etat')}}" target="_blank" ><i class="menu-icon fa fa-table"></i> ETATS</a>
+            </li>
+            <li class="@yield('utilisateur_depli') menu-item-has-children dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cog"></i>Parametrage</a>
+                <ul class="sub-menu children dropdown-menu @yield('utilisateur_depli')">
+                    <li class=" @yield('utilisateur_actif')"><i class="fa fa-user"></i><a href="{{route('utilisateurs')}}">Utilisateurs</a></li>
+                </ul>
+
             </li>
 
         </ul>
