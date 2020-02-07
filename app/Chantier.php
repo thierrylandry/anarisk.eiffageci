@@ -20,4 +20,8 @@ class Chantier extends Model
 
         return $this->belongsTo('App\Pays','id_pays');
     }
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'user_chantier', 'chantier_id', 'user_id');
+    }
 }

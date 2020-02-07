@@ -24,10 +24,11 @@
             <li class="">
                 <a href="{{route('etat')}}" target="_blank" ><i class="menu-icon fa fa-table"></i> ETATS</a>
             </li>
-            <li class="@yield('utilisateur_depli') menu-item-has-children dropdown">
+            <li class="@yield('parametrage') menu-item-has-children dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cog"></i>Parametrage</a>
-                <ul class="sub-menu children dropdown-menu @yield('utilisateur_depli')">
+                <ul class="sub-menu children dropdown-menu @yield('parametrage')">
                     <li class=" @yield('utilisateur_actif')"><i class="fa fa-user"></i><a href="{{route('utilisateurs')}}">Utilisateurs</a></li>
+                    <li class=" @yield('chnatier_actif')"><i class="fa fa-user"></i><a href="{{route('chantiers')}}">Chantiers</a></li>
                 </ul>
 
             </li>

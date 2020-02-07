@@ -13,6 +13,12 @@
 
 Auth::routes();
 
+Route::get('erreur', [
+    'as'=>'erreur',
+    'uses'=>'ErreurController@erreur'
+
+]);
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/',[
     'as'=>'/',
@@ -113,6 +119,64 @@ Route::get('/acteurFonctionResponsable/{id}',[
 Route::get('/utilisateurs',[
     'as'=>'utilisateurs',
     'uses'=>'UsersController@utilisateurs',
+    'middleware' => 'roles',
+    'roles'=>'Parametrage'
+])->middleware('auth');
+
+Route::get('/voir_utilisateur/{id}',[
+    'as'=>'voir_utilisateur',
+    'uses'=>'UsersController@voir_utilisateur',
+    'middleware' => 'roles',
+    'roles'=>['Parametrage']
+])->middleware('auth')->middleware('roles');
+Route::get('/supprimer_utilisateur/{id}',[
+    'as'=>'supprimer_utilisateur',
+    'uses'=>'UsersController@supprimer_utilisateur',
+    'middleware' => 'roles',
+    'roles'=>'Parametrage'
+])->middleware('auth');
+Route::post('/save_utilisateur',[
+    'as'=>'save_utilisateur',
+    'uses'=>'UsersController@save_utilisateur',
+    'middleware' => 'roles',
+    'roles'=>'Parametrage'
+])->middleware('auth');
+Route::post('/modifier_utilisateur',[
+    'as'=>'modifier_utilisateur',
+    'uses'=>'UsersController@modifier_utilisateur',
+    'middleware' => 'roles',
+    'roles'=>'Parametrage'
+])->middleware('auth');
+
+Route::get('/chantiers',[
+    'as'=>'chantiers',
+    'uses'=>'ChantiersController@chantiers',
+    'middleware' => 'roles',
+    'roles'=>'Parametrage'
+])->middleware('auth');
+Route::get('/voir_chantier/{id}',[
+    'as'=>'voir_chantier',
+    'uses'=>'ChantiersController@voir_chantier',
+    'middleware' => 'roles',
+    'roles'=>['Parametrage']
+])->middleware('auth')->middleware('roles');
+Route::get('/supprimer_chantier/{id}',[
+    'as'=>'supprimer_chantier',
+    'uses'=>'ChantiersController@supprimer_chantier',
+    'middleware' => 'roles',
+    'roles'=>'Parametrage'
+])->middleware('auth');
+Route::post('/save_chantier',[
+    'as'=>'save_chantier',
+    'uses'=>'ChantiersController@save_chantier',
+    'middleware' => 'roles',
+    'roles'=>'Parametrage'
+])->middleware('auth');
+Route::post('/modifier_chantier',[
+    'as'=>'modifier_chantier',
+    'uses'=>'ChantiersController@modifier_chantier',
+    'middleware' => 'roles',
+    'roles'=>'Parametrage'
 ])->middleware('auth');
 
 

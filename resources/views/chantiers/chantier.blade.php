@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('parametrage')
-    show
+    show active
 @endsection
 @section('analyses_actif')
     active
@@ -10,7 +10,7 @@
         <div class="col-sm-4">
             <div class="page-header float-left">
                 <div class="page-title">
-                    <h1>GESTION UTILISATEURS</h1>
+                    <h1>GESTION DE CHANTIERS</h1>
                 </div>
             </div>
         </div>
@@ -28,79 +28,33 @@
             <div class="resizeUI"><i class="fa fa-arrows"></i></div>
         </div>
         <div class="animated fadeIn">
-            <form method="post" action="{{isset($user)?route('modifier_utilisateur'):route('save_utilisateur')}}">
+            <form method="post" action="{{isset($chantier)?route('modifier_chantier'):route('save_chantier')}}">
                 @csrf
-                <input type="hidden" name="id" value="{{isset($user)?$user->id:''}}"/>
+                <input type="hidden" name="id" value="{{isset($chantier)?$chantier->id:''}}"/>
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Utilisateur</strong> {{isset($user)?'Modification':'Création'}} @if(isset($user)) <a href="{{route('utilisateurs')}}">Ajouter un utilisateur</a>@endif
+                            <strong>Chantier</strong> {{isset($chantier)?'Modification':'Création'}} @if(isset($chantier)) <a href="{{route('chantiers')}}">Ajouter un chantier</a>@endif
                         </div>
                         <div class="card-body card-block">
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nom</label></div>
-                                    <div class="col-12 col-md-9"><input type="text" name="nom" value="{{isset($user)?$user->nom:''}}" placeholder="Nom" class="form-control"><small class="form-text text-muted"></small></div>
+                                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">libelle</label></div>
+                                    <div class="col-12 col-md-9"><input type="text" name="nom" value="{{isset($chantier)?$chantier->libelle:''}}" placeholder="Nom" class="form-control"><small class="form-text text-muted"></small></div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Prenoms</label></div>
-                                    <div class="col-12 col-md-9"><input type="text" value="{{isset($user)?$user->prenoms:''}}" name="prenoms" placeholder="Prenom" class="form-control"><small class="form-text text-muted"></small></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Email</label></div>
-                                    <div class="col-12 col-md-9"><input type="email"  value="{{isset($user)?$user->email:''}}" id="email-input" name="email" placeholder="Enter Email" class="form-control"><small class="help-block form-text"></small></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="password-input" class=" form-control-label">Password</label></div>
-                                    <div class="col-12 col-md-9"><input type="password" value="{{isset($user)?$user->password:''}}" id="password" name="password" placeholder="Password" class="form-control password" required><small class="help-block form-text"></small></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="password-input" class=" form-control-label">Confirmer</label></div>
-                                    <div class="col-12 col-md-9"><input type="password" value="{{isset($user)?$user->password:''}}" id="confirmer" name="confirmer" placeholder="Password" class="form-control password" required><small class="help-block form-text"></small></div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="select" class=" form-control-label">Acteur</label></div>
+                                    <div class="col col-md-3"><label for="select" class=" form-control-label">Pays</label></div>
                                     <div class="col-12 col-md-9">
 
-                                        <select data-placeholder="Choisir un service" name="id_acteur" class="standardSelect" tabindex="1">
-                                            <option value=""></option>
-                                           @foreach($acteurs as $acteur)
-                                               <option value="{{$acteur->id}}" {{isset($user) && $user->id_acteur==$acteur->id?'selected':''}}>{{$acteur->libelle}}</option>
-                                               @endforeach
+                                        <select data-placeholder="Sélectionner un pays..." class="standardSelect form-control" tabindex="1" name="id_pays" id="pays" required>
+                                            @foreach($payss as $pays)
+                                                <option @if($pays->alpha2=="CI") {{'selected'}}@endif value="{{$pays->id}}">{{$pays->nom_fr_fr." (".$pays->alpha2.")"}}</option>
+                                            @endforeach
+
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="select" class=" form-control-label">rôles</label></div>
-                                    <div class="col-12 col-md-9">
-                                        <select data-placeholder="Choisir les rôles" name="roles[]" multiple class="standardSelect">
-                                            <option value=""></option>
-                                            @foreach($roles as $role)
-                                                @if(isset($user) and $user->hasRole($role->name))
-                                                    <option value="{{$role->name}}" selected>{{$role->description}}</option>
-                                                @else
-                                                    <option value="{{$role->name}}" >{{$role->description}}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3"><label for="select" class=" form-control-label">Chantier</label></div>
-                                    <div class="col-12 col-md-9">
-                                        <select data-placeholder="Choisir les chantiers" name="chantiers[]" multiple class="standardSelect">
-                                            <option value=""></option>
-                                            @foreach($chantiers as $chantier)
-                                                @if(isset($user) && $user->hasChantier($chantier->libelle))
-                                                    <option value="{{$chantier->libelle}}" selected>{{$chantier->libelle}} {{$chantier->pays->nom_fr_fr}}</option>
-                                                @else
-                                                    <option value="{{$chantier->libelle}}" >{{$chantier->libelle}} {{$chantier->pays->nom_fr_fr}}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
                             </form>
                         </div>
                         <div class="card-footer">
@@ -120,53 +74,27 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Liste des utilisateurs</strong>
+                            <strong class="card-title">Liste des chantier</strong>
                         </div>
                         <div class="card-body">
                             <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Nom</th>
-                                    <th>Prenoms</th>
-                                    <th>E-mail</th>
-                                    <th>Service</th>
-                                    <th>Chantier</th>
-                                    <th>Rôle</th>
+                                    <th>libelle</th>
+                                    <th>Pays</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                   @foreach($users as $user)
+                                   @foreach($chantiers as $chantier)
                                        <tr>
-                                           <td>{{$user->nom}}</td>
-                                           <td>{{$user->prenom}}</td>
-                                           <td>{{$user->email}}</td>
-                                           <td>{{isset($user->acteur)?$user->acteur->libelle:''}}</td>
-                                           <td>@if(isset($user->chantiers)!=null)
-                                                   <ul>
-                                                   @foreach( $user->chantiers as $chantier)
-
-                                                           <li>{{$chantier->libelle}}</li>
-
-                                                       @endforeach
-                                                   </ul>
-                                               @endif
-                                           </td>
-                                           <td>@if(isset($user->roles))
-                                                   <ul>
-                                                   @foreach( $user->roles as $role)
-
-                                                           <li>{{$role->description}}</li>
-
-                                                       @endforeach
-                                                   </ul>
-                                               @endif
-                                           </td>
+                                           <td>{{$chantier->libelle}}</td>
+                                           <td>{{$chantier->pays->nom_fr_fr}}</td>
                                            <td>
-                                               <a href="{{route('voir_utilisateur',$user->id)}}" class="btn btn-info col-sm-4 pull-right">
+                                               <a href="{{route('voir_chantier',$chantier->id)}}" class="btn btn-info col-sm-4 pull-right">
                                                    <i class=" fa fa-pencil"></i>
                                                </a>
-                                               <a href="{{route('supprimer_utilisateur',$user->id)}}" class="btn btn-danger col-sm-4 pull-right">
+                                               <a href="{{route('supprimer_chantier',$chantier->id)}}" class="btn btn-danger col-sm-4 pull-right">
                                                    <i class=" fa fa-trash"></i>
                                                </a>
                                            </td>
