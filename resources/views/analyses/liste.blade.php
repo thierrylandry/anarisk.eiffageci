@@ -248,6 +248,7 @@ active
                                     <th>id</th>
                                     <th>Etat</th>
                                     <th>Code</th>
+                                    <th>Description</th>
                                     <th>Nature</th>
                                     <th>Pays</th>
                                     <th>Chantier</th>
@@ -274,6 +275,9 @@ active
                                             {{$analyse->code}}
                                         </td>
                                         <td>
+                                            {{isset($analyse->description)?$analyse->description:''}}
+                                        </td>
+                                        <td>
                                             {{$analyse->nature()->first()->nature}}
                                         </td>
                                         <td>
@@ -284,7 +288,14 @@ active
                                         </td>
 
                                         <td>
-                                            {{$analyse->proprietaire()->first()->nom." ".$analyse->proprietaire()->first()->prenoms}}
+                                            @foreach($responsables as $responsable)
+                                                @if($responsable->id==$analyse->id_proprietaire)
+                                                    <?php $proprietaire_nom=$responsable->nom;?>
+                                                    <?php $proprietaire_prenoms=$responsable->prenoms;?>
+                                            {{$responsable->nom." ".$responsable->prenoms}}
+                                                @endif
+                                                @break
+                                                @endforeach
                                         </td>
                                         <td>
                                             {{$analyse->auteur()->first()->nom." ".$analyse->auteur()->first()->prenoms}}
@@ -294,7 +305,7 @@ active
                                                 <a href="#" data-toggle="modal" data-target="#smallmodal" class="ajouterMesure btn btn-primary btn-sm"> <i class="ti-ruler-pencil"></i> Ajouter une mesure</a>
                                                 <a href="{{route('mesures',$analyse->id)}}" class="btn btn-secondary btn-sm" > <i class="menu-icon fa fa-list"></i> Lister les mesures</a>
                                                 <a href="{{route('ficheAnalyse',$analyse->id)}}" class="btn btn-info btn-sm"> <i class="menu-icon fa  fa-file"></i> fiche analyse</a>
-                                                @if((stristr( \Illuminate\Support\Facades\Auth::user()->nom,$analyse->proprietaire->nom) === true and stristr( \Illuminate\Support\Facades\Auth::user()->prenoms,$analyse->proprietaire->prenoms) === true )|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id)
+                                                @if((stristr( \Illuminate\Support\Facades\Auth::user()->nom,$proprietaire_nom) === true and stristr( \Illuminate\Support\Facades\Auth::user()->prenoms,$proprietaire_prenoms) === true )|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id)
                                                     <a href="{{route('pageModifierAnalyse',$analyse->id)}}"  class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-update"></i>Modifier</a>
                                                     <a href="#"  data-toggle="modal" data-target="#evaluationpostemesure" class="evaluer btn btn-success btn-sm"> <i class="ti-view-grid"></i> Evaluation post mesure</a>
                                                 @endif

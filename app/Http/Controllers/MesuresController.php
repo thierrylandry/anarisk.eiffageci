@@ -14,6 +14,8 @@ use App\Periodicite;
 use App\Priorite;
 use App\Responsable;
 use App\Statut;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MesuresController extends Controller
 {
@@ -23,7 +25,7 @@ class MesuresController extends Controller
         // dd($analyses[0]->chantier()->get());
         //dd($analyse->nature()->first()->id);
         //dd($analyse->mesures()->get());
-        $responsables = Responsable::all();
+        $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
         $priorites = Priorite::all();
         $statuts = Statut::all();
         $acteurs = Acteur::all();
@@ -130,8 +132,8 @@ class MesuresController extends Controller
         $mesure = Mesure::find($id);
         $analyse = Analyse::find($mesure->id_analyse);
         $natures= Nature::all();
-        $chantiers = Chantier::all();
-        $responsables = Responsable::all();
+        $chantiers = Auth::user()->chantiers()->get();
+        $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
         $priorites = Priorite::all();
         $analyses = Analyse::all();
         $statuts = Statut::all();

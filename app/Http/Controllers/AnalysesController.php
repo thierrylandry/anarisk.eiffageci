@@ -14,6 +14,8 @@ use App\Responsable;
 use App\Statut;
 use App\Tableau_recap;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Spipu\Html2Pdf\Html2Pdf;
 use Illuminate\Http\Request;
@@ -25,8 +27,8 @@ class AnalysesController extends Controller
     public function ajouter_analyse(){
         $natures= Nature::all();
         $payss = Pays::all();
-        $chantiers = Chantier::where('id_pays','=',110)->get();
-        $responsables = Responsable::where('id_chantier','=',$chantiers->first()->id)->get();
+        $chantiers = Chantier::find(Auth::user()->id_chantier_connecte);
+        $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
 
         return view('analyses.analyses',compact('natures','payss','chantiers','responsables'));
 
@@ -35,8 +37,8 @@ class AnalysesController extends Controller
         $analyse=Analyse::find($id);
         $natures= Nature::all();
         $payss = Pays::all();
-        $chantiers = Chantier::where('id_pays','=',110)->get();
-        $responsables = Responsable::where('id_chantier','=',$chantiers->first()->id)->get();
+        $chantiers = Chantier::find(Auth::user()->id_chantier_connecte);
+        $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
         return view('analyses.modifierAnalyse',compact('analyse','natures','payss','chantiers','responsables'));
 
     }
@@ -63,16 +65,18 @@ class AnalysesController extends Controller
     }
 public function ficheAnalyse($id){
     $analyse =Analyse::find($id);
-
-    return view('analyses.fiche',compact('analyse'));
+    $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
+    return view('analyses.fiche',compact('analyse','responsables'));
 }
     public function liste(){
         $natures= Nature::all();
         $payss = Pays::all();
-        $chantiers = Chantier::all();
-        $responsables = Responsable::all();
+        $chantiers = Auth::user()->chantiers()->get();
+        $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
         $priorites = Priorite::all();
-        $analyses = Analyse::orderBy('id','DESC')->get();
+
+
+        $analyses = Analyse::where('id_chantier','=',Auth::user()->id_chantier_connecte)->orderBy('id','DESC')->get();
         $statuts = Statut::all();
         $acteurs = Acteur::all();
         $periodicites = Periodicite::all();
@@ -315,14 +319,15 @@ public function ficheAnalyse($id){
         }
     }
     public function etat(){
-    $risques = Analyse::where('id_nature','=',1)->orderBy('id','DESC')->get();
-    $opportunites = Analyse::where('id_nature','=',2)->orderBy('id','DESC')->get();
+    $risques = Analyse::where('id_nature','=',1)->where('id_chantier','=',Auth::user()->id_chantier_connecte)->orderBy('id','DESC')->get();
+    $opportunites = Analyse::where('id_nature','=',2)->where('id_chantier','=',Auth::user()->id_chantier_connecte)->orderBy('id','DESC')->get();
 
     // dd($analyses->first()->mesures()->orderBy('dateplanifie','ASC')->first());
     // dd($analyses[0]->chantier()->get());
     //  $pdf = PDF::loadView('analyses.etat', compact('risques','opportunites'))->setPaper('a3', 'landscape');
     //return $pdf->download('etat.pdf');
-      return view('analyses.etat',compact('risques','opportunites'));
+        $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
+      return view('analyses.etat',compact('risques','opportunites','responsables'));
     }
 
     public function etatpdf(){
@@ -361,7 +366,7 @@ public function ficheAnalyse($id){
             $aumieux_juste=$parameters['aumieux_juste'];
             $aumieux_aumieux=$parameters['aumieux_aumieux'];
 
-        $tableau_recap =  Tableau_recap::find(1);
+        $tableau_recap =  Tableau_recap::where('id_chantier','=',Auth()->user->id_chantier_connecte)->find();
         $tableau_recap->aupire_aupire=$aupire_aupire;
         $tableau_recap->aupire_juste=$aupire_juste;
         $tableau_recap->aupire_aumieux=$aupire_aumieux;

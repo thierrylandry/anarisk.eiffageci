@@ -137,7 +137,14 @@
                             </div>
                             <div class="col-sm-4">
                                 <p><b> Pays : </b> {{$analyse->chantier->pays->nom_fr_fr}}</p>
-                                <p> <b>Proprietaire :  </b>{{$analyse->proprietaire->nom}} {{$analyse->proprietaire->prenoms}}</p>
+                                <p> <b>Proprietaire :  </b>                                            @foreach($responsables as $responsable)
+                                        @if($responsable->id==$analyse->id_proprietaire)
+                                            <?php $proprietaire_nom=$responsable->nom;?>
+                                            <?php $proprietaire_prenoms=$responsable->prenoms;?>
+                                            {{$responsable->nom." ".$responsable->prenoms}}
+                                        @endif
+                                        @break
+                                    @endforeach</p>
                                 <p> <b>Auteur : </b> {{$analyse->auteur->nom}} {{$analyse->auteur->prenoms}}</p>
                                 <p> <b>Description  : </b> {{$analyse->description}}</p>
                                 <p><b> Detail  :  </b>{{$analyse->detail}}</p>
@@ -240,7 +247,14 @@
                                                     {{$mesure->libelle}}
                                                 </td>
                                                 <td>
-                                                    {{$mesure->responsable->nom}}  {{$mesure->responsable->prenoms}}
+                                                    @foreach($responsables as $responsable)
+                                                        @if($responsable->id==$analyse->id_proprietaire)
+                                                            <?php $proprietaire_nom=$responsable->nom;?>
+                                                            <?php $proprietaire_prenoms=$responsable->prenoms;?>
+                                                            {{$responsable->nom." ".$responsable->prenoms}}
+                                                        @endif
+                                                        @break
+                                                    @endforeach
                                                 </td>
                                                 <td>
                                                     {{$mesure->acteur()->first()->nom." ".$mesure->acteur()->first()->prenoms}}

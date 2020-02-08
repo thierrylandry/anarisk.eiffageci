@@ -50,7 +50,14 @@
                                 <td>{{$analyse->date}}</td>
                                 <td>{{$analyse->chantier->pays->nom_fr_fr}}</td>
                                 <td>{{$analyse->chantier->libelle}}</td>
-                                <td>{{$analyse->proprietaire->nom}} {{$analyse->proprietaire->prenoms}}</td>
+                                <td>                                            @foreach($responsables as $responsable)
+                                        @if($responsable->id==$analyse->id_proprietaire)
+                                            <?php $proprietaire_nom=$responsable->nom;?>
+                                            <?php $proprietaire_prenoms=$responsable->prenoms;?>
+                                            {{$responsable->nom." ".$responsable->prenoms}}
+                                        @endif
+                                        @break
+                                    @endforeach</td>
                                 <td>{{isset($analyse)? $analyse->code:''}}</td>
                             </tr>
                             <tr>
@@ -111,7 +118,14 @@
 
                             <tr>
                                 <td>{{$mesure->libelle}}</td>
-                                <td>{{$mesure->responsable->nom}} {{$mesure->responsable->prenoms}}</td>
+                                <td>   @foreach($responsables as $responsable)
+                                        @if($responsable->id==$mesure->id_responsable)
+                                            <?php $proprietaire_nom=$responsable->nom;?>
+                                            <?php $proprietaire_prenoms=$responsable->prenoms;?>
+                                            {{$responsable->nom." ".$responsable->prenoms}}
+                                        @endif
+                                        @break
+                                    @endforeach</td>
                                 <td>{{$mesure->acteur->libelle}}</td>
                                 <td>{{$mesure->dateplanifie}}</td>
                                 <td>{{$mesure->statut->libelle}}</td>

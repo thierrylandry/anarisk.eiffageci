@@ -178,5 +178,9 @@ Route::post('/modifier_chantier',[
     'middleware' => 'roles',
     'roles'=>'Parametrage'
 ])->middleware('auth');
+Route::get('/liste_chantier/{email}',[
+    'as'=>'liste_chantier',
+    'uses'=>'ChantiersController@liste_chantier',
+]);
 
 

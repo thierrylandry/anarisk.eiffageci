@@ -73,9 +73,9 @@
                                     <div class="input-group">
 
                                         <select data-placeholder="Sélectionner un chantier..." class="standardSelect form-control" tabindex="1" name="chantier" id="chantier" required>
-                                            @foreach($chantiers as $chantier)
-                                                <option value="{{$chantier->id}}">{{$chantier->libelle}}</option>
-                                            @endforeach
+
+                                                <option value="{{$chantiers->id}}">{{$chantiers->libelle}}</option>
+
 
                                         </select>
                                     </div>

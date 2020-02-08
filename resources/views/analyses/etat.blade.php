@@ -80,7 +80,14 @@
                                             {{$risque->chantier()->first()->libelle}}
                                         </td>
                                         <td>
-                                            {{$risque->proprietaire()->first()->nom." ".$risque->proprietaire()->first()->prenoms}}
+                                            @foreach($responsables as $responsable)
+                                                @if($responsable->id==$risque->id_proprietaire)
+                                                    <?php $proprietaire_nom=$responsable->nom;?>
+                                                    <?php $proprietaire_prenoms=$responsable->prenoms;?>
+                                                    {{$responsable->nom." ".$responsable->prenoms}}
+                                                @endif
+                                                @break
+                                            @endforeach
                                         </td>
                                         <td>
                                             @if(isset($risque->mesures()->orderBy('dateplanifie','ASC')->first()->dateplanifie))
@@ -165,7 +172,14 @@
                                             {{$opportunite->chantier()->first()->libelle}}
                                         </td>
                                         <td>
-                                            {{$opportunite->proprietaire()->first()->nom." ".$opportunite->proprietaire()->first()->prenoms}}
+                                            @foreach($responsables as $responsable)
+                                                @if($responsable->id==$opportunite->id_proprietaire)
+                                                    <?php $proprietaire_nom=$responsable->nom;?>
+                                                    <?php $proprietaire_prenoms=$responsable->prenoms;?>
+                                                    {{$responsable->nom." ".$responsable->prenoms}}
+                                                @endif
+                                                @break
+                                            @endforeach
                                         </td>
                                         <td>
                                             @if(isset($opportunite->mesures()->orderBy('dateplanifie','ASC')->first()->dateplanifie))

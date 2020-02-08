@@ -29,6 +29,7 @@ class HomeController extends Controller
         $effanalyses_tab = DB::table('analyse')
             ->groupBy('nature.id')
             ->join('nature','analyse.id_nature','=','nature.id')
+            ->where('id_chantier','=',Auth()->user()->id_chantier_connecte)
             ->select('nature.nature',DB::raw('count(analyse.id) as nb'))
             ->get();
        // dd($effanalyses);
@@ -41,7 +42,7 @@ class HomeController extends Controller
 
             $effanalyses[]=$vardiag;
         endforeach;
-        $tableau_recap = Tableau_recap::find(1);
+        $tableau_recap = Tableau_recap::where('id_chantier','=',Auth()->user()->id_chantier_connecte)->first();
         return view('welcome',compact('effanalyses','tableau_recap'));
     }
 }

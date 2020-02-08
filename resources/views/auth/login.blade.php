@@ -43,7 +43,7 @@
                     @csrf
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -58,6 +58,15 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                         @enderror
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="select" class=" form-control-label">chantiers</label></div>
+                        <div class="col-12 col-md-9">
+
+                            <select data-placeholder="Sélectionner un pays..." class="standardSelect form-control" tabindex="1" name="id_chantier" id="chantier" required>
+
+                            </select>
+                        </div>
                     </div>
                     <div class="checkbox">
                         <label>
@@ -87,6 +96,30 @@
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/plugins.js"></script>
 <script src="assets/js/main.js"></script>
+
+<script>
+
+    jQuery(document).ready(function() {
+
+        jQuery("#email").change(function (){
+           var email=jQuery('#email').val();
+            jQuery("#chantier").html('');
+            jQuery.get("liste_chantier/"+email,function(data) {
+                console.log(data);
+             //   console.log(data);
+
+                var option="";
+                jQuery.each(data,function(index, value){
+                    option+="<option value='"+value.id+"'>"+value.libelle+"</opption>"
+                });
+                //alert(option);
+
+                jQuery("#chantier").html(option);
+
+            });
+        })
+    });
+</script>
 
 
 </body>
