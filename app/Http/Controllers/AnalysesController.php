@@ -366,7 +366,7 @@ public function ficheAnalyse($id){
             $aumieux_juste=$parameters['aumieux_juste'];
             $aumieux_aumieux=$parameters['aumieux_aumieux'];
 
-        $tableau_recap =  Tableau_recap::where('id_chantier','=',Auth()->user->id_chantier_connecte)->find();
+        $tableau_recap =  Tableau_recap::where('id_chantier','=',Auth::user()->id_chantier_connecte)->find();
         $tableau_recap->aupire_aupire=$aupire_aupire;
         $tableau_recap->aupire_juste=$aupire_juste;
         $tableau_recap->aupire_aumieux=$aupire_aumieux;
