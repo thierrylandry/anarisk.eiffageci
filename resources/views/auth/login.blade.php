@@ -52,7 +52,7 @@
                     </div>
                     <div class="form-group">
                         <label>Mot de passe</label>
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" value="{{ old('password') }}" required autocomplete="current-password">
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Password" value="{{ old('password') }}" required autocomplete="current-password">
                         @error('password')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -102,6 +102,40 @@
     jQuery(document).ready(function() {
 
         jQuery("#email").change(function (){
+           var email=jQuery('#email').val();
+            jQuery("#chantier").html('');
+            jQuery.get("liste_chantier/"+email,function(data) {
+                console.log(data);
+             //   console.log(data);
+
+                var option="";
+                jQuery.each(data,function(index, value){
+                    option+="<option value='"+value.id+"'>"+value.libelle+"</opption>"
+                });
+                //alert(option);
+
+                jQuery("#chantier").html(option);
+
+            });
+        })
+        jQuery("#password").change(function (){
+           var email=jQuery('#email').val();
+            jQuery("#chantier").html('');
+            jQuery.get("liste_chantier/"+email,function(data) {
+                console.log(data);
+             //   console.log(data);
+
+                var option="";
+                jQuery.each(data,function(index, value){
+                    option+="<option value='"+value.id+"'>"+value.libelle+"</opption>"
+                });
+                //alert(option);
+
+                jQuery("#chantier").html(option);
+
+            });
+        })
+        jQuery("#chantier").click(function (){
            var email=jQuery('#email').val();
             jQuery("#chantier").html('');
             jQuery.get("liste_chantier/"+email,function(data) {
