@@ -37,7 +37,7 @@ class AnalysesController extends Controller
         $analyse=Analyse::find($id);
         $natures= Nature::all();
         $payss = Pays::all();
-        $chantiers = Chantier::find(Auth::user()->id_chantier_connecte);
+        $chantiers = Chantier::where('id','=',Auth::user()->id_chantier_connecte)->get();
         $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
         return view('analyses.modifierAnalyse',compact('analyse','natures','payss','chantiers','responsables'));
 
@@ -260,7 +260,7 @@ public function ficheAnalyse($id){
         //  dd($raw);
         $var["consequences"] = json_encode($consequences->toArray());
         $analyse =  Analyse::find($id);
-        if( (stristr( \Illuminate\Support\Facades\Auth::user()->nom,$analyse->proprietaire->nom) === true and stristr( \Illuminate\Support\Facades\Auth::user()->prenoms,$analyse->proprietaire->prenoms) === true )|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id ){
+        if($analyse->id_proprietaire==\Illuminate\Support\Facades\Auth::user()->id|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id){
 
 
         $analyse->id_nature=$nature;
@@ -306,7 +306,7 @@ public function ficheAnalyse($id){
         $coutApres = $parameters['coutApres'];
         $id = $parameters['id_analyse'];
         $analyse =  Analyse::find($id);
-        if( (stristr( \Illuminate\Support\Facades\Auth::user()->nom,$analyse->proprietaire->nom) === true and stristr( \Illuminate\Support\Facades\Auth::user()->prenoms,$analyse->proprietaire->prenoms) === true )|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id ) {
+        if( $analyse->id_proprietaire==\Illuminate\Support\Facades\Auth::user()->id|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id ) {
 
             $analyse->probabiliteApres = $probabiliteApres;
             $analyse->severiteApres = $severiteApres;

@@ -95,7 +95,7 @@
 
                                             <select data-placeholder="Choose a Country..." class="standardSelect form-control" tabindex="1" name="proprietaire" id="proprietaire">
                                                 @foreach($responsables as $responsable)
-                                                    <option  value="{{$responsable->id}}" {{isset($analyse) && $analyse->proprietaire->id==$responsable->id?'selected':''}}>{{$responsable->nom.' '.$responsable->prenoms}}</option>
+                                                    <option  value="{{$responsable->id}}">{{$responsable->nom.' '.$responsable->prenoms}}</option>
                                                 @endforeach
 
                                             </select>
