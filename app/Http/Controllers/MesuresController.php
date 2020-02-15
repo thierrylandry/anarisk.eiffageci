@@ -24,7 +24,7 @@ class MesuresController extends Controller
         $analyse = Analyse::find($id);
         // dd($analyses[0]->chantier()->get());
         //dd($analyse->nature()->first()->id);
-        //dd($analyse->mesures()->get());
+      //  dd($analyse->mesures()->first()->acteur);
         $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
         $priorites = Priorite::all();
         $statuts = Statut::all();
@@ -98,7 +98,7 @@ class MesuresController extends Controller
         $id= $parameters['id_mesure'];
         $mesure=  Mesure::find($id);
         $mesure->dateEffective=$dateEffective;
-        $mesure->id_statut=30;
+        $mesure->id_statut=10;
       //  $mesure->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
 
         $mesure->save();
@@ -107,7 +107,7 @@ class MesuresController extends Controller
         $colleguemesures=$mesure->analyse->mesures()->get();
         $tab =  array();
         foreach ($colleguemesures as $mes){
-            if($mes->id_statut==30){
+            if($mes->id_statut==10){
                 $tab[]='ok';
             }else{
                 $tab[]='impret';
@@ -116,7 +116,7 @@ class MesuresController extends Controller
         if (!in_array("impret", $tab))
         {
             $analyse= Analyse::find($mesure->analyse->id);
-            $analyse->etat=2;
+           // $analyse->etat=2;
             $analyse->save();
 
         }

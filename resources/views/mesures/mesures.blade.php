@@ -257,7 +257,7 @@
                                                     @endforeach
                                                 </td>
                                                 <td>
-                                                    {{$mesure->acteur()->first()->nom." ".$mesure->acteur()->first()->prenoms}}
+                                                    {{$mesure->acteur->libelle}}
                                                 </td>
                                                 <td>
                                                     {{$mesure->statut->libelle}}
