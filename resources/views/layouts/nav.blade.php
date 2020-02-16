@@ -25,7 +25,7 @@
                 <a href="{{route('etat')}}" target="_blank" ><i class="menu-icon fa fa-table"></i> ETATS  EN COURS</a>
             </li>
             <li class="">
-                <a href="{{route('etatfermer')}}" target="_blank" ><i class="menu-icon fa fa-table"></i> ETATS TERMINEES</a>
+                <a href="{{route('etatfermer')}}" target="_blank" ><i class="menu-icon fa fa-table"></i> ETATS TERMINES</a>
             </li>
             <li class="">
                 <a href="{{route('fichesanalyses')}}" target="_blank" ><i class="menu-icon fa fa-book"></i> TOUTES LES FICHES</a>
