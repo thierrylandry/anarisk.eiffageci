@@ -31,6 +31,7 @@
             </div>
 
         </div>
+        @foreach($analyses as $analyse)
         <div class="row" id="page">
             <div class="col-md-12">
                 <div class="card " id="page">
@@ -147,6 +148,7 @@
             </div>
 
         </div>
+            @endforeach
 
     </div>
     <script src="{{ asset("assets/js/vendor/jquery-2.1.4.min.js") }}"></script>

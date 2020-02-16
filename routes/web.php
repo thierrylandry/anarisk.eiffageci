@@ -92,6 +92,10 @@ Route::get('/etatfermer',[
         'as'=>'etatfermer',
         'uses'=>'AnalysesController@etatfermer',
     ])->middleware('auth');
+Route::get('/fichesanalyses',[
+        'as'=>'fichesanalyses',
+        'uses'=>'AnalysesController@fichesanalyses',
+    ])->middleware('auth');
 Route::get('/etatpdf',[
         'as'=>'etatpdf',
         'uses'=>'AnalysesController@etatpdf',

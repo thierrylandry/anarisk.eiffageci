@@ -22,17 +22,20 @@
                 <a href="{{route('liste')}}"><i class="menu-icon fa fa-list"></i>RISQUES \ OPPORTUNITES</a>
             </li>
             <li class="">
-                <a href="{{route('etat')}}" target="_blank" ><i class="menu-icon fa fa-table"></i> ETATS DES ANALYSES EN COURS</a>
+                <a href="{{route('etat')}}" target="_blank" ><i class="menu-icon fa fa-table"></i> ETATS  EN COURS</a>
             </li>
             <li class="">
-                <a href="{{route('etatfermer')}}" target="_blank" ><i class="menu-icon fa fa-table"></i> ETATS DES ANALYSES TERMINEES</a>
+                <a href="{{route('etatfermer')}}" target="_blank" ><i class="menu-icon fa fa-table"></i> ETATS TERMINEES</a>
+            </li>
+            <li class="">
+                <a href="{{route('fichesanalyses')}}" target="_blank" ><i class="menu-icon fa fa-book"></i> TOUTES LES FICHES</a>
             </li>
             @if(Auth::user() != null && Auth::user()->hasAnyRole(['parametrage']))
             <li class="@yield('parametrage') menu-item-has-children dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cog"></i>Parametrage</a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cog"></i>PARAMETRAGE</a>
                 <ul class="sub-menu children dropdown-menu @yield('parametrage')">
-                    <li class=" @yield('utilisateur_actif')"><i class="fa fa-user"></i><a href="{{route('utilisateurs')}}">Utilisateurs</a></li>
-                    <li class=" @yield('chnatier_actif')"><i class="fa fa-user"></i><a href="{{route('chantiers')}}">Chantiers</a></li>
+                    <li class=" @yield('utilisateur_actif')"><i class="fa fa-user"></i><a href="{{route('utilisateurs')}}">UTILISATEURS</a></li>
+                    <li class=" @yield('chnatier_actif')"><i class="fa fa-user"></i><a href="{{route('chantiers')}}">CHANTIERS</a></li>
                 </ul>
 
             </li>
