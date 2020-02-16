@@ -91,11 +91,11 @@
             color:black !important;
         }
         .riskfait {
-            background-color: #990066 !important;
+            background-color: #dc354580 !important;
             color:black !important;
         }
         .riskferme {
-            background-color: #74829C !important;
+            background-color: #f7f7f7 !important;
             color:black !important;
         }
         .opportunite {
