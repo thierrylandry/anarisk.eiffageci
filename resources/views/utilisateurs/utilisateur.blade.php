@@ -139,7 +139,7 @@
                                    @foreach($users as $user)
                                        <tr>
                                            <td>{{$user->nom}}</td>
-                                           <td>{{$user->prenom}}</td>
+                                           <td>{{$user->prenoms}}</td>
                                            <td>{{$user->email}}</td>
                                            <td>{{isset($user->acteur)?$user->acteur->libelle:''}}</td>
                                            <td>@if(isset($user->chantiers)!=null)
