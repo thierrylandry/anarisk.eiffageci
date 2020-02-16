@@ -111,6 +111,15 @@ Route::get('/analyseFonctionId/{id}',[
         'uses'=>'AnalysesController@analyseFonctionId',
     ])->middleware('auth');
 
+Route::get('/fermer_analyse/{id}',[
+        'as'=>'fermer_analyse',
+        'uses'=>'AnalysesController@fermer_analyse',
+    ])->middleware('auth');
+Route::get('/supprimer/{id}',[
+        'as'=>'supprimer',
+        'uses'=>'AnalysesController@supprimer',
+    ])->middleware('auth');
+
 Route::get('/acteurFonctionResponsable/{id}',[
     'as'=>'acteurFonctionResponsable',
     'uses'=>'MesuresController@acteurFonctionResponsable',

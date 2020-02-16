@@ -90,8 +90,22 @@
             background-color: #f50017d4 !important;
             color:black !important;
         }
+        .riskfait {
+            background-color: #990066 !important;
+            color:black !important;
+        }
+        .riskferme {
+            background-color: #74829C !important;
+            color:black !important;
+        }
         .opportunite {
+            background-color: #00ff00!important;
+        }
+        .opportunitefaite {
             background-color: #00ff7f29!important;
+        }
+        .opportuniteferme {
+            background-color: white!important;
         }
     </style>
     <link href="{{ asset('css/impression.css')}}" rel="stylesheet" media="print">

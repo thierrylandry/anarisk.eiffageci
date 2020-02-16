@@ -259,15 +259,29 @@ active
                                 </thead>
                                 <tbody>
                                 @foreach($analyses as $analyse)
-                                    <tr class="{{$analyse->id_nature==1?'risk':'opportunite'}}" >
+                                    <tr class="@if( $analyse->id_nature==1 && (!empty($analyse->cout) && !empty($analyse->mesures()->get())) )
+                                            riskfait
+                                    @elseif( $analyse->id_nature==1 && ( $analyse->etat==1 && empty($analyse->cout) || empty($analyse->mesures()->get())))
+                                        risk
+                                    @elseif($analyse->id_nature==1 &&  $analyse->etat==2)
+                                            riskferme
+                                         @elseif( $analyse->id_nature==2 && (!empty($analyse->cout) && !empty($analyse->mesures()->get())) )
+                                            opportunitefaite
+                                    @elseif( $analyse->id_nature==2 &&  ($analyse->etat==1 && empty($analyse->cout) || empty($analyse->mesures()->get())))
+                                            opportunite
+                                        @elseif($analyse->id_nature==2 &&  $analyse->etat==2)
+                                            opportuniteferme
+                                         @endif">
                                         <td>
                                             {{$analyse->id}}
                                         </td>
                                         <td>
-                                            @if($analyse->etat==2)
-                                                <p class=" btn btn-link"> <i class="fa fa-check-circle"></i> Terminé</p>
-                                            @else
-                                                <p class=" btn btn-link"> <i class="fa fa-spinner"></i> En cours</p>
+                                            @if( !empty($analyse->cout) && !empty($analyse->mesures()->get()) )
+                                                <p class=" btn btn-link"> <i class="fa fa-arrow-circle-right"></i> Analyse faite</p>
+                                            @elseif($analyse->etat==1 && empty($analyse->cout) || empty($analyse->mesures()->get()))
+                                                <p class=" btn btn-link"> <i class="fa fa-spinner"></i> Analyse en cours</p>
+                                                @elseif($analyse->etat==2)
+                                                <p class=" btn btn-link"> <i class="fa fa-check-circle"></i> Analyse fermée</p>
                                             @endif
                                         </td>
 
@@ -308,10 +322,17 @@ active
                                                 @if((stristr( \Illuminate\Support\Facades\Auth::user()->nom,$proprietaire_nom) === true and stristr( \Illuminate\Support\Facades\Auth::user()->prenoms,$proprietaire_prenoms) === true )|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id)
                                                     <a href="{{route('pageModifierAnalyse',$analyse->id)}}"  class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-update"></i>Modifier</a>
                                                     <a href="#"  data-toggle="modal" data-target="#evaluationpostemesure" class="evaluer btn btn-success btn-sm"> <i class="ti-view-grid"></i> Evaluation post mesure</a>
+                                                    <a href="{{route('fermer_analyse',$analyse->id)}}"  class="btn btn-dark btn-sm"> <i class="menu-icon fa fa-update"></i>Fermer l'analyse</a>
+                                                    <a href="{{route('supprimer',$analyse->id)}}"  class="btn btn-danger btn-sm"> <i class="menu-icon fa fa-trash"></i>Supprimer</a>
+
                                                 @endif
                                                 @else
-                                                <a href="{{route('ficheAnalyse',$analyse->id)}}" class="btn btn-info btn-sm"> <i class="menu-icon fa  fa-file"></i> fiche analyse</a>
 
+                                                <a href="{{route('ficheAnalyse',$analyse->id)}}" class="btn btn-info btn-sm"> <i class="menu-icon fa  fa-file"></i> fiche analyse</a>
+                                                @if((stristr( \Illuminate\Support\Facades\Auth::user()->nom,$proprietaire_nom) === true and stristr( \Illuminate\Support\Facades\Auth::user()->prenoms,$proprietaire_prenoms) === true )|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id)
+                                                    <a href="{{route('supprimer',$analyse->id)}}"  class="btn btn-danger btn-sm"> <i class="menu-icon fa fa-trash"></i>Supprimer</a>
+
+                                                @endif
                                             @endif
 
 

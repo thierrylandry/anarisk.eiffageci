@@ -68,6 +68,17 @@ public function ficheAnalyse($id){
     $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
     return view('analyses.fiche',compact('analyse','responsables'));
 }
+public function fermer_analyse($id){
+    $analyse =Analyse::find($id);
+   $analyse->etat=2;
+    $analyse->save();
+    return redirect()->route('liste')->with('success',"L'analyse a est close");
+}
+public function supprimer($id){
+    $analyse =Analyse::find($id);
+    $analyse->delete();
+    return redirect()->route('liste')->with('success',"L'analyse supprimée avec succès");
+}
     public function liste(){
         $natures= Nature::all();
         $payss = Pays::all();
