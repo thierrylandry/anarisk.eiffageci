@@ -68,7 +68,7 @@ public function ficheAnalyse($id){
     $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
     return view('analyses.fiche',compact('analyse','responsables'));
 }public function fichesanalyses(){
-    $analyses =Analyse::all();
+    $analyses =Analyse::where('id_chantier','=',Auth::user()->id_chantier_connecte)->get();
     $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
     return view('analyses.fichesanalyses',compact('analyses','responsables'));
 }
