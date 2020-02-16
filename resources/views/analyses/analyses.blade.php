@@ -396,6 +396,8 @@
                     }else{
                         jQuery("#titreeval").empty();
                         jQuery("#titreeval").append( "Evaluation du niveau de l'opportunité");
+                        //jQuery("#titreeval").empty();
+                       // jQuery("#titreeval").append( "Facteurs");
 
                         jQuery("#titreeval1").empty();
                         jQuery("#titreeval1").append(" Evaluation après action(s) favorisante(s)");
