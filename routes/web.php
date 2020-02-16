@@ -88,6 +88,10 @@ Route::get('/etat',[
         'as'=>'etat',
         'uses'=>'AnalysesController@etat',
     ])->middleware('auth');
+Route::get('/etatfermer',[
+        'as'=>'etatfermer',
+        'uses'=>'AnalysesController@etatfermer',
+    ])->middleware('auth');
 Route::get('/etatpdf',[
         'as'=>'etatpdf',
         'uses'=>'AnalysesController@etatpdf',

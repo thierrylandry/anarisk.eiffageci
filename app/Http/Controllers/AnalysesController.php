@@ -346,6 +346,17 @@ public function supprimer($id){
         $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
       return view('analyses.etat',compact('risques','opportunites','responsables'));
     }
+    public function etatfermer(){
+    $risques = Analyse::where('id_nature','=',1)->where('etat','=',2)->where('id_chantier','=',Auth::user()->id_chantier_connecte)->orderBy('id','DESC')->get();
+    $opportunites = Analyse::where('id_nature','=',2)->where('etat','=',2)->where('id_chantier','=',Auth::user()->id_chantier_connecte)->orderBy('id','DESC')->get();
+
+    // dd($analyses->first()->mesures()->orderBy('dateplanifie','ASC')->first());
+    // dd($analyses[0]->chantier()->get());
+    //  $pdf = PDF::loadView('analyses.etat', compact('risques','opportunites'))->setPaper('a3', 'landscape');
+    //return $pdf->download('etat.pdf');
+        $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
+      return view('analyses.etatferme',compact('risques','opportunites','responsables'));
+    }
 
     public function etatpdf(){
         $risques = Analyse::where('id_nature','=',1)->orderBy('id','DESC')->get();

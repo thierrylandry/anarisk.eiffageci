@@ -95,7 +95,7 @@
             color:black !important;
         }
         .riskferme {
-            background-color: #f7f7f7 !important;
+            background-color: #e5e3e3 !important;
             color:black !important;
         }
         .opportunite {

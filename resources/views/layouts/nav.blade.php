@@ -22,8 +22,12 @@
                 <a href="{{route('liste')}}"><i class="menu-icon fa fa-list"></i>RISQUES \ OPPORTUNITES</a>
             </li>
             <li class="">
-                <a href="{{route('etat')}}" target="_blank" ><i class="menu-icon fa fa-table"></i> ETATS</a>
+                <a href="{{route('etat')}}" target="_blank" ><i class="menu-icon fa fa-table"></i> ETATS DES ANALYSES EN COURS</a>
             </li>
+            <li class="">
+                <a href="{{route('etatfermer')}}" target="_blank" ><i class="menu-icon fa fa-table"></i> ETATS DES ANALYSES TERMINEES</a>
+            </li>
+            @if(Auth::user() != null && Auth::user()->hasAnyRole(['parametrage']))
             <li class="@yield('parametrage') menu-item-has-children dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cog"></i>Parametrage</a>
                 <ul class="sub-menu children dropdown-menu @yield('parametrage')">
@@ -32,6 +36,7 @@
                 </ul>
 
             </li>
+                @endif
 
         </ul>
 
