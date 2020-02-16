@@ -117,11 +117,11 @@
                 <div class="col-xs-6 col-sm-6">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Causes </strong>
+                            <strong class="card-title" id="causer"> </strong>
                         </div>
                         <div class="card-body">
 
-                            Ajouter une cause
+                            Ajouter
                             <button type="button" class="btn bg-teal btn-circle waves-effect waves-circle waves-float" id="addcauses">
                                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
                             </button>
@@ -130,7 +130,7 @@
                             <div id="causes" class="">
 
                                 <div class=" form-control-label">
-                                    <label for="causes[]">Cause</label>
+                                    <label for="causes[]"></label>
                                     <div class="form-group">
                                         <input name="causes[]" class="form-control" style="" type="text"/>
                                     </div>
@@ -140,7 +140,7 @@
                             </div>
                             <div id="causestemplate" class="row clearfix" style="display: none">
                                 <div class=" form-control-label">
-                                    <label for="causes[]">Cause</label>
+                                    <label for="causes[]"></label>
                                     <div class="form-group">
                                         <input name="causes[]" class="form-control" style="" type="text"/>
                                     </div>
@@ -157,11 +157,11 @@
                 <div class="col-xs-6 col-sm-6">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Conséquences </strong>
+                            <strong class="card-title" id="consequence"> </strong>
                         </div>
                         <div class="card-body">
 
-                            Ajouter une conséquence
+                            Ajouter
                             <button type="button" class="btn bg-teal btn-circle waves-effect waves-circle waves-float" id="addconsequences">
                                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
                             </button>
@@ -170,7 +170,7 @@
                             <div id="consequences" class="">
 
                                 <div class=" form-control-label">
-                                    <label for="consequences[]">Conséquence</label>
+                                    <label for="consequences[]"></label>
                                     <div class="form-group">
                                         <input name="consequences[]" class="form-control" style="" type="text"/>
                                     </div>
@@ -180,7 +180,7 @@
                             </div>
                             <div id="consequencestemplate" class="row clearfix" style="display: none">
                                 <div class=" form-control-label">
-                                    <label for="consequences[]">Conséquence</label>
+                                    <label for="consequences[]"></label>
                                     <div class="form-group">
                                         <input name="consequences[]" class="form-control" style="" type="text"/>
                                     </div>
@@ -392,12 +392,17 @@
                                 jQuery(".right-panel").addClass('risk');
                             }
 
-
+                        jQuery("#causer").empty();
+                        jQuery("#causer").append( "Causes");
+                        jQuery("#consequence").empty();
+                        jQuery("#consequence").append( "Conséquences");
                     }else{
                         jQuery("#titreeval").empty();
                         jQuery("#titreeval").append( "Evaluation du niveau de l'opportunité");
-                        //jQuery("#titreeval").empty();
-                       // jQuery("#titreeval").append( "Facteurs");
+                        jQuery("#causer").empty();
+                        jQuery("#causer").append( "Facteurs");
+                        jQuery("#consequence").empty();
+                        jQuery("#consequence").append( "Résultats");
 
                         jQuery("#titreeval1").empty();
                         jQuery("#titreeval1").append(" Evaluation après action(s) favorisante(s)");
