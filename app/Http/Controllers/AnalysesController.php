@@ -70,8 +70,14 @@ public function ficheAnalyse($id){
 }
 public function fermer_analyse($id){
     $analyse =Analyse::find($id);
-   $analyse->etat=2;
-    $analyse->save();
+
+    if(!empty($analyse->cout) ||  !empty($analyse->mesures()->get())){
+        $analyse->etat=2;
+        $analyse->save();
+    }else{
+        return redirect()->route('liste')->with('warning',"L'analyse ne peut etre close car le cout ou les actions menées sont pas préciser");
+    }
+
     return redirect()->route('liste')->with('success',"L'analyse a est close");
 }
 public function supprimer($id){

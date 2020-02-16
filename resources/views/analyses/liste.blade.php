@@ -263,24 +263,24 @@ active
                                             riskfait
                                     @elseif( $analyse->id_nature==1 && ( $analyse->etat==1 && empty($analyse->cout) || empty($analyse->mesures()->get())))
                                         risk
-                                    @elseif($analyse->id_nature==1 &&  $analyse->etat==2)
+                                    @elseif($analyse->id_nature==1 &&  $analyse->etat==2 )
                                             riskferme
-                                         @elseif( $analyse->id_nature==2 && (!empty($analyse->cout) && !empty($analyse->mesures()->get())) )
+                                         @elseif( $analyse->id_nature==2 && (!empty($analyse->cout) && !empty($analyse->mesures()->get())) && $analyse->etat==1 )
                                             opportunitefaite
                                     @elseif( $analyse->id_nature==2 &&  ($analyse->etat==1 && empty($analyse->cout) || empty($analyse->mesures()->get())))
                                             opportunite
-                                        @elseif($analyse->id_nature==2 &&  $analyse->etat==2)
+                                        @elseif($analyse->id_nature==2 &&  $analyse->etat==2 )
                                             opportuniteferme
                                          @endif">
                                         <td>
                                             {{$analyse->id}}
                                         </td>
                                         <td>
-                                            @if( !empty($analyse->cout) && !empty($analyse->mesures()->get()) )
+                                            @if( !empty($analyse->cout) && !empty($analyse->mesures()->get()) && $analyse->etat==1 )
                                                 <p class=" btn btn-link"> <i class="fa fa-arrow-circle-right"></i> Analyse faite</p>
                                             @elseif($analyse->etat==1 && empty($analyse->cout) || empty($analyse->mesures()->get()))
                                                 <p class=" btn btn-link"> <i class="fa fa-spinner"></i> Analyse en cours</p>
-                                                @elseif($analyse->etat==2)
+                                                @elseif($analyse->etat==2 )
                                                 <p class=" btn btn-link"> <i class="fa fa-check-circle"></i> Analyse fermée</p>
                                             @endif
                                         </td>
