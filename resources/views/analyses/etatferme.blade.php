@@ -11,7 +11,7 @@
         <div class="col-sm-12" style="text-align: center">
             <div class="page-header align-items-center">
                 <div class="page-title" >
-                    <h1>ANALYSES</h1>
+                    <h1>ANALYSES TERMINEES</h1>
                 </div>
             </div>
         </div>
