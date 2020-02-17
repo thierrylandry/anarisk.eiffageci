@@ -386,7 +386,11 @@
                 jQuery("#nature").change(function (e) {
 
                     var nature =jQuery("#nature").val();
+                    var route='{{URL::asset('')}}';
                     if(nature==1){
+
+                        jQuery('#permanant').attr('src',route+'images/anarisk.png');
+
                         jQuery("#titreeval").empty();
                         jQuery("#titreeval").append(" Evaluation du niveau de risque");
 
@@ -411,6 +415,7 @@
                         jQuery(".cout").empty();
                         jQuery(".cout").append( "Coût");
                     }else{
+                        jQuery('#permanant').attr('src',route+'images/anarisk_opportunite.jpg');
                         jQuery("#titreeval").empty();
                         jQuery("#titreeval").append( "Evaluation du niveau de l'opportunité");
                         jQuery("#causer").empty();
