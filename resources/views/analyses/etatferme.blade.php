@@ -51,6 +51,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php $montanttot=0;?>
                                 @foreach($risques as $risque)
                                     <tr >
                                         <td>
@@ -82,6 +83,7 @@
                                         </td>
                                         <td> {{$risque->description}} </td>
                                         <td>
+                                            <?php $montanttot+=$risque->cout;?>
                                             {{number_format($risque->cout, 0, ',', ' ')}}
                                         </td>
                                         <td>
@@ -94,7 +96,7 @@
 
                                 </tbody>
                                 <tfooter>
-                                    <tr> <th colspan="7" style="text-align:right" >MFCFA Budget :</th> <th id="tot_aupire" style="text-align: left"></th> </tr>
+                                    <tr> <th colspan="6" style="text-align:right" >MFCFA Budget :</th> <th  style="text-align: left">{{number_format($montanttot, 0, ',', ' ')}}</th><th style="text-align: left">MCFA</th></tr>
                                 </tfooter>
                             </table>
                         </div>
