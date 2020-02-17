@@ -65,8 +65,8 @@
                                 <td colspan="6" style="text-align: left;">&nbsp;{{$analyse->detail}}</td>
                             </tr>
                             <tr>
-                                <td colspan="4"><b>Causes</b></td>
-                                <td colspan="3"><b>Conséquences</b></td>
+                                <td colspan="4"><b>{{$analyse->id_nature==1?'Causes':'Facteurs'}}</b></td>
+                                <td colspan="3"><b>{{$analyse->id_nature==1?'Conséquences':'Conséquences'}}</b></td>
                             </tr>
                             <tr>
                                 <td colspan="4" style="text-align: left !important">@if(isset($analyse->causes)) @foreach(json_decode($analyse->causes) as $cause) <p>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{{$cause->libelle}}</p> @endforeach @endif</td>
@@ -83,9 +83,9 @@
                                 <td colspan="4">
                                     <table style="width: 80%">
                                         <tr><td>Probabilité d'occurence</td><td></td><td>{{$analyse->probabiliteAvant}}</td></tr>
-                                        <tr><td rowspan="4">Impact</td><td>Sévérité</td><td>{{$analyse->severiteAvant}}</td></tr>
+                                        <tr><td rowspan="4">Impact</td><td>{{$analyse->id_nature==1?'Sévérité':'Bénéfice'}}</td><td>{{$analyse->severiteAvant}}</td></tr>
                                         <tr><td>Planning</td><td>{{$analyse->planingAvant}}</td></tr>
-                                        <tr><td>Coût</td><td>{{$analyse->coutAvant}}</td></tr>
+                                        <tr><td>{{$analyse->id_nature==1?'Coût':'Gain'}}</td><td>{{$analyse->coutAvant}}</td></tr>
                                         <tr><td>Niveau</td><td style="{{$analyse->nature->id==1?'color:red':'color:green'}}">
                                                 <b>{{$analyse->probabiliteAvant*max(array($analyse->severiteAvant,$analyse->planingAvant,$analyse->coutAvant))}}</b>
                                             </td></tr>
@@ -93,9 +93,9 @@
                                 </td>
                                 <td colspan="3">                                    <table style="width: 80%">
                                         <tr><td>Probabilité d'occurence</td><td></td><td>{{$analyse->probabiliteApres}}</td></tr>
-                                        <tr><td rowspan="4">Impact</td><td>Sévérité</td><td>{{$analyse->severiteApres}}</td></tr>
+                                        <tr><td rowspan="4">Impact</td><td>{{$analyse->id_nature==1?'Sévérité':'Bénéfice'}}</td><td>{{$analyse->severiteApres}}</td></tr>
                                         <tr><td>Planning</td><td>{{$analyse->planingApres}}</td></tr>
-                                        <tr><td>Coût</td><td>{{$analyse->coutApres}}</td></tr>
+                                        <tr><td>{{$analyse->id_nature==1?'Coût':'Gain'}}</td><td>{{$analyse->coutApres}}</td></tr>
                                         <tr><td>Niveau</td><td style="{{$analyse->nature->id==1?'color:red':'color:green'}}">
                                                 <b> {{$analyse->probabiliteApres*max(array($analyse->severiteApres,$analyse->planingApres,$analyse->coutApres))}}</b>
                                             </td></tr>

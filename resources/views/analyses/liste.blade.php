@@ -44,9 +44,9 @@ active
                                             <th colspan="3">Impacts</th>
                                         </tr>
                                         <tr>
-                                            <th>Sévérité </th>
+                                            <th class="severite">Sévérité </th>
                                             <th>Planning</th>
-                                            <th>Cout</th>
+                                            <th class="cout">Cout</th>
                                             <th>Niveau</th>
                                         </tr>
                                         <tr>
@@ -93,9 +93,9 @@ active
                                             <th colspan="3">Impacts</th>
                                         </tr>
                                         <tr>
-                                            <th>Sévérité </th>
+                                            <th class="severite">Sévérité </th>
                                             <th>Planning</th>
-                                            <th>Coût</th>
+                                            <th class="cout">Coût</th>
                                             <th>Niveau</th>
                                         </tr>
                                         <tr>
@@ -438,12 +438,26 @@ active
 
 
 
+                            jQuery(".cout").empty();
+                            jQuery(".cout").append("Coût");
+
+                            jQuery(".severite").empty();
+                            jQuery(".severite").append("Sévérité");
+
+
+
                         }else{
                             jQuery("#titreeval").empty();
                             jQuery("#titreeval").append( "Evaluation du niveau de l'opportunité");
 
                             jQuery("#titreeval1").empty();
                             jQuery("#titreeval1").append(" Evaluation après action(s) favorisante(s)");
+
+                            jQuery(".cout").empty();
+                            jQuery(".cout").append("Gain");
+
+                            jQuery(".severite").empty();
+                            jQuery(".severite").append("Bénéfice");
 
                         }
 

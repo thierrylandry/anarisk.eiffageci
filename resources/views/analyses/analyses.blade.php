@@ -208,9 +208,9 @@
                                     <th colspan="3">Impacts</th>
                                 </tr>
                                 <tr>
-                                    <th>Sévérité </th>
+                                    <th class="severite">Sévérité </th>
                                     <th>Planning</th>
-                                    <th>Cout</th>
+                                    <th class="cout">Coût</th>
                                     <th>Niveau</th>
                                 </tr>
                                 <tr>
@@ -396,6 +396,11 @@
                         jQuery("#causer").append( "Causes");
                         jQuery("#consequence").empty();
                         jQuery("#consequence").append( "Conséquences");
+
+                        jQuery(".severite").empty();
+                        jQuery(".severite").append( "Sévérité");
+                        jQuery(".cout").empty();
+                        jQuery(".cout").append( "Coût");
                     }else{
                         jQuery("#titreeval").empty();
                         jQuery("#titreeval").append( "Evaluation du niveau de l'opportunité");
@@ -413,6 +418,11 @@
                         }else{
                             jQuery(".right-panel").addClass('opportunite');
                         }
+
+                        jQuery(".severite").empty();
+                        jQuery(".severite").append( "Bénéfice");
+                        jQuery(".cout").empty();
+                        jQuery(".cout").append( "Gain");
                     }
 
                 });
