@@ -97,7 +97,7 @@
                                         <td> {{$risque->description}} </td>
                                         <td> <input type="hidden" value="{{$risque->id}}" name="risk_{{$risque->id}}"/> </td>
                                         <td>
-                                            {{number_format($risque->cout, 0, ',', ' ')}}
+                                            - {{number_format($risque->cout, 0, ',', ' ')}}
                                         </td>
                                         <td>
                                             MFCFA

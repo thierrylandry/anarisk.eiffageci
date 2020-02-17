@@ -83,8 +83,8 @@
                                         </td>
                                         <td> {{$risque->description}} </td>
                                         <td>
-                                            <?php $montanttot+=$risque->cout;?>
-                                            {{number_format($risque->cout, 0, ',', ' ')}}
+                                            <?php $montanttot-=$risque->cout;?>
+                                            -{{number_format($risque->cout, 0, ',', ' ')}}
                                         </td>
                                         <td>
                                             MFCFA
