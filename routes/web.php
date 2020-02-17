@@ -127,6 +127,10 @@ Route::get('/supprimer/{id}',[
         'as'=>'supprimer',
         'uses'=>'AnalysesController@supprimer',
     ])->middleware('auth');
+Route::get('/supprimer_mesure/{id}',[
+        'as'=>'supprimer_mesure',
+        'uses'=>'MesuresController@supprimer_mesure',
+    ])->middleware('auth');
 
 Route::get('/acteurFonctionResponsable/{id}',[
     'as'=>'acteurFonctionResponsable',

@@ -275,12 +275,12 @@
                                                     {{$mesure->auteur->nom}}  {{$mesure->auteur->prenoms}}
                                                 </td>
                                                 <td>
-                                                    @if(isset($mesure->statut->id)&& $mesure->statut->id!=30)
+                                                    @if(isset($mesure->statut->id)&& $mesure->statut->id!=10)
                                                     <a href="{{route('pageModifMesure',$mesure->id)}}" class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-edit"></i> Modifier la mesure</a>
-                                                    @if($mesure->statut->id!=30)
+                                                    @if($mesure->statut->id!=10)
                                                     <a href="#" class="btn btn-success btn-sm terminerClass" data-toggle="modal" data-target="#teminer"> <i class="menu-icon fa fa-key"></i> terminé</a>
-                                                    @endif
-
+                                                            <a href="{{route("supprimer_mesure",$mesure->id)}}" class="btn btn-danger btn-sm terminerClass confirmons"> <i class="menu-icon fa fa-trash"></i> Supprimer</a>
+                                                        @endif
                                                         @endif
                                                 </td>
                                             </tr>
@@ -439,6 +439,10 @@
 
 
                     });
+                    $('.confirmons').click( function (e) {
+                        //   table.row('.selected').remove().draw( false );
+                        if(confirm('Voulez vous supprimer.?')){}else{e.preventDefault(); e.returnValue = false; return false; }
+                    } );
                 });
 
                 //Make the DIV element draggagle:

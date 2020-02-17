@@ -33,6 +33,13 @@ class MesuresController extends Controller
         return view('mesures.mesures',compact('analyse','priorites','statuts','periodicites','responsables','acteurs'));
 
     }
+    public function supprimer_mesure($id){
+        $mesure = Mesure::find($id);
+        $mesure->delete();
+
+        return redirect()->back()->with('error',"La mesure  a été supprimée avec succès");
+
+    }
     public function SaveMesure(Request $request){
         $parameters=$request->except(['_token']);
         $statut = $parameters['statut'];

@@ -402,7 +402,7 @@
                         jQuery("#causer").empty();
                         jQuery("#causer").append( "Facteurs");
                         jQuery("#consequence").empty();
-                        jQuery("#consequence").append( "Résultats");
+                        jQuery("#consequence").append( "Conséquences");
 
                         jQuery("#titreeval1").empty();
                         jQuery("#titreeval1").append(" Evaluation après action(s) favorisante(s)");

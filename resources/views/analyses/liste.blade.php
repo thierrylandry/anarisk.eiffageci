@@ -323,14 +323,14 @@ active
                                                     <a href="{{route('pageModifierAnalyse',$analyse->id)}}"  class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-update"></i>Modifier</a>
                                                     <a href="#"  data-toggle="modal" data-target="#evaluationpostemesure" class="evaluer btn btn-success btn-sm"> <i class="ti-view-grid"></i> Evaluation post mesure</a>
                                                     <a href="{{route('fermer_analyse',$analyse->id)}}"  class="btn btn-dark btn-sm"> <i class="menu-icon fa fa-update"></i>Fermer l'analyse</a>
-                                                    <a href="{{route('supprimer',$analyse->id)}}"  class="btn btn-danger btn-sm"> <i class="menu-icon fa fa-trash"></i>Supprimer</a>
+                                                    <a href="{{route('supprimer',$analyse->id)}}"  class="btn btn-danger btn-sm confirmons"> <i class="menu-icon fa fa-trash"></i>Supprimer</a>
 
                                                 @endif
                                                 @else
 
                                                 <a href="{{route('ficheAnalyse',$analyse->id)}}" class="btn btn-info btn-sm"> <i class="menu-icon fa  fa-file"></i> fiche analyse</a>
                                                 @if((stristr( \Illuminate\Support\Facades\Auth::user()->nom,$proprietaire_nom) === true and stristr( \Illuminate\Support\Facades\Auth::user()->prenoms,$proprietaire_prenoms) === true )|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id)
-                                                    <a href="{{route('supprimer',$analyse->id)}}"  class="btn btn-danger btn-sm"> <i class="menu-icon fa fa-trash"></i>Supprimer</a>
+                                                    <a href="{{route('supprimer',$analyse->id)}}"  class="btn btn-danger btn-sm confirmons"> <i class="menu-icon fa fa-trash"></i>Supprimer</a>
 
                                                 @endif
                                             @endif
@@ -451,7 +451,10 @@ active
 
 
                 });
-
+                $('.confirmons').click( function (e) {
+                    //   table.row('.selected').remove().draw( false );
+                    if(confirm('Voulez vous supprimer.?')){}else{e.preventDefault(); e.returnValue = false; return false; }
+                } );
 
                 function test(){
                     if($("#probabiliteAvant").val()!="") {
