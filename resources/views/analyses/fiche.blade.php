@@ -136,7 +136,7 @@
                             @endforeach
                             <tr>
                                 <td colspan="4">Calcul impact financier :</td>
-                                <td colspan="3">{{number_format($analyse->cout,0,',',' ')}} MCFA</td>
+                                <td colspan="3">{{$analyse->id_nature==1 && $analyse->cout>0?'-':''}}{{number_format($analyse->cout,0,',',' ')}} MCFA</td>
                             </tr>
                             <tr>
                                 <td colspan="7" style="text-align: left !important">&nbsp;&nbsp;&nbsp;{!! nl2br($analyse->brouillon) !!}</td>
