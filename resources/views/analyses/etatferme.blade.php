@@ -83,11 +83,11 @@
                                         </td>
                                         <td> {{$risque->description}} </td>
                                         <td>
-                                            <?php $montanttot-=$risque->cout;?>
-                                            -{{number_format($risque->cout, 0, ',', ' ')}}
+                                            <?php $montanttot-=$risque->coutreel;?>
+                                            -{{number_format($risque->coutreel, 0, ',', ' ')}}
                                         </td>
                                         <td>
-                                            MFCFA
+                                            M FCFA
                                         </td>
                                     </tr>
 
@@ -96,7 +96,7 @@
 
                                 </tbody>
                                 <tfooter>
-                                    <tr> <th colspan="6" style="text-align:right" >MFCFA Budget :</th> <th  style="text-align: left">{{number_format($montanttot, 0, ',', ' ')}}</th><th style="text-align: left">MCFA</th></tr>
+                                    <tr> <th colspan="6" style="text-align:right" >M FCFA Budget :</th> <th  style="text-align: left">{{number_format($montanttot, 0, ',', ' ')}}</th><th style="text-align: left">M FCFA</th></tr>
                                 </tfooter>
                             </table>
                         </div>
@@ -158,11 +158,11 @@
                                         </td>
                                         <td> {{$opportunite->description}} </td>
                                         <td>
-                                            <?php $montanttot+=$opportunite->cout;?>
-                                            {{number_format($opportunite->cout, 0, ',', ' ')}}
+                                            <?php $montanttot+=$opportunite->coutreel;?>
+                                            {{number_format($opportunite->coutreel, 0, ',', ' ')}}
                                         </td>
                                         <td>
-                                            MFCFA
+                                            M FCFA
                                         </td>
                                     </tr>
 
@@ -171,7 +171,7 @@
 
                                 </tbody>
                                 <tfooter>
-                                    <tr> <th colspan="6" style="text-align:right" >MFCFA Budget :</th> <th id="tot_aupire1" style="text-align: left">{{number_format($montanttot, 0, ',', ' ')}}</th><th style="text-align: left">MCFA</th> </tr>
+                                    <tr> <th colspan="6" style="text-align:right" >M FCFA Budget :</th> <th id="tot_aupire1" style="text-align: left">{{number_format($montanttot, 0, ',', ' ')}}</th><th style="text-align: left">M FCFA</th> </tr>
                                 </tfooter>
                             </table>
                         </div>

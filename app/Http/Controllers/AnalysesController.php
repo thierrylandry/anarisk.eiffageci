@@ -86,6 +86,23 @@ public function fermer_analyse($id){
 
     return redirect()->route('liste')->with('success',"L'analyse a est close");
 }
+//celui là est utilisé
+public function terminer_analyse(Request $request){
+    $parameters=$request->except(['_token']);
+    $id = $parameters['id_analyse'];
+    $coutreel = $parameters['coutreel'];
+    $analyse =Analyse::find($id);
+
+    if(!empty($analyse->cout) ||  !empty($analyse->mesures()->get())){
+        $analyse->etat=2;
+        $analyse->coutreel=$coutreel;
+        $analyse->save();
+    }else{
+        return redirect()->route('liste')->with('error',"L'analyse ne peut etre close car le cout ou les actions menées sont pas préciser");
+    }
+
+    return redirect()->route('liste')->with('success',"L'analyse est terminée");
+}
 public function supprimer($id){
     $analyse =Analyse::find($id);
     $analyse->delete();

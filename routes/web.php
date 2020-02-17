@@ -123,6 +123,10 @@ Route::get('/fermer_analyse/{id}',[
         'as'=>'fermer_analyse',
         'uses'=>'AnalysesController@fermer_analyse',
     ])->middleware('auth');
+Route::post('/terminer_analyse',[
+    'as'=>'terminer_analyse',
+    'uses'=>'AnalysesController@terminer_analyse',
+])->middleware('auth');
 Route::get('/download_doc/{namefile}',[
     'as'=>'download_doc',
     'uses'=>'AnalysesController@download_doc',
@@ -205,6 +209,7 @@ Route::post('/save_chantier',[
     'middleware' => 'roles',
     'roles'=>'Parametrage'
 ])->middleware('auth');
+
 Route::post('/modifier_chantier',[
     'as'=>'modifier_chantier',
     'uses'=>'ChantiersController@modifier_chantier',

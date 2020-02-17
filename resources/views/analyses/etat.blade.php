@@ -104,7 +104,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            MFCFA
+                                            M FCFA
                                         </td>
                                         <td><input type="number" value="{{$risque->aupire}}" id="prob_aupire" name="prob_aupire_{{$risque->id}}" class="prob_aupire" min="0" max="100" style="width: 50px;"/></td>
                                         <td><input type="number" value="{{$risque->juste}}" id="prob_aujuste" name="prob_aujuste_{{$risque->id}}"  class="prob_aujuste" min="0" max="100" style="width: 50px;"/></td>
@@ -131,7 +131,7 @@
 
                                 </tbody>
                                 <tfooter>
-                                    <tr> <th colspan="11" style="text-align:right" >MFCFA Budget :</th> <th id="tot_aupire" style="text-align: left"></th><th id="tot_aujuste" style="text-align: left"></th><th id="tot_aumieux" style="text-align: left"></th> </tr>
+                                    <tr> <th colspan="11" style="text-align:right" >M FCFA Budget :</th> <th id="tot_aupire" style="text-align: left"></th><th id="tot_aujuste" style="text-align: left"></th><th id="tot_aumieux" style="text-align: left"></th> </tr>
                                 </tfooter>
                             </table>
                         </div>
@@ -208,7 +208,7 @@
                                             {{number_format($opportunite->cout, 0, ',', ' ')}}
                                         </td>
                                         <td>
-                                            MFCFA
+                                            M FCFA
                                         </td>
                                         <td><input type="number" value="{{$opportunite->aupire}}" id="prob_aupire1" name="prob_aupire1_{{$opportunite->id}}" class="prob_aupire1" min="0" max="100" style="width: 50px;"/></td>
                                         <td><input type="number" value="{{$opportunite->juste}}" id="prob_aujuste1"name="prob_aujuste1_{{$opportunite->id}}"  class="prob_aujuste1" min="0" max="100" style="width: 50px;"/></td>
@@ -223,7 +223,7 @@
 
                                 </tbody>
                                 <tfooter>
-                                    <tr> <th colspan="11" style="text-align:right" >MFCFA Budget :</th> <th id="tot_aupire1" style="text-align: left"></th><th id="tot_aujuste1" style="text-align: left"></th><th id="tot_aumieux1" style="text-align: left"></th> </tr>
+                                    <tr> <th colspan="11" style="text-align:right" >M FCFA Budget :</th> <th id="tot_aupire1" style="text-align: left"></th><th id="tot_aujuste1" style="text-align: left"></th><th id="tot_aumieux1" style="text-align: left"></th> </tr>
                                 </tfooter>
                             </table>
                         </div>

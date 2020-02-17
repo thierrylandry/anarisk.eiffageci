@@ -137,6 +137,36 @@ active
             </div>
         </div>
     </div>
+    <div class="modal fade" id="terminer" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="smallmodalLabel">Small Modal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="{{route('terminer_analyse')}}">
+                <div class="modal-body">
+
+                        @csrf
+                        <div class="form-group">
+                            <label class=" form-control-label" id="coutgain">Coût ou Gain réel</label>
+                            <div class="input-group">
+                                <input type="hidden" id="id_analyseTermi" name="id_analyse"/>
+
+                                <input type="number" class="form-control" name="coutreel" id="coutreel" value="" required/>&nbsp;M FCFA
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -326,7 +356,7 @@ active
                                                 @if((stristr( \Illuminate\Support\Facades\Auth::user()->nom,$proprietaire_nom) === true and stristr( \Illuminate\Support\Facades\Auth::user()->prenoms,$proprietaire_prenoms) === true )|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id)
                                                     <a href="{{route('pageModifierAnalyse',$analyse->id)}}"  class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-update"></i>Modifier</a>
                                                     <a href="#"  data-toggle="modal" data-target="#evaluationpostemesure" class="evaluer btn btn-success btn-sm"> <i class="ti-view-grid"></i> Evaluation post mesure</a>
-                                                    <a href="{{route('fermer_analyse',$analyse->id)}}"  class="btn btn-dark btn-sm"> <i class="menu-icon fa fa-update"></i>Fermer l'analyse</a>
+                                                    <a href="#" data-toggle="modal" data-target="#terminer" class="btn btn-dark btn-sm terminer"> <i class="menu-icon fa fa-update"></i>Fermer l'analyse</a>
                                                     <a href="{{route('supprimer',$analyse->id)}}"  class="btn btn-danger btn-sm confirmons"> <i class="menu-icon fa fa-trash"></i>Supprimer</a>
 
                                                 @endif
@@ -471,6 +501,30 @@ active
                         }
 
                     });
+
+
+                });
+                $('.terminer').click(function(){
+                    var data = table.row($(this).closest('tr')).data();
+                    //alert(data[Object.keys(data)[0]]);
+                    $("#id_analyseTermi").val(data[Object.keys(data)[0]]);
+                  var id_analyse =data[Object.keys(data)[0]];
+                    $.get("../analyseFonctionId/"+id_analyse, function(data, status){
+
+                        console.log(data);
+                        $('#coutreel').val(data.cout);
+                        if(data.id_nature==1){
+
+                            $('#coutgain').empty();
+                            $('#coutgain').append('Coût');
+                        }else{
+
+                            $('#coutgain').empty();
+                            $('#coutgain').append('Gain');
+                        }
+
+                    });
+
 
 
                 });
