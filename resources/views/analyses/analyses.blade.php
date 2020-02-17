@@ -420,7 +420,7 @@
                         }
 
                         jQuery(".severite").empty();
-                        jQuery(".severite").append( "Bénéfice");
+                        jQuery(".severite").append("Bénéfice");
                         jQuery(".cout").empty();
                         jQuery(".cout").append( "Gain");
                     }
