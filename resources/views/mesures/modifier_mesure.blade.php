@@ -28,7 +28,7 @@
             <div class="col-sm-11">
             </div>
             <div class="col-sm-1">
-                <a class="btn btn-outline-secondary btn-sm btn-block" href="{{ URL::previous() }}"><i class="menu-icon fa fa-back"></i>RETOUR</a>
+                <a class="btn btn-outline-secondary btn-sm btn-block" href="{{ route('liste') }}"><i class="menu-icon fa fa-back"></i>RETOUR</a>
             </div>
 
         </div>
@@ -94,7 +94,7 @@
                     <div class="row">
 
 
-                            <form method="post" action="{{route('ModifierMesure')}}" class="col-sm-12">
+                            <form method="post" action="{{route('ModifierMesure')}}" enctype="multipart/form-data" class="col-sm-12">
                                 <div class="col-sm-6">                                @csrf
                                     <input type="hidden"  name="id" value="{{isset($mesure)?$mesure->id:''}}" />
                                     <div class="form-group">
@@ -165,6 +165,20 @@
                                         </div>
                                     </div>
                         </div>
+                                <div class="form-group col-sm-12">
+                                    <div class="input-group">
+                                        @if(!empty($mesure->nomfichier))
+                                            <a href="{{route('supprimer_pj_mesure',$mesure->id)}}" class="btn btn-danger">Supprimer la pièce jointe</a>
+                                        @endif
+                                    </div>
+                                    </br>
+                                    <div class="input-group">
+                                        <input type="file" id="nomfichier" name="nomfichier" placeholder="nomfichier" class="form-control">
+                                        @if(!empty($mesure->nomfichier))
+                                            <a href="{{route('download_doc',$mesure->nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$mesure->nomfichier}}</a>
+                                        @endif
+                                    </div>
+                                </div>
 
 
 

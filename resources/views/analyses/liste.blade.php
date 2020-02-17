@@ -147,7 +147,7 @@ active
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{route('SaveMesure')}}">
+                    <form method="post" action="{{route('SaveMesure')}}" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" id="id_analyse" name="id_analyse" value="" />
                         <div class="form-group">
@@ -215,6 +215,9 @@ active
 
                                 <input type="text" class="form-control" name="documentation" value="" />
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" id="nomfichier" name="nomfichier" placeholder="nomfichier" class="form-control">
                         </div>
 
                 </div>

@@ -96,7 +96,7 @@ public function supprimer_pj($id){
 
     $analyse->nomfichier="";
     $analyse->save();
-    return redirect()->back()->with('success',"La pièce jointe de l'analyse à été suppriméeavec succès");
+    return redirect()->back()->with('success',"La pièce jointe de l'analyse à été supprimée avec succès");
 }
     public function liste(){
         $natures= Nature::all();
@@ -223,7 +223,7 @@ public function supprimer_pj($id){
                 'images'.DIRECTORY_SEPARATOR.'document', $request->file('nomfichier'), $analyse->nomfichier
             );
         }else{
-            $analyse->image="";
+          //  $analyse->image="";
         }
 
         $analyse->save();

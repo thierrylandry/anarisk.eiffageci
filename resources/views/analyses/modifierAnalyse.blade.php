@@ -24,14 +24,14 @@
             <div class="resizeUI"><i class="fa fa-arrows"></i></div>
         </div>
         <div class="animated fadeIn">
-            <form method="post" action="{{route('modifier_analyse')}}">
+            <form method="post" action="{{route('modifier_analyse')}}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" class="form-control" name="id" value="{{isset($analyse)?$analyse->id:''}}" required/>
                 <div class="row">
                     <div class="col-sm-12">
 
                         <div class="table-data__tool-right" style="text-align: right">
-                            <a href="{{ url()->previous() }}" class="btn btn-success">
+                            <a href="{{ route('liste') }}" class="btn btn-success">
                                 <i class="zmdi zmdi-arrow-back"></i>RETOUR</a>
                         </div>
                     </div>

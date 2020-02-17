@@ -16,6 +16,8 @@ use App\Responsable;
 use App\Statut;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class MesuresController extends Controller
 {
@@ -65,9 +67,21 @@ class MesuresController extends Controller
         $mesure->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
 
         $mesure->save();
+
+        if($request->file('nomfichier')){
+            $mesure->nomfichier=Str::ascii('mesure_'.$mesure->id.'_'.$request->file('nomfichier')->getClientOriginalName());
+
+            $path = Storage::putFileAs(
+                'images'.DIRECTORY_SEPARATOR.'document', $request->file('nomfichier'), $mesure->nomfichier
+            );
+        }else{
+           // $mesure->image="";
+        }
+
+        $mesure->save();
         // dd($analyses[0]->chantier()->get());
         //dd($analyse->nature()->first()->id);
-        return redirect()->route('liste')->with('success',"La mesure  a été enregistré avec succès");
+        return redirect()->back()->with('success',"La mesure  a été enregistré avec succès");
 
     }
     public function ModifierMesure(Request $request){
@@ -94,10 +108,28 @@ class MesuresController extends Controller
         $mesure->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
 
         $mesure->save();
+
+        if($request->file('nomfichier')){
+            $mesure->nomfichier=Str::ascii('mesure'.$mesure->id.'_'.$request->file('nomfichier')->getClientOriginalName());
+
+            $path = Storage::putFileAs(
+                'images'.DIRECTORY_SEPARATOR.'document', $request->file('nomfichier'), $mesure->nomfichier
+            );
+        }else{
+            //$analyse->nomfichier="";
+        }
+        $mesure->save();
         // dd($analyses[0]->chantier()->get());
         //dd($analyse->nature()->first()->id);
-        return redirect()->route('liste')->with('success',"La mesure  a été mise à jour avec succès");
+        return redirect()->back()->with('success',"La mesure  a été mise à jour avec succès");
 
+    }
+    public function supprimer_pj_mesure($id){
+        $mesure =Mesure::find($id);
+
+        $mesure->nomfichier="";
+        $mesure->save();
+        return redirect()->back()->with('success',"La pièce jointe de la mesure à été supprimée avec succès");
     }
     public function terminer_mesure(Request $request){
         $parameters=$request->except(['_token']);

@@ -25,7 +25,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{route('SaveMesure')}}">
+                    <form method="post" action="{{route('SaveMesure')}}" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" id="id_analyse" name="id_analyse" value="{{$analyse->id}}" />
                         <div class="form-group">
@@ -92,6 +92,9 @@
 
                                 <input type="text" class="form-control" name="documentation" value="" />
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" id="nomfichier" name="nomfichier" placeholder="nomfichier" class="form-control">
                         </div>
 
                 </div>
@@ -235,6 +238,7 @@
                                             <th>Date effective</th>
                                             <th>Auteur</th>
                                             <th>Action</th>
+                                            <th>PJ</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -282,6 +286,11 @@
                                                             <a href="{{route("supprimer_mesure",$mesure->id)}}" class="btn btn-danger btn-sm terminerClass confirmons"> <i class="menu-icon fa fa-trash"></i> Supprimer</a>
                                                         @endif
                                                         @endif
+                                                </td>
+                                                <td>
+                                                    @if(!empty($mesure->nomfichier))
+                                                        <a href="{{route('download_doc',$mesure->nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$mesure->nomfichier}}</a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
