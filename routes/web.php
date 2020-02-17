@@ -123,9 +123,17 @@ Route::get('/fermer_analyse/{id}',[
         'as'=>'fermer_analyse',
         'uses'=>'AnalysesController@fermer_analyse',
     ])->middleware('auth');
+Route::get('/download_doc/{namefile}',[
+    'as'=>'download_doc',
+    'uses'=>'AnalysesController@download_doc',
+])->middleware('auth');
 Route::get('/supprimer/{id}',[
         'as'=>'supprimer',
         'uses'=>'AnalysesController@supprimer',
+    ])->middleware('auth');
+Route::get('/supprimer_pj/{id}',[
+        'as'=>'supprimer_pj',
+        'uses'=>'AnalysesController@supprimer_pj',
     ])->middleware('auth');
 Route::get('/supprimer_mesure/{id}',[
         'as'=>'supprimer_mesure',

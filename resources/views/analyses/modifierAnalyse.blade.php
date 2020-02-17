@@ -332,7 +332,20 @@
                                         <textarea name="brouillon" class="form-control" style="height: 318px; margin-top: 0px; margin-bottom: 0px;">{{isset($analyse)?$analyse->brouillon:''}}</textarea>
                                     </div>
                                 </div>
-
+                                <div class="form-group col-sm-12">
+                                    <div class="input-group">
+                                        @if(!empty($analyse->nomfichier))
+                                        <a href="{{route('supprimer_pj',$analyse->id)}}" class="btn btn-danger">Supprimer la pièce jointe</a>
+                                            @endif
+                                    </div>
+                                       </br>
+                                    <div class="input-group">
+                                        <input type="file" id="nomfichier" name="nomfichier" placeholder="nomfichier" class="form-control">
+                                        @if(!empty($analyse->nomfichier))
+                                            <a href="{{route('download_doc',$analyse->nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$analyse->nomfichier}}</a>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

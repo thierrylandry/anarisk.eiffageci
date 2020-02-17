@@ -255,6 +255,7 @@ active
                                     <th>Proprietaire</th>
                                     <th>Auteur</th>
                                     <th>Action</th>
+                                    <th>Pj</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -339,6 +340,11 @@ active
 
 
 
+                                        </td>
+                                        <td>
+                                            @if(!empty($analyse->nomfichier))
+                                                <a href="{{route('download_doc',$analyse->nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$analyse->nomfichier}}</a>
+                                                @endif
                                         </td>
                                     </tr>
                                 @endforeach

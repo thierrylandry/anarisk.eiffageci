@@ -25,7 +25,7 @@
             <div class="resizeUI"><i class="fa fa-arrows"></i></div>
         </div>
         <div class="animated fadeIn">
-<form method="post" action="{{route('save_analyse')}}">
+<form method="post" action="{{route('save_analyse')}}" enctype="multipart/form-data">
     @csrf
             <div class="row">
 
@@ -315,6 +315,15 @@
                                     <textarea name="brouillon" class="form-control" style="height: 318px; margin-top: 0px; margin-bottom: 0px;"></textarea>
                                 </div>
                             </div>
+                            <div class="form-group col-sm-12">
+
+                                <div class="input-group">
+                                    <input type="file" id="nomfichier" name="nomfichier" placeholder="nomfichier" class="form-control">
+                                    @if(isset($analyse->nomfichier))
+                                        <a href="{{route('download_doc',$analyse->nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$analyse->nomfichier}}</a>
+                                    @endif
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -451,7 +460,33 @@
                 $('#cout').on('change',function(){var valeur=$('#cout').val();
                     for(var i=valeur.length-1; i>=0; i-- ){valeur=valeur.replace(' ','');}
                     var res=  lisibilite_nombre(valeur);  $('#cout').val(res);
-                })
+                });
+                $("#nomfichier").change(function() {
+                    readURL(this);
+                });
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            console.log(input.files[0]);
+                            console.log(input.files[0].type);
+                                if(input.files[0].size<=10000024){
+                                }else{
+                                    alert('trop volumineux');
+
+                                    input.value='';
+
+                                }
+
+
+                        };
+
+                        reader.readAsDataURL(input.files[0]);
+
+                    }else{
+                    }
+                }
                 function test(){
                     if($("#probabiliteAvant").val()!="") {
                         var luimeme = $("#probabiliteAvant").val();

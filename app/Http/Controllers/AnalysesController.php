@@ -16,7 +16,9 @@ use App\Tableau_recap;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 use Spipu\Html2Pdf\Html2Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -88,6 +90,13 @@ public function supprimer($id){
     $analyse =Analyse::find($id);
     $analyse->delete();
     return redirect()->route('liste')->with('success',"L'analyse supprimée avec succès");
+}
+public function supprimer_pj($id){
+    $analyse =Analyse::find($id);
+
+    $analyse->nomfichier="";
+    $analyse->save();
+    return redirect()->back()->with('success',"La pièce jointe de l'analyse à été suppriméeavec succès");
 }
     public function liste(){
         $natures= Nature::all();
@@ -207,6 +216,15 @@ public function supprimer($id){
         $value=$analyse->id;
         $code = $lepays->alpha2.'-'.$lechantier->libelle.'-'.$value ;
         $analyse->code=$code;
+        if($request->file('nomfichier')){
+            $analyse->nomfichier=Str::ascii('analyse_'.$analyse->code.'_'.$request->file('nomfichier')->getClientOriginalName());
+
+            $path = Storage::putFileAs(
+                'images'.DIRECTORY_SEPARATOR.'document', $request->file('nomfichier'), $analyse->nomfichier
+            );
+        }else{
+            $analyse->image="";
+        }
 
         $analyse->save();
 
@@ -215,6 +233,12 @@ public function supprimer($id){
 
     }
 
+    public function download_doc($namefile){
+        // dd($namefile);
+        //   dd('document/'.$slug.'/'.$namefile);
+      //  dd (Storage::download('images'.DIRECTORY_SEPARATOR.'document'.DIRECTORY_SEPARATOR. Str::ascii($namefile,'fr')));
+        return Storage::download('images'.DIRECTORY_SEPARATOR.'document'.DIRECTORY_SEPARATOR. Str::ascii($namefile,'fr'));
+    }
     public function modifier_analyse(Request $request){
         $parameters=$request->except(['_token']);
         $nature = $parameters['nature'];
@@ -312,6 +336,16 @@ public function supprimer($id){
         $analyse->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
         $analyse->save();
 
+            if($request->file('nomfichier')){
+                $analyse->nomfichier=Str::ascii('analyse_'.$analyse->code.'_'.$request->file('nomfichier')->getClientOriginalName());
+
+                $path = Storage::putFileAs(
+                    'images'.DIRECTORY_SEPARATOR.'document', $request->file('nomfichier'), $analyse->nomfichier
+                );
+            }else{
+                //$analyse->nomfichier="";
+            }
+            $analyse->save();
         return redirect()->route('liste')->with('success',"L'analyse a été mise à jour  avec succès");
             }else{
                 return redirect()->route('liste')->with('error',"vous n'avez pas le droit de modifier cette analyse");
