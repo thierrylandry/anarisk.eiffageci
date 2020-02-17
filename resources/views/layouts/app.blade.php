@@ -105,7 +105,7 @@
             background-color: #00ff7f29!important;
         }
         .opportuniteferme {
-            background-color: white!important;
+            background-color: #3cf1ff!important;
         }
     </style>
     <link href="{{ asset('css/impression.css')}}" rel="stylesheet" media="print">
