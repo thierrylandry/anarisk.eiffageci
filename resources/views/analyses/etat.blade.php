@@ -97,7 +97,11 @@
                                         <td> {{$risque->description}} </td>
                                         <td> <input type="hidden" value="{{$risque->id}}" name="risk_{{$risque->id}}"/> </td>
                                         <td>
+                                            @if($risque->cout>0)
                                             - {{number_format($risque->cout, 0, ',', ' ')}}
+                                                @else
+                                                0
+                                            @endif
                                         </td>
                                         <td>
                                             MFCFA
@@ -105,9 +109,21 @@
                                         <td><input type="number" value="{{$risque->aupire}}" id="prob_aupire" name="prob_aupire_{{$risque->id}}" class="prob_aupire" min="0" max="100" style="width: 50px;"/></td>
                                         <td><input type="number" value="{{$risque->juste}}" id="prob_aujuste" name="prob_aujuste_{{$risque->id}}"  class="prob_aujuste" min="0" max="100" style="width: 50px;"/></td>
                                         <td><input type="number" value="{{$risque->aumieux}}"  id="prob_aumieux" name="prob_aumieux_{{$risque->id}}"  class="prob_aumieux" min="0" max="100" style="width: 50px;"/></td>
-                                        <td id="val_aupire{{$risque->id}}">{{number_format(($risque->cout*$risque->aupire)/100, 0, ',', ' ')}}</td>
-                                        <td id="val_aujuste{{$risque->id}}">{{number_format(($risque->cout*$risque->juste)/100, 0, ',', ' ')}} </td>
-                                        <td id="val_aumieux{{$risque->id}}">{{number_format(($risque->cout*$risque->aumieux)/100, 0, ',', ' ')}}  </td>
+                                        <td id="val_aupire{{$risque->id}}"> @if($risque->cout*$risque->aupire>0)-{{number_format(($risque->cout*$risque->aupire)/100, 0, ',', ' ')}}
+                                                                            @else
+                                                                                0
+                                                                            @endif
+                                        </td>
+                                        <td id="val_aujuste{{$risque->id}}">@if($risque->cout*$risque->juste>0)-{{number_format(($risque->cout*$risque->juste)/100, 0, ',', ' ')}}
+                                                                            @else
+                                                                                0
+                                                                            @endif
+                                        </td>
+                                        <td id="val_aumieux{{$risque->id}}">@if($risque->cout*$risque->aumieux>0)- {{number_format(($risque->cout*$risque->aumieux)/100, 0, ',', ' ')}}
+                                                                            @else
+                                                                                0
+                                                                            @endif
+                                        </td>
                                     </tr>
 
                                 @endforeach
