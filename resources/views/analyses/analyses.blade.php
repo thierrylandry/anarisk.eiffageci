@@ -298,7 +298,7 @@
                         </div>
                         <div class="card-body card-block">
                             <div class="form-inline col-sm-4">
-                                <label class=" form-control-label">Coût: &nbsp;</label>
+                                <label class=" form-control-label cout">Coût: </label>&nbsp;
                                 <div class="input-group">
 
                                     <input name="cout" class="form-control" type="text" id="cout"value="{{isset($analyse)?number_format($analyse->cout,0, ',', ' '):''}}"/>
