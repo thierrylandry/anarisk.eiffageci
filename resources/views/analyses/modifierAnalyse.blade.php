@@ -126,11 +126,11 @@
                     <div class="col-xs-6 col-sm-6">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Causes </strong>
+                                <strong class="card-title" id="causer">Causes </strong>
                             </div>
                             <div class="card-body">
 
-                                Ajouter une cause
+                                Ajouter
                                 <button type="button" class="btn bg-teal btn-circle waves-effect waves-circle waves-float" id="addcauses">
                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 </button>
@@ -141,7 +141,6 @@
                                     @if(isset($analyse->causes))
                                     @foreach(json_decode($analyse->causes) as $cause)
                                     <div class=" form-control-label">
-                                        <label for="causes[]">Cause</label>
 
                                         <div class="form-group">
                                             <input name="causes[]" class="form-control" style="" type="text" value="{{$cause->libelle}}"/>
@@ -154,7 +153,6 @@
                                 </div>
                                 <div id="causestemplate" class="row clearfix" style="display: none">
                                     <div class=" form-control-label">
-                                        <label for="causes[]">Cause</label>
                                         <div class="form-group">
                                             <input name="causes[]" class="form-control" style="" type="text"/>
                                         </div>
@@ -171,11 +169,11 @@
                     <div class="col-xs-6 col-sm-6">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Conséquences </strong>
+                                <strong class="card-title"  id="consequence">Conséquences </strong>
                             </div>
                             <div class="card-body">
 
-                                Ajouter une conséquence
+                                Ajouter
                                 <button type="button" class="btn bg-teal btn-circle waves-effect waves-circle waves-float" id="addconsequences">
                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 </button>
@@ -185,7 +183,7 @@
                                     @if(isset($analyse->consequences))
                                     @foreach(json_decode($analyse->consequences) as $consequence)
                                     <div class=" form-control-label">
-                                        <label for="consequences[]">Conséquence</label>
+                                        <label for="consequences[]"></label>
                                         <div class="form-group">
                                             <input name="consequences[]" class="form-control" style="" type="text" value="{{$consequence->libelle}}"/>
                                         </div>
@@ -197,7 +195,7 @@
                                 </div>
                                 <div id="consequencestemplate" class="row clearfix" style="display: none">
                                     <div class=" form-control-label">
-                                        <label for="consequences[]">Conséquence</label>
+                                        <label for="consequences[]"></label>
                                         <div class="form-group">
                                             <input name="consequences[]" class="form-control" style="" type="text"/>
                                         </div>
@@ -225,9 +223,9 @@
                                         <th colspan="3">Impacts</th>
                                     </tr>
                                     <tr>
-                                        <th>Sévérité</th>
+                                        <th class="severite">Sévérité</th>
                                         <th>Planning</th>
-                                        <th>Cout</th>
+                                        <th class="cout">Cout</th>
                                         <th>Niveau</th>
                                     </tr>
                                     <tr>
@@ -274,9 +272,9 @@
                                         <th colspan="3">Impacts</th>
                                     </tr>
                                     <tr>
-                                        <th>Sévérité </th>
-                                        <th>Planning</th>
-                                        <th>Coût</th>
+                                        <th class="severite">Sévérité </th>
+                                        <th >Planning</th>
+                                        <th class="cout">Coût</th>
                                         <th>Niveau</th>
                                     </tr>
                                     <tr>
@@ -316,7 +314,7 @@
                             </div>
                             <div class="card-body card-block">
                                 <div class="form-inline col-sm-4">
-                                    <label class=" form-control-label">Coût: &nbsp;</label>
+                                    <label class=" form-control-label" class="cout">Coût: &nbsp;</label>
                                     <div class="input-group">
 
                                         <input name="cout" class="form-control" type="text"  id="cout"value="{{isset($analyse)?number_format($analyse->cout,0, ',', ' '):''}}"/>
@@ -374,7 +372,9 @@
         <script>
 
             var nature =jQuery("#nature").val();
+            var route='{{URL::asset('')}}';
             if(nature==1){
+                jQuery('#permanant').attr('src',route+'images/anarisk.png');
                 jQuery("#titreeval").empty();
                 jQuery("#titreeval").append(" Evaluation du niveau de risque");
 
@@ -389,8 +389,17 @@
                     jQuery(".right-panel").addClass('risk');
                 }
 
+                jQuery("#causer").empty();
+                jQuery("#causer").append( "Causes");
+                jQuery("#consequence").empty();
+                jQuery("#consequence").append( "Conséquences");
 
+                jQuery(".severite").empty();
+                jQuery(".severite").append( "Sévérité");
+                jQuery(".cout").empty();
+                jQuery(".cout").append( "Coût");
             }else{
+                jQuery('#permanant').attr('src',route+'images/anarisk_opportunite.jpg');
                 jQuery("#titreeval").empty();
                 jQuery("#titreeval").append( "Evaluation du niveau de l'opportunité");
 
@@ -403,6 +412,13 @@
                 }else{
                     jQuery(".right-panel").addClass('opportunite');
                 }
+                jQuery("#causer").append( "Facteurs");
+                jQuery("#consequence").empty();
+                jQuery("#consequence").append( "Conséquences");
+                jQuery(".severite").empty();
+                jQuery(".severite").append("Bénéfice");
+                jQuery(".cout").empty();
+                jQuery(".cout").append( "Gain");
             }
 
 
@@ -449,7 +465,9 @@
                 jQuery("#nature").change(function (e) {
 
                     var nature =jQuery("#nature").val();
+                    var route='{{URL::asset('')}}';
                     if(nature==1){
+                        jQuery('#permanant').attr('src',route+'images/anarisk.png');
                         jQuery("#titreeval").empty();
                         jQuery("#titreeval").append(" Evaluation du niveau de risque");
 
@@ -464,13 +482,26 @@
                             jQuery(".right-panel").addClass('risk');
                         }
 
+                        jQuery("#causer").empty();
+                        jQuery("#causer").append( "Causes");
+                        jQuery("#consequence").empty();
+                        jQuery("#consequence").append( "Conséquences");
 
+                        jQuery(".severite").empty();
+                        jQuery(".severite").append( "Sévérité");
+                        jQuery(".cout").empty();
+                        jQuery(".cout").append( "Coût");
                     }else{
+                        jQuery('#permanant').attr('src',route+'images/anarisk_opportunite.jpg');
                         jQuery("#titreeval").empty();
                         jQuery("#titreeval").append( "Evaluation du niveau de l'opportunité");
 
                         jQuery("#titreeval1").empty();
                         jQuery("#titreeval1").append(" Evaluation après action(s) favorisante(s)");
+                        jQuery("#causer").empty();
+                        jQuery("#causer").append( "Facteurs");
+                        jQuery("#consequence").empty();
+                        jQuery("#consequence").append( "Conséquences");
 
                         if(jQuery(".right-panel").hasClass('risk')) {
                             jQuery(".right-panel").removeClass('risk');
@@ -478,6 +509,10 @@
                         }else{
                             jQuery(".right-panel").addClass('opportunite');
                         }
+                        jQuery(".severite").empty();
+                        jQuery(".severite").append("Bénéfice");
+                        jQuery(".cout").empty();
+                        jQuery(".cout").append( "Gain");
                     }
 
                 });
