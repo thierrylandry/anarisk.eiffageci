@@ -100,6 +100,21 @@
 <script>
 
     jQuery(document).ready(function() {
+        var email=jQuery('#email').val();
+        jQuery("#chantier").html('');
+        jQuery.get("liste_chantier/"+email,function(data) {
+            console.log(data);
+            //   console.log(data);
+
+            var option="";
+            jQuery.each(data,function(index, value){
+                option+="<option value='"+value.id+"'>"+value.libelle+"</opption>"
+            });
+            //alert(option);
+
+            jQuery("#chantier").html(option);
+
+        });
 
         jQuery("#email").change(function (){
            var email=jQuery('#email').val();
