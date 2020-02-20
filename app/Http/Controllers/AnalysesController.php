@@ -353,7 +353,7 @@ public function supprimer_pj($id){
             }else{
                 $analyse->cout=null;
             }
-        $analyse->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
+       // $analyse->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
         $analyse->save();
 
             if($request->file('nomfichier')){
