@@ -69,7 +69,8 @@ public function ficheAnalyse($id){
     $analyse =Analyse::find($id);
     $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
     return view('analyses.fiche',compact('analyse','responsables'));
-}public function fichesanalyses(){
+}
+public function fichesanalyses(){
     $analyses =Analyse::where('id_chantier','=',Auth::user()->id_chantier_connecte)->get();
     $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
     return view('analyses.fichesanalyses',compact('analyses','responsables'));
@@ -345,9 +346,11 @@ public function supprimer_pj($id){
 
         $analyse->causes=$var["cause"];
         $analyse->consequences=$var["consequences"];
+
             if($cout!=null){
                 $analyse->cout=filter_var($cout, FILTER_SANITIZE_NUMBER_INT);
-            }{
+               // dd($analyse->cout);
+            }else{
                 $analyse->cout=null;
             }
         $analyse->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
