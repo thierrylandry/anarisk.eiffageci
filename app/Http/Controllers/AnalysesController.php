@@ -323,7 +323,7 @@ public function supprimer_pj($id){
         //  dd($raw);
         $var["consequences"] = json_encode($consequences->toArray());
         $analyse =  Analyse::find($id);
-        if($analyse->id_proprietaire==\Illuminate\Support\Facades\Auth::user()->id|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id){
+        if($analyse->id_proprietaire==\Illuminate\Support\Facades\Auth::user()->id|| $analyse->auteur->id==\Illuminate\Support\Facades\Auth::user()->id || Auth::user()->hasrole('parametrage')){
 
 
         $analyse->id_nature=$nature;
