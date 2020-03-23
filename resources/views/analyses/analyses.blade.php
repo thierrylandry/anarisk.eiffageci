@@ -317,7 +317,7 @@
                             <div class="form-group col-sm-12">
 
                                 <div class="input-group">
-                                    <input type="file" id="nomfichier" name="nomfichier" placeholder="nomfichier" class="form-control">
+                                    <input type="file" id="nomfichier" name="nomfichier[]" multiple placeholder="nomfichier" class="form-control">
                                     @if(isset($analyse->nomfichier))
                                         <a href="{{route('download_doc',$analyse->nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$analyse->nomfichier}}</a>
                                     @endif

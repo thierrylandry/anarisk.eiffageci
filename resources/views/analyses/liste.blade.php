@@ -247,7 +247,7 @@ active
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="file" id="nomfichier" name="nomfichier" placeholder="nomfichier" class="form-control">
+                            <input type="file" id="nomfichier" name="nomfichier"  placeholder="nomfichier" class="form-control">
                         </div>
 
                 </div>
@@ -376,7 +376,12 @@ active
                                         </td>
                                         <td>
                                             @if(!empty($analyse->nomfichier))
-                                                <a href="{{route('download_doc',$analyse->nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$analyse->nomfichier}}</a>
+                                                @foreach(explode(',',$analyse->nomfichier) as $nomfichier)
+                                                    @if($nomfichier!="")
+                                                        <li><a href="{{route('download_doc',$nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$nomfichier}}</a>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
                                                 @endif
                                         </td>
                                     </tr>

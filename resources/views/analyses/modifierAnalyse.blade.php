@@ -333,14 +333,21 @@
                                 <div class="form-group col-sm-12">
                                     <div class="input-group">
                                         @if(!empty($analyse->nomfichier))
-                                        <a href="{{route('supprimer_pj',$analyse->id)}}" class="btn btn-danger">Supprimer la pièce jointe</a>
+                                        <a href="{{route('supprimer_pj',$analyse->id)}}" class="btn btn-danger">Supprimer toute les pièces jointes</a>
                                             @endif
                                     </div>
                                        </br>
                                     <div class="input-group">
-                                        <input type="file" id="nomfichier" name="nomfichier" placeholder="nomfichier" class="form-control">
+                                        <input type="file" id="nomfichier" name="nomfichier[]" multiple placeholder="nomfichier" class="form-control">
                                         @if(!empty($analyse->nomfichier))
-                                            <a href="{{route('download_doc',$analyse->nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$analyse->nomfichier}}</a>
+                                            <ul>
+                                            @foreach(explode(',',$analyse->nomfichier) as $nomfichier)
+                                                @if($nomfichier!="")
+                                           <li><a href="{{route('download_doc',$nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$nomfichier}}</a>  <a href="{{route('supprimer_pj_unique',[$analyse->id,$nomfichier])}}" class="btn btn-danger">Supprimer la pièce jointe</a>
+                                           </li>
+                                                    @endif
+                                            @endforeach
+                                            </ul>
                                         @endif
                                     </div>
                                 </div>

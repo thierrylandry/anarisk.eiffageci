@@ -116,6 +116,13 @@ public function supprimer_pj($id){
     $analyse->save();
     return redirect()->back()->with('success',"La pièce jointe de l'analyse à été supprimée avec succès");
 }
+public function supprimer_pj_unique($id,$nomfichier){
+    $analyse =Analyse::find($id);
+
+    $analyse->nomfichier=str_replace($nomfichier,"",','.$analyse->nomfichier);
+    $analyse->save();
+    return redirect()->back()->with('success',"La pièce jointe de l'analyse à été supprimée avec succès");
+}
     public function liste(){
         $natures= Nature::all();
         $payss = Pays::all();
@@ -235,11 +242,20 @@ public function supprimer_pj($id){
         $code = $lepays->alpha2.'-'.$lechantier->libelle.'-'.$value ;
         $analyse->code=$code;
         if($request->file('nomfichier')){
-            $analyse->nomfichier=Str::ascii('analyse_'.$analyse->code.'_'.$request->file('nomfichier')->getClientOriginalName());
 
-            $path = Storage::putFileAs(
-                'images'.DIRECTORY_SEPARATOR.'document', $request->file('nomfichier'), $analyse->nomfichier
-            );
+            foreach($request->file('nomfichier') as $nomfichiers):
+
+               // dd($nomfichiers);
+
+                $analyse->nomfichier=$analyse->nomfichier.','.Str::ascii('analyse_'.$analyse->code.'_'.$nomfichiers->getClientOriginalName());
+
+                $path = Storage::putFileAs(
+                    'images'.DIRECTORY_SEPARATOR.'document', $nomfichiers, Str::ascii('analyse_'.$analyse->code.'_'.$nomfichiers->getClientOriginalName())
+                );
+
+                endforeach;
+
+
         }else{
           //  $analyse->image="";
         }
@@ -356,12 +372,19 @@ public function supprimer_pj($id){
             }
        // $analyse->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
 
-            if($request->file('nomfichier')){
-                $analyse->nomfichier=Str::ascii('analyse_'.$analyse->code.'_'.$request->file('nomfichier')->getClientOriginalName());
 
-                $path = Storage::putFileAs(
-                    'images'.DIRECTORY_SEPARATOR.'document', $request->file('nomfichier'), $analyse->nomfichier
-                );
+            if($request->file('nomfichier')){
+                foreach($request->file('nomfichier') as $nomfichiers):
+
+                    // dd($nomfichiers);
+
+                    $analyse->nomfichier=$analyse->nomfichier.','.Str::ascii('analyse_'.$analyse->code.'_'.$nomfichiers->getClientOriginalName());
+
+                    $path = Storage::putFileAs(
+                        'images'.DIRECTORY_SEPARATOR.'document', $nomfichiers, Str::ascii('analyse_'.$analyse->code.'_'.$nomfichiers->getClientOriginalName())
+                    );
+
+                endforeach;
             }else{
                 //$analyse->nomfichier="";
             }

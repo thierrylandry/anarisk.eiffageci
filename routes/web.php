@@ -139,6 +139,10 @@ Route::get('/supprimer_pj/{id}',[
         'as'=>'supprimer_pj',
         'uses'=>'AnalysesController@supprimer_pj',
     ])->middleware('auth');
+Route::get('/supprimer_pj_unique/{id}/{nomfichier}',[
+        'as'=>'supprimer_pj_unique',
+        'uses'=>'AnalysesController@supprimer_pj_unique',
+    ])->middleware('auth');
 Route::get('/supprimer_pj_mesure/{id}',[
         'as'=>'supprimer_pj_mesure',
         'uses'=>'MesuresController@supprimer_pj_mesure',
