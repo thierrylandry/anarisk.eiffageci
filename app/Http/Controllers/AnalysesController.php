@@ -259,6 +259,7 @@ public function supprimer_pj($id){
     }
     public function modifier_analyse(Request $request){
         $parameters=$request->except(['_token']);
+       // dd($parameters);
         $nature = $parameters['nature'];
         $date = $parameters['date'];
         $pays = $parameters['pays'];
@@ -330,7 +331,7 @@ public function supprimer_pj($id){
         $analyse->date=$date;
         $analyse->id_chantier=$chantier;
         $analyse->id_proprietaire=$proprietaire;
-        $analyse->code=$code;
+      //  $analyse->code=$code;
         $analyse->probabiliteAvant=$probabiliteAvant;
         $analyse->severiteAvant=$severiteAvant;
         $analyse->planingAvant=$planingAvant;
@@ -354,7 +355,6 @@ public function supprimer_pj($id){
                 $analyse->cout=null;
             }
        // $analyse->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
-        $analyse->save();
 
             if($request->file('nomfichier')){
                 $analyse->nomfichier=Str::ascii('analyse_'.$analyse->code.'_'.$request->file('nomfichier')->getClientOriginalName());
