@@ -156,9 +156,15 @@ public function supprimer_pj_unique($id,$nomfichier){
 
         $lepays= Pays::find($pays);
         $lechantier= Chantier::find($chantier);
-        $lesanalyses= Analyse::all();
 
-        $value=sizeof($lesanalyses)+1;
+        $lesanalyses= Analyse::where('id_chantier','=',$lechantier->id)->get();
+      //  dd($lesanalyses);
+        $tableau_code= Array();
+        foreach($lesanalyses as $analyse):
+            $tableau_code[]=preg_replace('~\D~', '',$analyse->code);
+            endforeach;
+        //dd(end($tableau_code));
+        $value=intval(end($tableau_code))+1;
         $code = $lepays->alpha2.'-'.$lechantier->libelle.'-'.$value ;
         $probabiliteAvant = $parameters['probabiliteAvant'];
         $severiteAvant = $parameters['severiteAvant'];
@@ -239,7 +245,6 @@ public function supprimer_pj_unique($id,$nomfichier){
         $analyse->save();
 
         $value=$analyse->id;
-        $code = $lepays->alpha2.'-'.$lechantier->libelle.'-'.$value ;
         $analyse->code=$code;
         if($request->file('nomfichier')){
 
