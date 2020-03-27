@@ -55,17 +55,20 @@ class UsersController extends Controller
         $utilisateur->id_acteur = $parameters['id_acteur'];
       //  $utilisateur->slug = Str::slug($parameters['email'] . $date->format('dmYhis'));
         $utilisateur->save();
-        $roles=$parameters['roles'];
+        if(isset($parameters['roles'])){
+            $roles=$parameters['roles'];
 
-        foreach ($roles as $role):
-            $utilisateur->roles()->attach(Role::where('name',$role)->first());
-        endforeach;
+            foreach ($roles as $role):
+                $utilisateur->roles()->attach(Role::where('name',$role)->first());
+            endforeach;
+        }
 
-        $chantiers=$parameters['chantiers'];
-        foreach ($chantiers as $chantier):
-            $utilisateur->chantiers()->attach(Chantier::where('libelle',$chantier)->first());
-        endforeach;
-
+        if(isset($parameters['chantiers'])) {
+            $chantiers = $parameters['chantiers'];
+            foreach ($chantiers as $chantier):
+                $utilisateur->chantiers()->attach(Chantier::where('libelle', $chantier)->first());
+            endforeach;
+        }
 
         return redirect()->back()->with('success', "L'utilisateur a été ajouté");
     }
