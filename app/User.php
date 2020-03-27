@@ -42,6 +42,10 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Acteur','id', 'id_acteur');
     }
+    public function ChantierPrincipale()
+    {
+        return $this->hasOne('App\Chantier','id', 'id_chantier_principal');
+    }
     public function roles()
     {
         return $this->belongsToMany('App\Role', 'user_role', 'user_id', 'role_id');

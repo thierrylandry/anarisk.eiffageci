@@ -101,6 +101,21 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="select" class=" form-control-label">Chantier principale (A préciser uniquement pour les chefs de projet)</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <select data-placeholder="Choisir le chantier" name="id_chantier_principal" class="standardSelect">
+                                            <option value="">Selectionner un chantier</option>
+                                            @foreach($chantiers as $chantier)
+                                                @if(isset($user) && isset($user->ChantierPrincipale->id) && $user->ChantierPrincipale->id==$chantier->id)
+                                                    <option value="{{$chantier->id}}" selected>{{$chantier->libelle}} {{$chantier->pays->nom_fr_fr}}</option>
+                                                @else
+                                                    <option value="{{$chantier->id}}" >{{$chantier->libelle}} {{$chantier->pays->nom_fr_fr}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <div class="card-footer">
@@ -146,7 +161,7 @@
                                                    <ul>
                                                    @foreach( $user->chantiers as $chantier)
 
-                                                           <li>{{$chantier->libelle}}</li>
+                                                           <li>{{$chantier->libelle}} {{isset($user->ChantierPrincipale) && $user->ChantierPrincipale->id==$chantier->id?"(Principal)":""}}</li>
 
                                                        @endforeach
                                                    </ul>
