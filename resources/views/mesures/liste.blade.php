@@ -514,7 +514,7 @@ active
                                    // console.log(couleur);
                                $(rows[index]).before(
 
-                                            '<tr class="group '+couleur+'"  style=""><td colspan="11"><b>' + data[3] + ' : ' + data[1] + '  ' + data[2] + '</b></td></tr>'
+                                            '<tr class="group '+couleur+'"  style=""><td colspan="11"><b>' + data[3] + ' : ' + data[1] + '  ' + data[2] + ' avec un cout de ' + data[4] + ' MFCFA</b></td></tr>'
                                     );
 
 
