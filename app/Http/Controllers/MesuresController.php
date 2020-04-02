@@ -42,6 +42,24 @@ class MesuresController extends Controller
         return redirect()->back()->with('error',"La mesure  a été supprimée avec succès");
 
     }
+    public function tableau_recap_mesure(){
+        $mesures =  DB::table('mesure')
+            ->join('analyse','analyse.id','=','mesure.id_analyse')
+            ->join('acteur','acteur.id','=','mesure.id_acteur')
+            ->join('statut','statut.id','=','mesure.id_statut')
+            ->join('users','users.id','=','mesure.id_auteur')
+            ->join('nature','nature.id','=','analyse.id_nature')
+            ->select('mesure.id','dateplanifie','dateEffective','documentation','id_responsable','id_statut','id_priorite','mesure.libelle','id_proprietaire','mesure.id_statut',DB::raw('statut.libelle as libellestatut'),'nom','prenoms','code','description','causes','consequences','nature','cout','etat')->get();
+        $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
+
+        $priorites = Priorite::all();
+        $statuts = Statut::all();
+        $acteurs = Acteur::all();
+        $periodicites = Periodicite::all();
+
+        return view('mesures.liste',compact('mesures','responsables','priorites','statuts','periodicites','acteurs'));
+
+    }
     public function SaveMesure(Request $request){
         $parameters=$request->except(['_token']);
         $statut = $parameters['statut'];

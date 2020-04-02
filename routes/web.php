@@ -24,7 +24,10 @@ Route::get('/',[
     'as'=>'/',
     'uses'=>'HomeController@index',
 ])->middleware('auth');
-
+Route::get('/tableau_recap_mesure',[
+    'as'=>'tableau_recap_mesure',
+    'uses'=>'MesuresController@tableau_recap_mesure',
+])->middleware('auth');
 Route::group(['prefix' => 'analyses'], function () {
     Route::get('/creer',[
         'as'=>'analyses',
