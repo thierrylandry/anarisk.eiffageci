@@ -469,10 +469,12 @@ console.log(api.row(rows).data());
                                         couleur='opportuniteferme';
                                     }
 
-
+                                   // console.log(couleur);
                                $(rows[index]).before(
-                                            '<tr class="group couleur" style=";color:white"><td colspan="11"><b>' + data[3] + ' : ' + data[1] + '  ' + data[2] + '</b></td></tr>'
+
+                                            '<tr class="group '+couleur+'"  style=""><td colspan="11"><b>' + data[3] + ' : ' + data[1] + '  ' + data[2] + '</b></td></tr>'
                                     );
+
 
                                     group_last = group;
                                 }
