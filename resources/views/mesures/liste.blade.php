@@ -378,6 +378,9 @@ active
             <script src="{{ asset('assets/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
             <script src="{{ asset('assets/js/lib/data-table/dataTables.buttons.min.js')}}"></script>
             <script src="{{ asset('assets/js/lib/data-table/buttons.bootstrap.min.js')}}"></script>
+
+    <script src="{{ asset("js/lib/data-table/dataTables.rowGroup.min.js") }}"></script>
+
             <script src="{{ asset('assets/js/lib/data-table/jszip.min.js')}}"></script>
             <script src="{{ asset('assets/js/lib/data-table/pdfmake.min.js')}}"></script>
             <script src="{{ asset('assets/js/lib/data-table/vfs_fonts.js')}}"></script>
@@ -474,15 +477,6 @@ active
                             $(row).addClass('redClass');
                         }
                     },
-                    rowGroup: {
-                        startRender: function ( rows, group ) {
-                            return 'Nombre de mesure '+' ('+rows.count()+')';
-
-                        },
-                        endRender: null,
-
-                        dataSrc: [0]
-                    },
                     "drawCallback": function (settings){
                         var api = this.api();
 
@@ -493,7 +487,6 @@ active
                             var rows = api.rows({ page: 'current' }).nodes();
                             var group_last = null;
                             api.column(col_name, { page: 'current' }).data().each(function (name, index){
-                                console.log(index);
                                 var group = name;
                                 var data = api.row(rows[index]).data();
 
@@ -522,6 +515,15 @@ active
                                 }
                             });
                         }
+                    },
+                    rowGroup: {
+                        startRender: function ( rows, group ) {
+                            return 'Nombre de mesure '+' ('+rows.count()+')';
+
+                        },
+                        endRender: null,
+
+                        dataSrc: [0]
                     },
                 }).column(0).visible(false).column(1).visible(false).column(2).visible(false).visible(false).column(3).visible(false).visible(false).column(4).visible(false).column(5).visible(false);
 
