@@ -32,7 +32,7 @@
 
         </div>
         @foreach($analyses as $analyse)
-        <div class="row" id="page">
+        <div class="row" id="page" style="page-break-after:always;">
             <div class="col-md-12">
                 <div class="card " id="page">
                     <div class="card-body">
