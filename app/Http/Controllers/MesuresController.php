@@ -49,7 +49,7 @@ class MesuresController extends Controller
             ->join('statut','statut.id','=','mesure.id_statut')
             ->join('users','users.id','=','mesure.id_auteur')
             ->join('nature','nature.id','=','analyse.id_nature')
-            ->select('mesure.id','dateplanifie','dateEffective','documentation','id_responsable','id_statut','id_priorite','mesure.libelle','id_proprietaire','mesure.id_statut',DB::raw('statut.libelle as libellestatut'),'nom','prenoms','code','description','causes','consequences','nature','cout','etat')->get();
+            ->select('mesure.id','dateplanifie','dateEffective','documentation','id_responsable','id_statut','id_priorite','mesure.libelle','id_proprietaire','mesure.id_statut',DB::raw('statut.libelle as libellestatut'),'nom','prenoms','code','description','causes','consequences','nature','cout','etat','mesure.nomfichier')->get();
         $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
 
         $priorites = Priorite::all();

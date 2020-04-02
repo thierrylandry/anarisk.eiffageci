@@ -30,6 +30,9 @@
             <li class="">
                 <a href="{{route('fichesanalyses')}}" target="_blank" ><i class="menu-icon fa fa-book"></i> TOUTES LES FICHES</a>
             </li>
+            <li class="@yield('liste_mesure')">
+                <a href="{{route('tableau_recap_mesure')}}"><i class="menu-icon fa fa-list"></i>TABLEAU RECAPITULATIF DES MESURES</a>
+            </li>
             @if(Auth::user() != null && Auth::user()->hasAnyRole(['parametrage']))
             <li class="@yield('parametrage') menu-item-has-children dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cog"></i>PARAMETRAGE</a>

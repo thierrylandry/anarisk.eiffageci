@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('liste_actif')
+@section('liste_mesure')
 active
 @endsection
 @section('page')
@@ -276,11 +276,6 @@ active
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-11">
-                                    <a href="#" data-toggle="modal" data-target="#smallmodal" class="ajouterMesure btn btn-success btn-sm"> <i class="ti-ruler-pencil"></i> Ajouter une mesure</a>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-sm-12">
                                     <table id="bootstrap-data-table1" class="table table-striped table-bordered" style="width: 100%">
                                         <thead>
@@ -299,7 +294,6 @@ active
                                             <th>Date de planification</th>
                                             <th>Date effective</th>
                                             <th>Auteur</th>
-                                            <th>Action</th>
                                             <th>PJ</th>
                                         </tr>
                                         </thead>
@@ -353,15 +347,6 @@ active
                                                 </td>
                                                 <td>
                                                     {{$mesure->nom}}  {{$mesure->prenoms}}
-                                                </td>
-                                                <td>
-                                                    @if(isset($mesure->statut->id)&& $mesure->statut->id!=10)
-                                                        <a href="{{route('pageModifMesure',$mesure->id)}}" class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-edit"></i> Modifier la mesure</a>
-                                                        @if($mesure->statut->id!=10)
-                                                            <a href="#" class="btn btn-success btn-sm terminerClass" data-toggle="modal" data-target="#teminer"> <i class="menu-icon fa fa-key"></i> terminé</a>
-                                                            <a href="{{route("supprimer_mesure",$mesure->id)}}" class="btn btn-danger btn-sm terminerClass confirmons"> <i class="menu-icon fa fa-trash"></i> Supprimer</a>
-                                                        @endif
-                                                    @endif
                                                 </td>
                                                 <td>
                                                     @if(!empty($mesure->nomfichier))
@@ -422,8 +407,58 @@ active
                 });
 
             jQuery(function($) {
+                var date =new Date();
                 var table= $('#bootstrap-data-table1').DataTable({
                     "order": [[ 1, "desc" ]],
+                    buttons: [
+                        {
+                            extend: 'copyHtml5',
+                            exportOptions: {
+                                columns: [ 1, 2, 5,6,7,8,9,10,11,12,13,14 ]
+                            },
+                            text:"Copier",
+                            filename: "Liste des D.A "+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
+                            className: 'btn btn-primary btn-sm m-5 width-140 assets-select-btn toolbox-delete-selected',
+                            messageTop: "Tableau récapitulatif des mesures "+date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),
+
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            exportOptions: {
+                                columns: [ 1, 2, 5,6,7,8,9,10,11,12,13,14 ]
+                            },
+                            text:"Excel",
+                            filename: "Liste des D.A "+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
+                            className: 'btn btn-primary btn-sm m-5 width-140 assets-select-btn toolbox-delete-selected',
+                            messageTop: "Liste des D.A "+date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),
+                            orientation: 'landscape',
+
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            exportOptions: {
+                                columns: [ 1, 2, 5,6,7,8,9,10,11,12,13,14 ]
+                            },
+                            text:"PDF",
+                            filename: "Liste des D.A "+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
+                            className: 'btn btn-primary btn-sm m-5 width-140 assets-select-btn toolbox-delete-selected',
+                            messageTop: "Liste des D.A "+date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),
+                            orientation: 'landscape',
+
+                        },
+                        {
+                            extend: 'print',
+                            exportOptions: {
+                                columns: [ 1, 2, 5,6,7,8,9,10,11,12,13,14 ]
+                            },
+                            text:"Imprimer",
+                            filename: "Liste des D.A"+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
+                            className: 'btn btn-primary btn-sm m-5 width-140 assets-select-btn toolbox-delete-selected',
+                            messageTop: "Liste des D.A "+date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),
+                            orientation: 'landscape',
+
+                        }
+                    ],
                     language: {
                         url: "{{ URL::asset('js/French.json') }}"
                     },
@@ -439,17 +474,24 @@ active
                             $(row).addClass('redClass');
                         }
                     },
+                    rowGroup: {
+                        startRender: function ( rows, group ) {
+                            return 'Nombre de mesure '+' ('+rows.count()+')';
+
+                        },
+                        endRender: null,
+
+                        dataSrc: [0]
+                    },
                     "drawCallback": function (settings){
                         var api = this.api();
 
                         // Zero-based index of the column containing names
                         var col_name = 1;
-console.log(api.order());
                         // If ordered by column containing names
                         if (api.order()[0][0] === col_name) {
                             var rows = api.rows({ page: 'current' }).nodes();
                             var group_last = null;
-console.log(api.row(rows).data());
                             api.column(col_name, { page: 'current' }).data().each(function (name, index){
                                 console.log(index);
                                 var group = name;
