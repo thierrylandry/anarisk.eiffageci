@@ -88,13 +88,22 @@ class MesuresController extends Controller
         $mesure->save();
 
         if($request->file('nomfichier')){
-            $mesure->nomfichier=Str::ascii('mesure_'.$mesure->id.'_'.$request->file('nomfichier')->getClientOriginalName());
 
-            $path = Storage::putFileAs(
-                'images'.DIRECTORY_SEPARATOR.'document', $request->file('nomfichier'), $mesure->nomfichier
-            );
+            foreach($request->file('nomfichier') as $nomfichiers):
+
+                // dd($nomfichiers);
+
+                $mesure->nomfichier=$mesure->nomfichier.','.Str::ascii('Mesure_'.$mesure->libelle.'_'.$nomfichiers->getClientOriginalName());
+
+                $path = Storage::putFileAs(
+                    'images'.DIRECTORY_SEPARATOR.'document', $nomfichiers, Str::ascii('Mesure_'.$mesure->libelle.'_'.$nomfichiers->getClientOriginalName())
+                );
+
+            endforeach;
+
+
         }else{
-           // $mesure->image="";
+            //  $analyse->image="";
         }
 
         $mesure->save();
@@ -129,13 +138,22 @@ class MesuresController extends Controller
         $mesure->save();
 
         if($request->file('nomfichier')){
-            $mesure->nomfichier=Str::ascii('mesure'.$mesure->id.'_'.$request->file('nomfichier')->getClientOriginalName());
 
-            $path = Storage::putFileAs(
-                'images'.DIRECTORY_SEPARATOR.'document', $request->file('nomfichier'), $mesure->nomfichier
-            );
+            foreach($request->file('nomfichier') as $nomfichiers):
+
+                // dd($nomfichiers);
+
+                $mesure->nomfichier=$mesure->nomfichier.','.Str::ascii('Mesure_'.$mesure->libelle.'_'.$nomfichiers->getClientOriginalName());
+
+                $path = Storage::putFileAs(
+                    'images'.DIRECTORY_SEPARATOR.'document', $nomfichiers, Str::ascii('Mesure_'.$mesure->libelle.'_'.$nomfichiers->getClientOriginalName())
+                );
+
+            endforeach;
+
+
         }else{
-            //$analyse->nomfichier="";
+            //  $analyse->image="";
         }
         $mesure->save();
         // dd($analyses[0]->chantier()->get());
@@ -149,6 +167,13 @@ class MesuresController extends Controller
         $mesure->nomfichier="";
         $mesure->save();
         return redirect()->back()->with('success',"La pièce jointe de la mesure à été supprimée avec succès");
+    }
+    public function supprimer_pj_mesure_unique($id,$nomfichier){
+        $mesure =Mesure::find($id);
+
+        $mesure->nomfichier=str_replace($nomfichier,"",','.$mesure->nomfichier);
+        $mesure->save();
+        return redirect()->back()->with('success',"La pièce jointe de la mesure a été supprimée avec succès");
     }
     public function terminer_mesure(Request $request){
         $parameters=$request->except(['_token']);

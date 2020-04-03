@@ -247,7 +247,7 @@ active
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="file" id="nomfichier" name="nomfichier"  placeholder="nomfichier" class="form-control">
+                            <input type="file" id="nomfichier" name="nomfichier[]" multiple  placeholder="nomfichier" class="form-control">
                         </div>
 
                 </div>
@@ -443,8 +443,25 @@ active
                     "createdRow": function( row, data, dataIndex){
 
                     },
+                    "pageLength": 1000,
                     responsive: false,
                 }).column(0).visible(false);
+                $('#bootstrap-data-table1 tbody').on( 'click', 'tr', function () {
+                    var d = table.row( this ).data();
+                    $("#bootstrap-data-table1 tbody tr").removeClass('selected');
+                    $(this).toggleClass('selected');
+                    row_table=table.row( this ).index();
+                    d.counter++;
+
+                    table
+                            .row( this )
+                            .data( d )
+                            .draw();
+// Récupération numéro de page
+                    table.page( num_page  ).draw( 'page' );
+
+                    Select_rang(d[0]);
+                } );
 
                 $('.ajouterMesure').click(function(){
                     var data = table.row($(this).closest('tr')).data();

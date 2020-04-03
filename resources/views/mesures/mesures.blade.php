@@ -94,7 +94,17 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="file" id="nomfichier" name="nomfichier" placeholder="nomfichier" class="form-control">
+                            <input type="file" id="nomfichier" name="nomfichier[]" multiple placeholder="nomfichier" class="form-control">
+                            @if(!empty($mesure->nomfichier))
+                                <ul>
+                                    @foreach(explode(',',$mesure->nomfichier) as $nomfichier)
+                                        @if($nomfichier!="")
+                                            <li><a href="{{route('download_doc',$nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$nomfichier}}</a>  <a href="{{route('supprimer_pj_mesure_unique',[$mesure->id,$nomfichier])}}" class="btn btn-danger">Supprimer la pièce jointe</a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            @endif
                         </div>
 
                 </div>
@@ -289,7 +299,12 @@
                                                 </td>
                                                 <td>
                                                     @if(!empty($mesure->nomfichier))
-                                                        <a href="{{route('download_doc',$mesure->nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$mesure->nomfichier}}</a>
+                                                        @foreach(explode(',',$mesure->nomfichier) as $nomfichier)
+                                                            @if($nomfichier!="")
+                                                                <li><a href="{{route('download_doc',$nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$nomfichier}}</a>
+                                                                </li>
+                                                            @endif
+                                                        @endforeach
                                                     @endif
                                                 </td>
                                             </tr>

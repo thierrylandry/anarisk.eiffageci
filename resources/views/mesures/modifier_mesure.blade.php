@@ -168,14 +168,21 @@
                                 <div class="form-group col-sm-12">
                                     <div class="input-group">
                                         @if(!empty($mesure->nomfichier))
-                                            <a href="{{route('supprimer_pj_mesure',$mesure->id)}}" class="btn btn-danger">Supprimer la pièce jointe</a>
+                                            <a href="{{route('supprimer_pj_mesure',$mesure->id)}}" class="btn btn-danger">Supprimer les pièces jointes</a>
                                         @endif
                                     </div>
                                     </br>
                                     <div class="input-group">
-                                        <input type="file" id="nomfichier" name="nomfichier" placeholder="nomfichier" class="form-control">
+                                        <input type="file" id="nomfichier" name="nomfichier[]" multiple  placeholder="nomfichier" class="form-control">
                                         @if(!empty($mesure->nomfichier))
-                                            <a href="{{route('download_doc',$mesure->nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$mesure->nomfichier}}</a>
+                                            <ul>
+                                                @foreach(explode(',',$mesure->nomfichier) as $nomfichier)
+                                                    @if($nomfichier!="")
+                                                        <li><a href="{{route('download_doc',$nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$nomfichier}}</a>  <a href="{{route('supprimer_pj_mesure_unique',[$mesure->id,$nomfichier])}}" class="btn btn-danger">Supprimer la pièce jointe</a>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
                                         @endif
                                     </div>
                                 </div>
