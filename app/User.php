@@ -44,7 +44,7 @@ class User extends Authenticatable
     }
     public function ChantierPrincipale()
     {
-        return $this->belongsToMany('App\Chantier','Chantier_principale','id_users', 'id_chantier');
+        return $this->belongsToMany('App\Chantier','chantier_principale','id_users', 'id_chantier');
     }
     public function roles()
     {
