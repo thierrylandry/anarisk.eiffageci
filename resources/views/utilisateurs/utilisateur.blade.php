@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="select" class=" form-control-label">Chantiers principales (A préciser uniquement pour les chefs de projet)</label></div>
+                                    <div class="col col-md-3"><label for="select" class=" form-control-label">Chantiers principaux (A préciser uniquement pour les chefs de projet)</label></div>
                                     <div class="col-12 col-md-9">
                                         <select data-placeholder="Choisir le chantier" name="id_chantier_principal[]" multiple class="standardSelect">
                                             <option value="">Selectionner un chantier</option>
