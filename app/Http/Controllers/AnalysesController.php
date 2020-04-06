@@ -128,6 +128,7 @@ public function supprimer_pj_unique($id,$nomfichier){
         $payss = Pays::all();
         $chantiers = Auth::user()->chantiers()->get();
         $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
+       // dd($responsables);
         $priorites = Priorite::all();
 
 

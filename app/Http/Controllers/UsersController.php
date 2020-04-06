@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Acteur;
 use App\Chantier;
+use App\Chantier_principale;
 use App\Nature;
 use App\Pays;
 use App\Responsable;
@@ -53,9 +54,7 @@ class UsersController extends Controller
         $utilisateur->email = $parameters['email'];
         $utilisateur->password = Hash::make( $parameters['password']);
         $utilisateur->id_acteur = $parameters['id_acteur'];
-        if(isset($parameters['id_chantier_principal'])){
-            $utilisateur->id_chantier_principal = $parameters['id_chantier_principal'];
-        }
+
         $utilisateur->id_acteur = $parameters['id_acteur'];
       //  $utilisateur->slug = Str::slug($parameters['email'] . $date->format('dmYhis'));
         $utilisateur->save();
@@ -67,6 +66,12 @@ class UsersController extends Controller
             endforeach;
         }
 
+        if(isset($parameters['id_chantier_principal'])){
+            $leschantiers=$parameters['id_chantier_principal'];
+            foreach ($leschantiers as $lechantier):
+                $utilisateur->ChantierPrincipale()->attach(Chantier::where('libelle',$lechantier)->first());
+            endforeach;
+        }
         if(isset($parameters['chantiers'])) {
             $chantiers = $parameters['chantiers'];
             foreach ($chantiers as $chantier):
@@ -93,7 +98,7 @@ class UsersController extends Controller
         $utilisateur->email = $parameters['email'];
         $utilisateur->id_acteur = $parameters['id_acteur'];
 
-            $utilisateur->id_chantier_principal = $parameters['id_chantier_principal'];
+
 
         //Hash::needsRehash($parameters['password'])
         //dd("ancien ".$utilisateur->password." nouveau :".$parameters['password']." Qaund on hash sa donne ceci".Hash::check($parameters['password'],$parameters['password']));
@@ -109,6 +114,14 @@ class UsersController extends Controller
 
         $utilisateur->roles()->detach();
 
+       // $utilisateur->id_chantier_principal = $parameters['id_chantier_principal'];
+        $utilisateur->chantiers()->detach();
+        if(isset($parameters['id_chantier_principal'])){
+            $leschantiers=$parameters['id_chantier_principal'];
+            foreach ($leschantiers as $lechantier):
+                $utilisateur->ChantierPrincipale()->attach(Chantier::where('libelle',$lechantier)->first());
+            endforeach;
+        }
 
         if(isset($parameters['roles'])){
             $roles=$parameters['roles'];

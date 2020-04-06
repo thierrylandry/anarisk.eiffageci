@@ -44,7 +44,7 @@ class User extends Authenticatable
     }
     public function ChantierPrincipale()
     {
-        return $this->hasOne('App\Chantier','id', 'id_chantier_principal');
+        return $this->belongsToMany('App\Chantier','Chantier_principale','id_users', 'id_chantier');
     }
     public function roles()
     {
@@ -99,6 +99,14 @@ class User extends Authenticatable
     public function hasChantier($role)
     {
         if ($this->chantiers()->where('libelle', $role)->first()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function hasChantierPrincipale($role)
+    {
+        if ($this->ChantierPrincipale()->where('libelle', $role)->first()) {
             return true;
         }
         return false;
