@@ -331,7 +331,7 @@ active
                                                     @endforeach
                                                 </td>
                                                 <td>
-                                                    {{$mesure->libelle}}
+                                                    {{$mesure->libelleacteur}}
                                                 </td>
                                                 <td>
                                                     {{$mesure->libellestatut}}
