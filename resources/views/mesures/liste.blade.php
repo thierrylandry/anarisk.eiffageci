@@ -3,6 +3,24 @@
 active
 @endsection
 @section('page')
+    <style>
+        .rating {
+            direction: rtl;
+        }
+        .rating a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 3em;
+            transition: color .4s;
+        }
+        .rating a:hover,
+        .rating a:focus,
+        .rating a:hover ~ a,
+        .rating a:focus ~ a {
+            color: orange;
+            cursor: pointer;
+        }
+    </style>
     <div class="breadcrumbs" style="max-height:300px">
         <div class="col-sm-4">
             <div class="page-header float-left">
@@ -266,6 +284,65 @@ active
             <img src="{{URL::asset("images/anarisk.png")}}"  class="petitImage" id="permanant"/>
             <div class="resizeUI"><i class="fa fa-arrows"></i></div>
         </div>
+
+        <!-- Modal -->
+        <div id="teminer" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <form method="post" action="{{route('terminer_mesure')}}">
+                        @csrf
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class=" form-control-label">Terminé</label>
+                                <div class="input-group">
+                                    <input type="hidden" id="id_mesure" name="id_mesure"/>
+
+                                    <input type="date" class="form-control" name="dateEffective" value="{{date("Y-m-d")}}" required/>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label class=" form-control-label">Efficacité</label></div>
+                                <div class="col col-md-9">
+                                    <div class="form-check-inline form-check">
+                                        <label for="inline-checkbox1" class="form-check-label ">
+                                            <input type="radio" id="inline-checkbox1" name="efficacite" value="1" class="form-check-input">  Oui
+                                        </label>
+                                        &nbsp;
+                                        <label for="inline-checkbox2" class="form-check-label ">
+                                            <input type="radio" id="inline-checkbox2" name="efficacite" value="0" checked class="form-check-input">  Non
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Evaluer</label></div>
+                                <div class="rating"><!--
+                                 --><a href="#5" id="etoile5" onclick="document.getElementById('evaluer').value=5;" title="Donner 5 étoiles">☆</a><!--
+                                 --><a href="#4" id="etoile4"onclick="document.getElementById('evaluer').value=4;" title="Donner 4 étoiles">☆</a><!--
+                                 --><a href="#3"  id="etoile3" onclick="document.getElementById('evaluer').value=3;" title="Donner 3 étoiles">☆</a><!--
+                                 --><a href="#2" id="etoile2"onclick="document.getElementById('evaluer').value=2;" title="Donner 2 étoiles">☆</a><!--
+                                 --><a href="#1" id="etoile1" onclick="document.getElementById('evaluer').value=1;" title="Donner 1 étoile">☆</a>
+                                </div>
+                            </div>
+                            <input type="hidden" name="evaluer" id="evaluer" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Enregistrer</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
         <div class="animated fadeIn">
 
             <div class="row">
@@ -281,6 +358,8 @@ active
                                         <thead>
                                         <tr>
                                             <th>id</th>
+                                            <th>Efficacité</th>
+                                            <th>Evaluation</th>
                                             <th>code</th>
                                             <th>Description</th>
                                             <th>Nature</th>
@@ -294,6 +373,7 @@ active
                                             <th>Date de planification</th>
                                             <th>Date effective</th>
                                             <th>Auteur</th>
+                                            <th>Action</th>
                                             <th>PJ</th>
                                         </tr>
                                         </thead>
@@ -302,6 +382,24 @@ active
                                             <tr   {{isset($mesure->statut->id)&& $mesure->statut->id==30?"style=background-color:darkgrey":''}}>
                                                 <td>
                                                     {{$mesure->id}}
+                                                </td>
+                                                <td>
+                                                    {{$mesure->efficacite==1?'OUI':'NON'}}
+                                                </td>
+                                                <td>
+                                                    <div class="row form-group">
+                                                        <div style=" text-decoration: none; font-size: 1em;color:orange;cursor: pointer;"><!--
+                                    --><a href="#1"  title="Donner 1 étoile" @if($mesure->evaluation>=1) style="color: orange" @endif>☆</a><!--
+                                    --><a href="#2"  title="Donner 2 étoiles" @if($mesure->evaluation>=2) style="color: orange" @endif>☆</a><!--
+                                    --><a href="#3"  title="Donner 3 étoiles" @if($mesure->evaluation>=3) style="color: orange" @endif>☆</a><!--
+                                    --><a href="#4"  title="Donner 4 étoiles" @if($mesure->evaluation>=4) style="color: orange" @endif>☆</a><!--
+                                 --><a href="#5"  title="Donner 5 étoiles"  @if($mesure->evaluation==5) style="color: orange" @endif>☆</a>
+
+
+
+
+                                                        </div>
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     {{$mesure->code}}
@@ -349,6 +447,17 @@ active
                                                     {{$mesure->nom}}  {{$mesure->prenoms}}
                                                 </td>
                                                 <td>
+                                                    @if(isset($mesure->id_statut)&& $mesure->id_statut!=10 && $mesure->nom==auth::user()->nom && $mesure->prenoms==auth::user()->prenoms)
+                                                        @if($mesure->id_statut!=10)
+                                                            <a href="#" class="btn btn-success btn-sm terminerClass" data-toggle="modal" data-target="#teminer"> <i class="menu-icon fa fa-key"></i> terminé</a>
+
+                                                        @endif
+                                                    @elseif($mesure->nom==auth::user()->nom && $mesure->prenoms==auth::user()->prenoms)
+                                                        <a href="#" class="btn btn-primary btn-sm terminerClass" data-toggle="modal" data-target="#teminer"> <i class="menu-icon fa fa-key"></i> Modifier l'évalutaion</a>
+
+                                                    @endif
+                                                </td>
+                                                <td>
                                                     @if(!empty($mesure->nomfichier))
                                                         <a href="{{route('download_doc',$mesure->nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$mesure->nomfichier}}</a>
                                                     @endif
@@ -359,6 +468,7 @@ active
 
                                         </tbody>
                                     </table>
+                                    {{$mesures->links()}}
                                 </div>
 
 
@@ -412,7 +522,7 @@ active
             jQuery(function($) {
                 var date =new Date();
                 var table= $('#bootstrap-data-table1').DataTable({
-                    "order": [[ 1, "desc" ]],
+                    "order": [[ 3, "desc" ]],
                     buttons: [
                         {
                             extend: 'copyHtml5',
@@ -462,6 +572,7 @@ active
 
                         }
                     ],
+
                     language: {
                         url: "{{ URL::asset('js/French.json') }}"
                     },
@@ -481,7 +592,8 @@ active
                         var api = this.api();
 
                         // Zero-based index of the column containing names
-                        var col_name = 1;
+                        var col_name = 3;
+                        console.log(api.order());
                         // If ordered by column containing names
                         if (api.order()[0][0] === col_name) {
                             var rows = api.rows({ page: 'current' }).nodes();
@@ -492,22 +604,22 @@ active
 
                                 if (group_last !== group) {
                                     var couleur='';
-                                    if( data[3]=="Risque" &&  data[5]==1 && data[4]!=""){
+                                    if( data[5]=="Risque" &&  data[7]==1 && data[6]!=""){
                                         couleur='risk';
-                                    }else if(data[3]=="Risque" &&  data[5]==2 ){
+                                    }else if(data[5]=="Risque" &&  data[7]==2 ){
                                         couleur='riskferme';
-                                    }else if( data[3]!="Risque" && data[4]!="" && data[5]==1 ){
+                                    }else if( data[5]!="Risque" && data[6]!="" && data[7]==1 ){
                                         couleur='opportunitefaite';
-                                    }else if( data[3]!="Risque" &&  data[5]==1 && data[4]==""){
+                                    }else if( data[5]!="Risque" &&  data[7]==1 && data[6]==""){
                                         couleur='opportunite';
-                                    }else if(data[3]!="Risque" &&  data[5]==2 ){
+                                    }else if(data[5]!="Risque" &&  data[7]==2 ){
                                         couleur='opportuniteferme';
                                     }
 
                                    // console.log(couleur);
                                $(rows[index]).before(
 
-                                            '<tr class="group '+couleur+'"  style=""><td colspan="11"><b>' + data[3] + ' : ' + data[1] + '  ' + data[2] + ' avec un cout de ' + data[4] + ' MFCFA</b></td></tr>'
+                                            '<tr class="group '+couleur+'"  style=""><td colspan="13"><b>' + data[5] + ' : ' + data[3] + '  ' + data[5] + ' avec un cout de ' + data[6] + ' MFCFA</b></td></tr>'
                                     );
 
 
@@ -516,6 +628,7 @@ active
                             });
                         }
                     },
+                    paginate: false,
                     rowGroup: {
                         startRender: function ( rows, group ) {
                             return 'Nombre de mesure '+' ('+rows.count()+')';
@@ -525,7 +638,7 @@ active
 
                         dataSrc: [0]
                     },
-                }).column(0).visible(false).column(1).visible(false).column(2).visible(false).visible(false).column(3).visible(false).visible(false).column(4).visible(false).column(5).visible(false);
+                }).column(0).visible(false).column(3).visible(false).column(4).visible(false).visible(false).column(5).visible(false).visible(false).column(6).visible(false).column(7).visible(false);
 
                 $('.ajouterMesure').click(function(){
                     var data = table.row($(this).closest('tr')).data();
@@ -587,6 +700,20 @@ active
                         }
 
                     });
+
+
+                });
+                $(".terminerClass").click(function (){
+                    var data = table.row($(this).parents('tr')).data();
+
+                    $("#id_mesure").val(data[0]);
+                    if(data[1]=="OUI"){
+                        $("#inline-checkbox1").prop('checked',true);
+                    }else{
+                        $("#inline-checkbox2").prop('checked',true);
+                    }
+
+
 
 
                 });

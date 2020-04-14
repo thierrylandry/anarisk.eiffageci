@@ -3,6 +3,24 @@
     active
 @endsection
 @section('page')
+    <style>
+        .rating {
+            direction: rtl;
+        }
+        .rating a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 3em;
+            transition: color .4s;
+        }
+        .rating a:hover,
+        .rating a:focus,
+        .rating a:hover ~ a,
+        .rating a:focus ~ a {
+            color: orange;
+            cursor: pointer;
+        }
+    </style>
     <div class="breadcrumbs" style="max-height:300px">
         <div class="col-sm-4">
             <div class="page-header float-left">
@@ -211,6 +229,32 @@
                                 <input type="date" class="form-control" name="dateEffective" value="{{date("Y-m-d")}}" required/>
                             </div>
                         </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label class=" form-control-label">Efficacité</label></div>
+                            <div class="col col-md-9">
+                                <div class="form-check-inline form-check">
+                                    <label for="inline-checkbox1" class="form-check-label ">
+                                        <input type="radio" id="inline-checkbox1" name="efficacite" value="1" class="form-check-input">  Oui
+                                    </label>
+                                    &nbsp;
+                                    <label for="inline-checkbox2" class="form-check-label ">
+                                        <input type="radio" id="inline-checkbox2" name="efficacite" value="0" checked class="form-check-input">  Non
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Evaluer</label></div>
+                            <div class="rating"><!--
+                                 --><a href="#5" onclick="document.getElementById('evaluer').value=5;" title="Donner 5 étoiles">☆</a><!--
+                                 --><a href="#4" onclick="document.getElementById('evaluer').value=4;" title="Donner 4 étoiles">☆</a><!--
+                                 --><a href="#3"  onclick="document.getElementById('evaluer').value=3;" title="Donner 3 étoiles">☆</a><!--
+                                 --><a href="#2" onclick="document.getElementById('evaluer').value=2;" title="Donner 2 étoiles">☆</a><!--
+                                 --><a href="#1" onclick="document.getElementById('evaluer').value=1;" title="Donner 1 étoile">☆</a>
+                            </div>
+                        </div>
+                        <input type="hidden" name="evaluer" id="evaluer" />
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Enregistrer</button>
@@ -239,6 +283,8 @@
                                         <thead>
                                         <tr>
                                             <th>id</th>
+                                            <th>Efficacité</th>
+                                            <th>Evaluation</th>
                                             <th>Libelle</th>
                                             <th>Responsable</th>
                                             <th>Acteur</th>
@@ -256,6 +302,24 @@
                                             <tr   {{isset($mesure->statut->id)&& $mesure->statut->id==30?"style=background-color:darkgrey":''}}>
                                                 <td>
                                                     {{$mesure->id}}
+                                                </td>
+                                                <td>
+                                                    {{$mesure->efficacite==1?'OUI':'NON'}}
+                                                </td>
+                                                <td>
+                                                    <div class="row form-group">
+                                                      <div style=" text-decoration: none; font-size: 1em;color:orange;cursor: pointer;"><!--
+                                    --><a href="#1"  title="Donner 1 étoile" @if($mesure->evaluation>=1) style="color: orange" @endif>☆</a><!--
+                                    --><a href="#2"  title="Donner 2 étoiles" @if($mesure->evaluation>=2) style="color: orange" @endif>☆</a><!--
+                                    --><a href="#3"  title="Donner 3 étoiles" @if($mesure->evaluation>=3) style="color: orange" @endif>☆</a><!--
+                                    --><a href="#4"  title="Donner 4 étoiles" @if($mesure->evaluation>=4) style="color: orange" @endif>☆</a><!--
+                                 --><a href="#5"  title="Donner 5 étoiles"  @if($mesure->evaluation==5) style="color: orange" @endif>☆</a>
+
+
+
+
+                                                        </div>
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     {{$mesure->libelle}}
@@ -289,13 +353,16 @@
                                                     {{$mesure->auteur->nom}}  {{$mesure->auteur->prenoms}}
                                                 </td>
                                                 <td>
-                                                    @if(isset($mesure->statut->id)&& $mesure->statut->id!=10)
-                                                    <a href="{{route('pageModifMesure',$mesure->id)}}" class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-edit"></i> Modifier la mesure</a>
-                                                    @if($mesure->statut->id!=10)
-                                                    <a href="#" class="btn btn-success btn-sm terminerClass" data-toggle="modal" data-target="#teminer"> <i class="menu-icon fa fa-key"></i> terminé</a>
-                                                            <a href="{{route("supprimer_mesure",$mesure->id)}}" class="btn btn-danger btn-sm terminerClass confirmons"> <i class="menu-icon fa fa-trash"></i> Supprimer</a>
-                                                        @endif
-                                                        @endif
+                                                        @if(isset($mesure->statut->id)&& $mesure->statut->id!=10)
+                                                            <a href="{{route('pageModifMesure',$mesure->id)}}" class="btn btn-primary btn-sm"> <i class="menu-icon fa fa-edit"></i> Modifier la mesure</a>
+                                                            @if($mesure->statut->id!=10)
+                                                                <a href="#" class="btn btn-success btn-sm terminerClass" data-toggle="modal" data-target="#teminer"> <i class="menu-icon fa fa-key"></i> terminé</a>
+                                                                <a href="{{route("supprimer_mesure",$mesure->id)}}" class="btn btn-danger btn-sm terminerClass confirmons"> <i class="menu-icon fa fa-trash"></i> Supprimer</a>
+                                                            @endif
+                                                         @else
+                                                        <a href="#" class="btn btn-primary btn-sm terminerClass" data-toggle="modal" data-target="#teminer"> <i class="menu-icon fa fa-key"></i> Modifier l'évalutaion</a>
+
+                                                         @endif
                                                 </td>
                                                 <td>
                                                     @if(!empty($mesure->nomfichier))
@@ -371,7 +438,13 @@
                     $(".terminerClass").click(function (){
                         var data = table.row($(this).parents('tr')).data();
 
-                         $("#id_mesure").val(data[0]);
+                        $("#id_mesure").val(data[0]);
+                        if(data[1]=="OUI"){
+                            $("#inline-checkbox1").prop('checked',true);
+                        }else{
+                            $("#inline-checkbox2").prop('checked',true);
+                        }
+
 
 
 

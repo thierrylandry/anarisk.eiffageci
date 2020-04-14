@@ -390,6 +390,7 @@ active
 
                                 </tbody>
                             </table>
+                            {{$analyses->links()}}
                         </div>
                     </div>
                 </div>

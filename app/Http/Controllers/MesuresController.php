@@ -50,7 +50,7 @@ class MesuresController extends Controller
             ->join('users','users.id','=','mesure.id_auteur')
             ->join('nature','nature.id','=','analyse.id_nature')
             ->where('id_chantier','=',Auth::user()->id_chantier_connecte)
-            ->select('mesure.id','dateplanifie','dateEffective','documentation','id_responsable','id_statut','id_priorite','mesure.libelle','id_proprietaire','mesure.id_statut',DB::raw('acteur.libelle as libelleacteur'),DB::raw('statut.libelle as libellestatut'),'nom','prenoms','code','description','causes','consequences','nature','cout','etat','mesure.nomfichier')->get();
+            ->select('mesure.id','dateplanifie','dateEffective','documentation','id_responsable','id_statut','id_priorite','mesure.libelle','id_proprietaire','mesure.id_statut',DB::raw('acteur.libelle as libelleacteur'),DB::raw('statut.libelle as libellestatut'),'nom','prenoms','code','description','causes','consequences','nature','cout','etat','mesure.nomfichier','mesure.efficacite','mesure.evaluation')->orderby('code','DESC')->paginate(10);
         $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
 
         $priorites = Priorite::all();
@@ -177,14 +177,27 @@ class MesuresController extends Controller
     }
     public function terminer_mesure(Request $request){
         $parameters=$request->except(['_token']);
+       // dd($parameters);
         $dateEffective = $parameters['dateEffective'];
+        $efficacite = $parameters['efficacite'];
+        $evaluer = $parameters['evaluer'];
         $id= $parameters['id_mesure'];
         $mesure=  Mesure::find($id);
         $mesure->dateEffective=$dateEffective;
+        $mesure->efficacite=$efficacite;
+
+        if($efficacite==1){
+            $mesure->evaluation=$evaluer;
+        }else{
+            $mesure->evaluation=0;
+        }
+
         $mesure->id_statut=10;
+        $mesure->save();
       //  $mesure->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
 
-        $mesure->save();
+        //;
+
         // dd($analyses[0]->chantier()->get());
         //dd($analyse->nature()->first()->id);
         $colleguemesures=$mesure->analyse->mesures()->get();
@@ -200,14 +213,14 @@ class MesuresController extends Controller
         {
             $analyse= Analyse::find($mesure->analyse->id);
            // $analyse->etat=2;
-            $analyse->save();
+          //  $analyse->save();
 
         }
         else
         {
 
         }
-        return redirect()->back()->with('success',"La mesure  a été éffectué");
+        return redirect()->back()->with('success',"Succès");
 
     }
 

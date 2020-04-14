@@ -132,7 +132,7 @@ public function supprimer_pj_unique($id,$nomfichier){
         $priorites = Priorite::all();
 
 
-        $analyses = Analyse::where('id_chantier','=',Auth::user()->id_chantier_connecte)->orderBy('id','DESC')->get();
+        $analyses = Analyse::where('id_chantier','=',Auth::user()->id_chantier_connecte)->orderBy('id','DESC')->paginate(10);
         $statuts = Statut::all();
         $acteurs = Acteur::all();
         $periodicites = Periodicite::all();
