@@ -14,6 +14,8 @@ use App\Responsable;
 use App\Statut;
 use App\Tableau_recap;
 use Barryvdh\DomPDF\Facade as PDF;
+
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -41,6 +43,9 @@ class AnalysesController extends Controller
         $payss = Pays::all();
         $chantiers = Chantier::where('id','=',Auth::user()->id_chantier_connecte)->get();
         $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
+        //affectation du positionnement
+        auth::user()->position_number=$id;
+        auth::user()->save();
         return view('analyses.modifierAnalyse',compact('analyse','natures','payss','chantiers','responsables'));
 
     }
@@ -68,6 +73,8 @@ class AnalysesController extends Controller
 public function ficheAnalyse($id){
     $analyse =Analyse::find($id);
     $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
+    auth::user()->position_number=$id;
+    auth::user()->save();
     return view('analyses.fiche',compact('analyse','responsables'));
 }
 public function fichesanalyses(){
@@ -123,22 +130,35 @@ public function supprimer_pj_unique($id,$nomfichier){
     $analyse->save();
     return redirect()->back()->with('success',"La pièce jointe de l'analyse à été supprimée avec succès");
 }
-    public function liste(){
-        $natures= Nature::all();
-        $payss = Pays::all();
-        $chantiers = Auth::user()->chantiers()->get();
-        $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
-       // dd($responsables);
-        $priorites = Priorite::all();
+public function liste(Request $request){
+    $natures= Nature::all();
+    $payss = Pays::all();
+    $chantiers = Auth::user()->chantiers()->get();
+    $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
+    // dd($responsables);
+    $priorites = Priorite::all();
+    if(!isset($request->page)){
+        $currentPage = Auth::user()->page; // You can set this to any page you want to paginate to
+
+        // Make sure that you call the static method currentPageResolver()
+        // before querying users
+        Paginator::currentPageResolver(function () use ($currentPage) {
+            return $currentPage;
+        });
+    }
 
 
-        $analyses = Analyse::where('id_chantier','=',Auth::user()->id_chantier_connecte)->orderBy('id','DESC')->paginate(10);
-        $statuts = Statut::all();
-        $acteurs = Acteur::all();
-        $periodicites = Periodicite::all();
-       // dd($analyses[0]->chantier()->get());
-        return view('analyses.liste',compact('natures','payss','chantiers','responsables','analyses','priorites','statuts','acteurs','periodicites'));
+    $analyses = Analyse::where('id_chantier','=',Auth::user()->id_chantier_connecte)->orderBy('id','DESC')->paginate(10);
+    $statuts = Statut::all();
+    $acteurs = Acteur::all();
+    $periodicites = Periodicite::all();
+    // dd($analyses[0]->chantier()->get());
+    return view('analyses.liste',compact('natures','payss','chantiers','responsables','analyses','priorites','statuts','acteurs','periodicites'));
 
+}
+    public function liste_redirect(){
+
+        return redirect('liste_redirect?page=3');
     }
 
     /**

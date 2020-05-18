@@ -183,9 +183,6 @@
 <script src="{{ asset('assets/js/plugins.js')}}"></script>
 <script src="{{ asset('assets/js/main.js')}}"></script>
 
-
-
-<script src="{{ asset('assets/js/dashboard.js')}}"></script>
 <script src="{{ asset('assets/js/widgets.js')}}"></script>
 <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.js')}}"></script>
 <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js')}}"></script>

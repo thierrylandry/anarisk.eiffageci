@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mesure;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use App\Analyse;
 use App\Acteur;
@@ -32,6 +33,9 @@ class MesuresController extends Controller
         $statuts = Statut::all();
         $acteurs = Acteur::all();
         $periodicites = Periodicite::all();
+        //affectation du positionnement
+        auth::user()->position_number=$id;
+        auth::user()->save();
         return view('mesures.mesures',compact('analyse','priorites','statuts','periodicites','responsables','acteurs'));
 
     }
@@ -59,6 +63,25 @@ class MesuresController extends Controller
         $periodicites = Periodicite::all();
 
         return view('mesures.liste',compact('mesures','responsables','priorites','statuts','periodicites','acteurs'));
+
+    }
+    public function print_tableau_recap_mesure(){
+        $mesures =  DB::table('mesure')
+            ->join('analyse','analyse.id','=','mesure.id_analyse')
+            ->join('acteur','acteur.id','=','mesure.id_acteur')
+            ->join('statut','statut.id','=','mesure.id_statut')
+            ->join('users','users.id','=','mesure.id_auteur')
+            ->join('nature','nature.id','=','analyse.id_nature')
+            ->where('id_chantier','=',Auth::user()->id_chantier_connecte)
+            ->select('mesure.id','dateplanifie','dateEffective','documentation','id_responsable','id_statut','id_priorite','mesure.libelle','id_proprietaire','mesure.id_statut',DB::raw('acteur.libelle as libelleacteur'),DB::raw('statut.libelle as libellestatut'),'nom','prenoms','code','description','causes','consequences','nature','cout','etat','mesure.nomfichier','mesure.efficacite','mesure.evaluation')->orderby('code','DESC')->paginate(3000);
+        $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
+
+        $priorites = Priorite::all();
+        $statuts = Statut::all();
+        $acteurs = Acteur::all();
+        $periodicites = Periodicite::all();
+        return view('mesures.printListe',compact('mesures','responsables','priorites','statuts','periodicites','acteurs'));
+
 
     }
     public function SaveMesure(Request $request){

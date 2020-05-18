@@ -293,7 +293,7 @@ active
                                 </thead>
                                 <tbody>
                                 @foreach($analyses as $analyse)
-                                    <tr class="@if( $analyse->id_nature==1 && (!empty($analyse->cout) && !empty($analyse->mesures()->get())) && $analyse->etat==1)
+                                    <tr id="{{$analyse->id}}" class=" @if( $analyse->id_nature==1 && (!empty($analyse->cout) && !empty($analyse->mesures()->get())) && $analyse->etat==1)
                                             riskfait
                                     @elseif( $analyse->id_nature==1 && ( $analyse->etat==1 && empty($analyse->cout) || empty($analyse->mesures()->get())))
                                         risk
@@ -391,6 +391,8 @@ active
                                 </tbody>
                             </table>
                             {{$analyses->links()}}
+                            {{$analyses->currentPage()}}
+                            {{$analyses->getPageName()}}
                         </div>
                     </div>
                 </div>
@@ -444,7 +446,7 @@ active
                     "createdRow": function( row, data, dataIndex){
 
                     },
-                    "pageLength": 1000,
+                    "pageLength": 50000,
                     responsive: false,
                 }).column(0).visible(false);
                 $('#bootstrap-data-table1 tbody').on( 'click', 'tr', function () {
@@ -688,5 +690,10 @@ active
                     document.onmousemove = null;
                 }
             }
+
+
+            {{Auth::user()->page=$analyses->currentPage()}}
+            {{Auth::user()->save()}}
+            window.location.hash = '{{Auth::user()->position_number}}';
         </script>
 @endsection

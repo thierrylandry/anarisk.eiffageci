@@ -353,6 +353,12 @@ active
                         </div>
                         <div class="card-body">
                             <div class="row">
+                                <div class="col-sm-6">
+                                    <a href="{{route('print_tableau_recap_mesure')}}" target="_blank" class="btn btn-info">Imprimer</a>
+                                </div>
+
+                            </div>
+                            <div class="row">
                                 <div class="col-sm-12">
                                     <table id="bootstrap-data-table1" class="table table-striped table-bordered" style="width: 100%">
                                         <thead>
@@ -431,7 +437,7 @@ active
                                                 <td>
                                                     {{$mesure->libelleacteur}}
                                                 </td>
-                                                <td>
+                                                <td style="@if($mesure->libellestatut=="Fait" ||  $mesure->libellestatut=="permanente") background-color:green;color: white @endif">
                                                     {{$mesure->libellestatut}}
                                                 </td>
                                                 <td>
@@ -489,7 +495,6 @@ active
             <script src="{{ asset('assets/js/lib/data-table/dataTables.buttons.min.js')}}"></script>
             <script src="{{ asset('assets/js/lib/data-table/buttons.bootstrap.min.js')}}"></script>
 
-    <script src="{{ asset("js/lib/data-table/dataTables.rowGroup.min.js") }}"></script>
 
             <script src="{{ asset('assets/js/lib/data-table/jszip.min.js')}}"></script>
             <script src="{{ asset('assets/js/lib/data-table/pdfmake.min.js')}}"></script>
@@ -527,7 +532,7 @@ active
                         {
                             extend: 'copyHtml5',
                             exportOptions: {
-                                columns: [ 1, 2, 5,6,7,8,9,10,11,12,13,14 ]
+                                columns: [ 1, 2, 5 ]
                             },
                             text:"Copier",
                             filename: "Liste des D.A "+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
@@ -538,7 +543,7 @@ active
                         {
                             extend: 'excelHtml5',
                             exportOptions: {
-                                columns: [ 1, 2, 5,6,7,8,9,10,11,12,13,14 ]
+                                columns: [ 1, 2, 5 ]
                             },
                             text:"Excel",
                             filename: "Liste des D.A "+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
@@ -550,7 +555,7 @@ active
                         {
                             extend: 'pdfHtml5',
                             exportOptions: {
-                                columns: [ 1, 2, 5,6,7,8,9,10,11,12,13,14 ]
+                                columns: [ 1, 2, 5 ]
                             },
                             text:"PDF",
                             filename: "Liste des D.A "+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
@@ -562,7 +567,7 @@ active
                         {
                             extend: 'print',
                             exportOptions: {
-                                columns: [ 1, 2, 5,6,7,8,9,10,11,12,13,14 ]
+                                columns: [ 1, 2, 5 ]
                             },
                             text:"Imprimer",
                             filename: "Liste des D.A"+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
