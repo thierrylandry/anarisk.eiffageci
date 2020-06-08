@@ -473,6 +473,7 @@ active
 
 
                                         </tbody>
+
                                     </table>
                                     {{$mesures->links()}}
                                 </div>
@@ -503,6 +504,7 @@ active
             <script src="{{ asset('assets/js/lib/data-table/buttons.print.min.js')}}"></script>
             <script src="{{ asset('assets/js/lib/data-table/buttons.colVis.min.js')}}"></script>
             <script src="{{ asset('assets/js/lib/data-table/datatables-init.js')}}"></script>
+            <script src="{{ asset('assets/js/lib/data-table/dataTables.fixedHeader.min.js')}}"></script>
         <!-- .animated -->
         <script>
 
@@ -593,6 +595,7 @@ active
                             $(row).addClass('redClass');
                         }
                     },
+                    fixedHeader: true,
                     "drawCallback": function (settings){
                         var api = this.api();
 
@@ -624,7 +627,7 @@ active
                                    // console.log(couleur);
                                $(rows[index]).before(
 
-                                            '<tr class="group '+couleur+'"  style=""><td colspan="13"><b>' + data[5] + ' : ' + data[3] + '  ' + data[5] + ' avec un cout de ' + data[6] + ' MFCFA</b></td></tr>'
+                                            '<tr class="group '+couleur+'"  style=""><td colspan="13"><b>' + data[5] + ' : ' + data[3] + '  ' + data[4] + ' avec un cout de ' + data[6] + ' MFCFA</b></td></tr>'
                                     );
 
 

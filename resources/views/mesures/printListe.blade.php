@@ -123,7 +123,8 @@
                                                 </td>
                                                 <td>
                                                     {{$mesure->id}}
-                                                </td><td>
+                                                </td>
+                                                <td>
                                                     {{$mesure->code}}
                                                 </td>
                                                 <td>
@@ -281,6 +282,7 @@
                         $(row).addClass('redClass');
                     }
                 },
+                fixedHeader: true,
                 "drawCallback": function (settings){
                     var api = this.api();
 
@@ -312,7 +314,7 @@
                                 // console.log(couleur);
                                 $(rows[index]).before(
 
-                                        '<tr class="group '+couleur+'"  style=""><td colspan="13"><b>' + data[5] + ' : ' + data[3] + '  ' + data[5] + ' avec un cout de ' + data[6] + ' MFCFA</b></td></tr>'
+                                        '<tr class="group '+couleur+'"  style=""><td colspan="13"><b>' + data[5] + ' : ' + data[3] + '  ' + data[4] + ' avec un cout de ' + data[6] + ' MFCFA</b></td></tr>'
                                 );
 
 
