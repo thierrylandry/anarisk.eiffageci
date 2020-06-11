@@ -171,7 +171,7 @@
                                                 </td>
                                                 <td>
                                                     @if(!empty($mesure->nomfichier))
-                                                        <a href="{{route('download_doc',$mesure->nomfichier)}}"><i class="menu-icon fa fa-file"></i>{{$mesure->nomfichier}}</a>
+                                                        <a href="{{route('download_doc',str_replace(",","",$mesure->nomfichier))}}"><i class="menu-icon fa fa-file"></i>{{$mesure->nomfichier}}</a>
                                                     @endif
                                                 </td>
                                             </tr>
