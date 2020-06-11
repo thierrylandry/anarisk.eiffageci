@@ -82,8 +82,6 @@
                                         <thead>
                                         <tr>
                                             <th>id</th>
-                                            <th>Efficacité</th>
-                                            <th>Evaluation</th>
                                             <th>code</th>
                                             <th>Description</th>
                                             <th>Nature</th>
@@ -97,30 +95,14 @@
                                             <th>Date de planification</th>
                                             <th>Date effective</th>
                                             <th>Auteur</th>
+                                            <th>Efficacité de l'action</th>
+                                            <th>Evaluation</th>
                                             <th>PJ</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($mesures as $mesure)
                                             <tr   {{isset($mesure->statut->id)&& $mesure->statut->id==30?"style=background-color:darkgrey":''}}>
-                                                <td>
-                                                    {{$mesure->efficacite==1?'OUI':'NON'}}
-                                                </td>
-                                                <td>
-                                                    <div class="row form-group">
-                                                        <div style=" text-decoration: none; font-size: 1em;color:orange;cursor: pointer;"><!--
-                                    --><a href="#1"  title="Donner 1 étoile" @if($mesure->evaluation>=1) style="color: orange" @endif>☆</a><!--
-                                    --><a href="#2"  title="Donner 2 étoiles" @if($mesure->evaluation>=2) style="color: orange" @endif>☆</a><!--
-                                    --><a href="#3"  title="Donner 3 étoiles" @if($mesure->evaluation>=3) style="color: orange" @endif>☆</a><!--
-                                    --><a href="#4"  title="Donner 4 étoiles" @if($mesure->evaluation>=4) style="color: orange" @endif>☆</a><!--
-                                 --><a href="#5"  title="Donner 5 étoiles"  @if($mesure->evaluation==5) style="color: orange" @endif>☆</a>
-
-
-
-
-                                                        </div>
-                                                    </div>
-                                                </td>
                                                 <td>
                                                     {{$mesure->id}}
                                                 </td>
@@ -170,6 +152,24 @@
                                                     {{$mesure->nom}}  {{$mesure->prenoms}}
                                                 </td>
                                                 <td>
+                                                    {{$mesure->efficacite==1?'OUI':'NON'}}
+                                                </td>
+                                                <td>
+                                                    <div class="row form-group">
+                                                        <div style=" text-decoration: none; font-size: 1em;color:orange;cursor: pointer;"><!--
+                                    --><a href="#1"  title="Donner 1 étoile" @if($mesure->evaluation>=1) style="color: orange" @endif>☆</a><!--
+                                    --><a href="#2"  title="Donner 2 étoiles" @if($mesure->evaluation>=2) style="color: orange" @endif>☆</a><!--
+                                    --><a href="#3"  title="Donner 3 étoiles" @if($mesure->evaluation>=3) style="color: orange" @endif>☆</a><!--
+                                    --><a href="#4"  title="Donner 4 étoiles" @if($mesure->evaluation>=4) style="color: orange" @endif>☆</a><!--
+                                 --><a href="#5"  title="Donner 5 étoiles"  @if($mesure->evaluation==5) style="color: orange" @endif>☆</a>
+
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
                                                     @if(!empty($mesure->nomfichier))
                                                         <a href="{{route('download_doc',str_replace(",","",$mesure->nomfichier))}}"><i class="menu-icon fa fa-file"></i>{{$mesure->nomfichier}}</a>
                                                     @endif
@@ -216,7 +216,7 @@
         jQuery(function($) {
             var date =new Date();
             var table= $('#bootstrap-data-table1').DataTable({
-                "order": [[ 3, "desc" ]],
+                "order": [[ 1, "desc" ]],
                 buttons: [
                     {
                         extend: 'copyHtml5',
@@ -287,7 +287,7 @@
                     var api = this.api();
 
                     // Zero-based index of the column containing names
-                    var col_name = 3;
+                    var col_name = 1;
                     console.log(api.order());
                     // If ordered by column containing names
                     if (api.order()[0][0] === col_name) {
@@ -299,22 +299,22 @@
 
                             if (group_last !== group) {
                                 var couleur='';
-                                if( data[5]=="Risque" &&  data[7]==1 && data[6]!=""){
+                                if( data[3]=="Risque" &&  data[5]==1 && data[4]!=""){
                                     couleur='risk';
-                                }else if(data[5]=="Risque" &&  data[7]==2 ){
+                                }else if(data[3]=="Risque" &&  data[5]==2 ){
                                     couleur='riskferme';
-                                }else if( data[5]!="Risque" && data[6]!="" && data[7]==1 ){
+                                }else if( data[3]!="Risque" && data[4]!="" && data[5]==1 ){
                                     couleur='opportunitefaite';
-                                }else if( data[5]!="Risque" &&  data[7]==1 && data[6]==""){
+                                }else if( data[3]!="Risque" &&  data[5]==1 && data[4]==""){
                                     couleur='opportunite';
-                                }else if(data[5]!="Risque" &&  data[7]==2 ){
+                                }else if(data[3]!="Risque" &&  data[5]==2 ){
                                     couleur='opportuniteferme';
                                 }
 
                                 // console.log(couleur);
                                 $(rows[index]).before(
 
-                                        '<tr class="group '+couleur+'"  style=""><td colspan="13"><b>' + data[5] + ' : ' + data[3] + '  ' + data[4] + ' avec un cout de ' + data[6] + ' MFCFA</b></td></tr>'
+                                        '<tr class="group '+couleur+'"  style=""><td colspan="13"><b>' + data[3] + ' : ' + data[1] + '  ' + data[2] + ' avec un cout de ' + data[4] + ' MFCFA</b></td></tr>'
                                 );
 
 
