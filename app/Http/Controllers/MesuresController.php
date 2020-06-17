@@ -208,11 +208,14 @@ class MesuresController extends Controller
         $mesure=  Mesure::find($id);
         $mesure->dateEffective=$dateEffective;
         $mesure->efficacite=$efficacite;
-
+$valeur=0;
         if($efficacite==1){
             $mesure->evaluation=$evaluer;
         }else{
             $mesure->evaluation=0;
+            $valeur=$mesure->analyse->id;
+            auth::user()->position_number=$mesure->analyse->id;
+            auth::user()->save();
         }
 
         $mesure->id_statut=10;
@@ -243,7 +246,7 @@ class MesuresController extends Controller
         {
 
         }
-        return redirect()->back()->with('success',"Succès");
+        return redirect()->back()->with('success',"Succès")->with('analyse_non_termine',$valeur);
 
     }
 

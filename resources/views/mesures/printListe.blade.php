@@ -60,7 +60,7 @@
         <div class="col-sm-4">
             <div class="page-header float-left">
                 <div class="page-title">
-                    <h1>Tableaau récapitulatif des mesures</h1>
+                    <h1>Tableau récapitulatif des mesures</h1>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
                                             <th>Date effective</th>
                                             <th>Auteur</th>
                                             <th>Efficacité de l'action</th>
-                                            <th>Evaluation</th>
+                                           <!-- <th>Evaluation</th>-->
                                             <th>PJ</th>
                                         </tr>
                                         </thead>
@@ -154,21 +154,7 @@
                                                 <td>
                                                     {{$mesure->efficacite==1?'OUI':'NON'}}
                                                 </td>
-                                                <td>
-                                                    <div class="row form-group">
-                                                        <div style=" text-decoration: none; font-size: 1em;color:orange;cursor: pointer;"><!--
-                                    --><a href="#1"  title="Donner 1 étoile" @if($mesure->evaluation>=1) style="color: orange" @endif>☆</a><!--
-                                    --><a href="#2"  title="Donner 2 étoiles" @if($mesure->evaluation>=2) style="color: orange" @endif>☆</a><!--
-                                    --><a href="#3"  title="Donner 3 étoiles" @if($mesure->evaluation>=3) style="color: orange" @endif>☆</a><!--
-                                    --><a href="#4"  title="Donner 4 étoiles" @if($mesure->evaluation>=4) style="color: orange" @endif>☆</a><!--
-                                 --><a href="#5"  title="Donner 5 étoiles"  @if($mesure->evaluation==5) style="color: orange" @endif>☆</a>
 
-
-
-
-                                                        </div>
-                                                    </div>
-                                                </td>
                                                 <td>
                                                     @if(!empty($mesure->nomfichier))
                                                         <a href="{{route('download_doc',str_replace(",","",$mesure->nomfichier))}}"><i class="menu-icon fa fa-file"></i>{{$mesure->nomfichier}}</a>
@@ -216,57 +202,7 @@
         jQuery(function($) {
             var date =new Date();
             var table= $('#bootstrap-data-table1').DataTable({
-                "order": [[ 1, "desc" ]],
-                buttons: [
-                    {
-                        extend: 'copyHtml5',
-                        exportOptions: {
-                            columns: [ 1, 2, 5 ]
-                        },
-                        text:"Copier",
-                        filename: "Liste des D.A "+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
-                        className: 'btn btn-primary btn-sm m-5 width-140 assets-select-btn toolbox-delete-selected',
-                        messageTop: "Tableau récapitulatif des mesures "+date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),
-
-                    },
-                    {
-                        extend: 'excelHtml5',
-                        exportOptions: {
-                            columns: [ 1, 2, 5 ]
-                        },
-                        text:"Excel",
-                        filename: "Liste des D.A "+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
-                        className: 'btn btn-primary btn-sm m-5 width-140 assets-select-btn toolbox-delete-selected',
-                        messageTop: "Liste des D.A "+date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),
-                        orientation: 'landscape',
-
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        exportOptions: {
-                            columns: [ 1, 2, 5 ]
-                        },
-                        text:"PDF",
-                        filename: "Liste des D.A "+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
-                        className: 'btn btn-primary btn-sm m-5 width-140 assets-select-btn toolbox-delete-selected',
-                        messageTop: "Liste des D.A "+date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),
-                        orientation: 'landscape',
-
-                    },
-                    {
-                        extend: 'print',
-                        exportOptions: {
-                            columns: [ 1, 2, 5 ]
-                        },
-                        text:"Imprimer",
-                        filename: "Liste des D.A"+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
-                        className: 'btn btn-primary btn-sm m-5 width-140 assets-select-btn toolbox-delete-selected',
-                        messageTop: "Liste des D.A "+date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),
-                        orientation: 'landscape',
-
-                    }
-                ],
-
+                "order": [[ 1, "asc" ]],
                 language: {
                     url: "{{ URL::asset('js/French.json') }}"
                 },

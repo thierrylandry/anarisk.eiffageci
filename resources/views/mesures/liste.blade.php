@@ -185,7 +185,11 @@ active
             </div>
         </div>
     </div>
-    <div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    <div class="modal fade @if(Session::has('analyse_non_termine') && Session('analyse_non_termine')!=0)
+           in show
+    @endif" id="smallmodal" style="@if(Session::has('analyse_non_termine') && Session('analyse_non_termine')!=0)
+            display: block;
+    @endif " tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -197,7 +201,7 @@ active
                 <div class="modal-body">
                     <form method="post" action="{{route('SaveMesure')}}" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" id="id_analyse" name="id_analyse" value="" />
+                        <input type="hidden" id="id_analyse" name="id_analyse" value="@if(Session::has('analyse_non_termine') && Session('analyse_non_termine')!=0){{Session('analyse_non_termine')}}@endif" />
                         <div class="form-group">
                             <label class=" form-control-label">Libelle</label>
                             <div class="input-group">
@@ -321,16 +325,7 @@ active
                                     </div>
                                 </div>
                             </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Evaluer</label></div>
-                                <div class="rating"><!--
-                                 --><a href="#5" id="etoile5" onclick="document.getElementById('evaluer').value=5;" title="Donner 5 étoiles">☆</a><!--
-                                 --><a href="#4" id="etoile4"onclick="document.getElementById('evaluer').value=4;" title="Donner 4 étoiles">☆</a><!--
-                                 --><a href="#3"  id="etoile3" onclick="document.getElementById('evaluer').value=3;" title="Donner 3 étoiles">☆</a><!--
-                                 --><a href="#2" id="etoile2"onclick="document.getElementById('evaluer').value=2;" title="Donner 2 étoiles">☆</a><!--
-                                 --><a href="#1" id="etoile1" onclick="document.getElementById('evaluer').value=1;" title="Donner 1 étoile">☆</a>
-                                </div>
-                            </div>
+
                             <input type="hidden" name="evaluer" id="evaluer" />
                         </div>
                         <div class="modal-footer">
@@ -378,7 +373,7 @@ active
                                             <th>Date effective</th>
                                             <th>Auteur</th>
                                             <th>Efficacité de l'action</th>
-                                            <th>Evaluation</th>
+                                            <!--<th>Evaluation</th>-->
                                             <th>Action</th>
                                             <th>PJ</th>
                                         </tr>
@@ -438,21 +433,20 @@ active
                                                 <td>
                                                     {{$mesure->efficacite==1?'OUI':'NON'}}
                                                 </td>
-                                                <td>
+                                          <!--      <td>
                                                     <div class="row form-group">
-                                                        <div style=" text-decoration: none; font-size: 1em;color:orange;cursor: pointer;"><!--
-                                    --><a href="#1"  title="Donner 1 étoile" @if($mesure->evaluation>=1) style="color: orange" @endif>☆</a><!--
-                                    --><a href="#2"  title="Donner 2 étoiles" @if($mesure->evaluation>=2) style="color: orange" @endif>☆</a><!--
-                                    --><a href="#3"  title="Donner 3 étoiles" @if($mesure->evaluation>=3) style="color: orange" @endif>☆</a><!--
-                                    --><a href="#4"  title="Donner 4 étoiles" @if($mesure->evaluation>=4) style="color: orange" @endif>☆</a><!--
-                                 --><a href="#5"  title="Donner 5 étoiles"  @if($mesure->evaluation==5) style="color: orange" @endif>☆</a>
+                                                        <div style=" text-decoration: none; font-size: 1em;color:orange;cursor: pointer;"><a href="#1"  title="Donner 1 étoile" @if($mesure->evaluation>=1) style="color: orange" @endif>☆</a><!--
+                                    <a href="#2"  title="Donner 2 étoiles" @if($mesure->evaluation>=2) style="color: orange" @endif>☆</a><!--
+                                    <a href="#3"  title="Donner 3 étoiles" @if($mesure->evaluation>=3) style="color: orange" @endif>☆</a><!--
+                                    <a href="#4"  title="Donner 4 étoiles" @if($mesure->evaluation>=4) style="color: orange" @endif>☆</a><!--
+                                 <a href="#5"  title="Donner 5 étoiles"  @if($mesure->evaluation==5) style="color: orange" @endif>☆</a>
 
 
 
 
                                                         </div>
                                                     </div>
-                                                </td>
+                                                </td>-->
                                                 <td>
                                                     @if(isset($mesure->id_statut)&& $mesure->id_statut!=10 && $mesure->nom==auth::user()->nom && $mesure->prenoms==auth::user()->prenoms)
                                                         @if($mesure->id_statut!=10)
@@ -507,6 +501,17 @@ active
             <script src="{{ asset('assets/js/lib/data-table/datatables-init.js')}}"></script>
             <script src="{{ asset('assets/js/lib/data-table/dataTables.fixedHeader.min.js')}}"></script>
         <!-- .animated -->
+    <script>
+        $(document).ready(function () {
+            @if(Session::has('analyse_non_termine') && Session('analyse_non_termine')!=0)
+
+
+          //  $('#ajouterMesure').trigger('click');
+         //   $('#smallmodal').modal('show');
+            // alert("je suis icic");
+            @endif
+        });
+    </script>
         <script>
 
             jQuery(document).ready(function() {
@@ -525,62 +530,13 @@ active
                         jQuery("#acteur").trigger("chosen:updated");
                     });
                 });
+
                 });
 
             jQuery(function($) {
                 var date =new Date();
                 var table= $('#bootstrap-data-table1').DataTable({
-                    "order": [[ 1, "desc" ]],
-                    buttons: [
-                        {
-                            extend: 'copyHtml5',
-                            exportOptions: {
-                                columns: [ 1, 2, 5 ]
-                            },
-                            text:"Copier",
-                            filename: "Liste des D.A "+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
-                            className: 'btn btn-primary btn-sm m-5 width-140 assets-select-btn toolbox-delete-selected',
-                            messageTop: "Tableau récapitulatif des mesures "+date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),
-
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            exportOptions: {
-                                columns: [ 1, 2, 5 ]
-                            },
-                            text:"Excel",
-                            filename: "Liste des D.A "+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
-                            className: 'btn btn-primary btn-sm m-5 width-140 assets-select-btn toolbox-delete-selected',
-                            messageTop: "Liste des D.A "+date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),
-                            orientation: 'landscape',
-
-                        },
-                        {
-                            extend: 'pdfHtml5',
-                            exportOptions: {
-                                columns: [ 1, 2, 5 ]
-                            },
-                            text:"PDF",
-                            filename: "Liste des D.A "+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
-                            className: 'btn btn-primary btn-sm m-5 width-140 assets-select-btn toolbox-delete-selected',
-                            messageTop: "Liste des D.A "+date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),
-                            orientation: 'landscape',
-
-                        },
-                        {
-                            extend: 'print',
-                            exportOptions: {
-                                columns: [ 1, 2, 5 ]
-                            },
-                            text:"Imprimer",
-                            filename: "Liste des D.A"+date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear(),
-                            className: 'btn btn-primary btn-sm m-5 width-140 assets-select-btn toolbox-delete-selected',
-                            messageTop: "Liste des D.A "+date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),
-                            orientation: 'landscape',
-
-                        }
-                    ],
-
+                    "order": [[ 1, "asc" ]],
                     language: {
                         url: "{{ URL::asset('js/French.json') }}"
                     },
@@ -842,6 +798,18 @@ active
 
 
                 });
+                $( ".close" ).click(function() {
+                    //  alert( "Handler for .dblclick() called." );
+                    if($("#smallmodal").hasClass('in show')) {
+                        $("#smallmodal").removeClass('in show');
+                        $("#smallmodal").css('display','none');
+
+                    }
+
+
+                });
+
+
             });
 
             //Make the DIV element draggagle:
@@ -888,4 +856,5 @@ active
                 }
             }
         </script>
+
 @endsection

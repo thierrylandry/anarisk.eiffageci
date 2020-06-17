@@ -244,16 +244,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Evaluer</label></div>
-                            <div class="rating"><!--
-                                 --><a href="#5" onclick="document.getElementById('evaluer').value=5;" title="Donner 5 étoiles">☆</a><!--
-                                 --><a href="#4" onclick="document.getElementById('evaluer').value=4;" title="Donner 4 étoiles">☆</a><!--
-                                 --><a href="#3"  onclick="document.getElementById('evaluer').value=3;" title="Donner 3 étoiles">☆</a><!--
-                                 --><a href="#2" onclick="document.getElementById('evaluer').value=2;" title="Donner 2 étoiles">☆</a><!--
-                                 --><a href="#1" onclick="document.getElementById('evaluer').value=1;" title="Donner 1 étoile">☆</a>
-                            </div>
-                        </div>
                         <input type="hidden" name="evaluer" id="evaluer" />
                     </div>
                     <div class="modal-footer">
@@ -284,7 +274,6 @@
                                         <tr>
                                             <th>id</th>
                                             <th>Efficacité</th>
-                                            <th>Evaluation</th>
                                             <th>Libelle</th>
                                             <th>Responsable</th>
                                             <th>Acteur</th>
@@ -306,21 +295,7 @@
                                                 <td>
                                                     {{$mesure->efficacite==1?'OUI':'NON'}}
                                                 </td>
-                                                <td>
-                                                    <div class="row form-group">
-                                                      <div style=" text-decoration: none; font-size: 1em;color:orange;cursor: pointer;"><!--
-                                    --><a href="#1"  title="Donner 1 étoile" @if($mesure->evaluation>=1) style="color: orange" @endif>☆</a><!--
-                                    --><a href="#2"  title="Donner 2 étoiles" @if($mesure->evaluation>=2) style="color: orange" @endif>☆</a><!--
-                                    --><a href="#3"  title="Donner 3 étoiles" @if($mesure->evaluation>=3) style="color: orange" @endif>☆</a><!--
-                                    --><a href="#4"  title="Donner 4 étoiles" @if($mesure->evaluation>=4) style="color: orange" @endif>☆</a><!--
-                                 --><a href="#5"  title="Donner 5 étoiles"  @if($mesure->evaluation==5) style="color: orange" @endif>☆</a>
 
-
-
-
-                                                        </div>
-                                                    </div>
-                                                </td>
                                                 <td>
                                                     {{$mesure->libelle}}
                                                 </td>
