@@ -380,7 +380,7 @@ active
                                         </thead>
                                         <tbody>
                                         @foreach($mesures as $mesure)
-                                            <tr   {{isset($mesure->statut->id)&& $mesure->statut->id==30?"style=background-color:darkgrey":''}}>
+                                            <tr id="{{$mesure->id}}"   {{isset($mesure->statut->id)&& $mesure->statut->id==30?"style=background-color:darkgrey":''}}>
                                                 <td>
                                                     {{$mesure->id}}
                                                 </td>
@@ -808,8 +808,7 @@ active
 
 
                 });
-
-
+                        window.location.hash = '{{Auth::user()->position_number_mesure}}';
             });
 
             //Make the DIV element draggagle:

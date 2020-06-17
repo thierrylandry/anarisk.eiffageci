@@ -42,7 +42,8 @@ class MesuresController extends Controller
     public function supprimer_mesure($id){
         $mesure = Mesure::find($id);
         $mesure->delete();
-
+        auth::user()->position_number_mesure=$id;
+        auth::user()->save();
         return redirect()->back()->with('error',"La mesure  a été supprimée avec succès");
 
     }
@@ -130,6 +131,8 @@ class MesuresController extends Controller
         }
 
         $mesure->save();
+        auth::user()->position_number_mesure=$mesure->id;
+        auth::user()->save();
         // dd($analyses[0]->chantier()->get());
         //dd($analyse->nature()->first()->id);
         return redirect()->back()->with('success',"La mesure  a été enregistré avec succès");
@@ -147,7 +150,8 @@ class MesuresController extends Controller
         $documentation = $parameters['documentation'];
 
         $mesure=  Mesure::find($id);
-
+        auth::user()->position_number_mesure=$mesure->id;
+        auth::user()->save();
         $mesure->datePlanifie=$dateplanifie;
         $mesure->documentation=$documentation;
         $mesure->dateEffective=$dateEffective;
@@ -189,6 +193,8 @@ class MesuresController extends Controller
 
         $mesure->nomfichier="";
         $mesure->save();
+        auth::user()->position_number_mesure=$mesure->id;
+        auth::user()->save();
         return redirect()->back()->with('success',"La pièce jointe de la mesure à été supprimée avec succès");
     }
     public function supprimer_pj_mesure_unique($id,$nomfichier){
@@ -196,6 +202,8 @@ class MesuresController extends Controller
 
         $mesure->nomfichier=str_replace($nomfichier,"",','.$mesure->nomfichier);
         $mesure->save();
+        auth::user()->position_number_mesure=$mesure->id;
+        auth::user()->save();
         return redirect()->back()->with('success',"La pièce jointe de la mesure a été supprimée avec succès");
     }
     public function terminer_mesure(Request $request){
@@ -220,6 +228,8 @@ $valeur=0;
 
         $mesure->id_statut=10;
         $mesure->save();
+        auth::user()->position_number_mesure=$mesure->id;
+        auth::user()->save();
       //  $mesure->id_auteur=\Illuminate\Support\Facades\Auth::user()->id;
 
         //;
@@ -261,6 +271,8 @@ $valeur=0;
         $statuts = Statut::all();
         $acteurs = Acteur::all();
         $periodicites = Periodicite::all();
+        auth::user()->position_number_mesure=$mesure->id;
+        auth::user()->save();
         return view('mesures.modifier_mesure',compact('analyse','mesure','natures','chantiers','responsables','priorites','analyses','statuts','acteurs','periodicites'));
 
     }
