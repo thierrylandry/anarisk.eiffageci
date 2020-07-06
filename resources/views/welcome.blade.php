@@ -74,7 +74,7 @@
                                     </tr>
                                 @endfor
                                 <tr>
-                                    <td>Total des mesures</td>
+                                    <td>Total des analyses</td>
                                     <td>{{$tot}}</td>
                                     <td>100%</td>
                                 </tr>
