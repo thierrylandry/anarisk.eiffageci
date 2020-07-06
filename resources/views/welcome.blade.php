@@ -55,15 +55,29 @@
                                 <tr>
                                     <th>Analyses</th>
                                     <th>Effectifs</th>
+                                    <th>Pourcentages</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php
+                                $tot=0;
+                                for($i=0;$i<sizeof($effanalyses);$i++){
+                                    $tot+=$effanalyses[$i]->y;
+                                }
+
+                                ?>
                                 @for($i=0;$i<sizeof($effanalyses);$i++)
                                     <tr class="tr-shadow">
                                         <td> {{$effanalyses[$i]->name}}</td>
                                         <td> {{$effanalyses[$i]->y}}</td>
+                                        <td> {{number_format((($effanalyses[$i]->y/$tot)*100),1,',','')."%"}}</td>
                                     </tr>
                                 @endfor
+                                <tr>
+                                    <td>Total des mesures</td>
+                                    <td>{{$tot}}</td>
+                                    <td>100%</td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -88,15 +102,29 @@
                                 <tr>
                                     <th>Mesures</th>
                                     <th>Effectifs</th>
+                                    <th>Pourcentages</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                               <?php
+                                       $tot=0;
+                               for($i=0;$i<sizeof($mesures);$i++){
+                                   $tot+=$mesures[$i]->y;
+                               }
+
+                               ?>
                                 @for($i=0;$i<sizeof($mesures);$i++)
                                     <tr class="tr-shadow">
                                         <td> {{$mesures[$i]->name}}</td>
                                         <td> {{$mesures[$i]->y}}</td>
+                                        <td> {{number_format((($mesures[$i]->y/$tot)*100),1,',','')."%"}}</td>
                                     </tr>
                                 @endfor
+                                <tr>
+                                    <td>Total des mesures</td>
+                                      <td>{{$tot}}</td>
+                                      <td>100%</td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>

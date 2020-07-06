@@ -54,21 +54,27 @@ class HomeController extends Controller
 
         $mesures= Array();
         $mesure_en_vert =New Vardiag();
+        $mesure_autre =New Vardiag();
         $mesure_total =New Vardiag();
         foreach ($mesures_tab as $group):
 
             if($group->libelle=="Fait" ||  $group->libelle=="permanente" ||  $group->libelle=="régulière" ||  $group->libelle=="Prêt"){
-                $mesure_en_vert->name="Mesures faites, permanantes, prêtes et régulières";
+                $mesure_en_vert->name="Mesures faites, permanentes, prêtes et régulières";
                 $mesure_en_vert->y+=$group->nb;
-            }
-            $mesure_total->name='Mesures total';
-            $mesure_total->y+=$group->nb;
+            }else{
+                $mesure_autre->name="Autres mesures";
+                $mesure_autre->y+=$group->nb;
+        }
+                $mesure_total->name='Mesures total';
+                $mesure_total->y+=$group->nb;
+
+
 
 
 
         endforeach;
         $mesures[]=$mesure_en_vert;
-        $mesures[]=$mesure_total;
+        $mesures[]=$mesure_autre;
         $tableau_recap = Tableau_recap::where('id_chantier','=',Auth()->user()->id_chantier_connecte)->first();
         return view('welcome',compact('effanalyses','tableau_recap','mesures'));
     }
