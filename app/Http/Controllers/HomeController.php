@@ -61,11 +61,8 @@ class HomeController extends Controller
                 $mesure_en_vert->name="Mesures faites, permanantes, prêtes et régulières";
                 $mesure_en_vert->y+=$group->nb;
             }
-
-
-
             $mesure_total->name='Mesures total';
-            $mesure_total->y=$group->nb;
+            $mesure_total->y+=$group->nb;
 
 
 
