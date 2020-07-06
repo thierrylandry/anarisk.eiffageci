@@ -78,6 +78,39 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-6 tableau" id="">
+                <div class="card" style="height: 100% !important">
+                    <div class="card-body" >
+                        <div class="table-responsive table-responsive-data2">
+                            <table class="table  table-earning" id="table_mesure_par_statut">
+                                <thead>
+                                <tr>
+                                    <th>Mesures</th>
+                                    <th>Effectifs</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @for($i=0;$i<sizeof($mesures);$i++)
+                                    <tr class="tr-shadow">
+                                        <td> {{$mesures[$i]->name}}</td>
+                                        <td> {{$mesures[$i]->y}}</td>
+                                    </tr>
+                                @endfor
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xs-6	col-sm-6	col-md-6	col-lg-6">
+                <div class="au-card m-b-30">
+                    <div class="au-card-inner">
+                        <div id="mesures" style=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row " >
             <div class="col-md-12" >
                 <div class="card">
@@ -281,6 +314,47 @@
                 name: 'Brands',
                 colorByPoint: true,
                 data: effanalyses
+            }],
+        });
+        var mesures=[
+            @foreach($mesures as $res)
+                    {{"{name:"}} '{{$res->name}}' {{",y:".$res->y."}"}},
+            @endforeach
+
+        ];
+        // Build the chart
+        Highcharts.chart('mesures', {
+            exporting: { enabled: false },
+            colors: ['green','grey'],
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Les mesures'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: mesures
             }],
         });
     </script>

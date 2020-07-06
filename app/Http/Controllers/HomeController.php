@@ -42,7 +42,37 @@ class HomeController extends Controller
 
             $effanalyses[]=$vardiag;
         endforeach;
+        //pourcentage des mesures en vert
+
+        $mesures_tab = DB::table('mesure')
+            ->groupBy('statut.id')
+            ->join('statut','mesure.id_statut','=','statut.id')
+            ->join('analyse','mesure.id_analyse','=','analyse.id')
+            ->where('analyse.id_chantier','=',Auth()->user()->id_chantier_connecte)
+            ->select('statut.libelle',DB::raw('count(mesure.id) as nb'))
+            ->get();
+
+        $mesures= Array();
+        $mesure_en_vert =New Vardiag();
+        $mesure_total =New Vardiag();
+        foreach ($mesures_tab as $group):
+
+            if($group->libelle=="Fait" ||  $group->libelle=="permanente" ||  $group->libelle=="régulière" ||  $group->libelle=="Prêt"){
+                $mesure_en_vert->name="Mesures faites, permanantes, prêtes et régulières";
+                $mesure_en_vert->y+=$group->nb;
+            }
+
+
+
+            $mesure_total->name='Mesures total';
+            $mesure_total->y=$group->nb;
+
+
+
+        endforeach;
+        $mesures[]=$mesure_en_vert;
+        $mesures[]=$mesure_total;
         $tableau_recap = Tableau_recap::where('id_chantier','=',Auth()->user()->id_chantier_connecte)->first();
-        return view('welcome',compact('effanalyses','tableau_recap'));
+        return view('welcome',compact('effanalyses','tableau_recap','mesures'));
     }
 }

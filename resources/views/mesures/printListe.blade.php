@@ -95,7 +95,6 @@
                                             <th>Date de planification</th>
                                             <th>Date effective</th>
                                             <th>Auteur</th>
-                                            <th>Efficacité de l'action</th>
                                            <!-- <th>Evaluation</th>-->
                                             <th>PJ</th>
                                         </tr>
@@ -136,7 +135,7 @@
                                                 <td>
                                                     {{$mesure->libelleacteur}}
                                                 </td>
-                                                <td style="@if($mesure->libellestatut=="Fait" ||  $mesure->libellestatut=="permanente") background-color:green;color: white @endif">
+                                                <td style="@if($mesure->libellestatut=="Fait" ||  $mesure->libellestatut=="permanente" ||  $mesure->libellestatut=="régulière" ||  $mesure->libellestatut=="Prêt") background-color:green;color: white @endif">
                                                     {{$mesure->libellestatut}}
                                                 </td>
                                                 <td>
@@ -150,9 +149,6 @@
                                                 </td>
                                                 <td>
                                                     {{$mesure->nom}}  {{$mesure->prenoms}}
-                                                </td>
-                                                <td>
-                                                    {{$mesure->efficacite==1?'OUI':'NON'}}
                                                 </td>
 
                                                 <td>

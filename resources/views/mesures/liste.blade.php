@@ -372,9 +372,7 @@ active
                                             <th>Date de planification</th>
                                             <th>Date effective</th>
                                             <th>Auteur</th>
-                                            <th>Efficacité de l'action</th>
                                             <!--<th>Evaluation</th>-->
-                                            <th>Action</th>
                                             <th>PJ</th>
                                         </tr>
                                         </thead>
@@ -415,7 +413,7 @@ active
                                                 <td>
                                                     {{$mesure->libelleacteur}}
                                                 </td>
-                                                <td style="@if($mesure->libellestatut=="Fait" ||  $mesure->libellestatut=="permanente") background-color:green;color: white @endif">
+                                                <td style="@if($mesure->libellestatut=="Fait" ||  $mesure->libellestatut=="permanente" ||  $mesure->libellestatut=="régulière" ||  $mesure->libellestatut=="Prêt") background-color:green;color: white @endif">
                                                     {{$mesure->libellestatut}}
                                                 </td>
                                                 <td>
@@ -429,9 +427,6 @@ active
                                                 </td>
                                                 <td>
                                                     {{$mesure->nom}}  {{$mesure->prenoms}}
-                                                </td>
-                                                <td>
-                                                    {{$mesure->efficacite==1?'OUI':'NON'}}
                                                 </td>
                                           <!--      <td>
                                                     <div class="row form-group">
@@ -447,17 +442,6 @@ active
                                                         </div>
                                                     </div>
                                                 </td>-->
-                                                <td>
-                                                    @if(isset($mesure->id_statut)&& $mesure->id_statut!=10 && $mesure->nom==auth::user()->nom && $mesure->prenoms==auth::user()->prenoms)
-                                                        @if($mesure->id_statut!=10)
-                                                            <a href="#" class="btn btn-success btn-sm terminerClass" data-toggle="modal" data-target="#teminer"> <i class="menu-icon fa fa-key"></i> terminé</a>
-
-                                                        @endif
-                                                    @elseif($mesure->nom==auth::user()->nom && $mesure->prenoms==auth::user()->prenoms)
-                                                        <a href="#" class="btn btn-primary btn-sm terminerClass" data-toggle="modal" data-target="#teminer"> <i class="menu-icon fa fa-key"></i> Modifier l'évalutaion</a>
-
-                                                    @endif
-                                                </td>
                                                 <td>
                                                     @if(!empty($mesure->nomfichier))
                                                         <a href="{{route('download_doc',str_replace(",","",$mesure->nomfichier))}}"><i class="menu-icon fa fa-file"></i>{{$mesure->nomfichier}}</a>
