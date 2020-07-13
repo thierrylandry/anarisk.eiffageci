@@ -97,6 +97,7 @@
                                             <th>Auteur</th>
                                            <!-- <th>Evaluation</th>-->
                                             <th>PJ</th>
+                                            <th>id_analyse</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -156,6 +157,9 @@
                                                         <a href="{{route('download_doc',str_replace(",","",$mesure->nomfichier))}}"><i class="menu-icon fa fa-file"></i>{{$mesure->nomfichier}}</a>
                                                     @endif
                                                 </td>
+                                                <td>
+                                                    {{$mesure->id_analyse}}
+                                                </td>
                                             </tr>
                                         @endforeach
 
@@ -198,7 +202,7 @@
         jQuery(function($) {
             var date =new Date();
             var table= $('#bootstrap-data-table1').DataTable({
-                "order": [[ 1, "asc" ]],
+                "order": [[ 15, "asc" ]],
                 language: {
                     url: "{{ URL::asset('js/French.json') }}"
                 },
@@ -219,7 +223,7 @@
                     var api = this.api();
 
                     // Zero-based index of the column containing names
-                    var col_name = 1;
+                    var col_name = 15;
                     console.log(api.order());
                     // If ordered by column containing names
                     if (api.order()[0][0] === col_name) {
@@ -266,7 +270,7 @@
 
                     dataSrc: [0]
                 },
-            }).column(0).visible(false).column(1).visible(false).column(2).visible(false).column(3).visible(false).column(4).visible(false).visible(false).column(5).visible(false).visible(false).column(7).visible(false);
+            }).column(0).visible(false).column(15).visible(false).column(1).visible(false).column(2).visible(false).column(3).visible(false).column(4).visible(false).visible(false).column(5).visible(false).visible(false).column(7).visible(false);
 
             $('.ajouterMesure').click(function(){
                 var data = table.row($(this).closest('tr')).data();
