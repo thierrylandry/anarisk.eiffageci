@@ -61,8 +61,8 @@
       <file leaf-file-name="liste.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/mesures/liste.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="543" column="40" selection-start-line="543" selection-start-column="40" selection-end-line="543" selection-end-column="40" />
+            <state relative-caret-position="498">
+              <caret line="546" column="44" selection-start-line="546" selection-start-column="44" selection-end-line="546" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -609,7 +609,7 @@
       <workItem from="1594026588255" duration="17955000" />
       <workItem from="1594212669536" duration="607000" />
       <workItem from="1594225895471" duration="631000" />
-      <workItem from="1594637420445" duration="716000" />
+      <workItem from="1594637420445" duration="979000" />
     </task>
     <task id="LOCAL-00001" summary="htaccess">
       <created>1561044383970</created>
@@ -856,11 +856,18 @@
       <option name="project" value="LOCAL" />
       <updated>1594638048161</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="mofification laura">
+      <created>1594638142451</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1594638142451</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="269446000" />
+    <option name="totallyTimeSpent" value="269709000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="2" width="1934" height="1036" extended-state="0" />
@@ -1342,8 +1349,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/mesures/liste.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="543" column="40" selection-start-line="543" selection-start-column="40" selection-end-line="543" selection-end-column="40" />
+        <state relative-caret-position="498">
+          <caret line="546" column="44" selection-start-line="546" selection-start-column="44" selection-end-line="546" selection-end-column="44" />
           <folding />
         </state>
       </provider>

@@ -544,7 +544,7 @@ active
                         var col_name = 0;
                         console.log(api.order());
                         // If ordered by column containing names
-                        if (api.order()[0][0] === col_name) {
+                        if (api.order()[0][1] === col_name) {
                             var rows = api.rows({ page: 'current' }).nodes();
                             var group_last = null;
                             api.column(col_name, { page: 'current' }).data().each(function (name, index){
