@@ -520,7 +520,7 @@ active
             jQuery(function($) {
                 var date =new Date();
                 var table= $('#bootstrap-data-table1').DataTable({
-                    "order": [[ 0, "asc" ]],
+                    "order": [[ 1, "asc" ]],
                     language: {
                         url: "{{ URL::asset('js/French.json') }}"
                     },
@@ -541,10 +541,10 @@ active
                         var api = this.api();
 
                         // Zero-based index of the column containing names
-                        var col_name = 0;
+                        var col_name = 1;
                         console.log(api.order());
                         // If ordered by column containing names
-                        if (api.order()[1][0] === col_name) {
+                        if (api.order()[0][0] === col_name) {
                             var rows = api.rows({ page: 'current' }).nodes();
                             var group_last = null;
                             api.column(col_name, { page: 'current' }).data().each(function (name, index){
