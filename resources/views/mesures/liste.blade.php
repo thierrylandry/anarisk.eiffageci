@@ -591,7 +591,7 @@ active
 
                         dataSrc: [0]
                     },
-                }).column(0).visible(false).column(1).visible(false).column(2).visible(false).visible(false).column(3).visible(false).visible(false).column(4).visible(false).column(5).visible(false);
+                }).column(0).visible(false).column(15).visible(false).column(1).visible(false).column(2).visible(false).visible(false).column(3).visible(false).visible(false).column(4).visible(false).column(5).visible(false);
 
                 $('.ajouterMesure').click(function(){
                     var data = table.row($(this).closest('tr')).data();
