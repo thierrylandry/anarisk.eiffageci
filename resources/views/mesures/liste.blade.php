@@ -541,7 +541,7 @@ active
                         var api = this.api();
 
                         // Zero-based index of the column containing names
-                        var col_name = 1;
+                        var col_name = 0;
                         console.log(api.order());
                         // If ordered by column containing names
                         if (api.order()[0][0] === col_name) {
