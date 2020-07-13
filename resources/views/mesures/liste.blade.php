@@ -520,7 +520,7 @@ active
             jQuery(function($) {
                 var date =new Date();
                 var table= $('#bootstrap-data-table1').DataTable({
-                    "order": [[ 1, "asc" ]],
+                    "order": [[ 0, "asc" ]],
                     language: {
                         url: "{{ URL::asset('js/French.json') }}"
                     },
