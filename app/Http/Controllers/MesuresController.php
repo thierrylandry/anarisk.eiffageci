@@ -55,7 +55,7 @@ class MesuresController extends Controller
             ->join('users','users.id','=','mesure.id_auteur')
             ->join('nature','nature.id','=','analyse.id_nature')
             ->where('id_chantier','=',Auth::user()->id_chantier_connecte)
-            ->select('mesure.id','dateplanifie','dateEffective','documentation','id_responsable','id_statut','id_priorite','mesure.libelle','id_proprietaire','mesure.id_statut',DB::raw('acteur.libelle as libelleacteur'),DB::raw('statut.libelle as libellestatut'),'nom','prenoms','code','description','causes','consequences','nature','cout','etat','mesure.nomfichier','mesure.efficacite','mesure.evaluation')->orderby('code','ASC')->paginate(3000);
+            ->select('mesure.id','dateplanifie','dateEffective','documentation','id_responsable','id_statut','id_priorite','mesure.libelle','id_proprietaire','mesure.id_statut',DB::raw('acteur.libelle as libelleacteur'),DB::raw('statut.libelle as libellestatut'),'nom','prenoms','code','description','causes','consequences','nature','cout','etat','mesure.nomfichier','mesure.efficacite','mesure.evaluation','mesure.id_analyse')->orderby('code','ASC')->paginate(3000);
         $responsables =DB::select('call responsable('.Auth::user()->id_chantier_connecte.')');
 
         $priorites = Priorite::all();

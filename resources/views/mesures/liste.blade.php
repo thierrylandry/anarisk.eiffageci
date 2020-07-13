@@ -374,6 +374,7 @@ active
                                             <th>Auteur</th>
                                             <!--<th>Evaluation</th>-->
                                             <th>PJ</th>
+                                            <th>idanalyse</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -446,6 +447,9 @@ active
                                                     @if(!empty($mesure->nomfichier))
                                                         <a href="{{route('download_doc',str_replace(",","",$mesure->nomfichier))}}"><i class="menu-icon fa fa-file"></i>{{$mesure->nomfichier}}</a>
                                                     @endif
+                                                </td>
+                                                <td>
+                                                    {{$mesure->id_analyse}}
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -520,7 +524,7 @@ active
             jQuery(function($) {
                 var date =new Date();
                 var table= $('#bootstrap-data-table1').DataTable({
-                    "order": [[ 1, "asc" ]],
+                    "order": [[ 15, "asc" ]],
                     language: {
                         url: "{{ URL::asset('js/French.json') }}"
                     },
@@ -541,7 +545,7 @@ active
                         var api = this.api();
 
                         // Zero-based index of the column containing names
-                        var col_name = 1;
+                        var col_name = 15;
                         console.log(api.order());
                         // If ordered by column containing names
                         if (api.order()[0][0] === col_name) {
